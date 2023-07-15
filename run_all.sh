@@ -1,3 +1,3 @@
 
-
-go run src/main.go
+cd src/
+go run .

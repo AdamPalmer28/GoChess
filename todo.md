@@ -22,4 +22,4 @@ A ongoing to-do list of task for development of the chess engine.
 ---
 
 - Test environment for testing the engine against previous versions
-- Test scripts - Correct moves i.e. as expected - Function outputs - Benchmark test & function's speed
+- Test scripts - Correct moves i.e. as expected - Function outputs  - Benchmark test & function's speed
