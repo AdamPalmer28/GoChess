@@ -2,6 +2,7 @@ package main
 
 import (
 	"chess/chess_engine"
+	//"chess/chess_cli"
 	"fmt"
 )
 
@@ -13,9 +14,15 @@ func main() {
 
 	board.Print()
 
-	while true; {
-		fmt.println("new cmd")
-		chess_console(board)
+	for {
 
+		fmt.Println("new cmd")
+		//chess_cli.chess_console(board)
+		
+
+		// condition to break the loop
+		if true {
+			break
+		}
 	}
 }
