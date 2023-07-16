@@ -1,32 +1,28 @@
 package make_game
 
-import (
-	"chess/board"
-)
+import "chess/board"
 
 type GameState struct {
 	Board board.ChessBoard
 
-	WhiteKingCastle [2]bool
-	BlackKingCastle [2]bool
+	WhiteCastle [2]bool
+	BlackCastle [2]bool
 
-	WhiteToMove bool
-	EnPassantSquare uint
+	White_to_move bool
+	Enpassent_ind uint
 
-	MoveList []string
-	MoveNumber uint
+	Movehist []string
+	Moveno   uint
 
-	CapturedPieces [][2]int // [move number][piece type]
+	Cap_pieces [][2]int // [move number][piece type]
 
 }
-
 
 var PieceValLookup = map[int]string{
-	0 : "P",
-	1 : "K",
-	2 : "B",
-	3 : "R",
-	4 : "Q",
-	5 : "K",
+	0: "P",
+	1: "K",
+	2: "B",
+	3: "R",
+	4: "Q",
+	5: "K",
 }
-

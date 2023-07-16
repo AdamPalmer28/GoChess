@@ -5,11 +5,14 @@ import (
 	"chess/chess_engine/make_game"
 )
 
+
+
 func StartGame() *board.ChessBoard{
 
 	println("Starting Chess Engine")
 
 	board := make_game.MakeIntialChessBoard()
+	gs := GameState{Board: board}
 	
 	return board
 }

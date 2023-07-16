@@ -13,9 +13,9 @@ func main() {
 
 	board.Print()
 
-	var input string
+	while true; {
+		fmt.println("new cmd")
+		chess_console(board)
 
-	fmt.Print("Type your input: ")
-	fmt.Scan(&input)
-	fmt.Println("Your input is:", input)
+	}
 }
