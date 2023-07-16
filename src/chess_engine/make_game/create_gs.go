@@ -4,22 +4,6 @@ import (
 	"chess/board"
 )
 
-type GameState struct {
-	Board board.ChessBoard
-
-	WhiteCastle [2]bool
-	BlackCastle [2]bool
-
-	White_to_move bool
-	Enpassent_ind uint
-
-	Movehist []string
-	Moveno uint
-
-	Cap_pieces [][2]int // [move number][piece type]
-
-}
-
 
 func MakeIntialChessBoard() *board.ChessBoard {
 	// Starting chess position

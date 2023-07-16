@@ -1,4 +1,4 @@
-package chess_cli
+package cli_engine
 
 import (
 	"chess/chess_engine/make_game"
@@ -12,4 +12,6 @@ func chess_console(gs *make_game.GameState) {
 	fmt.Scan(&user_cmd)
 
 	fmt.Println("Your input is:", user_cmd)
+
+	gs.Board.Print()
 }

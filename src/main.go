@@ -2,7 +2,6 @@ package main
 
 import (
 	"chess/chess_engine"
-	//"chess/chess_cli"
 	"fmt"
 )
 
@@ -24,5 +23,13 @@ func main() {
 		if true {
 			break
 		}
+
 	}
+	type bitboard uint64
+
+	var b bitboard = 01
+	b = b << 1
+	fmt.Println(b)
+	b = b << 5
+	fmt.Println(b)
 }
