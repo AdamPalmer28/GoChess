@@ -27,9 +27,11 @@ func main() {
 	}
 	type bitboard uint64
 
-	var b bitboard = 01
+	var b bitboard = 0b101
+
+	fmt.Println(b)
 	b = b << 1
 	fmt.Println(b)
-	b = b << 5
+	b = b >> 4
 	fmt.Println(b)
 }
