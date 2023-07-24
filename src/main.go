@@ -9,9 +9,9 @@ func main() {
 
 	println("Hello World")
 
-	board := chess_engine.StartGame()
+	gs := chess_engine.StartGame()
 
-	board.Print()
+	gs.Board.Print()
 
 	for {
 

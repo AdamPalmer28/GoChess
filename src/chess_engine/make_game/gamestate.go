@@ -32,8 +32,8 @@ var PieceValLookup = map[int]string{
 func Make_move(move uint16, gs *GameState) {
 
 	// get the start and finish squares
-	start := move & (0x3F)
-	finish := (move >> 6) & 0x3F
+	//start := move & (0x3F)
+	//finish := (move >> 6) & 0x3F
 
 	special := (move >> 12) & 0xF
 

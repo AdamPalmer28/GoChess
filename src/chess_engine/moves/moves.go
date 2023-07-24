@@ -1,7 +1,8 @@
 package move_gen
 
-`Moves are represented as a 16 bit integer
-0000 000000 000000 
+/*
+Moves are represented as a 16 bit integer
+0000 000000 000000
 special | finish | start
 
 0000 - special moves (info below)
@@ -15,4 +16,7 @@ special moves
 0100 - capture
 0101 - enpassent capture
 1000 - promotion knight
-`
+*/
+
+
+

@@ -40,11 +40,11 @@ func (b Bitboard) print() {
 	}
 }
 
-func BB_to_index(b Bitboard) []int {
+func BB_to_index(b Bitboard) []uint {
 	// convert a bitboard to slide index
 
-	ind := []int{}
-	bitPosition := 0
+	ind := []uint{}
+	var bitPosition uint = 0
 
 	for b > 0 {
 		if b&1 == 1 {
@@ -58,16 +58,22 @@ func BB_to_index(b Bitboard) []int {
 }
 
 // slower method
-func BB_to_index2(b Bitboard) []int {
+func BB_to_index2(b Bitboard) []uint {
 	// convert a bitboard to slide index
 
-	var ind []int
+	var ind []uint
 
 	for i := uint(0); i < 64; i++ {
 		mask := Bitboard(1) << i
 		if (b & mask) != 0 {
-			ind = append(ind, int(i))
+			ind = append(ind, uint(i))
 		}
 	}
 	return ind
+}
+
+// flip bb index
+func (b *Bitboard) flip(ind uint) {
+
+	*b ^= 1 << ind
 }

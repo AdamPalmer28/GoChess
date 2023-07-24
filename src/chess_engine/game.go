@@ -1,17 +1,16 @@
 package chess_engine
 
 import (
-	"chess/board"
 	"chess/chess_engine/make_game"
 )
 
 
 
-func StartGame() *board.ChessBoard{
+func StartGame() *make_game.GameState {
 
 	println("Starting Chess Engine")
 
-	board := make_game.MakeIntialChessBoard()
+	gs := make_game.MakeGameState()
 	
-	return board
+	return gs
 }

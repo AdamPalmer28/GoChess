@@ -3,7 +3,26 @@ package make_game
 import (
 	"chess/board"
 )
+func MakeGameState() *GameState {
+	// Make a new game state
 
+	chess_board	 := MakeIntialChessBoard()
+
+	gs := &GameState{
+		Board: *chess_board,
+		WhiteCastle: [2]bool{true, true},
+		BlackCastle: [2]bool{true, true},
+		White_to_move: true,
+		Enpassent_ind: 0,
+		MoveList: []uint16{},
+		MoveHumanList: []string{},
+		Moveno: 0,
+		PrevMoves: []uint16{},
+		Cap_pieces: [][2]int{},
+	}
+
+	return gs
+}
 
 func MakeIntialChessBoard() *board.ChessBoard {
 	// Starting chess position
