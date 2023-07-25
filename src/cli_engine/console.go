@@ -1,33 +1,51 @@
 package cli_engine
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"strings"
 )
 
+
 func (cfg *Config) Run() bool {
 	
+	scanner := bufio.NewScanner(os.Stdin)
 	var user_cmd string
 
-	fmt.Scan(&user_cmd)
+    // Prompt the user for input
+    fmt.Print("Enter a line of text: ")
 
-	fmt.Println("Your input is:", user_cmd)
 
+    // Read the next line from standard input
+    if scanner.Scan() {
+		// Get the text that the user entered
+		user_cmd = scanner.Text()
+
+        // Print the input line
+        fmt.Println("\nChess Engine:", user_cmd)
+    } else {
+        // If an error occurred while reading input
+        fmt.Println("Error reading input:", scanner.Err())
+    }
+
+	// lowercase the input
+	user_cmd = strings.ToLower(user_cmd)
 	inputs := strings.Split(user_cmd, " ")
-	fmt.Println("Inputs", inputs)
+	
 	cmd := inputs[0]
 
 	gs := cfg.gs
 
 	if cmd == "print" {
 
-	cfg.gs.Board.Print()
+		gs.Board.Print()
 	}
  
 	// move a1a2
 	if cmd == "move" {
 		
-		move := inputs[0]
+		move := inputs[1]
 
 		start := move[0:2]
 		end := move[2:] // string + 2 for promotion
@@ -39,8 +57,12 @@ func (cfg *Config) Run() bool {
 		fmt.Printf("Square: start: %s, end: %s\n", start, end_sq)
 		fmt.Printf("Index: start: %d, end: %d\n", s, e)
 
-		gs.Board.Print()
+		//gs.Board.Print()
 
+	}
+
+	if cmd == "quit" {
+		return false
 	}
 
 	return true
