@@ -1,16 +1,16 @@
 package cli_engine
 
 import (
-	"chess/chess_engine/make_game"
+	gamestate "chess/chess_engine/gamestate"
 )
 
 type Config struct {
-	gs *make_game.GameState
+	gs *gamestate.GameState
 	cmds []string
 }
 
 
-func MakeConfig(gs *make_game.GameState) *Config {
+func MakeConfig(gs *gamestate.GameState) *Config {
 
 	cfg := &Config{
 		gs: gs,

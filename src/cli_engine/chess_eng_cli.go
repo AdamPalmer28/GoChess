@@ -29,3 +29,23 @@ func index_to_move(ind int) string {
 
 	return cord
 }
+
+func (cfg *Config) move_input(user_input string) bool {
+
+	start := user_input[0:2]
+	end := user_input[2:] // string + 1 for promotion
+	end_sq := end[0:2] 
+
+	s := move_to_index(start)
+	e := move_to_index(end_sq)
+
+	
+	move_num :=  (e << 6) | s
+
+	//fmt.Printf("Move: %b\n", move_num)
+
+	cfg.gs.Make_move(uint(move_num))
+	cfg.gs.Board.Print()
+
+	return true
+}

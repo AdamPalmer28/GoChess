@@ -24,9 +24,9 @@ const (
 	EmptyBoard Bitboard = 0
 )
 
-func (b Bitboard) print() {
+func (b Bitboard) Print() {
 
-	for rank := uint(0); rank < 8; rank++ {
+	for rank := uint(7); rank < 8; rank-- {
 		for file := uint(0); file < 8; file++ {
 			square := (rank * 8) + file
 			mask := Bitboard(1) << square

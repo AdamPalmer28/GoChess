@@ -1,6 +1,6 @@
-package make_game
+package gamestate
 
-import "chess/board"
+import "chess/chess_engine/board"
 
 type GameState struct {
 	Board board.ChessBoard
@@ -11,11 +11,11 @@ type GameState struct {
 	White_to_move bool
 	Enpassent_ind uint
 
-	MoveList []uint16
+	MoveList []uint
 	MoveHumanList []string // CLI referencing
 
 	Moveno   uint
-	PrevMoves []uint16 // previous moves (0000 000000 000000 form)
+	PrevMoves []uint // previous moves (0000 000000 000000 form)
 	Cap_pieces [][2]int // [move number][piece type]
 
 }
@@ -29,16 +29,19 @@ var PieceValLookup = map[int]string{
 	5: "K",
 }
 
-func Make_move(move uint16, gs *GameState) {
+func (gs *GameState) Make_move(move uint)  {
 
 	// get the start and finish squares
-	//start := move & (0x3F)
-	//finish := (move >> 6) & 0x3F
 
 	special := (move >> 12) & 0xF
 
 	// update piece bitboards (gs.Board)
+	piece_moved, cap_piece := gs.Board.Move(move, gs.White_to_move)
 
+	piece_moved_str := PieceValLookup[int(piece_moved)]
+	cap_piece_str := PieceValLookup[int(cap_piece)]
+
+	println(piece_moved_str, cap_piece_str)
 
 
 	// update castling rights
@@ -57,6 +60,10 @@ func Make_move(move uint16, gs *GameState) {
 	
 	// update move number
 	gs.Moveno++
+
+	
+	// change move color
+	gs.White_to_move = !gs.White_to_move
 
 
 

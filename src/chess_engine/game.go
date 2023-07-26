@@ -1,16 +1,16 @@
 package chess_engine
 
 import (
-	"chess/chess_engine/make_game"
+	"chess/chess_engine/gamestate"
 )
 
 
 
-func StartGame() *make_game.GameState {
+func StartGame() *gamestate.GameState {
 
 	println("Starting Chess Engine")
 
-	gs := make_game.MakeGameState()
+	gs := gamestate.MakeGameState()
 	
 	return gs
 }

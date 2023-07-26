@@ -2,6 +2,7 @@ package cli_engine
 
 import (
 	"bufio"
+	"chess/cli_engine/cli_debug"
 	"fmt"
 	"os"
 	"strings"
@@ -14,7 +15,7 @@ func (cfg *Config) Run() bool {
 	var user_cmd string
 
     // Prompt the user for input
-    fmt.Print("Enter a line of text: ")
+    fmt.Print("\nEnter a command: ")
 
 
     // Read the next line from standard input
@@ -23,7 +24,7 @@ func (cfg *Config) Run() bool {
 		user_cmd = scanner.Text()
 
         // Print the input line
-        fmt.Println("\nChess Engine:", user_cmd)
+        //fmt.Println("\nChess Engine:", user_cmd)
     } else {
         // If an error occurred while reading input
         fmt.Println("Error reading input:", scanner.Err())
@@ -40,30 +41,24 @@ func (cfg *Config) Run() bool {
 	if cmd == "print" {
 
 		gs.Board.Print()
-	}
- 
-	// move a1a2
-	if cmd == "move" {
-		
-		move := inputs[1]
-
-		start := move[0:2]
-		end := move[2:] // string + 2 for promotion
-		end_sq := end[0:2] 
-
-		s := move_to_index(start)
-		e := move_to_index(end_sq)
-
-		fmt.Printf("Square: start: %s, end: %s\n", start, end_sq)
-		fmt.Printf("Index: start: %d, end: %d\n", s, e)
-
-		//gs.Board.Print()
-
-	}
-
-	if cmd == "quit" {
+	} else if cmd == "quit" {
 		return false
+
+	} else if cmd == "bb" {
+		cli_debug.Bitboard_cli(*gs, inputs)
+		
+	} else {
+		// assume move
+
+		uci_move := cmd
+		result := cfg.move_input(uci_move)
+
+		if result == false {
+			fmt.Println("Invalid move")
+		}
+		
 	}
+
 
 	return true
 

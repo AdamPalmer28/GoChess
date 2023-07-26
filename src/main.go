@@ -7,8 +7,6 @@ import (
 
 func main() {
 
-	println("Hello World")
-
 	gs := chess_engine.StartGame()
 
 	gs.Board.Print()
