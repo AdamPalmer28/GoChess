@@ -4,7 +4,7 @@ import (
 	"strconv"
 )
 
-func move_to_index(cord string) int {
+func Move_to_index(cord string) int {
 	// convert a chess cord to an index
 
 	var ind int
@@ -19,7 +19,7 @@ func move_to_index(cord string) int {
 	return ind
 }
 
-func index_to_move(ind int) string {
+func Index_to_move(ind int) string {
 
 	var cord string
 
@@ -36,8 +36,8 @@ func (cfg *Config) move_input(user_input string) bool {
 	end := user_input[2:] // string + 1 for promotion
 	end_sq := end[0:2] 
 
-	s := move_to_index(start)
-	e := move_to_index(end_sq)
+	s := Move_to_index(start)
+	e := Move_to_index(end_sq)
 
 	
 	move_num :=  (e << 6) | s

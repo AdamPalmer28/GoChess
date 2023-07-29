@@ -19,11 +19,11 @@ func Test_Cord_Index(t *testing.T) {
 
 	for _, tc := range test_cases {
 		
-		result := move_to_index(tc.cord)
+		result := Move_to_index(tc.cord)
 		if result != tc.expected {
 			t.Errorf("move_to_index(%s) = %d; want %d", tc.cord, result, tc.expected)
 		}
-		cord_result := index_to_move(tc.expected)
+		cord_result := Index_to_move(tc.expected)
 		if cord_result != tc.cord {
 			t.Errorf("index_to_move(%d) = %s; want %s", tc.expected, cord_result, tc.cord)
 		}
