@@ -21,6 +21,9 @@ func Bitboard_cli(gs gamestate.GameState, inputs []string) {
 		"bq": gs.Board.BlackQueens,
 		"wk": gs.Board.WhiteKing,
 		"bk": gs.Board.BlackKing,
+
+		"w": &gs.Board.White,
+		"b": &gs.Board.Black,
 	}
 
 	bb_type := inputs[1]

@@ -7,6 +7,7 @@ func MakeGameState() *GameState {
 	// Make a new game state
 
 	chess_board	 := MakeIntialChessBoard()
+	chess_board.UpdateSideBB(true)
 
 	gs := &GameState{
 		Board: *chess_board,

@@ -17,14 +17,42 @@ type ChessBoard struct {
 	BlackQueens  *Bitboard
 	BlackKing    *Bitboard
 
+	White        Bitboard
+	Black        Bitboard
 }
 
 
+// listBB returns a list of bitboards for each size
+func (cb *ChessBoard) listBB(white bool) [6]*Bitboard {
+	// return a list of bitboards for each piece type
+	if white {
+		return [6]*Bitboard{cb.WhitePawns, cb.WhiteKnights, cb.WhiteBishops, 
+			cb.WhiteRooks, cb.WhiteQueens, cb.WhiteKing}
+	} else {
+		return [6]*Bitboard{cb.BlackPawns, cb.BlackKnights, cb.BlackBishops, 
+			cb.BlackRooks, cb.BlackQueens, cb.BlackKing}
+	}
+}
+
+// Creates a BB of all the pieces on the board for a given side
+func (cb *ChessBoard) UpdateSideBB(white bool) {
+	
+	if white {
+		cb.White = *cb.WhitePawns | *cb.WhiteKnights | *cb.WhiteBishops | 
+		*cb.WhiteRooks | *cb.WhiteQueens | *cb.WhiteKing
+	} else {
+		cb.Black = *cb.BlackPawns | *cb.BlackKnights | *cb.BlackBishops | 
+		*cb.BlackRooks | *cb.BlackQueens | *cb.BlackKing
+	}
+}	
+	
+	
 func (cb *ChessBoard) Print() {
 
-	fmt.Println("   a  b  c  d  e  f  g  h")
+	fmt.Println("  |  a  b  c  d  e  f  g  h")
+	fmt.Println("--+------------------------")
 	for rank := uint(0); rank < 8; rank++ {
-		fmt.Printf("%d ", 8 - rank)
+		fmt.Printf("%d | ", 8 - rank)
 		for file := uint(0); file < 8; file++ {
 
 			square := ((7-rank) * 8) + file
@@ -63,58 +91,4 @@ func (cb *ChessBoard) Print() {
 		}
 		fmt.Println()
 	}
-}
-
-func (cb *ChessBoard) listBB(white bool) [6]*Bitboard {
-	// return a list of bitboards for each piece type
-	if white {
-		return [6]*Bitboard{cb.WhitePawns, cb.WhiteKnights, cb.WhiteBishops, 
-							cb.WhiteRooks, cb.WhiteQueens, cb.WhiteKing}
-	} else {
-		return [6]*Bitboard{cb.BlackPawns, cb.BlackKnights, cb.BlackBishops, 
-							cb.BlackRooks, cb.BlackQueens, cb.BlackKing}
-	}
-}
-
-
-func (cb *ChessBoard) Move(move_num uint, white_move bool) (uint, uint) {
-
-	start_sq := move_num & 0x3F
-	finish_sq := (move_num >> 6) & 0x3F
-	//special := (move_num >> 12) & 0xF
-
-	BB_list := [6]*Bitboard{}
-	Opp_BB_list := [6]*Bitboard{}
-
-
-	BB_list = cb.listBB(white_move) 
-	Opp_BB_list = cb.listBB(!white_move)
-		
-	
-	// update piece bitboards
-	var piece_moved uint = 6
-	for ind, BB := range BB_list {
-
-		if *BB & (1 << start_sq) != 0 {
-
-			piece_moved = uint(ind)
-			BB.flip(start_sq)
-			BB.flip(finish_sq)
-			break
-		}
-	}
-	// check for capture
-	var cap_piece uint = 6
-	for ind, BB := range Opp_BB_list {
-
-		if *BB & (1 << finish_sq) != 0 {
-			
-			cap_piece = uint(ind)
-			BB.flip(finish_sq)
-			break
-		}
-	}
-
-	return piece_moved, cap_piece
-
 }
