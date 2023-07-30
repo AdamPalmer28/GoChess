@@ -49,46 +49,48 @@ func (cb *ChessBoard) UpdateSideBB(white bool) {
 	
 func (cb *ChessBoard) Print() {
 
-	fmt.Println("  |  a  b  c  d  e  f  g  h")
-	fmt.Println("--+------------------------")
+	fmt.Println("  | a   b   c   d   e   f   g   h")
+	fmt.Println("--+---+---+---+---+---+---+---+---+")
 	for rank := uint(0); rank < 8; rank++ {
-		fmt.Printf("%d | ", 8 - rank)
+	
+		fmt.Printf("%d |", 8 - rank)
 		for file := uint(0); file < 8; file++ {
 
 			square := ((7-rank) * 8) + file
 			mask := Bitboard(1) << square
 
 			// Check if any piece is present on the square
-			piece := " - "
+			piece := "   |"
 			if (*cb.WhitePawns & mask) != 0 {
-				piece = "wP "
+				piece = " P |"
 			} else if (*cb.WhiteKnights & mask) != 0 {
-				piece = "wN "
+				piece = " N |"
 			} else if (*cb.WhiteBishops & mask) != 0 {
-				piece = "wB "
+				piece = " B |"
 			} else if (*cb.WhiteRooks & mask) != 0 {
-				piece = "wR "
+				piece = " R |"
 			} else if (*cb.WhiteQueens & mask) != 0 {
-				piece = "wQ "
+				piece = " Q |"
 			} else if (*cb.WhiteKing & mask) != 0 {
-				piece = "wK "
+				piece = " K |"
 
 			} else if (*cb.BlackPawns & mask) != 0 {
-				piece = " p "
+				piece = " p |"
 			} else if (*cb.BlackKnights & mask) != 0 {
-				piece = " n " 
+				piece = " n |" 
 			} else if (*cb.BlackBishops & mask) != 0 {
-				piece = " b "
+				piece = " b |"
 			} else if (*cb.BlackRooks & mask) != 0 {
-				piece = " r "
+				piece = " r |"
 			} else if (*cb.BlackQueens & mask) != 0 {
-				piece = " q "
+				piece = " q |"
 			} else if (*cb.BlackKing & mask) != 0 {
-				piece = " k "
+				piece = " k |"
 			}
 
 			fmt.Print(piece)
 		}
 		fmt.Println()
+		fmt.Println("  +---+---+---+---+---+---+---+---+")
 	}
 }

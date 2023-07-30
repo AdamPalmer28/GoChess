@@ -49,3 +49,16 @@ func (cfg *Config) move_input(user_input string) bool {
 
 	return true
 }
+
+func MoveNum_readable(move_num uint) string {
+
+	var move string
+
+	start := move_num & 0x3f
+	end := (move_num >> 6) & 0x3f
+	//special := (move_num >> 12) & 0xf
+
+	move = Index_to_move(int(start)) + Index_to_move(int(end))
+
+	return move
+}
