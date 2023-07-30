@@ -15,7 +15,14 @@ func (cfg *Config) Run() bool {
 	var user_cmd string
 
     // Prompt the user for input
-    fmt.Print("\nEnter a command: ")
+	fmt.Printf("\nMove: %x ", cfg.gs.Moveno)
+	if cfg.gs.White_to_move {
+		fmt.Print("(White to move)")
+	} else {
+		fmt.Print("(Black to move)")
+	}
+
+    fmt.Println("\nEnter a command: ")
 
 
     // Read the next line from standard input
@@ -23,8 +30,6 @@ func (cfg *Config) Run() bool {
 		// Get the text that the user entered
 		user_cmd = scanner.Text()
 
-        // Print the input line
-        //fmt.Println("\nChess Engine:", user_cmd)
     } else {
         // If an error occurred while reading input
         fmt.Println("Error reading input:", scanner.Err())
@@ -46,6 +51,12 @@ func (cfg *Config) Run() bool {
 
 	} else if cmd == "bb" {
 		cli_debug.Bitboard_cli(*gs, inputs)
+
+	// } else if cmd == "fen" {
+
+	// 	fen_str := strings.Join(inputs[1:7], " ")
+
+
 		
 	} else {
 		// assume move

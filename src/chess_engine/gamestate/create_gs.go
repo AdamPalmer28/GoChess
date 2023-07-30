@@ -11,8 +11,8 @@ func MakeGameState() *GameState {
 
 	gs := &GameState{
 		Board: *chess_board,
-		WhiteCastle: [2]bool{true, true},
-		BlackCastle: [2]bool{true, true},
+		WhiteCastle: [2]bool{true, true}, // [0] = queenside, [1] = kingside
+		BlackCastle: [2]bool{true, true}, // [0] = queenside, [1] = kingside
 		White_to_move: true,
 		Enpassent_ind: 0,
 		MoveList: []uint{},
