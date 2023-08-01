@@ -30,7 +30,7 @@ var bb_ind_set = [][]uint{
 func Test_BB_to_index(b *testing.T) {
 
 	for i, bb := range bb_set {
-		ind := BB_to_index(bb)
+		ind := bb.Index()
 
 		// test length
 		if len(ind) != len(bb_ind_set[i]) {
@@ -80,7 +80,7 @@ func BenchmarkBB_to_index(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		for _, bb := range bb_set {
 
-			BB_to_index(bb)
+			bb.Index()
 		}
 	}
 	b.ReportAllocs()
@@ -91,7 +91,7 @@ func BenchmarkBB_to_index2(b *testing.B) {
 	for i := 0; i < b.N; i++ {
 		for _, bb := range bb_set {
 
-			BB_to_index2(bb)
+			bb.BB_to_index2()
 		}
 	}
 	b.ReportAllocs()

@@ -40,7 +40,7 @@ func (b Bitboard) Print() {
 	}
 }
 
-func BB_to_index(b Bitboard) []uint {
+func (b Bitboard) Index() []uint {
 	// convert a bitboard to slide index
 
 	ind := []uint{}
@@ -58,7 +58,7 @@ func BB_to_index(b Bitboard) []uint {
 }
 
 // slower method
-func BB_to_index2(b Bitboard) []uint {
+func (b Bitboard) BB_to_index2() []uint {
 	// convert a bitboard to slide index
 
 	var ind []uint
