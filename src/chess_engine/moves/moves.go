@@ -1,4 +1,4 @@
-package move_gen
+package moves
 
 /*
 Moves are represented as a 16 bit integer
@@ -17,6 +17,7 @@ special moves
 0101 - enpassent capture
 1000 - promotion knight
 */
+
 
 
 
