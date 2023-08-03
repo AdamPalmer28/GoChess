@@ -32,4 +32,7 @@ func (gs *GameState) Make_move(move uint) {
 
 	// change move color
 	gs.White_to_move = !gs.White_to_move
+
+	// generate new moves
+	gs.GenMoves()
 }

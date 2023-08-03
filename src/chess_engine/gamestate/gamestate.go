@@ -9,7 +9,7 @@ type GameState struct {
 	BlackCastle [2]bool
 
 	White_to_move bool
-	Enpassent_ind uint
+	Enpass_ind uint
 
 	MoveList []uint
 	MoveHumanList []string // CLI referencing
@@ -19,15 +19,30 @@ type GameState struct {
 	PrevMoves []uint // previous moves (0000 000000 000000 form)
 	Cap_pieces [][2]int // [move number][piece type]
 
+	MoveRays struct {
+		// rays for each piece
+		KnightRays [64]board.Bitboard
+		BishopRays [64]board.Bitboard
+		RookRays [64]board.Bitboard
+		KingRays [64]board.Bitboard
+	}
+
+
 }
 
 var PieceValLookup = map[int]string{
 	0: "P",
-	1: "K",
+	1: "N",
 	2: "B",
 	3: "R",
 	4: "Q",
 	5: "K",
+	6: "p",
+	7: "n",
+	8: "b",
+	9: "r",
+	10: "q",
+	11: "k",
 }
 
 var PieceBBind = map[string]uint{

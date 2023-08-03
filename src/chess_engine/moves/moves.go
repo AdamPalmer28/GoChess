@@ -16,6 +16,14 @@ special moves
 0100 - capture
 0101 - enpassent capture
 1000 - promotion knight
+1001 - promotion bishop
+1010 - promotion rook
+1011 - promotion queen
+1100 - promotion knight capture
+1101 - promotion bishop capture
+1110 - promotion rook capture
+1111 - promotion queen capture
+
 */
 
 

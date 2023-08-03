@@ -52,11 +52,9 @@ func (cfg *Config) Run() bool {
 	} else if cmd == "bb" {
 		cli_debug.Bitboard_cli(*gs, inputs)
 
-	// } else if cmd == "fen" {
+	} else if cmd == "moves" {
 
-	// 	fen_str := strings.Join(inputs[1:7], " ")
-
-
+		GetMoves(gs.MoveList)
 		
 	} else {
 		// assume move

@@ -14,7 +14,7 @@ func MakeGameState() *GameState {
 		WhiteCastle: [2]bool{true, true}, // [0] = queenside, [1] = kingside
 		BlackCastle: [2]bool{true, true}, // [0] = queenside, [1] = kingside
 		White_to_move: true,
-		Enpassent_ind: 0,
+		Enpass_ind: 0,
 		MoveList: []uint{},
 		MoveHumanList: []string{},
 		Moveno: 0,

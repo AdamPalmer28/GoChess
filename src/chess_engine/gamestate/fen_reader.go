@@ -51,7 +51,7 @@ func FEN_to_gs(fen string) *GameState {
 		BlackCastle: black_castle,
 		White_to_move: active_color == "w",
 
-		Enpassent_ind: en_passant_squ_ind,
+		Enpass_ind: en_passant_squ_ind,
 
 		MoveList: []uint{},
 		Moveno: uint(move_number),
