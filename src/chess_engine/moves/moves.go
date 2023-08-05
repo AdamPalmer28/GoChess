@@ -1,5 +1,7 @@
 package moves
 
+import "sort"
+
 /*
 Moves are represented as a 16 bit integer
 0000 000000 000000
@@ -26,6 +28,23 @@ special moves
 
 */
 
+func special_move(move uint) uint {
+	return (move >> 12)
+}
 
+func SortMoves(moves []uint) []uint {
+
+	// priority order: promotion, capture, castle, double pawn push
+	
+	// they are already in numerical value
+	// so we just can sort them by their value (highest to lowest)
+
+	sort.Slice(moves, func(i, j int) bool {
+		return (special_move(moves[i]) > special_move(moves[j]))
+	})
+
+	return moves
+
+}
 
 

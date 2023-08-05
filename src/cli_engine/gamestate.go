@@ -10,10 +10,10 @@ func GetMoves(moves []uint) {
 		end_sq := (move >> 6) & 0x3f
 		special := (move >> 12) & 0xf
 
-		start := Index_to_move(int(start_sq))
-		end := Index_to_move(int(end_sq))
+		start := Index_to_move(start_sq)
+		end := Index_to_move(end_sq)
 
-		fmt.Println(start, end, " special: ", special)
+		fmt.Println(start+end, " special: ", special)
 	}
 
 }

@@ -44,15 +44,15 @@ func (cfg *Config) Run() bool {
 	gs := cfg.gs
 
 	if cmd == "print" {
-
 		gs.Board.Print()
+
 	} else if cmd == "quit" {
 		return false
 
 	} else if cmd == "bb" {
 		cli_debug.Bitboard_cli(*gs, inputs)
 
-	} else if cmd == "moves" {
+	} else if cmd == "move" {
 
 		GetMoves(gs.MoveList)
 		

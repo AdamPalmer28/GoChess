@@ -9,7 +9,7 @@ func Test_Cord_Index(t *testing.T) {
 
 	test_cases := []struct {
 		cord string
-		expected int
+		expected uint
 	}{
 		{"a1", 0},
 		{"a3", 16},

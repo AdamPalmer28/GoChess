@@ -42,7 +42,7 @@ func GenKnightMoves(knight_bb board.Bitboard, knight_rays *[64]board.Bitboard,
 }
 
 
-func KnightMoves(ind int) board.Bitboard {
+func KnightRays(ind int) board.Bitboard {
 
 	var moves board.Bitboard = 0
 
