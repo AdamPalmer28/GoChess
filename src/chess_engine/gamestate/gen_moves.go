@@ -2,7 +2,7 @@ package gamestate
 
 import (
 	"chess/chess_engine/board"
-	"chess/chess_engine/moves/move_gen"
+	"chess/chess_engine/move_gen"
 )
 
 type BoardPerpective struct {
@@ -28,7 +28,7 @@ type BoardPerpective struct {
 func (gs *GameState) GenMoves() {
 
 	// reset the moves
-	MoveList := []uint{}
+	MoveList := move_gen.MoveList{}
 
 	var player BoardPerpective
 
