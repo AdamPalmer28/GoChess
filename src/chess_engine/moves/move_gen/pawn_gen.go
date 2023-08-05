@@ -6,7 +6,7 @@ import (
 
 // simplify this function to take inputs
 func GenPawnMoves(pawn_bb board.Bitboard, w_move bool, enpass uint,
-			team_bb board.Bitboard, opp_bb board.Bitboard,) []uint {
+			team_bb board.Bitboard, opp_bb board.Bitboard) []uint {
 
 	var movelist []uint
 	var moveno uint
@@ -25,10 +25,9 @@ func GenPawnMoves(pawn_bb board.Bitboard, w_move bool, enpass uint,
 		prom_row = 0
 		start_row = 6
 	}
-			
 	
 	comb_occ := team_bb | opp_bb
-	
+
 	// loop through all the pawns
 	pawn_inds := pawn_bb.Index()
 	for _, ind := range pawn_inds {
@@ -50,7 +49,7 @@ func GenPawnMoves(pawn_bb board.Bitboard, w_move bool, enpass uint,
 				en_sq := uint(int(ind) + (pawnstep * 2))
 
 				// check if the square is occupied
-				if comb_occ & (1 << en_sq) != 0 {
+				if comb_occ & (1 << en_sq) == 0 {
 					double_moveno := (en_sq << 6) | ind
 					double_moveno |= 0b0001 << 12
 
@@ -63,9 +62,10 @@ func GenPawnMoves(pawn_bb board.Bitboard, w_move bool, enpass uint,
 				movelist = append(movelist, promotion_list[:]...)
 
 			// single push
-			} else { 
-				movelist = append(movelist, moveno)
 			}
+
+			movelist = append(movelist, moveno)
+			
 		}
 
 		// pawn captures
@@ -80,15 +80,18 @@ func GenPawnMoves(pawn_bb board.Bitboard, w_move bool, enpass uint,
 		}
 
 		for _, sq := range cap_sq {
-			moveno = 1 << 14
-			moveno |= sq << 6 | ind
+			if comb_occ & (1 << sq) != 0 {
+				(comb_occ & (1 << sq)).Print()
+				moveno = 1 << 14
+				moveno |= sq << 6 | ind
 
-			// promotion
-			if (row == prom_row) {
-				promotion_list := promotion(moveno)
-				movelist = append(movelist, promotion_list[:]...)
-			} else { 
-				movelist = append(movelist, moveno)
+				// promotion
+				if (row == prom_row) {
+					promotion_list := promotion(moveno)
+					movelist = append(movelist, promotion_list[:]...)
+				} else { 
+					movelist = append(movelist, moveno)
+				}
 			}
 		}
 

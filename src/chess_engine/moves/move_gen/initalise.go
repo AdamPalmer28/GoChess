@@ -5,9 +5,9 @@ import (
 )
 
 
-func InitKnightMoves() []board.Bitboard {
+func InitKnightRays() [64]board.Bitboard {
 
-	moves := make([]board.Bitboard, 64)
+	moves := [64]board.Bitboard{}
 
 	for i := 0; i < 64; i++ {
 		moves[i] = KnightMoves(i)

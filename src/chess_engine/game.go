@@ -14,6 +14,7 @@ func StartGame() *gamestate.GameState {
 	// gs := gamestate.FEN_to_gs(fen_str)
 
 	gs := gamestate.MakeGameState()
+	gs.Init()
 	
 	
 	return gs

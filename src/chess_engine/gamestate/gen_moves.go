@@ -49,6 +49,7 @@ func (gs *GameState) GenMoves() {
 	MoveList = append(MoveList, pawn_moves...)
 
 	// generate knight moves
+
 	knight_moves := move_gen.GenKnightMoves(knight_bb, 
 				&gs.MoveRays.KnightRays, team_bb, opp_bb)
 

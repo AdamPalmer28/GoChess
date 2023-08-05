@@ -10,13 +10,13 @@ func GenKnightMoves(knight_bb board.Bitboard, knight_rays *[64]board.Bitboard,
 	var movelist []uint
 	var moveno uint
 
+
 	// loop through all the knights
 	knight_inds := knight_bb.Index()
 	for _, ind := range knight_inds {
 
 		move_ray := knight_rays[ind]
 		move_ray &= ^team_bb
-
 		// generate the moves nums
 
 		// captures
@@ -24,7 +24,7 @@ func GenKnightMoves(knight_bb board.Bitboard, knight_rays *[64]board.Bitboard,
 		caps_inds := caps.Index()
 
 		for _, end_sq := range caps_inds {
-			moveno = 1 << 14 | uint(ind) << 6 | uint(end_sq)
+			moveno = 1 << 14 | uint(end_sq) << 6 | uint(ind)
 			movelist = append(movelist, moveno)
 		}
 
@@ -33,7 +33,7 @@ func GenKnightMoves(knight_bb board.Bitboard, knight_rays *[64]board.Bitboard,
 		noncaps_inds := noncaps.Index()
 
 		for _, end_sq := range noncaps_inds {
-			moveno = uint(ind) << 6 | uint(end_sq)
+			moveno = uint(end_sq) << 6 | uint(ind)
 			movelist = append(movelist, moveno)
 		}
 
