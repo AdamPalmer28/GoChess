@@ -1,6 +1,8 @@
 package move_gen
 
-import "sort"
+import (
+	"sort"
+)
 
 /*
 Moves are represented as a 16 bit integer

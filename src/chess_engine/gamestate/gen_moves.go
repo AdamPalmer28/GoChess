@@ -25,16 +25,13 @@ type BoardPerpective struct {
 	opp_bb board.Bitboard
 }
 
-func (gs *GameState) GenMoves() {
+func (gs *GameState) Make_BP() {
 
-	// reset the moves
-	MoveList := move_gen.MoveList{}
-
-	var player BoardPerpective
+	var bp BoardPerpective
 
 	if gs.White_to_move {
-
-		player = BoardPerpective{
+		
+		bp = BoardPerpective{
 
 			pawn_bb: *gs.Board.WhitePawns,
 			knight_bb: *gs.Board.WhiteKnights,
@@ -42,20 +39,19 @@ func (gs *GameState) GenMoves() {
 			rook_bb: *gs.Board.WhiteRooks,
 			queen_bb: *gs.Board.WhiteQueens,
 			king_bb: *gs.Board.WhiteKing,
-
 			opp_pawn_bb: *gs.Board.BlackPawns,
 			opp_knight_bb: *gs.Board.BlackKnights,
 			opp_bishop_bb: *gs.Board.BlackBishops,
 			opp_rook_bb: *gs.Board.BlackRooks,
 			opp_queen_bb: *gs.Board.BlackQueens,
 			opp_king_bb: *gs.Board.BlackKing,
-
 			team_bb: gs.Board.White,
 			opp_bb: gs.Board.Black,
 		}
 
 	} else {
-		player = BoardPerpective{
+
+		bp = BoardPerpective{
 
 			pawn_bb: *gs.Board.BlackPawns,
 			knight_bb: *gs.Board.BlackKnights,
@@ -63,39 +59,64 @@ func (gs *GameState) GenMoves() {
 			rook_bb: *gs.Board.BlackRooks,
 			queen_bb: *gs.Board.BlackQueens,
 			king_bb: *gs.Board.BlackKing,
-
 			opp_pawn_bb: *gs.Board.WhitePawns,
 			opp_knight_bb: *gs.Board.WhiteKnights,
 			opp_bishop_bb: *gs.Board.WhiteBishops,
 			opp_rook_bb: *gs.Board.WhiteRooks,
 			opp_queen_bb: *gs.Board.WhiteQueens,
 			opp_king_bb: *gs.Board.WhiteKing,
-
 			team_bb: gs.Board.Black,
 			opp_bb: gs.Board.White,
 		}
 	}
 
+	gs.PlayerBoard = bp
+}
+
+
+func (gs *GameState) GenMoves() {
+
+	// reset the moves
+	MoveList := move_gen.MoveList{}
+
+	gs.Make_BP()
+
+	var player BoardPerpective = gs.PlayerBoard
+
 	// generate pawn moves
+	println("here")
 	pawn_moves := move_gen.GenPawnMoves(player.pawn_bb, gs.White_to_move, 
 				gs.Enpass_ind, player.team_bb, player.opp_bb)
 
 	MoveList = append(MoveList, pawn_moves...)
-
+	println("here2")
 
 	// generate knight moves
 	knight_moves := move_gen.GenKnightMoves(player.knight_bb, 
 				&gs.MoveRays.KnightRays, player.team_bb, player.opp_bb)
 
 	MoveList = append(MoveList, knight_moves...)
-
-	// generate bishop moves
-
+	
 
 	// generate rook moves
+	rook_moves := move_gen.GenSlidingMoves(player.rook_bb,
+				&gs.MoveRays.RookRays, 0, player.team_bb, player.opp_bb)
+
+	MoveList = append(MoveList, rook_moves...)
+
+
+	// generate bishop moves
+	bishop_moves := move_gen.GenSlidingMoves(player.bishop_bb,
+				&gs.MoveRays.BishopRays, 1, player.team_bb, player.opp_bb)
+
+	MoveList = append(MoveList, bishop_moves...)
 
 
 	// generate queen moves
+	queen_moves := move_gen.GenSlidingMoves(player.queen_bb,
+				&gs.MoveRays.QueenRays, 2, player.team_bb, player.opp_bb)
+
+	MoveList = append(MoveList, queen_moves...)
 
 
 	// generate king moves

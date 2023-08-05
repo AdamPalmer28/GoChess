@@ -54,7 +54,13 @@ func (cfg *Config) Run() bool {
 
 	} else if cmd == "move" {
 
-		GetMoves(gs.MoveList)
+		if len(inputs) > 1 {
+			sq := inputs[1]
+			cli_debug.Move_cli(gs.MoveList, sq)
+		} else {
+			GetMoves(gs.MoveList)
+		}
+
 		
 	} else {
 		// assume move

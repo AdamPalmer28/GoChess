@@ -1,6 +1,9 @@
 package gamestate
 
-import "chess/chess_engine/board"
+import (
+	"chess/chess_engine/board"
+	"chess/chess_engine/move_gen"
+)
 
 type GameState struct {
 	Board board.ChessBoard
@@ -11,7 +14,7 @@ type GameState struct {
 	White_to_move bool
 	Enpass_ind uint
 
-	MoveList []uint
+	MoveList move_gen.MoveList
 	MoveHumanList []string // CLI referencing
 
 	Moveno   uint
@@ -24,9 +27,11 @@ type GameState struct {
 		KnightRays [64]board.Bitboard
 		BishopRays [64]board.Bitboard
 		RookRays [64]board.Bitboard
+		QueenRays [64]board.Bitboard
 		KingRays [64]board.Bitboard
 	}
 
+	PlayerBoard  BoardPerpective
 
 }
 

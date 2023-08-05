@@ -80,8 +80,7 @@ func GenPawnMoves(pawn_bb board.Bitboard, w_move bool, enpass uint,
 		}
 
 		for _, sq := range cap_sq {
-			if comb_occ & (1 << sq) != 0 {
-				(comb_occ & (1 << sq)).Print()
+			if opp_bb & (1 << sq) != 0 {
 				moveno = 1 << 14
 				moveno |= sq << 6 | ind
 
