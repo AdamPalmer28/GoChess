@@ -17,7 +17,7 @@ func MakeGameState() *GameState {
 		Enpass_ind: 0,
 		MoveList: []uint{},
 		MoveHumanList: []string{},
-		Moveno: 0,
+		Moveno: 1,
 		PrevMoves: []uint{},
 		Cap_pieces: [][2]int{},
 	}
