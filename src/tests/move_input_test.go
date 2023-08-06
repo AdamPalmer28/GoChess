@@ -1,11 +1,14 @@
-package cli_engine
+package test
 
-import "testing"
+import (
+	"chess/chess_engine/board"
+	"testing"
+)
 
-func Test_Cord_Index(t *testing.T) {
+func TestCordIndex(t *testing.T) {
 
 	test_cases := []struct {
-		cord string
+		cord     string
 		expected uint
 	}{
 		{"a1", 0},
@@ -18,12 +21,12 @@ func Test_Cord_Index(t *testing.T) {
 	}
 
 	for _, tc := range test_cases {
-		
-		result := Move_to_index(tc.cord)
+
+		result := board.Move_to_index(tc.cord)
 		if result != tc.expected {
 			t.Errorf("move_to_index(%s) = %d; want %d", tc.cord, result, tc.expected)
 		}
-		cord_result := Index_to_move(tc.expected)
+		cord_result := board.Index_to_move(tc.expected)
 		if cord_result != tc.cord {
 			t.Errorf("index_to_move(%d) = %s; want %s", tc.expected, cord_result, tc.cord)
 		}

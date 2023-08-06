@@ -1,36 +1,9 @@
 package cli_engine
 
 import (
+	"chess/chess_engine/board"
 	"fmt"
-	"strconv"
 )
-
-func Move_to_index(cord string) uint {
-	// convert a chess cord to an index
-
-	var ind uint
-
-	cord = cord[0:2]
-	
-	letter := cord[0]
-	number := cord[1]
-
-	ind = uint(number-'1')*8 + uint(letter-'a')
-
-	return ind
-}
-
-func Index_to_move(ind uint) string {
-
-	var cord string
-
-	letter := rune(ind%8) + 'a'
-	rank := ind/8 + 1
-	cord = string(letter) + strconv.Itoa( int(rank) )
-
-	return cord
-}
-
 
 // CLI move input - determin if move is valid and determine move number
 func (cfg *Config) move_input(user_input string) bool {
@@ -46,8 +19,8 @@ func (cfg *Config) move_input(user_input string) bool {
 	end := user_input[2:] // string + 1 for promotion
 	end_sq := end[0:2] 
 	
-	s := Move_to_index(start)
-	e := Move_to_index(end_sq)
+	s := board.Move_to_index(start)
+	e := board.Move_to_index(end_sq)
 	
 	var move_num uint
 	move_num =  (e << 6) | s

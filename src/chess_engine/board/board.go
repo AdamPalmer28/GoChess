@@ -1,6 +1,9 @@
 package board
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
 type ChessBoard struct {
 	WhitePawns   *Bitboard
@@ -93,4 +96,31 @@ func (cb *ChessBoard) Print() {
 		fmt.Println()
 		fmt.Println("  +---+---+---+---+---+---+---+---+")
 	}
+}
+
+
+func Move_to_index(cord string) uint {
+	// convert a chess cord to an index
+
+	var ind uint
+
+	cord = cord[0:2]
+	
+	letter := cord[0]
+	number := cord[1]
+
+	ind = uint(number-'1')*8 + uint(letter-'a')
+
+	return ind
+}
+
+func Index_to_move(ind uint) string {
+
+	var cord string
+
+	letter := rune(ind%8) + 'a'
+	rank := ind/8 + 1
+	cord = string(letter) + strconv.Itoa( int(rank) )
+
+	return cord
 }

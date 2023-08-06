@@ -27,7 +27,7 @@ var bb_ind_set = [][]uint{
 			[]uint{16,28,40}, // 6
                          }
 
-func Test_BB_to_index(b *testing.T) {
+func Test_BB_to_index(t *testing.T) {
 
 	for i, bb := range bb_set {
 		ind := bb.Index()
@@ -35,13 +35,13 @@ func Test_BB_to_index(b *testing.T) {
 		// test length
 		if len(ind) != len(bb_ind_set[i]) {
 
-			b.Errorf("BB_to_index failed Sets different length. \nSet: %d Result: %d Expected: %d, number: %b", i, ind, bb_ind_set[i], bb)
+			t.Errorf("BB_to_index failed Sets different length. \nSet: %d Result: %d Expected: %d, number: %b", i, ind, bb_ind_set[i], bb)
 			
 		} else { // test values
 
 			for j, v := range ind {
 				if v != uint(bb_ind_set[i][j]) {
-					b.Errorf("BB_to_index value error. \nSet: %d Result: %d Expected: %d", i, ind, bb_ind_set[i])
+					t.Errorf("BB_to_index value error. \nSet: %d Result: %d Expected: %d", i, ind, bb_ind_set[i])
 					break
 				}
 			}

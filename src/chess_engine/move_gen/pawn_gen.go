@@ -18,11 +18,11 @@ func GenPawnMoves(pawn_bb board.Bitboard, w_move bool, enpass uint,
 
 	if w_move {
 		pawnstep = 8
-		prom_row = 7
+		prom_row = 6
 		start_row = 1
 	} else {
 		pawnstep = -8
-		prom_row = 0
+		prom_row = 1
 		start_row = 6
 	}
 	
@@ -55,6 +55,8 @@ func GenPawnMoves(pawn_bb board.Bitboard, w_move bool, enpass uint,
 
 					movelist = append(movelist, double_moveno)
 				}
+				movelist = append(movelist, moveno)
+				
 			// promotion
 			} else if (row == prom_row) {
 
@@ -62,9 +64,9 @@ func GenPawnMoves(pawn_bb board.Bitboard, w_move bool, enpass uint,
 				movelist = append(movelist, promotion_list[:]...)
 
 			// single push
+			} else {
+				movelist = append(movelist, moveno)
 			}
-
-			movelist = append(movelist, moveno)
 			
 		}
 

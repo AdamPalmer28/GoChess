@@ -84,12 +84,10 @@ func (gs *GameState) GenMoves() {
 	var player BoardPerpective = gs.PlayerBoard
 
 	// generate pawn moves
-	println("here")
 	pawn_moves := move_gen.GenPawnMoves(player.pawn_bb, gs.White_to_move, 
 				gs.Enpass_ind, player.team_bb, player.opp_bb)
 
 	MoveList = append(MoveList, pawn_moves...)
-	println("here2")
 
 	// generate knight moves
 	knight_moves := move_gen.GenKnightMoves(player.knight_bb, 
