@@ -7,6 +7,12 @@ import (
 
 func main() {
 
+	// time to generate attack rays
+	//rook_rays := move_gen.Gen_attack_rays(false)
+
+
+
+	// start the game
 	gs := chess_engine.StartGame()
 
 	gs.Board.Print()
@@ -15,7 +21,6 @@ func main() {
 
 	for {
 		result := cli.Run()
-		
 
 		// condition to break the loop
 		if result == false {
