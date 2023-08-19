@@ -1,6 +1,10 @@
 package move_gen
 
-import "chess/chess_engine/board"
+import (
+	"chess/chess_engine/board"
+	"chess/chess_engine/move_gen/magic"
+)
+
 
 func GenSlidingMoves(bb board.Bitboard, 
 	rays *[64]board.Bitboard, piece_type uint,
@@ -17,16 +21,16 @@ func GenSlidingMoves(bb board.Bitboard,
 		// basic generation
 		if piece_type == 0 {  
 			// rook
-			move_ray = slidingRays(ind, team_bb|opp_bb)
+			move_ray = magic.SlidingRays(ind, team_bb|opp_bb)
 			move_ray &= ^team_bb
 		} else if piece_type == 1 {
 			// bishop
-			move_ray = diagonalRays(ind, team_bb|opp_bb)
+			move_ray = magic.DiagonalRays(ind, team_bb|opp_bb)
 			move_ray &= ^team_bb
 		} else { // piece_type == 2
 			// queen
-			move_ray = slidingRays(ind, team_bb|opp_bb)
-			move_ray |= diagonalRays(ind, team_bb|opp_bb)
+			move_ray = magic.SlidingRays(ind, team_bb|opp_bb)
+			move_ray |= magic.DiagonalRays(ind, team_bb|opp_bb)
 			move_ray &= ^team_bb
 		}
 		// generate the moves nums

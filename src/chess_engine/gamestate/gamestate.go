@@ -3,6 +3,7 @@ package gamestate
 import (
 	"chess/chess_engine/board"
 	"chess/chess_engine/move_gen"
+	"chess/chess_engine/move_gen/magic"
 )
 
 type GameState struct {
@@ -29,6 +30,12 @@ type GameState struct {
 		RookRays [64]board.Bitboard
 		QueenRays [64]board.Bitboard
 		KingRays [64]board.Bitboard
+
+		Magic struct {
+			// magic squares for each piece
+			RookMagic [64]magic.Magicsq
+			BishopMagic [64]magic.Magicsq
+		}
 	}
 
 	PlayerBoard  BoardPerpective

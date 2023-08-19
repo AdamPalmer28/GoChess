@@ -1,11 +1,13 @@
-package move_gen
+package magic
 
 import (
 	"chess/chess_engine/board"
 )
 
+// A basic sliding generation - used for verification of the magic bitboards
+
 // horizontal and vertical rays
-func slidingRays(ind uint, bb board.Bitboard)  board.Bitboard{
+func SlidingRays(ind uint, bb board.Bitboard)  board.Bitboard{
 
 	// get row and column of index
 	row := int(ind / 8)
@@ -36,7 +38,7 @@ func slidingRays(ind uint, bb board.Bitboard)  board.Bitboard{
 
 
 // diagonal rays
-func diagonalRays(ind uint, bb board.Bitboard)  board.Bitboard{
+func DiagonalRays(ind uint, bb board.Bitboard)  board.Bitboard{
 	
 	// get row and column of index
 	row := int(ind / 8)
