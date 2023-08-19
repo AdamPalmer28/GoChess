@@ -8,23 +8,23 @@ import (
 )
 
 type magicdata struct {
-	index uint
-	magic board.Bitboard
-	shift int
-	diag bool
+	Index uint
+	Magic board.Bitboard
+	Shift int
+	Diag bool
 }
 
 // Transform magic data to magicsq  // ? NEEDS TO BE REDESIGNED
 func create_magicsq(data magicdata) Magicsq {
 
 	msq := Magicsq{
-		index: data.index, 
-		diag: data.diag,
-		magic: data.magic,
-		shift: data.shift,
+		index: data.Index, 
+		diag: data.Diag,
+		magic: data.Magic,
+		shift: data.Shift,
 		}
 
-	msq.occ_mask = innerOccupancy(data.index) // inner occupancy
+	msq.occ_mask = innerOccupancy(data.Index) // inner occupancy
 
 	magic_attack_rays(&msq)
 
@@ -32,24 +32,24 @@ func create_magicsq(data magicdata) Magicsq {
 }
 
 // create hash table for magic square
-func magic_attack_rays(msq *Magicsq) bool{
+func magic_attack_rays(msq *Magicsq) {
 
 	index := msq.index
 	diag := msq.diag
 	magic_num := msq.magic
 	shift := msq.shift
 
-	var attack_rays []board.Bitboard // attack rays for magic square
+	var attack_rays map[board.Bitboard]board.Bitboard // attack rays for magic square
 
 	// all occupancy bitboards
 	all_occ := allOccupancy(msq.index, msq.diag)
 
 
-	var exp_attack_ray_func func(uint, board.Bitboard) board.Bitboard
+	var exp_attack_ray func(uint, board.Bitboard) board.Bitboard
 	if diag {
-		exp_attack_ray_func = SlidingRays
+		exp_attack_ray = SlidingRays
 	} else {
-		exp_attack_ray_func = DiagonalRays
+		exp_attack_ray = DiagonalRays
 	}
 
 	var expected board.Bitboard
@@ -57,7 +57,7 @@ func magic_attack_rays(msq *Magicsq) bool{
 	// create hash table
 	for _, occ := range all_occ {
 
-		expected = exp_attack_ray_func(index, occ) // expected attack ray - using basic sliding rays
+		expected = exp_attack_ray(index, occ) // expected attack ray - using basic sliding rays
 
 		magic_index := (occ * magic_num) >> shift
 
@@ -67,6 +67,7 @@ func magic_attack_rays(msq *Magicsq) bool{
 	}
 	msq.attack_rays = attack_rays
 }
+
 // ============================================================================
 // Load magic data
 
@@ -129,10 +130,10 @@ func export_all_magic(msq [64]Magicsq, diag bool) {
 	var export_data magicdata
 	for i := 0; i < 64; i++ {
 
-		export_data.index = msq[i].index
-		export_data.magic = msq[i].magic
-		export_data.shift = msq[i].shift
-		export_data.diag = msq[i].diag
+		export_data.Index = msq[i].index
+		export_data.Magic = msq[i].magic
+		export_data.Shift = msq[i].shift
+		export_data.Diag = msq[i].diag
 
 		// export magic data to json
 		
