@@ -60,19 +60,61 @@ func Gen_attack_rays(diag bool) [64][]board.Bitboard {
 // ============================================================================
 // 		Occupancy 
 
-func allOccupancy(ind uint, diag bool) []board.Bitboard {
+func AllOccupancy(ind uint, diag bool) []board.Bitboard {
+	// all possible bit combinations of fullrays
 
 	all_occ := []board.Bitboard{board.Bitboard(0)}
+
+	full_rays := fullrays(ind, diag)
+	full_rays &= InnerOccupancy(ind)
+
+	index := full_rays.Index()
+
+	var bb board.Bitboard
+	var bb_comb []board.Bitboard // not the best way to do this
+	
+
+	for _, ind  := range index {
+		bb = board.Bitboard(0) | (1 << ind)
+
+		// combine all the rays
+		bb_comb = []board.Bitboard{bb, 0}
+
+		all_occ = combineRays(all_occ, bb_comb)
+
+	}
+
+	return all_occ
+}
+
+func InnerOccupancy(ind uint) board.Bitboard {
 
 	row := int(ind / 8)
 	col := int(ind % 8)
 
-	maxrays := fullrays(ind, diag)
+	// directions of move
+	inner_occ := fullrays(ind, false) | fullrays(ind, true)
 
-	// all possible bit combinations of fullrays
+	if row != 0 {
+		// remove the bottom row
+		inner_occ &= ^board.Rank1
+	} 
+	if row != 7 {
+		// remove the top row
+		inner_occ &= ^board.Rank8
+	}
+	if col != 0 {
+		// remove the left column
+		inner_occ &= ^board.FileA
+	} 
+	if col != 7 {
+		// remove the right column
+		inner_occ &= ^board.FileH
+	}
 
+	return inner_occ
+}
 
-	return all_occ
 
 
 
@@ -129,6 +171,4 @@ func combineRays(rays []board.Bitboard,
 
 	return comb_rays
 }
-
-func 
 
