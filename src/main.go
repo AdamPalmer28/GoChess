@@ -8,10 +8,13 @@ import (
 
 func main() {
 
-	// time to generate attack rays
+	//time to generate attack rays
 	if true {
 		magic.Gen_all_magics(false)
+		magic.Gen_all_magics(true)
 	}
+
+
 
 
 	// start the game

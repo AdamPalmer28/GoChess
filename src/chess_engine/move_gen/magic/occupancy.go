@@ -6,13 +6,13 @@ import "chess/chess_engine/board"
 // 		Occupancy
 
 // calcs the inner occupancy of a square (both diagonals and straights)
-func innerOccupancy(ind uint) board.Bitboard {
+func innerOccupancy(ind uint, diag bool) board.Bitboard {
 
 	row := int(ind / 8)
 	col := int(ind % 8)
 
 	// directions of move
-	inner_occ := fullrays(ind, false) | fullrays(ind, true)
+	inner_occ := fullrays(ind, diag)
 
 	if row != 0 {
 		// remove the bottom row

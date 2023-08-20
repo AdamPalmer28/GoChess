@@ -20,7 +20,7 @@ type Magicsq struct {
 
 // ============================================================================
 
-// Generation functions
+// Gen new magic numbers
 func Gen_all_magics(diag bool) {
 	
 	var magics [64]Magicsq
@@ -28,19 +28,18 @@ func Gen_all_magics(diag bool) {
 	var default_shift int
 	var bits int
 
-	//all_magic_sq := load_magic(diag)
+	magics = load_magic(diag) // load existing magic squares data
 
-	// generate empty magic squares
-	for i := 0; i < 64; i++ {
-		magics[i] = Magicsq{
-			index: uint(i),
-			diag: diag,
-			occ_mask: innerOccupancy(uint(i)), // inner occupancy
-			}
-	}
+	// // generate empty magic squares
+	// for i := 0; i < 64; i++ {
+	// 	magics[i] = Magicsq{
+	// 		index: uint(i),
+	// 		diag: diag,
+	// 		occ_mask: innerOccupancy(uint(i), diag), // inner occupancy
+	// 		}
+	// }
 
 	for i, magic_sq := range magics {
-
 
 		default_shift = 64 - len(magic_sq.occ_mask.Index())
 		
@@ -54,7 +53,7 @@ func Gen_all_magics(diag bool) {
 
 	
 	// save magic squares
-	export_all_magic(magics, diag)
+	//export_all_magic(magics, diag)
 
 	if false {
 		fmt.Println(default_shift, bits, magics_num)
@@ -74,10 +73,11 @@ func gen_magic(msq *Magicsq) (board.Bitboard, int) {
 	var default_bits = len(msq.occ_mask.Index())
 
 
-	for (magics_found < 1) || ( (magics_tried < 10_000) && (magics_found < 5) ){ 
+	for ((magics_found > 0) || (magics_tried < 1_000_000)) { 
 
 		// generate random magic
 		magic_bb := board.Bitboard(rand.Uint64())
+		msq.magic = magic_bb
 		
 		magics_tried++
 		// check if magic is valid
@@ -89,7 +89,7 @@ func gen_magic(msq *Magicsq) (board.Bitboard, int) {
 		}
 		
 	}
-	println("Ind:", msq.index, "Magic found: ", magics_found, " Magic tried: ", magics_tried, "\n")
+	println("Ind:", msq.index, "Magic found: ", best_magic, " Magic tried: ", magics_tried, "\n")
 	
 	used_bits := default_bits
 
@@ -109,9 +109,9 @@ func check_magicnum(msq *Magicsq) bool {
 
 	var exp_attack_ray func(uint, board.Bitboard) board.Bitboard
 	if msq.diag {
-		exp_attack_ray = SlidingRays
-	} else {
 		exp_attack_ray = DiagonalRays
+		} else {
+		exp_attack_ray = SlidingRays
 	}
 
 	// hash table checking variables
@@ -130,8 +130,10 @@ func check_magicnum(msq *Magicsq) bool {
 			
 			// check if the attack ray is the same
 			if val != expected {
+				//fmt.Println("Error: magic number is not unique", i)
 				return false
 			}
+
 		} else {
 			hashmap[magic_index] = expected
 		}
@@ -151,7 +153,7 @@ func allOccupancy(ind uint, diag bool) []board.Bitboard {
 	all_occ := []board.Bitboard{board.Bitboard(0)}
 	
 	full_rays := fullrays(ind, diag)
-	full_rays &= innerOccupancy(ind)
+	full_rays &= innerOccupancy(ind, diag)
 	
 	index := full_rays.Index()
 	

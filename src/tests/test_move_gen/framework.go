@@ -77,8 +77,9 @@ func useful_error_msg(move_list []uint, expected []uint) string {
 
 	if len(move_list) != len(expected) {
 		return "Different move lists sizes:\n" +
-			"Expected: " + move_list_to_string(expected_diff) + "\n" +
-			"Got: " + move_list_to_string(move_diff)
+			"Expected: "+ strconv.FormatInt(int64(len(expected)),10) + " " + move_list_to_string(expected_diff) + "\n" +
+			"Got: "+ strconv.FormatInt(int64(len(move_list)), 10) + " " + move_list_to_string(move_diff)
+			
 	}
 
 
@@ -111,7 +112,7 @@ func useful_error_msg(move_list []uint, expected []uint) string {
 func move_list_to_string(move_list []uint) string {
 
 	var result string
-
+	
 	for _, move := range move_list {
 		start_sq := move & 0b111111
 		end_sq := (move >> 6) & 0b111111
@@ -120,7 +121,6 @@ func move_list_to_string(move_list []uint) string {
 		// convert uint to string
 		special_str := strconv.FormatUint(uint64(special), 2)
 		
-
 		result += board.Index_to_move(start_sq) + 
 					board.Index_to_move(end_sq) + 
 					" " + string(special_str) + ", "

@@ -5,7 +5,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"path/filepath"
+	"runtime"
 )
+
+// Construct the relative file path from the current directory
+const strt_magic_data_path = "data/magics.json"
+const diag_magic_data_path = "data/diag_magics.json"
 
 type magicdata struct {
 	Index uint
@@ -14,7 +20,8 @@ type magicdata struct {
 	Diag bool
 }
 
-// Transform magic data to magicsq  // ? NEEDS TO BE REDESIGNED
+
+// Transform magicdata to magicsq 
 func create_magicsq(data magicdata) Magicsq {
 
 	msq := Magicsq{
@@ -22,9 +29,9 @@ func create_magicsq(data magicdata) Magicsq {
 		diag: data.Diag,
 		magic: data.Magic,
 		shift: data.Shift,
-		}
 
-	msq.occ_mask = innerOccupancy(data.Index) // inner occupancy
+		occ_mask: innerOccupancy(data.Index, data.Diag), // inner occupancy
+		}
 
 	magic_attack_rays(&msq)
 
@@ -39,7 +46,8 @@ func magic_attack_rays(msq *Magicsq) {
 	magic_num := msq.magic
 	shift := msq.shift
 
-	var attack_rays map[board.Bitboard]board.Bitboard // attack rays for magic square
+	// attack rays for magic square
+	attack_rays := make(map[board.Bitboard]board.Bitboard)
 
 	// all occupancy bitboards
 	all_occ := allOccupancy(msq.index, msq.diag)
@@ -47,9 +55,9 @@ func magic_attack_rays(msq *Magicsq) {
 
 	var exp_attack_ray func(uint, board.Bitboard) board.Bitboard
 	if diag {
-		exp_attack_ray = SlidingRays
-	} else {
 		exp_attack_ray = DiagonalRays
+		} else {
+		exp_attack_ray = SlidingRays
 	}
 
 	var expected board.Bitboard
@@ -58,30 +66,47 @@ func magic_attack_rays(msq *Magicsq) {
 	for _, occ := range all_occ {
 
 		expected = exp_attack_ray(index, occ) // expected attack ray - using basic sliding rays
-
+		
+		// expected.Print()
+		// occ.Print()
+		// println(magic_num, shift)
 		magic_index := (occ * magic_num) >> shift
+
 
 		// add attack ray to hash table
 		attack_rays[magic_index] = expected
 
 	}
-	msq.attack_rays = attack_rays
+	msq.attack_rays = attack_rays // hash table for magic square
 }
+
 
 // ============================================================================
 // Load magic data
 
+func Load_all_magicsq() ([64]Magicsq, [64]Magicsq) {
 
+
+	strt := load_magic(false)
+	diag := load_magic(true)
+
+	return strt, diag
+}
 
 func load_magic(diag bool) [64]Magicsq{
+	
+	// Get the path of the current source file
+	_, filename, _, _ := runtime.Caller(0)
+	dir := filepath.Dir(filename)
+
 
 	var file_name string
 	if diag {
-		file_name = "diag_magics.json"
+		file_name = diag_magic_data_path
 	} else {
-		file_name = "magics.json"
+		file_name = strt_magic_data_path
 	}
-
+	file_name = filepath.Join(dir, file_name)
 	
 	// open file
 	file, err := os.Open(file_name)
@@ -92,12 +117,12 @@ func load_magic(diag bool) [64]Magicsq{
 	
 	// decode json
 	data := [64]magicdata{}
-
+	
 	err = decoding.Decode(&data)
 	if err != nil {
 		fmt.Println("Error decoding:", err)
 	}
-
+	
 	// create magic squares
 	var magicsquares [64]Magicsq
 
@@ -106,42 +131,50 @@ func load_magic(diag bool) [64]Magicsq{
 	}
 	
 	return magicsquares
-}
-
+	}
+	
 // ============================================================================
 // Export magic data
-
-func export_all_magic(msq [64]Magicsq, diag bool) {
-
-	var file_name string
-	if diag {
-		file_name = "diag_magics.json"
-	} else {
-		file_name = "magics.json"
-	}
-
-	file, err := os.Create(file_name)
-	if err != nil {
-		fmt.Println("Error creating file:", err)
-		return
-	}
-	encoding := json.NewEncoder(file)
 	
-	var export_data magicdata
-	for i := 0; i < 64; i++ {
-
-		export_data.Index = msq[i].index
-		export_data.Magic = msq[i].magic
-		export_data.Shift = msq[i].shift
-		export_data.Diag = msq[i].diag
-
-		// export magic data to json
+	func export_all_magic(msq [64]Magicsq, diag bool) {
 		
-		err = encoding.Encode(export_data)
-		if err != nil {
-			fmt.Println("Error encoding:", err)
-			return
-		}
+		var file_name string
+		if diag {
+			file_name = diag_magic_data_path
+			} else {
+				file_name = strt_magic_data_path
+			}
+			
+			file, err := os.Create(file_name)
+			if err != nil {
+				fmt.Println("Error creating file:", err)
+				return
+			}
+			encoding := json.NewEncoder(file)
+			
+			// create magic data
+			export_data := create_magicdata(msq)
+	
+			
+			// export magic data to json
+			err = encoding.Encode(export_data)
+			if err != nil {
+				fmt.Println("Error encoding:", err)
+				return
+			}
 	}
-	fmt.Println("Exported magic data to", file_name)
-}
+
+			
+	// convert Magicsq to magicdata
+	func create_magicdata(all_msq [64]Magicsq) [64]magicdata {
+	
+		var data [64]magicdata
+	
+		for i := 0; i < 64; i++ {
+			data[i].Index = all_msq[i].index
+			data[i].Magic = all_msq[i].magic
+			data[i].Shift = all_msq[i].shift
+			data[i].Diag = all_msq[i].diag
+		}
+		return data
+	}

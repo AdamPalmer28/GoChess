@@ -29,6 +29,6 @@ func TestRook(t *testing.T) {
 	result := check_moves(moves, expected)
 	if !result {
 		error_str := useful_error_msg(moves, expected)
-		t.Errorf("Queen moves failed :\n%s", error_str)
+		t.Errorf("Rook moves failed :\n%s", error_str)
 	}
 }

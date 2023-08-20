@@ -2,6 +2,7 @@ package gamestate
 
 import (
 	"chess/chess_engine/move_gen"
+	"chess/chess_engine/move_gen/magic"
 )
 
 func (gs *GameState) Init() {
@@ -17,6 +18,13 @@ func (gs *GameState) Init() {
 	
 	// move gen
 	gs.GenMoves()
+
+
+	// magic squares
+	strt, diag := magic.Load_all_magicsq()
+
+	gs.MoveRays.Magic.RookMagic = strt
+	gs.MoveRays.Magic.BishopMagic = diag
 
 }
 
