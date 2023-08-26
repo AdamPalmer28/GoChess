@@ -10,6 +10,7 @@ type Magicsq struct {
 	index uint
 	magic board.Bitboard 
 	shift int 
+	default_shift int
 	diag bool
 	
 	// attack rays - must be calculated

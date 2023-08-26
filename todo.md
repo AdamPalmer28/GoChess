@@ -6,14 +6,20 @@ A ongoing to-do list of task for development of the chess engine.
 
 ### High priority
 
-- Create bitboards
-- Draw board w/ coordinates
-  - Draw pieces
-- Create input system
+- magic numbers
 
 ### General
 
+- undo move
+- finish king moves
+  - castling
+  - check
+  - double checks
+
 ### Low priority
+
+- piece pins
+- add testing for all test to-dos
 
 ---
 

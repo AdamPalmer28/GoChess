@@ -80,6 +80,9 @@ func (gs *GameState) Make_BP() {
 	gs.PlayerBoard = bp
 }
 
+// Should add initial check to see if king is in check
+// then only generate relevant moves
+
 
 func (gs *GameState) GenMoves() {
 

@@ -17,25 +17,8 @@ type magicdata struct {
 	Index uint
 	Magic board.Bitboard
 	Shift int
+	default_shift int
 	Diag bool
-}
-
-
-// Transform magicdata to magicsq 
-func create_magicsq(data magicdata) Magicsq {
-
-	msq := Magicsq{
-		index: data.Index, 
-		diag: data.Diag,
-		magic: data.Magic,
-		shift: data.Shift,
-
-		occ_mask: innerOccupancy(data.Index, data.Diag), // inner occupancy
-		}
-
-	magic_attack_rays(&msq)
-
-	return msq
 }
 
 // create hash table for magic square
@@ -84,6 +67,24 @@ func magic_attack_rays(msq *Magicsq) {
 // ============================================================================
 // Load magic data
 
+// Transform magicdata to magicsq 
+func create_magicsq(data magicdata) Magicsq {
+
+	msq := Magicsq{
+		index: data.Index, 
+		diag: data.Diag,
+		magic: data.Magic,
+		shift: data.Shift, // 64 - data.Shift 
+		//default_shift: data.default_shift,
+
+		occ_mask: innerOccupancy(data.Index, data.Diag), // inner occupancy
+		}
+
+	magic_attack_rays(&msq)
+
+	return msq
+}
+
 func Load_all_magicsq() ([64]Magicsq, [64]Magicsq) {
 
 
@@ -110,11 +111,9 @@ func load_magic(diag bool) [64]Magicsq{
 	
 	// open file
 	file, err := os.Open(file_name)
-	if err != nil {
-		fmt.Println("Error opening file:", err)
-	}
+	if err != nil {fmt.Println("Error opening file:", err)}
+
 	decoding := json.NewDecoder(file)
-	
 	// decode json
 	data := [64]magicdata{}
 	
@@ -173,7 +172,8 @@ func load_magic(diag bool) [64]Magicsq{
 		for i := 0; i < 64; i++ {
 			data[i].Index = all_msq[i].index
 			data[i].Magic = all_msq[i].magic
-			data[i].Shift = all_msq[i].shift
+			data[i].Shift = 64 - all_msq[i].shift
+			data[i].default_shift = 64 - len(all_msq[i].occ_mask.Index()) // default shift
 			data[i].Diag = all_msq[i].diag
 		}
 		return data
