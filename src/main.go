@@ -2,18 +2,17 @@ package main
 
 import (
 	"chess/chess_engine"
-	"chess/chess_engine/move_gen/magic"
+	//"chess/chess_engine/move_gen/magic"
 	"chess/cli_engine"
 )
 
 func main() {
 
 	//time to generate attack rays
-	if true {
-		magic.Gen_all_magics(false)
-		magic.Gen_all_magics(true)
-	}
-
+	// if true {
+	// 	magic.Gen_all_magics(true)
+	// 	magic.Gen_all_magics(false)
+	// }
 
 
 
