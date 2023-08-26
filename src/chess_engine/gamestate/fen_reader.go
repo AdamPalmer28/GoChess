@@ -32,10 +32,21 @@ func FEN_to_gs(fen string) *GameState {
 	board := FENdata_to_board(piece_data)
 
 	// castle rights
-	white_castle := [2]bool{strings.Contains(castling_availability, "Q"), 
-							strings.Contains(castling_availability, "K")}
-	black_castle := [2]bool{strings.Contains(castling_availability, "q"),
-							strings.Contains(castling_availability, "k")}
+	var white_castle uint
+	var black_castle uint
+
+	if strings.Contains(castling_availability, "Q") {
+		white_castle |= 0b01
+	}
+	if strings.Contains(castling_availability, "K") {
+		white_castle |= 0b10
+	}
+	if strings.Contains(castling_availability, "q") {
+		black_castle |= 0b01
+	}
+	if strings.Contains(castling_availability, "k") {
+		black_castle |= 0b10
+	}
 
 	// en passant target
 	var en_passant_squ_ind uint = 64

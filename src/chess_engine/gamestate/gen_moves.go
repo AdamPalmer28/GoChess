@@ -24,6 +24,8 @@ type BoardPerpective struct {
 
 	team_bb board.Bitboard
 	opp_bb board.Bitboard
+
+	castle_rights uint
 }
 
 func (gs *GameState) Make_BP() {
@@ -48,6 +50,8 @@ func (gs *GameState) Make_BP() {
 			opp_king_bb: *gs.Board.BlackKing,
 			team_bb: gs.Board.White,
 			opp_bb: gs.Board.Black,
+
+			castle_rights: gs.WhiteCastle,
 		}
 
 	} else {
@@ -68,6 +72,8 @@ func (gs *GameState) Make_BP() {
 			opp_king_bb: *gs.Board.WhiteKing,
 			team_bb: gs.Board.Black,
 			opp_bb: gs.Board.White,
+
+			castle_rights: gs.BlackCastle,
 		}
 	}
 
@@ -127,12 +133,13 @@ func (gs *GameState) GenMoves() {
 	MoveList = append(MoveList, queen_moves...)
 
 	// generate king moves
-	king_basicmoves := move_gen.GenBasicKingMove(player.king_bb, &gs.MoveRays.KingRays, 
-			player.team_bb, player.opp_bb, player.opp_king_bb)
+	king_moves := move_gen.GenKingMoves(player.king_bb, player.team_bb, player.castle_rights,
+				&gs.MoveRays.Magic.RookMagic, &gs.MoveRays.Magic.BishopMagic,
+				&gs.MoveRays.KnightRays, &gs.MoveRays.KingRays,
+				player.opp_pawn_bb, player.opp_knight_bb, player.opp_bishop_bb,
+				player.opp_rook_bb, player.opp_queen_bb, player.opp_king_bb)
+	MoveList = append(MoveList, king_moves...)
 	
-	MoveList = append(MoveList, king_basicmoves...)
 	
-
 	gs.MoveList = MoveList
-
 }

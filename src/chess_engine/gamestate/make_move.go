@@ -13,7 +13,7 @@ func (gs *GameState) Make_move(move uint) {
 	// piece_moved_str := PieceValLookup[int(piece_moved)]
 	// cap_piece_str := PieceValLookup[int(cap_piece)]
 
-	var CastleRight *[2]bool
+	var CastleRight *uint
 	var row uint
 	var fwd int
 
@@ -28,30 +28,35 @@ func (gs *GameState) Make_move(move uint) {
 	}
 
 	var sq uint
+	var intrest_sq uint
 	// update castling rights
-	if CastleRight[0] || CastleRight[1] {
+	if *CastleRight > 0 {
 
 		if piece_moved == 5 { // king moved
-			CastleRight[0] = false
-			CastleRight[1] = false
+			*CastleRight = 0
 
-		} else if piece_moved == 3 { // rook moved
+		} else if piece_moved == 3 || cap_piece == 3 { // rook moved
 
-			if CastleRight[0] {
-				sq = row * 8
-				if start_sq == sq {
-					CastleRight[0] = false
-				}
+			intrest_sq = start_sq
+			if cap_piece == 3 {
+				intrest_sq = finish_sq
 			}
 
-			if CastleRight[1] {
+			// king side
+			if *CastleRight&0b01 > 0 {
 				sq = row*8 + 7
-				if start_sq == sq {
-					CastleRight[1] = false
+				if intrest_sq == sq {
+					*CastleRight &^= 0b01
+				}
+			}
+			// queen side
+			if *CastleRight&0b10 > 0 {
+				sq = row * 8
+				if intrest_sq == sq {
+					*CastleRight &^= 0b10
 				}
 			}
 		}
-
 	}
 
 	// update enpassent index

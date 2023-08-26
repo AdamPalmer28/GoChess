@@ -2,9 +2,44 @@ package move_gen
 
 import (
 	"chess/chess_engine/board"
+	"chess/chess_engine/move_gen/magic"
 )
 
-func GenBasicKingMove(king_bb board.Bitboard, king_rays *[64]board.Bitboard,
+// ! need to finish king moves
+/*
+Moves still to code:
+	- castle
+	- check move is legal
+		- king can't move
+	- double checks
+	- check pins
+
+*/
+
+func GenKingMoves(king_bb board.Bitboard, team_bb board.Bitboard, castle_rights uint,
+		magic_str_sqs *[64]magic.Magicsq, magic_diag_sqs *[64]magic.Magicsq,
+		knight_rays *[64]board.Bitboard, king_rays *[64]board.Bitboard,
+		opp_pawn board.Bitboard, opp_knight board.Bitboard, opp_bishop board.Bitboard,
+		opp_rook board.Bitboard, opp_queen board.Bitboard, opp_king board.Bitboard) []uint {
+
+	var movelist []uint
+
+	// // generate basic moves
+	// basic_moves = genBasicKingMove(king_bb, magic_str_sqs, team_bb, opp_pawn, opp_king)
+	// movelist = append(movelist, basic_moves...)
+
+	// // generate castle moves
+	//if castle_rights > 0 {
+	// castle_moves = genCastleMoves(king_bb, castle_rights, team_bb, opp_pawn, opp_knight, opp_bishop, opp_rook, opp_queen, opp_king)
+	// movelist = append(movelist, castle_moves...)
+	//}
+
+	return movelist
+}
+
+
+// ! needs to check legal moves
+func genBasicKingMove(king_bb board.Bitboard, king_rays *[64]board.Bitboard,
 				team_bb board.Bitboard, opp_bb board.Bitboard, opp_king_bb board.Bitboard) []uint {
 
 	var movelist []uint
@@ -42,7 +77,26 @@ func GenBasicKingMove(king_bb board.Bitboard, king_rays *[64]board.Bitboard,
 
 }
 
+func GenCastling(king_bb board.Bitboard, castle_rights uint, team_bb board.Bitboard, 
+	opp_pawn board.Bitboard, opp_knight board.Bitboard, opp_bishop board.Bitboard,
+	opp_rook board.Bitboard, opp_queen board.Bitboard, opp_king board.Bitboard) []uint {
 
+var movelist []uint
+//relevant_sqs := board.Bitboard(0)
+
+// king side castle
+if castle_rights&0b01 > 0 {
+
+
+}
+
+return movelist
+}
+
+// ==================================================================
+// helper function
+
+// king ray generator for given square
 func KingRays(ind int) board.Bitboard {
 
 	var moves board.Bitboard = 0

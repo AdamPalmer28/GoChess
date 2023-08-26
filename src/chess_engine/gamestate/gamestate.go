@@ -9,8 +9,9 @@ import (
 type GameState struct {
 	Board board.ChessBoard
 
-	WhiteCastle [2]bool
-	BlackCastle [2]bool
+	// king 0b01, queen 0b10, both 0b11 
+	WhiteCastle uint 
+	BlackCastle uint 
 
 	White_to_move bool
 	Enpass_ind uint

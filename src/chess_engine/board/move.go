@@ -1,6 +1,7 @@
 package board
 
-/*
+/* Move type hierarchy
+----------------------------------------------
 1. split movenum and variables
 2. check moves type
 	a. normal move (special < 2)
@@ -29,7 +30,7 @@ func (cb *ChessBoard) Move(move_num uint, white_move bool) (uint, uint) {
 	var piece_moved uint
 	var cap_piece uint = 6
 		
-	// move type
+	// Move type (see top of file)
 	// ========================================================================
 
 	if special < 2 { // normal move
@@ -97,7 +98,11 @@ func (cb *ChessBoard) Move(move_num uint, white_move bool) (uint, uint) {
 
 }
 
-// bitboard update for standard moves
+// ========================================================================
+// Helper functions
+
+
+// Standard moves
 func normal_move(start_sq uint, finish_sq uint, BB_list [6]*Bitboard) uint {
 
 	// update piece bitboards
@@ -116,7 +121,7 @@ func normal_move(start_sq uint, finish_sq uint, BB_list [6]*Bitboard) uint {
 	return piece_moved
 }
 
-// bitboard update for captures
+// Captures
 func cap_move(take_sq uint, BB_list [6]*Bitboard) uint {
 
 	// update piece bitboards
@@ -134,7 +139,7 @@ func cap_move(take_sq uint, BB_list [6]*Bitboard) uint {
 	return cap_piece
 }
 
-// bitboard updates for promotions
+// Promotions
 func prom_move(special uint, start uint, finish_sq uint, BB_list [6]*Bitboard) {
 
 	special = special & 0b0011 // relevant bits

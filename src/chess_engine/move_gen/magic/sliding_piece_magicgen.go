@@ -3,7 +3,7 @@ package magic
 import "chess/chess_engine/board"
 
 
-func get_magic_rays(magic_sq Magicsq,
+func Get_magic_rays(magic_sq Magicsq,
 	occ board.Bitboard) board.Bitboard {
 
 	// get magic square
@@ -30,7 +30,7 @@ func GenMagicMoves(bb board.Bitboard,
 	p_inds := bb.Index()
 	for _, ind := range p_inds {
 
-		move_ray = get_magic_rays(magic_sqs[ind], team_bb|opp_bb)
+		move_ray = Get_magic_rays(magic_sqs[ind], team_bb|opp_bb)
 		move_ray &= ^team_bb
 
 		// generate the moves nums
