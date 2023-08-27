@@ -9,7 +9,7 @@ import (
 	"runtime"
 )
 
-// Construct the relative file path from the current directory
+// Construct the relative file path from the current directory - from main.go
 const strt_magic_data_path = "data/magics.json"
 const diag_magic_data_path = "data/diag_magics.json"
 
@@ -17,7 +17,7 @@ type magicdata struct {
 	Index uint
 	Magic board.Bitboard
 	Shift int
-	default_shift int
+	Default_shift int
 	Diag bool
 }
 
@@ -74,8 +74,8 @@ func create_magicsq(data magicdata) Magicsq {
 		index: data.Index, 
 		diag: data.Diag,
 		magic: data.Magic,
-		shift: data.Shift, // 64 - data.Shift 
-		//default_shift: data.default_shift,
+		shift: 64 - data.Shift,
+		default_shift: data.Default_shift,
 
 		occ_mask: innerOccupancy(data.Index, data.Diag), // inner occupancy
 		}
@@ -139,11 +139,15 @@ func load_magic(diag bool) [64]Magicsq{
 		
 		var file_name string
 		if diag {
-			file_name = diag_magic_data_path
+				file_name = diag_magic_data_path
 			} else {
 				file_name = strt_magic_data_path
 			}
-			
+
+			_, filename, _, _ := runtime.Caller(0)
+			dir := filepath.Dir(filename)
+			file_name = filepath.Join(dir, file_name)
+
 			file, err := os.Create(file_name)
 			if err != nil {
 				fmt.Println("Error creating file:", err)
@@ -173,7 +177,7 @@ func load_magic(diag bool) [64]Magicsq{
 			data[i].Index = all_msq[i].index
 			data[i].Magic = all_msq[i].magic
 			data[i].Shift = 64 - all_msq[i].shift
-			data[i].default_shift = 64 - len(all_msq[i].occ_mask.Index()) // default shift
+			data[i].Default_shift = len(all_msq[i].occ_mask.Index()) // default shift
 			data[i].Diag = all_msq[i].diag
 		}
 		return data

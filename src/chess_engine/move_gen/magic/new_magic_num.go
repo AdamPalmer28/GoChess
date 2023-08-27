@@ -31,32 +31,25 @@ func Gen_all_magics(diag bool) {
 
 	magics = load_magic(diag) // load existing magic squares data
 
-	// // generate empty magic squares
-	// for i := 0; i < 64; i++ {
-	// 	magics[i] = Magicsq{
-	// 		index: uint(i),
-	// 		diag: diag,
-	// 		occ_mask: innerOccupancy(uint(i), diag), // inner occupancy
-	// 		}
-	// }
 
+	var valid_magic bool
 	for i, magic_sq := range magics {
 
 		default_shift = 64 - len(magic_sq.occ_mask.Index())
 		
 
-		magics_num, bits = gen_magic(&magic_sq)
+		magics_num, bits, valid_magic = gen_magic(&magic_sq)
 
-		magics[i].magic = magics_num
-		magics[i].shift = default_shift
-
+		if valid_magic {
+			magics[i].magic = magics_num
+			magics[i].shift = default_shift
+		}
 	}
 
-	
 	// save magic squares
-	//export_all_magic(magics, diag)
+	export_all_magic(magics, diag)
 
-	if false {
+	if false { // temp
 		fmt.Println(default_shift, bits, magics_num)
 	}
 
@@ -64,7 +57,7 @@ func Gen_all_magics(diag bool) {
 
 
 // generate magic square for a given square 
-func gen_magic(msq *Magicsq) (board.Bitboard, int) {
+func gen_magic(msq *Magicsq) (board.Bitboard, int, bool) {
 
 	var magics_tried uint = 0
 	var magics_found uint = 0
@@ -74,10 +67,11 @@ func gen_magic(msq *Magicsq) (board.Bitboard, int) {
 	var default_bits = len(msq.occ_mask.Index())
 
 
-	for ((magics_found > 0) || (magics_tried < 1_000_000)) { 
+	for ((magics_found == 0) && (magics_tried < 1_000_000)) { 
 
 		// generate random magic
-		magic_bb := board.Bitboard(rand.Uint64())
+		try_magic := rand_rel_magic_num(msq.occ_mask, msq.shift)
+		magic_bb := board.Bitboard(try_magic)
 		msq.magic = magic_bb
 		
 		magics_tried++
@@ -88,17 +82,52 @@ func gen_magic(msq *Magicsq) (board.Bitboard, int) {
 
 			best_magic = magic_bb
 		}
-		
+		//println(magics_tried, " ", magics_found)
 	}
-	println("Ind:", msq.index, "Magic found: ", best_magic, " Magic tried: ", magics_tried, "\n")
+	println("Ind:", msq.index, "-  Magic found: ", magics_found, " Magic tried: ", magics_tried)
 	
 	used_bits := default_bits
 
-	return best_magic, used_bits
+	valid_magic := false
+	if magics_found != 0 {
+		valid_magic = true
+	}
+
+	return best_magic, used_bits, valid_magic
 
 }
 
-// check hasmap for magic number
+func rand_rel_magic_num(occ board.Bitboard, shift int) uint64 {
+
+	all_index := occ.Index()
+
+	// sample of number of bits
+	default_bits := len(all_index)
+	rand_ind := rand.Perm(default_bits)
+
+	min := shift
+
+	var magic_num uint64 = 0
+
+	for i, index := range all_index {
+
+		dist_to_min := min - int(index)
+		if dist_to_min < 0 {
+			dist_to_min = 0
+		}
+
+		// shift the bits
+		magic_num |= 1 << (rand_ind[i] + dist_to_min) 
+	}
+
+	magic_num |= rand.Uint64()
+
+	return magic_num
+}
+
+// ============================================================================
+
+// check hashmap for magic number
 func check_magicnum(msq *Magicsq) bool {
 
 	// generate all occupancy bitboards
