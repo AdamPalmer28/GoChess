@@ -10,7 +10,7 @@ func main() {
 
 	//time to generate attack rays
 
-	if true {
+	if false {
 		println("Generating diag magics... \n")
 		magic.Gen_all_magics(true) // generate diagonal magics
 		println("\n\nGenerating straight magics... \n")

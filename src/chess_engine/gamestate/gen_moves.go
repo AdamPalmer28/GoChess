@@ -107,8 +107,6 @@ func (gs *GameState) GenMoves() {
 	
 
 	// generate rook moves
-	// rook_moves := move_gen.GenSlidingMoves(player.rook_bb,
-	// 			&gs.MoveRays.RookRays, 0, player.team_bb, player.opp_bb)
 	rook_moves := magic.GenMagicMoves(player.rook_bb, &gs.MoveRays.Magic.RookMagic,
 				player.team_bb, player.opp_bb)
 
@@ -116,8 +114,6 @@ func (gs *GameState) GenMoves() {
 
 
 	// generate bishop moves
-	// bishop_moves := move_gen.GenSlidingMoves(player.bishop_bb,
-	// 			&gs.MoveRays.BishopRays, 1, player.team_bb, player.opp_bb)
 	bishop_moves := magic.GenMagicMoves(player.bishop_bb, &gs.MoveRays.Magic.BishopMagic,
 				player.team_bb, player.opp_bb)
 	
@@ -125,8 +121,6 @@ func (gs *GameState) GenMoves() {
 
 
 	// generate queen moves
-	// queen_moves := move_gen.GenSlidingMoves(player.queen_bb,
-	// 			&gs.MoveRays.QueenRays, 2, player.team_bb, player.opp_bb)
 	queen_moves := magic.GenMagicMoves(player.queen_bb, &gs.MoveRays.Magic.BishopMagic,
 				player.team_bb, player.opp_bb)
 	MoveList = append(MoveList, queen_moves...)

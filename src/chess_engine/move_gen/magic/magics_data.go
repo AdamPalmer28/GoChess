@@ -134,12 +134,12 @@ func load_magic(diag bool) [64]Magicsq{
 	}
 
 	// temp
-	if diag {
-		println("Valid Diagonal magics loaded: ", validsquares, " / 64")
-	} else {
-		println("Valid Straight magics loaded: ", validsquares, " / 64")
-	}
-	println()
+	// if diag {
+	// 	println("Valid Diagonal magics loaded: ", validsquares, " / 64")
+	// } else {
+	// 	println("Valid Straight magics loaded: ", validsquares, " / 64")
+	// }
+	// println()
 	
 	return magicsquares
 	}

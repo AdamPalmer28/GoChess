@@ -82,7 +82,12 @@ func gen_magic(msq *Magicsq) (board.Bitboard, int, int, bool) {
 	var target_shift int = msq.shift
 
 	var BestMagicNum board.Bitboard = 0
-	var BestMagicMapsize int = msq.mapsize
+	var BestMagicMapsize int 
+	if msq.mapsize != 0 {
+		BestMagicMapsize = msq.mapsize
+	} else {
+		BestMagicMapsize = 100_000_000
+	}
 
 
 	var goRoutineCount int = 12
@@ -113,7 +118,7 @@ func gen_magic(msq *Magicsq) (board.Bitboard, int, int, bool) {
 						if atomic.AddInt64(&magics_tried, 1) >= 5_000_000 {
 							break
 						}
-						newMagic, valid_map, mapsize = findSingleMagic(*msq, target_shift, &all_occ)
+						newMagic, valid_map, mapsize = magicSearch(*msq, target_shift, &all_occ)
 
 						if (valid_map) { 
 							// if magic number is valid
@@ -140,9 +145,9 @@ func gen_magic(msq *Magicsq) (board.Bitboard, int, int, bool) {
 							break
 						}
 						
-						newMagic, valid_map, mapsize = findSingleMagic(*msq, target_shift, &all_occ)
+						newMagic, valid_map, mapsize = magicSearch(*msq, target_shift, &all_occ)
 
-						if ((valid_map) && (mapsize < msq.mapsize)) { 
+						if ((valid_map) && (mapsize < BestMagicMapsize)) { 
 							
 							atomic.AddInt64(&magics_found, 1)
         					found_magics = append(found_magics, newMagic)
@@ -166,11 +171,11 @@ func gen_magic(msq *Magicsq) (board.Bitboard, int, int, bool) {
 				var mapsize int
 				var valid_map bool = false
 				for {
-					if atomic.AddInt64(&magics_tried, 1) >= 10_000_000 {
+					if atomic.AddInt64(&magics_tried, 1) >= 500_000 {
 						break
 					}
 					//msqCopy := *msq
-					newMagic, valid_map, mapsize = findSingleMagic(*msq, target_shift, &all_occ)
+					newMagic, valid_map, mapsize = magicSearch(*msq, target_shift, &all_occ)
 				
 					if valid_map {
 						atomic.AddInt64(&magics_found, 1)
@@ -205,14 +210,15 @@ func gen_magic(msq *Magicsq) (board.Bitboard, int, int, bool) {
 		valid_magic = true
 	}
 	
-	fmt.Printf("Ind: %d - Output: valid %t // magic: %d // mapsize: %d\n\n", msq.index, valid_magic, BestMagicNum, BestMagicMapsize)
+	fmt.Printf("Ind: %d - Output: valid %t // magic: %d // mapsize: %d (all_occs: %d)\n\n", msq.index, valid_magic, BestMagicNum, BestMagicMapsize, len(all_occ))
 	return BestMagicNum, target_shift, BestMagicMapsize, valid_magic
 }
 
 
-func findSingleMagic(msq Magicsq, target_shift int, all_occ *[]board.Bitboard) (board.Bitboard, bool, int){
+func magicSearch(msq Magicsq, target_shift int, all_occ *[]board.Bitboard) (board.Bitboard, bool, int){
 
 	new_magic := rand_rel_magic_num(msq.occ_mask, target_shift)
+	//new_magic := randomUint64FewBits() // for initial magic number generation
 
 	magic_bb := board.Bitboard(new_magic)
 	msq.magic = magic_bb
@@ -224,6 +230,7 @@ func findSingleMagic(msq Magicsq, target_shift int, all_occ *[]board.Bitboard) (
 // ============================================================================
 // Magic number generation
 
+// create improved magic number - "random" relative to the occupancy mask
 func rand_rel_magic_num(occ board.Bitboard, shift int) uint64 {
 
 	all_index := occ.Index()
@@ -253,6 +260,22 @@ func rand_rel_magic_num(occ board.Bitboard, shift int) uint64 {
 
 	return magic_num
 }
+
+// ----------------------------------------------------------------------------
+// used for generating initial magic numbers
+func randomUint64() uint64 {
+	u1 := uint64(rand.Uint32()) & 0xFFFF
+	u2 := uint64(rand.Uint32()) & 0xFFFF
+	u3 := uint64(rand.Uint32()) & 0xFFFF
+	u4 := uint64(rand.Uint32()) & 0xFFFF
+	return u1 | (u2 << 16) | (u3 << 32) | (u4 << 48)
+}
+
+func randomUint64FewBits() uint64 {
+	return randomUint64() & randomUint64() & randomUint64()
+}
+
+// ----------------------------------------------------------------------------
 
 // check hashmap for magic number
 func check_magicnum(msq Magicsq, all_occ *[]board.Bitboard, shift int) (bool, int) {

@@ -6,7 +6,7 @@ A ongoing to-do list of task for development of the chess engine.
 
 ### High priority
 
-- magic numbers
+- testing: read magic numbers from file
 
 ### General
 
