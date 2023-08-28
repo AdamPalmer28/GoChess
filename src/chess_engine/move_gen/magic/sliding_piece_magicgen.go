@@ -13,7 +13,7 @@ func Get_magic_rays(magic_sq Magicsq,
 	rel_occ := occ & magic_sq.occ_mask
 
 	// get attack rays
-	magic_index := (rel_occ * magic_num) >> shift
+	magic_index := (rel_occ * magic_num) >> (64 - shift)
 
 	return magic_sq.attack_rays[magic_index]
 }

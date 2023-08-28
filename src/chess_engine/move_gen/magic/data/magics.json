@@ -3,448 +3,512 @@
 		"Index": 0,
 		"Magic": 0,
 		"Shift": 12,
-		"Default_shift": 52,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 12,
+		"Mapsize": 0
 	},
 	{
 		"Index": 1,
 		"Magic": 0,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 0
 	},
 	{
 		"Index": 2,
 		"Magic": 0,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 0
 	},
 	{
 		"Index": 3,
 		"Magic": 0,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 0
 	},
 	{
 		"Index": 4,
 		"Magic": 0,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 0
 	},
 	{
 		"Index": 5,
 		"Magic": 0,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 0
 	},
 	{
 		"Index": 6,
 		"Magic": 0,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 0
 	},
 	{
 		"Index": 7,
 		"Magic": 0,
 		"Shift": 12,
-		"Default_shift": 52,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 12,
+		"Mapsize": 0
 	},
 	{
 		"Index": 8,
 		"Magic": 0,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 0
 	},
 	{
 		"Index": 9,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 10,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 11,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 12,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 13,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 14,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 15,
 		"Magic": 0,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 0
 	},
 	{
 		"Index": 16,
 		"Magic": 0,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 0
 	},
 	{
 		"Index": 17,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 18,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 19,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 20,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 21,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 22,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 23,
 		"Magic": 0,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 0
 	},
 	{
 		"Index": 24,
 		"Magic": 0,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 0
 	},
 	{
 		"Index": 25,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 26,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 27,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 28,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 29,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 30,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 31,
 		"Magic": 0,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 0
 	},
 	{
 		"Index": 32,
 		"Magic": 0,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 0
 	},
 	{
 		"Index": 33,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 34,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 35,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 36,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 37,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 38,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 39,
 		"Magic": 0,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 0
 	},
 	{
 		"Index": 40,
 		"Magic": 0,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 0
 	},
 	{
 		"Index": 41,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 42,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 43,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 44,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 45,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 46,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 47,
 		"Magic": 0,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 0
 	},
 	{
 		"Index": 48,
-		"Magic": 0,
+		"Magic": 17870272111516254128,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 1088
 	},
 	{
 		"Index": 49,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 50,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 51,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 52,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 53,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 54,
 		"Magic": 0,
 		"Shift": 10,
-		"Default_shift": 54,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 0
 	},
 	{
 		"Index": 55,
 		"Magic": 0,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 0
 	},
 	{
 		"Index": 56,
-		"Magic": 0,
+		"Magic": 17870282145608466398,
 		"Shift": 12,
-		"Default_shift": 52,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 12,
+		"Mapsize": 2112
 	},
 	{
 		"Index": 57,
-		"Magic": 0,
+		"Magic": 9007198080063242207,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 1056
 	},
 	{
 		"Index": 58,
-		"Magic": 0,
+		"Magic": 13150507334195216207,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 1056
 	},
 	{
 		"Index": 59,
-		"Magic": 0,
+		"Magic": 9160319236873124767,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 1184
 	},
 	{
 		"Index": 60,
-		"Magic": 0,
+		"Magic": 18077448869871876698,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 1088
 	},
 	{
 		"Index": 61,
-		"Magic": 0,
+		"Magic": 18444492256145571574,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 1088
 	},
 	{
 		"Index": 62,
-		"Magic": 0,
+		"Magic": 9223372031385402462,
 		"Shift": 11,
-		"Default_shift": 53,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 1088
 	},
 	{
 		"Index": 63,
 		"Magic": 0,
 		"Shift": 12,
-		"Default_shift": 52,
-		"Diag": false
+		"Diag": false,
+		"Default_shift": 12,
+		"Mapsize": 0
 	}
 ]
