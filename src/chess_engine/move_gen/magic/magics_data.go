@@ -17,8 +17,9 @@ type magicdata struct {
 	Index uint
 	Magic board.Bitboard
 	Shift int
-	Default_shift int
 	Diag bool
+	Default_shift int
+	Mapsize int
 }
 
 // create hash table for magic square
@@ -50,10 +51,8 @@ func magic_attack_rays(msq *Magicsq) {
 
 		expected = exp_attack_ray(index, occ) // expected attack ray - using basic sliding rays
 		
-		// expected.Print()
-		// occ.Print()
-		// println(magic_num, shift)
-		magic_index := (occ * magic_num) >> shift
+		
+		magic_index := (occ * magic_num) >> (64 - shift)
 
 
 		// add attack ray to hash table
@@ -74,8 +73,9 @@ func create_magicsq(data magicdata) Magicsq {
 		index: data.Index, 
 		diag: data.Diag,
 		magic: data.Magic,
-		shift: 64 - data.Shift,
+		shift: data.Shift,
 		default_shift: data.Default_shift,
+		mapsize: data.Mapsize,
 
 		occ_mask: innerOccupancy(data.Index, data.Diag), // inner occupancy
 		}
@@ -125,9 +125,21 @@ func load_magic(diag bool) [64]Magicsq{
 	// create magic squares
 	var magicsquares [64]Magicsq
 
+	var validsquares uint
 	for i := 0; i < 64; i++ {
 		magicsquares[i] = create_magicsq(data[i])
+		if magicsquares[i].magic != 0 {
+			validsquares++
+		}
 	}
+
+	// temp
+	if diag {
+		println("Valid Diagonal magics loaded: ", validsquares, " / 64")
+	} else {
+		println("Valid Straight magics loaded: ", validsquares, " / 64")
+	}
+	println()
 	
 	return magicsquares
 	}
@@ -158,7 +170,6 @@ func load_magic(diag bool) [64]Magicsq{
 			// create magic data
 			export_data := create_magicdata(msq)
 	
-			
 			// export magic data to json
 			err = encoding.Encode(export_data)
 			if err != nil {
@@ -176,9 +187,10 @@ func load_magic(diag bool) [64]Magicsq{
 		for i := 0; i < 64; i++ {
 			data[i].Index = all_msq[i].index
 			data[i].Magic = all_msq[i].magic
-			data[i].Shift = 64 - all_msq[i].shift
+			data[i].Shift = all_msq[i].shift
 			data[i].Default_shift = len(all_msq[i].occ_mask.Index()) // default shift
 			data[i].Diag = all_msq[i].diag
+			data[i].Mapsize = all_msq[i].mapsize
 		}
 		return data
 	}
