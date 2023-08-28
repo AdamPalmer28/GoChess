@@ -15,16 +15,16 @@ func (gs *GameState) Init() {
 	// initialise move rays
 	gs.makeMoveRays()
 	
-	
-	// move gen
-	gs.GenMoves()
-
-
 	// magic squares
 	strt, diag := magic.Load_all_magicsq()
 
 	gs.MoveRays.Magic.RookMagic = strt
 	gs.MoveRays.Magic.BishopMagic = diag
+	
+	// move gen
+	gs.GenMoves()
+
+
 
 }
 

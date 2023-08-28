@@ -1,1 +1,514 @@
-[{"Index":0,"Magic":1188950869635248160,"Shift":12,"Diag":false,"Default_shift":12,"Mapsize":4096},{"Index":1,"Magic":882705811774644228,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":2048},{"Index":2,"Magic":108095324594110592,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":2048},{"Index":3,"Magic":4647723613695545344,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":2048},{"Index":4,"Magic":144119869593360416,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":2048},{"Index":5,"Magic":3098516126626283528,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":2048},{"Index":6,"Magic":4899925193105080848,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":2048},{"Index":7,"Magic":2485988093857898880,"Shift":12,"Diag":false,"Default_shift":12,"Mapsize":4096},{"Index":8,"Magic":2242194411114971103,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":1664},{"Index":9,"Magic":1153203155752730624,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":10,"Magic":844494186628352,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":11,"Magic":468655977958211592,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":12,"Magic":585608706226913408,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":13,"Magic":41095364455956992,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":14,"Magic":865535832558272532,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":15,"Magic":140738570487040,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":2048},{"Index":16,"Magic":159978954424352,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":2048},{"Index":17,"Magic":11245488545495785482,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":18,"Magic":594582904059756560,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":19,"Magic":72568037968384,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":20,"Magic":9260246358449734674,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":21,"Magic":141288116617728,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":22,"Magic":1157464687458190984,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":23,"Magic":582096848921067780,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":2048},{"Index":24,"Magic":9676254227775490,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":2048},{"Index":25,"Magic":180372684587212800,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":26,"Magic":13907256532841697792,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":27,"Magic":7045820835692802,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":28,"Magic":144964013208373248,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":29,"Magic":577028102459228672,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":30,"Magic":6944568269133121554,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":31,"Magic":644245373953,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":2048},{"Index":32,"Magic":2322177760166016,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":2048},{"Index":33,"Magic":1180647064699150336,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":34,"Magic":142938155782720,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":35,"Magic":562984615157826,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":36,"Magic":865262880952419328,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":37,"Magic":5097338062260736,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":38,"Magic":36169538810692096,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":39,"Magic":282713034588300,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":2048},{"Index":40,"Magic":2633515341497532416,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":2048},{"Index":41,"Magic":87965762076676,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":42,"Magic":1834131428343826,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":43,"Magic":9223653958776586272,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":44,"Magic":370421103719383044,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":45,"Magic":563001761595400,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":46,"Magic":721141089372766336,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":47,"Magic":1407943010549772,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":2048},{"Index":48,"Magic":17870272111516254128,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":1088},{"Index":49,"Magic":159914624710347520,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":50,"Magic":22553183583797504,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":51,"Magic":2599148731307688064,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":52,"Magic":9277454814936072832,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":53,"Magic":7881376665715840,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":54,"Magic":612496181843461120,"Shift":10,"Diag":false,"Default_shift":10,"Mapsize":1024},{"Index":55,"Magic":6917530678317876736,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":2048},{"Index":56,"Magic":17870282145608466398,"Shift":12,"Diag":false,"Default_shift":12,"Mapsize":2112},{"Index":57,"Magic":9007198080063242207,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":1056},{"Index":58,"Magic":13150507334195216207,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":1056},{"Index":59,"Magic":9160319236873124767,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":1184},{"Index":60,"Magic":18077448869871876698,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":1088},{"Index":61,"Magic":18444492256145571574,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":1088},{"Index":62,"Magic":9223372031385402462,"Shift":11,"Diag":false,"Default_shift":11,"Mapsize":1088},{"Index":63,"Magic":4611690451387646018,"Shift":12,"Diag":false,"Default_shift":12,"Mapsize":4096}]
+[
+	{
+		"Index": 0,
+		"Magic": 1188950869635248160,
+		"Shift": 12,
+		"Diag": false,
+		"Default_shift": 12,
+		"Mapsize": 4096
+	},
+	{
+		"Index": 1,
+		"Magic": 882705811774644228,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 2048
+	},
+	{
+		"Index": 2,
+		"Magic": 108095324594110592,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 2048
+	},
+	{
+		"Index": 3,
+		"Magic": 4647723613695545344,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 2048
+	},
+	{
+		"Index": 4,
+		"Magic": 144119869593360416,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 2048
+	},
+	{
+		"Index": 5,
+		"Magic": 3098516126626283528,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 2048
+	},
+	{
+		"Index": 6,
+		"Magic": 4899925193105080848,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 2048
+	},
+	{
+		"Index": 7,
+		"Magic": 2485988093857898880,
+		"Shift": 12,
+		"Diag": false,
+		"Default_shift": 12,
+		"Mapsize": 4096
+	},
+	{
+		"Index": 8,
+		"Magic": 2242194411114971103,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 1664
+	},
+	{
+		"Index": 9,
+		"Magic": 1153203155752730624,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 10,
+		"Magic": 844494186628352,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 11,
+		"Magic": 468655977958211592,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 12,
+		"Magic": 585608706226913408,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 13,
+		"Magic": 41095364455956992,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 14,
+		"Magic": 865535832558272532,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 15,
+		"Magic": 140738570487040,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 2048
+	},
+	{
+		"Index": 16,
+		"Magic": 159978954424352,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 2048
+	},
+	{
+		"Index": 17,
+		"Magic": 11245488545495785482,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 18,
+		"Magic": 594582904059756560,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 19,
+		"Magic": 72568037968384,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 20,
+		"Magic": 9260246358449734674,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 21,
+		"Magic": 141288116617728,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 22,
+		"Magic": 1157464687458190984,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 23,
+		"Magic": 582096848921067780,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 2048
+	},
+	{
+		"Index": 24,
+		"Magic": 9676254227775490,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 2048
+	},
+	{
+		"Index": 25,
+		"Magic": 180372684587212800,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 26,
+		"Magic": 13907256532841697792,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 27,
+		"Magic": 7045820835692802,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 28,
+		"Magic": 144964013208373248,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 29,
+		"Magic": 577028102459228672,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 30,
+		"Magic": 6944568269133121554,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 31,
+		"Magic": 644245373953,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 2048
+	},
+	{
+		"Index": 32,
+		"Magic": 2322177760166016,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 2048
+	},
+	{
+		"Index": 33,
+		"Magic": 1180647064699150336,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 34,
+		"Magic": 142938155782720,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 35,
+		"Magic": 562984615157826,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 36,
+		"Magic": 865262880952419328,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 37,
+		"Magic": 5097338062260736,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 38,
+		"Magic": 36169538810692096,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 39,
+		"Magic": 282713034588300,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 2048
+	},
+	{
+		"Index": 40,
+		"Magic": 2633515341497532416,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 2048
+	},
+	{
+		"Index": 41,
+		"Magic": 87965762076676,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 42,
+		"Magic": 1834131428343826,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 43,
+		"Magic": 9223653958776586272,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 44,
+		"Magic": 370421103719383044,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 45,
+		"Magic": 563001761595400,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 46,
+		"Magic": 721141089372766336,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 47,
+		"Magic": 1407943010549772,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 2048
+	},
+	{
+		"Index": 48,
+		"Magic": 17870272111516254128,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 1088
+	},
+	{
+		"Index": 49,
+		"Magic": 159914624710347520,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 50,
+		"Magic": 22553183583797504,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 51,
+		"Magic": 2599148731307688064,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 52,
+		"Magic": 9277454814936072832,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 53,
+		"Magic": 7881376665715840,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 54,
+		"Magic": 612496181843461120,
+		"Shift": 10,
+		"Diag": false,
+		"Default_shift": 10,
+		"Mapsize": 1024
+	},
+	{
+		"Index": 55,
+		"Magic": 6917530678317876736,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 2048
+	},
+	{
+		"Index": 56,
+		"Magic": 17870282145608466398,
+		"Shift": 12,
+		"Diag": false,
+		"Default_shift": 12,
+		"Mapsize": 2112
+	},
+	{
+		"Index": 57,
+		"Magic": 9007198080063242207,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 1056
+	},
+	{
+		"Index": 58,
+		"Magic": 13150507334195216207,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 1056
+	},
+	{
+		"Index": 59,
+		"Magic": 9160319236873124767,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 1184
+	},
+	{
+		"Index": 60,
+		"Magic": 18077448869871876698,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 1088
+	},
+	{
+		"Index": 61,
+		"Magic": 18444492256145571574,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 1088
+	},
+	{
+		"Index": 62,
+		"Magic": 9223372031385402462,
+		"Shift": 11,
+		"Diag": false,
+		"Default_shift": 11,
+		"Mapsize": 1088
+	},
+	{
+		"Index": 63,
+		"Magic": 4611690451387646018,
+		"Shift": 12,
+		"Diag": false,
+		"Default_shift": 12,
+		"Mapsize": 4096
+	}
+]
