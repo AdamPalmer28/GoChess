@@ -33,11 +33,11 @@
 	},
 	{
 		"Index": 4,
-		"Magic": 15824222852048945151,
+		"Magic": 15344585729485299198,
 		"Shift": 5,
 		"Diag": true,
 		"Default_shift": 5,
-		"Mapsize": 30
+		"Mapsize": 28
 	},
 	{
 		"Index": 5,
@@ -201,11 +201,11 @@
 	},
 	{
 		"Index": 25,
-		"Magic": 18302171751589306296,
+		"Magic": 18310244224957022137,
 		"Shift": 5,
 		"Diag": true,
 		"Default_shift": 5,
-		"Mapsize": 26
+		"Mapsize": 23
 	},
 	{
 		"Index": 26,
@@ -321,11 +321,11 @@
 	},
 	{
 		"Index": 40,
-		"Magic": 7710117408756725823,
+		"Magic": 18140480463963156603,
 		"Shift": 5,
 		"Diag": true,
 		"Default_shift": 5,
-		"Mapsize": 17
+		"Mapsize": 16
 	},
 	{
 		"Index": 41,
@@ -449,11 +449,11 @@
 	},
 	{
 		"Index": 56,
-		"Magic": 18298123081915955454,
+		"Magic": 16067716740447780595,
 		"Shift": 5,
 		"Diag": true,
 		"Default_shift": 6,
-		"Mapsize": 28
+		"Mapsize": 27
 	},
 	{
 		"Index": 57,

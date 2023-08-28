@@ -97,12 +97,13 @@ func gen_magic(msq *Magicsq) (board.Bitboard, int, int, bool) {
 	if msq.magic != 0 { // if magic number already exists
 		//try to improve the magic number
 		
+
 		if msq.mapsize < int(math.Pow(2, float64(msq.shift - 1))) {
+			// REDUCE the BITS of mapping
 			println("Ind:", msq.index, " MN - Bit reduction")
 			target_shift  = target_shift - 1
 
 			for i := 0; i < goRoutineCount; i++ {
-				// reduce bits
 				go func() {
 					defer wg.Done()
 					var newMagic board.Bitboard
@@ -127,7 +128,7 @@ func gen_magic(msq *Magicsq) (board.Bitboard, int, int, bool) {
 			}
 		} else {
 			println("Ind:", msq.index, " MN - Improve")
-			// reduce map size 
+			// REDUCE MAP SIZE 
 			for i := 0; i < goRoutineCount; i++ {
 				go func() {
 					defer wg.Done()
@@ -155,7 +156,8 @@ func gen_magic(msq *Magicsq) (board.Bitboard, int, int, bool) {
 		}
 
 
-	} else { // find new magic number
+	} else { 
+		// find NEW MAGIC number
 		println("Ind:", msq.index, " MN - Search")
 		for i := 0; i < goRoutineCount; i++ {
 			go func() {
