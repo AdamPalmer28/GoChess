@@ -6,15 +6,14 @@ A ongoing to-do list of task for development of the chess engine.
 
 ### High priority
 
-- testing: read magic numbers from file
-
-### General
-
-- undo move
 - finish king moves
   - castling
   - check
   - double checks
+
+### General
+
+- undo move
 
 ### Low priority
 
