@@ -14,61 +14,61 @@ Possible double check combinations:
 */
 
 // check if king check
-func check_king_safety(square uint, team_bb board.Bitboard, fwd int,
-			magic_str_sqs *[64]magic.Magicsq, magic_diag_sqs *[64]magic.Magicsq, 
-			knight_rays *[64]board.Bitboard, king_rays *[64]board.Bitboard,
-			opp_pawn board.Bitboard, opp_knight board.Bitboard, opp_bishop board.Bitboard,
-			opp_rook board.Bitboard, opp_queen board.Bitboard, opp_king board.Bitboard) bool {
-
-	// get the column
-	col := square % 8
-	
-
+func check_king_safety(end_sq uint, kingSafety KingSafetyRelBB, knight_ray board.Bitboard,
+			magic_str_sq *magic.Magicsq, magic_diag_sq *magic.Magicsq) bool {
+					
 	// check diag attacks (bishop and queen)
-	if !check_safe_rays(square, magic_diag_sqs, team_bb, opp_bishop | opp_queen) {
+	if !check_safe_rays(magic_diag_sq, (kingSafety.Team_bb_no_king | kingSafety.Opp_bb), 
+						(kingSafety.Opp_bishop_bb | kingSafety.Opp_queen_bb)) {
 		return false
 	}
-
+	
 	// check straight attacks (rook and queen)
-	if !check_safe_rays(square, magic_str_sqs, team_bb, opp_rook | opp_queen) {
+	if !check_safe_rays(magic_str_sq, (kingSafety.Team_bb_no_king | kingSafety.Opp_bb), 
+						(kingSafety.Opp_rook_bb | kingSafety.Opp_queen_bb)) {
 		return false
 	}
 
+	// check knight attacks
+	if (knight_ray & kingSafety.Opp_knight_bb) != 0 {
+		return false
+	}
+	
 	// check pawn attacks
 	pawn_attack_bb := board.Bitboard(0)
+	col := kingSafety.King_sq % 8
 	if col != 0 { // left capture
-		en_sq := int(square) + fwd - 1
+		en_sq := int(kingSafety.King_sq) + kingSafety.Fwd - 1
 		pawn_attack_bb |= 1 << en_sq
 	}
 	if col != 7 { // right capture
-		en_sq := int(square) + fwd + 1
+		en_sq := int(kingSafety.King_sq) + kingSafety.Fwd + 1
 		pawn_attack_bb |= 1 << en_sq
 	}
 
-	if pawn_attack_bb & opp_pawn != 0 {
+	if pawn_attack_bb & kingSafety.Opp_bb != 0 {
 		return false
 	}
 	
-	// check knight attacks
-	knight_attack_bb := knight_rays[square]
-	if knight_attack_bb & opp_knight != 0 {
-		return false
-	}
 
 	return true
 }
 
 // check if associated king rays are safe
-func check_safe_rays(square uint, magic_sqs *[64]magic.Magicsq, 
-				team_bb board.Bitboard, rel_attacker_bb board.Bitboard) bool {
-
+func check_safe_rays(magic_sqs *magic.Magicsq, 
+				occ_bb board.Bitboard, rel_attacker_bb board.Bitboard) bool {
 
 	// get the column
-	rays := magic.Get_magic_rays(magic_sqs[square], team_bb)
+	rays := magic.Get_magic_rays(*magic_sqs, occ_bb)
 
-	if rays & rel_attacker_bb != 0 {
+	if (rays & rel_attacker_bb) != 0 {
 		return false
 	}
 
 	return true
 }
+
+
+// identify check attacks
+func check_details(){}
+

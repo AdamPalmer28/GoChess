@@ -12,9 +12,24 @@
     - promotion
 
 - Move generation
+
   - king moves
     - castling
     - check
     - double checks
   - Hard moves
   - pins
+  - check_king_safety
+
+  # Benchmark
+
+  - Move generation
+
+    - check_king_safety function
+    - king moves
+    - pawn moves
+    - knight moves
+    - bishop moves
+    - rook moves
+    - queen moves
+    - all moves

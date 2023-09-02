@@ -25,6 +25,7 @@ type BoardPerpective struct {
 	team_bb board.Bitboard
 	opp_bb board.Bitboard
 
+	fwd int
 	castle_rights uint
 }
 
@@ -35,6 +36,7 @@ func (gs *GameState) Make_BP() {
 	if gs.White_to_move {
 		
 		bp = BoardPerpective{
+			
 
 			pawn_bb: *gs.Board.WhitePawns,
 			knight_bb: *gs.Board.WhiteKnights,
@@ -51,6 +53,7 @@ func (gs *GameState) Make_BP() {
 			team_bb: gs.Board.White,
 			opp_bb: gs.Board.Black,
 
+			fwd: 8,
 			castle_rights: gs.WhiteCastle,
 		}
 
@@ -73,6 +76,7 @@ func (gs *GameState) Make_BP() {
 			team_bb: gs.Board.Black,
 			opp_bb: gs.Board.White,
 
+			fwd: -8,
 			castle_rights: gs.BlackCastle,
 		}
 	}
@@ -129,12 +133,33 @@ func (gs *GameState) GenMoves() {
 				player.team_bb, player.opp_bb)
 	MoveList = append(MoveList, queen_moves...)
 
+
+
 	// generate king moves
-	king_moves := move_gen.GenKingMoves(player.king_bb, player.team_bb, player.castle_rights,
+	
+	opp_king_bubble := gs.MoveRays.KingRays[player.opp_king_bb.Index()[0]]
+	// king safety struct
+	playerKingSafety := move_gen.KingSafetyRelBB{
+		King_sq: player.king_bb.Index()[0],
+		Team_bb: player.team_bb,
+		Team_bb_no_king: (player.pawn_bb | player.knight_bb | 
+				player.bishop_bb | player.rook_bb | player.queen_bb),
+		Opp_bb: player.opp_bb,
+		Fwd: player.fwd,
+
+		Opp_pawn_bb: player.opp_pawn_bb,
+		Opp_knight_bb: player.opp_knight_bb,
+		Opp_bishop_bb: player.opp_bishop_bb,
+		Opp_rook_bb: player.opp_rook_bb,
+		Opp_queen_bb: player.opp_queen_bb,
+		Opp_king_bubble: opp_king_bubble,
+	}
+
+
+
+	king_moves := move_gen.GenKingMoves(playerKingSafety, player.castle_rights,
 				&gs.MoveRays.Magic.RookMagic, &gs.MoveRays.Magic.BishopMagic,
-				&gs.MoveRays.KnightRays, &gs.MoveRays.KingRays,
-				player.opp_pawn_bb, player.opp_knight_bb, player.opp_bishop_bb,
-				player.opp_rook_bb, player.opp_queen_bb, player.opp_king_bb)
+				&gs.MoveRays.KnightRays, &gs.MoveRays.KingRays)
 	MoveList = append(MoveList, king_moves...)
 	
 	

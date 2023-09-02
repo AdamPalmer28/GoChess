@@ -8,17 +8,20 @@ A ongoing to-do list of task for development of the chess engine.
 
 - finish king moves
   - castling
-  - check
-  - double checks
+- check king safety
 
 ### General
 
 - undo move
+  - gamestate undo properties
+- gamestate / move gen
+  - check
+  - double checks
 
 ### Low priority
 
 - piece pins
-- add testing for all test to-dos
+- add testing for all 'test to-dos'
 
 ---
 
