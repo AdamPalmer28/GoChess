@@ -6,10 +6,6 @@ A ongoing to-do list of task for development of the chess engine.
 
 ### High priority
 
-- finish king moves
-  - castling
-- check king safety
-
 ### General
 
 - undo move

@@ -141,6 +141,7 @@ func (gs *GameState) GenMoves() {
 	// king safety struct
 	playerKingSafety := move_gen.KingSafetyRelBB{
 		King_sq: player.king_bb.Index()[0],
+		King_bb: player.king_bb,
 		Team_bb: player.team_bb,
 		Team_bb_no_king: (player.pawn_bb | player.knight_bb | 
 				player.bishop_bb | player.rook_bb | player.queen_bb),

@@ -8,6 +8,7 @@ import (
 type KingSafetyRelBB struct {
 	// friendly pieces
 	King_sq uint
+	King_bb board.Bitboard
 	Team_bb board.Bitboard
 	Team_bb_no_king board.Bitboard
 	Fwd int
@@ -34,7 +35,7 @@ func GenKingMoves(kingRel KingSafetyRelBB, castle_rights uint,
 
 	// generate basic moves
 	basic_moves := king_rays[kingRel.King_sq]
-	basic_moves &= ^kingRel.Team_bb | ^kingRel.Opp_king_bubble
+	basic_moves &= (^kingRel.Team_bb & ^kingRel.Opp_king_bubble)
 
 	cap_moves := basic_moves & kingRel.Opp_bb
 	noncap_moves := basic_moves & ^kingRel.Opp_bb
@@ -51,39 +52,64 @@ func GenKingMoves(kingRel KingSafetyRelBB, castle_rights uint,
 
 	// castle moves
 	if castle_rights > 0 {
-
-	
+		castle_moves := GenCastling(castle_rights, kingRel,
+									magic_str_sqs, magic_diag_sqs, knight_rays)
+		movelist = append(movelist, castle_moves...)
 	}
-
-	// // generate castle moves
-	//if castle_rights > 0 {
-	// castle_moves = genCastleMoves(king_bb, castle_rights, team_bb, opp_pawn, opp_knight, opp_bishop, opp_rook, opp_queen, opp_king)
-	// movelist = append(movelist, castle_moves...)
-	//}
 
 	return movelist
 }
 
-func GenCastling(king_bb board.Bitboard, castle_rights uint, team_bb board.Bitboard, 
-	opp_pawn board.Bitboard, opp_knight board.Bitboard, opp_bishop board.Bitboard,
-	opp_rook board.Bitboard, opp_queen board.Bitboard, opp_king board.Bitboard) []uint {
 
-var movelist []uint
-//relevant_sqs := board.Bitboard(0)
+// generate castling moves
+func GenCastling(castle_rights uint, kingRel KingSafetyRelBB,
+	magic_str_sqs *[64]magic.Magicsq, magic_diag_sqs *[64]magic.Magicsq, 
+	knight_rays *[64]board.Bitboard) []uint {
 
-// king side castle
-if castle_rights&0b01 > 0 {
+	var movelist []uint
+	var castle_occ board.Bitboard
 
+	var castle_checks []uint 
+	// king side castle
+	if castle_rights&0b01 > 0 {
+		// check safe for king
+		castle_occ = kingRel.King_bb << 1 | kingRel.King_bb << 2
+		
+		if (castle_occ) & (kingRel.Team_bb | kingRel.Opp_bb) == 0 {
+			// check safe for king
+			castle_checks = legal_king_moves(castle_occ, kingRel, 0b0010,
+							magic_str_sqs, magic_diag_sqs, knight_rays)
+			if len(castle_checks) == 2 {
+				movelist = append(movelist, castle_checks[1])
+			}
+		}
+	}
 
-}
+	// queen side castle
+	if castle_rights&0b10 > 0 {
 
-return movelist
+		// check safe for king
+		queen_side_castle := kingRel.King_bb >> 1 | kingRel.King_bb >> 2
+		// check square occs
+		castle_occ = queen_side_castle | queen_side_castle >> 1
+
+		if (castle_occ) & (kingRel.Team_bb | kingRel.Opp_bb) == 0 {
+			// check safe for king
+			castle_checks = legal_king_moves(queen_side_castle, kingRel, 0b0011,
+							magic_str_sqs, magic_diag_sqs, knight_rays)	
+			if len(castle_checks) == 2 {
+				movelist = append(movelist, castle_checks[0])
+			}
+		}
+	}
+
+	return movelist
 }
 
 // ==================================================================
 // helper function
 
-// create legal king moves
+// create king moves are legal
 func legal_king_moves(movebb board.Bitboard, kingRel KingSafetyRelBB, special uint,
 		magic_str_sqs *[64]magic.Magicsq, magic_diag_sqs *[64]magic.Magicsq, 
 		knight_rays *[64]board.Bitboard) []uint {

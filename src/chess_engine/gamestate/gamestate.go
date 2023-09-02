@@ -27,9 +27,6 @@ type GameState struct {
 	MoveRays struct {
 		// rays for each piece
 		KnightRays [64]board.Bitboard
-		BishopRays [64]board.Bitboard
-		RookRays [64]board.Bitboard
-		QueenRays [64]board.Bitboard
 		KingRays [64]board.Bitboard
 
 		Magic struct {
