@@ -18,8 +18,6 @@ func MakeGameState() *GameState {
 		MoveList: []uint{},
 		MoveHumanList: []string{},
 		Moveno: 1,
-		PrevMoves: []uint{},
-		Cap_pieces: [][2]int{},
 	}
 
 	return gs

@@ -25,8 +25,8 @@ type ChessBoard struct {
 }
 
 
-// listBB returns a list of bitboards for each size
-func (cb *ChessBoard) listBB(white bool) [6]*Bitboard {
+// ListBB returns a list of bitboards for each size
+func (cb *ChessBoard) ListBB(white bool) [6]*Bitboard {
 	// return a list of bitboards for each piece type
 	if white {
 		return [6]*Bitboard{cb.WhitePawns, cb.WhiteKnights, cb.WhiteBishops, 

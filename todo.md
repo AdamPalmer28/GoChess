@@ -9,7 +9,10 @@ A ongoing to-do list of task for development of the chess engine.
 ### General
 
 - undo move
+
   - gamestate undo properties
+    - need to make these maps
+
 - gamestate / move gen
   - check
   - double checks

@@ -61,7 +61,10 @@ func (cfg *Config) Run() bool {
 			GetMoves(gs.MoveList)
 		}
 
-		
+	} else if cmd == "undo" {
+		gs.Undo()
+		gs.Board.Print()
+	
 	} else {
 		// assume move
 
