@@ -6,10 +6,10 @@ A ongoing to-do list of task for development of the chess engine.
 
 ### High priority
 
+- add testing for all 'test to-dos'
+
 ### General
 
-- undo move
-  - gamestate undo properties
 - gamestate / move gen
   - check
   - double checks
@@ -17,7 +17,6 @@ A ongoing to-do list of task for development of the chess engine.
 ### Low priority
 
 - piece pins
-- add testing for all 'test to-dos'
 
 ---
 

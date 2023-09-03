@@ -25,7 +25,7 @@ type KingSafetyRelBB struct {
 }
 
 
-
+// generate all king moves (basic moves and castling)
 func GenKingMoves(kingRel KingSafetyRelBB, castle_rights uint,
 		magic_str_sqs *[64]magic.Magicsq, magic_diag_sqs *[64]magic.Magicsq,
 		knight_rays *[64]board.Bitboard, king_rays *[64]board.Bitboard) []uint {
@@ -36,21 +36,21 @@ func GenKingMoves(kingRel KingSafetyRelBB, castle_rights uint,
 	// generate basic moves
 	basic_moves := king_rays[kingRel.King_sq]
 	basic_moves &= (^kingRel.Team_bb & ^kingRel.Opp_king_bubble)
-
-	cap_moves := basic_moves & kingRel.Opp_bb
+	
+		// non capture moves
 	noncap_moves := basic_moves & ^kingRel.Opp_bb
-
-	// generate the basic moves
-	cap_moves_nums := legal_king_moves(cap_moves, kingRel, 0b0100, 
-							magic_str_sqs, magic_diag_sqs, knight_rays)
-	movelist = append(movelist, cap_moves_nums...)
-
 	noncap_moves_nums := legal_king_moves(noncap_moves, kingRel, 0b0000,
 							magic_str_sqs, magic_diag_sqs, knight_rays)
 	movelist = append(movelist, noncap_moves_nums...)
+		// capture moves
+	cap_moves := basic_moves & kingRel.Opp_bb
+	cap_moves_nums := legal_king_moves(cap_moves, kingRel, 0b0100, 
+		magic_str_sqs, magic_diag_sqs, knight_rays)
+		movelist = append(movelist, cap_moves_nums...)
+		
 
 
-	// castle moves
+	// generate castle moves
 	if castle_rights > 0 {
 		castle_moves := GenCastling(castle_rights, kingRel,
 									magic_str_sqs, magic_diag_sqs, knight_rays)

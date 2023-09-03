@@ -17,7 +17,6 @@
     - castling
     - check
     - double checks
-  - Hard moves
   - pins
   - check_king_safety
 

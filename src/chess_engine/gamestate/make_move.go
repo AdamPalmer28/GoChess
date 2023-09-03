@@ -26,6 +26,7 @@ func (gs *GameState) Make_move(move uint) {
 		row = 7
 		fwd = -8
 	}
+	gs.History.CastleRight = append(gs.History.CastleRight, *CastleRight) // castle rights at start of the move
 
 	var sq uint
 	var intrest_sq uint
@@ -68,19 +69,11 @@ func (gs *GameState) Make_move(move uint) {
 		gs.Enpass_ind = 0
 	}
 
-	// capture piece
-	if (special & 4) > 0 {
-		piece := 0 // placeholder
-		gs.Cap_pieces = append(gs.Cap_pieces, [2]int{int(gs.Moveno), piece})
-	}
+	// update gamestate
 
 	// update previous moves
-	gs.PrevMoves = append(gs.PrevMoves, move)
-
-	if cap_piece != 6 {
-		gs.Cap_pieces = append(gs.Cap_pieces,
-			[2]int{int(gs.Moveno), int(cap_piece)})
-	}
+	gs.History.PrevMoves = append(gs.History.PrevMoves, move)
+	gs.History.Cap_pieces = append(gs.History.Cap_pieces, cap_piece)
 
 	// update move number
 	gs.Moveno++

@@ -21,8 +21,13 @@ type GameState struct {
 
 	Moveno   uint
 	HalfMoveNo uint
-	PrevMoves []uint // previous moves (0000 000000 000000 form)
-	Cap_pieces [][2]int // [move number][piece type]
+
+	History struct {
+		PrevMoves []uint // previous moves (0000 000000 000000 form)
+
+		Cap_pieces []uint // History of piece type
+		CastleRight []uint // castle rights at end of the move
+	}
 
 	MoveRays struct {
 		// rays for each piece

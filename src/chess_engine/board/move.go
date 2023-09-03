@@ -24,8 +24,8 @@ func (cb *ChessBoard) Move(move_num uint, white_move bool) (uint, uint) {
 	Opp_BB_list := [6]*Bitboard{}
 
 
-	BB_list = cb.listBB(white_move) 
-	Opp_BB_list = cb.listBB(!white_move)
+	BB_list = cb.ListBB(white_move) 
+	Opp_BB_list = cb.ListBB(!white_move)
 
 	var piece_moved uint
 	var cap_piece uint = 6

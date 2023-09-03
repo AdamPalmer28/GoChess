@@ -67,8 +67,6 @@ func FEN_to_gs(fen string) *GameState {
 		MoveList: []uint{},
 		Moveno: uint(move_number),
 		HalfMoveNo: uint(halfmove_clock),
-		PrevMoves: []uint{},
-		Cap_pieces: [][2]int{},
 	}
 
 	return gs
