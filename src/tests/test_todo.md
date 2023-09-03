@@ -1,34 +1,24 @@
 # Tests to add
 
 - Gamestate
+
   - Make_move
   - Fenreader
   - castle logic
+  - undo move
+
 - Board
 
-  - rare moves: (check bitboards)
+  - capture
     - en passant
+  - rare moves: (check bitboards)
     - castling
     - promotion
 
 - Move generation
-
   - king moves
+    - not into check
+    - basic moves
     - castling
-    - check
-    - double checks
+  - Checks
   - pins
-  - check_king_safety
-
-  # Benchmark
-
-  - Move generation
-
-    - check_king_safety function
-    - king moves
-    - pawn moves
-    - knight moves
-    - bishop moves
-    - rook moves
-    - queen moves
-    - all moves

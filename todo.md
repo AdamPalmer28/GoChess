@@ -10,14 +10,6 @@ A ongoing to-do list of task for development of the chess engine.
 
 ### General
 
-<<<<<<< HEAD
-=======
-- undo move
-
-  - gamestate undo properties
-    - need to make these maps
-
->>>>>>> 4b6c1ccefd98fb93f6f232dd7c62452eaf8f0e11
 - gamestate / move gen
   - check
   - double checks
