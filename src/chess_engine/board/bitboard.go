@@ -38,6 +38,7 @@ func (b Bitboard) Print() {
 		}
 		println()
 	}
+	println()
 }
 
 func (b Bitboard) Index() []uint {

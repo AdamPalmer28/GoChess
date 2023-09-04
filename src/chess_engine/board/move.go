@@ -20,12 +20,8 @@ func (cb *ChessBoard) Move(move_num uint, white_move bool) (uint, uint) {
 	finish_sq := (move_num >> 6) & 0x3F
 	special := (move_num >> 12) & 0xF
 
-	BB_list := [6]*Bitboard{}
-	Opp_BB_list := [6]*Bitboard{}
-
-
-	BB_list = cb.ListBB(white_move) 
-	Opp_BB_list = cb.ListBB(!white_move)
+	BB_list := cb.ListBB(white_move) 
+	Opp_BB_list := cb.ListBB(!white_move)
 
 	var piece_moved uint
 	var cap_piece uint = 6
