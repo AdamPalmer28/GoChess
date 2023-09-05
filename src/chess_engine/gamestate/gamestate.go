@@ -12,23 +12,29 @@ type GameState struct {
 	// king 0b01, queen 0b10, both 0b11 
 	WhiteCastle uint 
 	BlackCastle uint 
-
+	
+	// game state
 	White_to_move bool
+	State uint // 0b00 = normal, 0b01 = check, 0b10 = checkmate, 0b11 = stalemate
 	Enpass_ind uint
 
+	// move list
 	MoveList move_gen.MoveList
 	MoveHumanList []string // CLI referencing
+	PlayerBoard  BoardPerpective
 
 	Moveno   uint
 	HalfMoveNo uint
-
+	
+	// history data - for undo
 	History struct {
 		PrevMoves []uint // previous moves (0000 000000 000000 form)
-
+		
 		Cap_pieces []uint // History of piece type
 		CastleRight []uint // castle rights at end of the move
 	}
-
+	
+	// move arrays - for move gen
 	MoveRays struct {
 		// rays for each piece
 		KnightRays [64]board.Bitboard
@@ -41,7 +47,6 @@ type GameState struct {
 		}
 	}
 
-	PlayerBoard  BoardPerpective
 
 }
 

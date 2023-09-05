@@ -124,3 +124,24 @@ func Index_to_move(ind uint) string {
 
 	return cord
 }
+
+// check if two chessboards are identical
+func (cb ChessBoard) Identical(new_cb ChessBoard) bool {
+
+	if (*cb.WhitePawns == *new_cb.WhitePawns) &&
+		(*cb.WhiteKnights == *new_cb.WhiteKnights) &&
+		(*cb.WhiteBishops == *new_cb.WhiteBishops) &&
+		(*cb.WhiteRooks == *new_cb.WhiteRooks) &&
+		(*cb.WhiteQueens == *new_cb.WhiteQueens) &&
+		(*cb.WhiteKing == *new_cb.WhiteKing) &&
+		(*cb.BlackPawns == *new_cb.BlackPawns) &&
+		(*cb.BlackKnights == *new_cb.BlackKnights) &&
+		(*cb.BlackBishops == *new_cb.BlackBishops) &&
+		(*cb.BlackRooks == *new_cb.BlackRooks) &&
+		(*cb.BlackQueens == *new_cb.BlackQueens) &&
+		(*cb.BlackKing == *new_cb.BlackKing) {
+		return true
+	} 
+	
+	return false
+}

@@ -78,3 +78,11 @@ func (b *Bitboard) flip(ind uint) {
 
 	*b ^= 1 << ind
 }
+
+func Make_bitboard(ind []uint) *Bitboard {
+	var BB Bitboard
+	for _, i := range ind {
+		BB.flip(i)
+	}
+	return &BB
+}
