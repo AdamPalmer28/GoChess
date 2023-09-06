@@ -14,7 +14,7 @@ func MakeGameState() *GameState {
 		WhiteCastle: 0b11,
 		BlackCastle: 0b11, 
 		White_to_move: true,
-		Enpass_ind: 0,
+		Enpass_ind: 64,
 		MoveList: []uint{},
 		MoveHumanList: []string{},
 		Moveno: 1,

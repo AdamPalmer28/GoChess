@@ -10,54 +10,67 @@ func (gs *GameState) Make_move(move uint) {
 	// update piece bitboards (gs.Board)
 	piece_moved, cap_piece := gs.Board.Move(move, gs.White_to_move)
 
-	// piece_moved_str := PieceValLookup[int(piece_moved)]
-	// cap_piece_str := PieceValLookup[int(cap_piece)]
-
 	var CastleRight *uint
+	var OppCastleRight *uint
 	var row uint
 	var fwd int
 
 	if gs.White_to_move {
 		CastleRight = &gs.WhiteCastle
+		OppCastleRight = &gs.BlackCastle
 		row = 0
 		fwd = 8
 	} else {
 		CastleRight = &gs.BlackCastle
+		OppCastleRight = &gs.WhiteCastle
 		row = 7
 		fwd = -8
 	}
 	gs.History.CastleRight = append(gs.History.CastleRight, *CastleRight) // castle rights at start of the move
 
 	var sq uint
-	var intrest_sq uint
 	// update castling rights
 	if *CastleRight > 0 {
 
 		if piece_moved == 5 { // king moved
 			*CastleRight = 0
 
-		} else if piece_moved == 3 || cap_piece == 3 { // rook moved
-
-			intrest_sq = start_sq
-			if cap_piece == 3 {
-				intrest_sq = finish_sq
-			}
+		} else if piece_moved == 3 { // rook moved
 
 			// king side
 			if *CastleRight&0b01 > 0 {
 				sq = row*8 + 7
-				if intrest_sq == sq {
+				if start_sq == sq {
 					*CastleRight &^= 0b01
 				}
 			}
 			// queen side
 			if *CastleRight&0b10 > 0 {
 				sq = row * 8
-				if intrest_sq == sq {
+				if start_sq == sq {
 					*CastleRight &^= 0b10
 				}
 			}
 		}
+	}
+	if (*OppCastleRight > 0) && (cap_piece == 3) {
+
+		opp_row := 7 - row
+		// king side
+		if *OppCastleRight&0b01 > 0 {
+			sq = opp_row*8 + 7
+			if finish_sq == sq {
+				*OppCastleRight &^= 0b01
+			}
+		}
+		// queen side
+		if *OppCastleRight&0b10 > 0 {
+			sq = opp_row * 8
+			if finish_sq == sq {
+				*OppCastleRight &^= 0b10
+			}
+		}
+
 	}
 
 	// update enpassent index
@@ -66,7 +79,7 @@ func (gs *GameState) Make_move(move uint) {
 		gs.Enpass_ind = uint(int(finish_sq) - fwd)
 
 	} else {
-		gs.Enpass_ind = 0
+		gs.Enpass_ind = 64
 	}
 
 	// update gamestate

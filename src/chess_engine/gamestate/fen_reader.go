@@ -54,6 +54,11 @@ func FEN_to_gs(fen string) *GameState {
 		en_passant_squ_ind = uint(en_passant_sq[0] - 'a') + 
 								uint(en_passant_sq[1] - '1')*8
 	}
+	if active_color == "w" {
+		en_passant_squ_ind += 8
+	} else {
+		en_passant_squ_ind -= 8
+	}
 
 	// create gamestate
 	gs := &GameState{

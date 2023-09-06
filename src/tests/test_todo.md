@@ -3,8 +3,8 @@
 - Gamestate
 
   - Make_move
-  - Fenreader
-  - castle logic
+    - castle logic
+    - enpassent
   - undo move
 
 - Move generation

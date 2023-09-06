@@ -24,7 +24,7 @@ func Test_FEN_to_gs(t *testing.T) {
 	}
 
 	// enpassant
-	if gs.Enpass_ind != 28 {
+	if gs.Enpass_ind != 20 {
 		t.Errorf("Enpassant square incorrect, got %d, expected 28", gs.Enpass_ind)
 	}
 
