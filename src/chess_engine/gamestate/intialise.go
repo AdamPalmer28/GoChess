@@ -21,9 +21,8 @@ func (gs *GameState) Init() {
 	gs.MoveRays.Magic.RookMagic = strt
 	gs.MoveRays.Magic.BishopMagic = diag
 	
-	// move gen
-	gs.GenMoves()
-
+	// next move
+	gs.Next_move()
 
 
 }

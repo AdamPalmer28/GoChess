@@ -15,13 +15,15 @@ type GameState struct {
 	
 	// game state
 	White_to_move bool
-	State uint // 0b00 = normal, 0b01 = check, 0b10 = checkmate, 0b11 = stalemate
-	Enpass_ind uint
-
+	InCheck bool
+	GameOver bool
+	
 	// move list
 	MoveList move_gen.MoveList
+	Enpass_ind uint
 	MoveHumanList []string // CLI referencing
 	PlayerBoard  BoardPerpective
+	PlayerKingSaftey move_gen.KingSafetyRelBB
 
 	Moveno   uint
 	HalfMoveNo uint

@@ -2,9 +2,6 @@
 
 - Gamestate
 
-  - Make_move
-    - castle logic
-    - enpassent
   - undo move
 
 - Move generation

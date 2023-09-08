@@ -14,7 +14,7 @@ Possible double check combinations:
 */
 
 // check if king check
-func check_king_safety(end_sq uint, kingSafety KingSafetyRelBB, knight_ray board.Bitboard,
+func Check_king_safety(kingSafety KingSafetyRelBB, knight_ray board.Bitboard,
 			magic_str_sq *magic.Magicsq, magic_diag_sq *magic.Magicsq) bool {
 					
 	// check diag attacks (bishop and queen)

@@ -16,7 +16,7 @@ Moves and undo to test:
 
 func TestUndo(t *testing.T) {
 
-	initial_gs := gamestate.MakeGameState()
+	//initial_gs := gamestate.MakeGameState()
 
 	// make a move
 

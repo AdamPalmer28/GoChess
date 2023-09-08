@@ -32,6 +32,7 @@ type BoardPerpective struct {
 func (gs *GameState) Make_BP() {
 
 	var bp BoardPerpective
+	var king_safety move_gen.KingSafetyRelBB
 
 	if gs.White_to_move {
 		
@@ -81,7 +82,28 @@ func (gs *GameState) Make_BP() {
 		}
 	}
 
+	// king safety struct
+	opp_king_bubble := gs.MoveRays.KingRays[bp.opp_king_bb.Index()[0]]
+	
+	king_safety = move_gen.KingSafetyRelBB{
+		King_sq: bp.king_bb.Index()[0],
+		King_bb: bp.king_bb,
+		Team_bb: bp.team_bb,
+		Team_bb_no_king: (bp.pawn_bb | bp.knight_bb | 
+				bp.bishop_bb | bp.rook_bb | bp.queen_bb),
+		Opp_bb: bp.opp_bb,
+		Fwd: bp.fwd,
+
+		Opp_pawn_bb: bp.opp_pawn_bb,
+		Opp_knight_bb: bp.opp_knight_bb,
+		Opp_bishop_bb: bp.opp_bishop_bb,
+		Opp_rook_bb: bp.opp_rook_bb,
+		Opp_queen_bb: bp.opp_queen_bb,
+		Opp_king_bubble: opp_king_bubble,
+	}
+
 	gs.PlayerBoard = bp
+	gs.PlayerKingSaftey = king_safety
 }
 
 // Should add initial check to see if king is in check
@@ -92,8 +114,6 @@ func (gs *GameState) GenMoves() {
 
 	// reset the moves
 	MoveList := move_gen.MoveList{}
-
-	gs.Make_BP()
 
 	var player BoardPerpective = gs.PlayerBoard
 
@@ -137,28 +157,9 @@ func (gs *GameState) GenMoves() {
 
 	// generate king moves
 	
-	opp_king_bubble := gs.MoveRays.KingRays[player.opp_king_bb.Index()[0]]
-	// king safety struct
-	playerKingSafety := move_gen.KingSafetyRelBB{
-		King_sq: player.king_bb.Index()[0],
-		King_bb: player.king_bb,
-		Team_bb: player.team_bb,
-		Team_bb_no_king: (player.pawn_bb | player.knight_bb | 
-				player.bishop_bb | player.rook_bb | player.queen_bb),
-		Opp_bb: player.opp_bb,
-		Fwd: player.fwd,
+	
 
-		Opp_pawn_bb: player.opp_pawn_bb,
-		Opp_knight_bb: player.opp_knight_bb,
-		Opp_bishop_bb: player.opp_bishop_bb,
-		Opp_rook_bb: player.opp_rook_bb,
-		Opp_queen_bb: player.opp_queen_bb,
-		Opp_king_bubble: opp_king_bubble,
-	}
-
-
-
-	king_moves := move_gen.GenKingMoves(playerKingSafety, player.castle_rights,
+	king_moves := move_gen.GenKingMoves(gs.PlayerKingSaftey, player.castle_rights,
 				&gs.MoveRays.Magic.RookMagic, &gs.MoveRays.Magic.BishopMagic,
 				&gs.MoveRays.KnightRays, &gs.MoveRays.KingRays)
 	MoveList = append(MoveList, king_moves...)

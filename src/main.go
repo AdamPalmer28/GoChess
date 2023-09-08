@@ -30,7 +30,7 @@ func main() {
 		result := cli.Run()
 
 		// condition to break the loop
-		if result == false {
+		if !result {
 			break
 		}
 

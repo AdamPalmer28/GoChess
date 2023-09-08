@@ -1,5 +1,8 @@
 package gamestate
 
+import "chess/chess_engine/move_gen"
+
+// make move on gamestate
 func (gs *GameState) Make_move(move uint) {
 
 	// get the start and finish squares
@@ -94,6 +97,52 @@ func (gs *GameState) Make_move(move uint) {
 	// change move color
 	gs.White_to_move = !gs.White_to_move
 
-	// generate new moves
-	gs.GenMoves()
+	gs.Next_move()
+}
+
+
+// Calcs for next move
+func (gs *GameState) Next_move() {
+
+	gs.Make_BP() // make board perspectives
+
+	gs.GetCheck() // get check status
+	gs.GenMoves() // generate moves
+
+	// check for game over
+	if len(gs.MoveList) == 0 {
+		// no moves 
+		gs.GameOver = true
+		
+		if gs.InCheck {
+			if gs.White_to_move {
+				println("Black wins - checkmate")
+			} else {
+				println("White wins - checkmate")
+			}
+		} else {
+			println("Stalemate")
+		}
+
+	} else {
+		gs.GameOver = false
+	}
+}
+
+
+// updates InCheck status depending on position
+func (gs *GameState) GetCheck() {
+
+	// get the king square
+	var king_sq uint
+	
+
+	// check if the king is attacked
+
+	results := move_gen.Check_king_safety(gs.PlayerKingSaftey,
+		gs.MoveRays.KnightRays[king_sq],
+		&gs.MoveRays.Magic.RookMagic[king_sq],
+		&gs.MoveRays.Magic.BishopMagic[king_sq])
+
+	gs.InCheck = !results
 }
