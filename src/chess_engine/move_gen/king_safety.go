@@ -68,7 +68,33 @@ func check_safe_rays(magic_sqs *magic.Magicsq,
 	return true
 }
 
+// ============================================================================
+// detailed check
+// ============================================================================
 
-// identify check attacks
-func check_details(){}
+// identify check attacks and squares associated with check
+// func check_details(kingSafety KingSafetyRelBB, knight_rays) ([]uint, uint){
 
+// 	var no_of_checks uint
+// 	var check_details []uint
+
+// 	var opp_straight_bb board.Bitboard
+// 	var opp_diag_bb board.Bitboard
+// 	var opp_knight_bb board.Bitboard
+// 	var opp_pawn_bb board.Bitboard
+
+// 	// get the king safety struct
+// 	rays := magic.Get_magic_rays(*magic_sqs, occ_bb)
+
+
+// }
+
+// // path is either +/- 1,7,8,9
+
+// // get the path between sq and end_sq
+// func get_ray_paths(end_sq uint, sq uint) {
+
+
+	
+
+// }

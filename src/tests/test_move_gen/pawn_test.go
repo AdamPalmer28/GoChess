@@ -24,10 +24,8 @@ func TestPawnStandardMove(t *testing.T) {
 	fen := "rnbqkb1r/1p1p1p2/2p1p1n1/8/4B3/1N3N2/PP2PP2/R1BQK2R w KQkq - 0 1"
 	gs := chess_engine.CreateGameFen(fen)
 
-	eng_moves := &gs.MoveList
-
 	// get all the pawn moves
-	pawn_moves := get_piece_moves(*eng_moves, *gs.Board.WhitePawns)
+	pawn_moves := get_piece_moves(gs.MoveList, *gs.Board.WhitePawns)
 
 	// expected moves
 	single_push := create_moves([]string{"a2", "e2"}, [][]string{{"a3"}, {"e3"}}, 0)
@@ -47,7 +45,7 @@ func TestPawnStandardMove(t *testing.T) {
 	gs.Make_move(expected[0])
 
 	// get all moves
-	pawn_moves = get_piece_moves(*eng_moves, *gs.Board.BlackPawns)
+	pawn_moves = get_piece_moves(gs.MoveList, *gs.Board.BlackPawns)
 
 	// expected moves
 	single_push = create_moves([]string{"b7", "c6", "d7", "e6", "f7"}, 
@@ -74,10 +72,8 @@ func TestPawnCapture(t *testing.T) {
 	fen := "rnbqkb1r/3p4/6n1/2p1Pp2/pP1NP3/PP5p/3B3P/R1BQK2R w KQkq - 0 1"
 	gs := chess_engine.CreateGameFen(fen)
 
-	eng_moves := &gs.MoveList
-
 	// get all the pawn moves
-	pawn_moves := get_piece_moves(*eng_moves, *gs.Board.WhitePawns)
+	pawn_moves := get_piece_moves(gs.MoveList, *gs.Board.WhitePawns)
 
 	// expected moves
 	capture := create_moves([]string{"e4", "b3", "b4"}, 
@@ -102,19 +98,17 @@ func TestEnpassCapture(t *testing.T) {
 
 	fen := "rnbqkb1r/3p4/6n1/2p1Pp2/pP1NP3/PP5p/3B3P/R1BQK2R b KQkq - 0 1"
 	gs := chess_engine.CreateGameFen(fen)
-
-	eng_moves := &gs.MoveList
 	
 	// make double pawn move d7d5
 	var move_num uint = 0b0001 << 12 | (3 + 32) << 6 | (3 + 48)
-	if !contains(*eng_moves, move_num) {
+	if !contains(gs.MoveList, move_num) {
 		t.Errorf("Move %b not found in move list", move_num)
 	}
 	gs.Make_move(move_num)
 
 
 	// get all the pawn moves
-	pawn_moves := get_piece_moves(*eng_moves, *gs.Board.WhitePawns)
+	pawn_moves := get_piece_moves(gs.MoveList, *gs.Board.WhitePawns)
 
 	// get normal pawn moves
 	capture := create_moves([]string{"e4", "b3", "b4", "e4"}, 
@@ -145,8 +139,6 @@ func TestPawnPromotion(t *testing.T) {
 	fen := "4n3/1P1P3k/8/8/8/8/8/3K4 w - - 0 1"
 	gs := chess_engine.CreateGameFen(fen)
 
-	eng_moves := &gs.MoveList
-
 	// promotion b7b8, d7d8, d7e8
 
 	moves := promo_movenum([]string{"b7", "d7"}, [][]string{{"b8"}, {"d8"}}, false)
@@ -156,7 +148,7 @@ func TestPawnPromotion(t *testing.T) {
 	expected = append(expected, cap_moves...)
 
 	// get all the pawn moves
-	pawn_moves := get_piece_moves(*eng_moves, *gs.Board.WhitePawns)
+	pawn_moves := get_piece_moves(gs.MoveList, *gs.Board.WhitePawns)
 
 	// check moves
 	result := check_moves(pawn_moves, expected)

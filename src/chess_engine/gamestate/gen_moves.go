@@ -156,9 +156,6 @@ func (gs *GameState) GenMoves() {
 
 
 	// generate king moves
-	
-	
-
 	king_moves := move_gen.GenKingMoves(gs.PlayerKingSaftey, player.castle_rights,
 				&gs.MoveRays.Magic.RookMagic, &gs.MoveRays.Magic.BishopMagic,
 				&gs.MoveRays.KnightRays, &gs.MoveRays.KingRays)
@@ -166,4 +163,10 @@ func (gs *GameState) GenMoves() {
 	
 	
 	gs.MoveList = MoveList
+}
+
+// generate moves when king in check
+func (gs *GameState) GenCheckMoves() {
+
+
 }
