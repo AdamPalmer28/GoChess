@@ -12,6 +12,7 @@ type KingSafetyRelBB struct {
 	Team_bb board.Bitboard
 	Team_bb_no_king board.Bitboard
 	Fwd int
+	P_start_row uint
 
 	// opp pieces
 	Opp_bb board.Bitboard
@@ -116,6 +117,7 @@ func legal_king_moves(movebb board.Bitboard, kingRel KingSafetyRelBB, special ui
 
 	var movelist []uint
 	special = special << 12
+	start_sq := kingRel.King_sq
 
 	var moveno uint
 	var magic_str_sq *magic.Magicsq
@@ -130,10 +132,13 @@ func legal_king_moves(movebb board.Bitboard, kingRel KingSafetyRelBB, special ui
 		magic_diag_sq = &magic_diag_sqs[end_sq]
 		knight_ray = knight_rays[end_sq]
 
+		kingRel.King_sq = uint(end_sq)
+		kingRel.King_bb = 1 << kingRel.King_sq
+
 		legal = Check_king_safety(kingRel, knight_ray, magic_str_sq, magic_diag_sq)
 		if legal {
 			// make move number
-			moveno = special | (end_sq << 6)  | (kingRel.King_sq)
+			moveno = special | (end_sq << 6)  | (start_sq)
 			movelist = append(movelist, moveno)
 		}
 	}

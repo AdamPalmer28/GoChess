@@ -1,6 +1,7 @@
 package move_gen
 
 import (
+	"chess/chess_engine/board"
 	"sort"
 )
 
@@ -31,6 +32,31 @@ special moves
 */
 
 type MoveList []uint
+
+
+type BoardPerpective struct {
+	// friendly pieces
+	Pawn_bb board.Bitboard
+	Knight_bb board.Bitboard
+	Bishop_bb board.Bitboard
+	Rook_bb board.Bitboard
+	Queen_bb board.Bitboard
+	King_bb board.Bitboard
+	// opp pieces
+	Opp_pawn_bb board.Bitboard
+	Opp_knight_bb board.Bitboard
+	Opp_bishop_bb board.Bitboard
+	Opp_rook_bb board.Bitboard
+	Opp_queen_bb board.Bitboard
+	Opp_king_bb board.Bitboard
+
+	Team_bb board.Bitboard
+	Opp_bb board.Bitboard
+
+	Fwd int
+	P_start_row uint
+	Castle_rights uint
+}
 
 
 func special_move(move uint) uint {

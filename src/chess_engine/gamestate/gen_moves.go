@@ -1,104 +1,81 @@
 package gamestate
 
 import (
-	"chess/chess_engine/board"
 	"chess/chess_engine/move_gen"
 	"chess/chess_engine/move_gen/magic"
 )
 
-type BoardPerpective struct {
-	// friendly pieces
-	pawn_bb board.Bitboard
-	knight_bb board.Bitboard
-	bishop_bb board.Bitboard
-	rook_bb board.Bitboard
-	queen_bb board.Bitboard
-	king_bb board.Bitboard
-	// opp pieces
-	opp_pawn_bb board.Bitboard
-	opp_knight_bb board.Bitboard
-	opp_bishop_bb board.Bitboard
-	opp_rook_bb board.Bitboard
-	opp_queen_bb board.Bitboard
-	opp_king_bb board.Bitboard
-
-	team_bb board.Bitboard
-	opp_bb board.Bitboard
-
-	fwd int
-	castle_rights uint
-}
-
 func (gs *GameState) Make_BP() {
 
-	var bp BoardPerpective
+	var bp move_gen.BoardPerpective
 	var king_safety move_gen.KingSafetyRelBB
 
 	if gs.White_to_move {
 		
-		bp = BoardPerpective{
+		bp = move_gen.BoardPerpective{
 			
+			Pawn_bb: *gs.Board.WhitePawns,
+			Knight_bb: *gs.Board.WhiteKnights,
+			Bishop_bb: *gs.Board.WhiteBishops,
+			Rook_bb: *gs.Board.WhiteRooks,
+			Queen_bb: *gs.Board.WhiteQueens,
+			King_bb: *gs.Board.WhiteKing,
+			Opp_pawn_bb: *gs.Board.BlackPawns,
+			Opp_knight_bb: *gs.Board.BlackKnights,
+			Opp_bishop_bb: *gs.Board.BlackBishops,
+			Opp_rook_bb: *gs.Board.BlackRooks,
+			Opp_queen_bb: *gs.Board.BlackQueens,
+			Opp_king_bb: *gs.Board.BlackKing,
+			Team_bb: gs.Board.White,
+			Opp_bb: gs.Board.Black,
 
-			pawn_bb: *gs.Board.WhitePawns,
-			knight_bb: *gs.Board.WhiteKnights,
-			bishop_bb: *gs.Board.WhiteBishops,
-			rook_bb: *gs.Board.WhiteRooks,
-			queen_bb: *gs.Board.WhiteQueens,
-			king_bb: *gs.Board.WhiteKing,
-			opp_pawn_bb: *gs.Board.BlackPawns,
-			opp_knight_bb: *gs.Board.BlackKnights,
-			opp_bishop_bb: *gs.Board.BlackBishops,
-			opp_rook_bb: *gs.Board.BlackRooks,
-			opp_queen_bb: *gs.Board.BlackQueens,
-			opp_king_bb: *gs.Board.BlackKing,
-			team_bb: gs.Board.White,
-			opp_bb: gs.Board.Black,
-
-			fwd: 8,
-			castle_rights: gs.WhiteCastle,
+			Fwd: 8,
+			P_start_row: 1,
+			Castle_rights: gs.WhiteCastle,
 		}
 
 	} else {
 
-		bp = BoardPerpective{
+		bp = move_gen.BoardPerpective{
 
-			pawn_bb: *gs.Board.BlackPawns,
-			knight_bb: *gs.Board.BlackKnights,
-			bishop_bb: *gs.Board.BlackBishops,
-			rook_bb: *gs.Board.BlackRooks,
-			queen_bb: *gs.Board.BlackQueens,
-			king_bb: *gs.Board.BlackKing,
-			opp_pawn_bb: *gs.Board.WhitePawns,
-			opp_knight_bb: *gs.Board.WhiteKnights,
-			opp_bishop_bb: *gs.Board.WhiteBishops,
-			opp_rook_bb: *gs.Board.WhiteRooks,
-			opp_queen_bb: *gs.Board.WhiteQueens,
-			opp_king_bb: *gs.Board.WhiteKing,
-			team_bb: gs.Board.Black,
-			opp_bb: gs.Board.White,
+			Pawn_bb: *gs.Board.BlackPawns,
+			Knight_bb: *gs.Board.BlackKnights,
+			Bishop_bb: *gs.Board.BlackBishops,
+			Rook_bb: *gs.Board.BlackRooks,
+			Queen_bb: *gs.Board.BlackQueens,
+			King_bb: *gs.Board.BlackKing,
+			Opp_pawn_bb: *gs.Board.WhitePawns,
+			Opp_knight_bb: *gs.Board.WhiteKnights,
+			Opp_bishop_bb: *gs.Board.WhiteBishops,
+			Opp_rook_bb: *gs.Board.WhiteRooks,
+			Opp_queen_bb: *gs.Board.WhiteQueens,
+			Opp_king_bb: *gs.Board.WhiteKing,
+			Team_bb: gs.Board.Black,
+			Opp_bb: gs.Board.White,
 
-			fwd: -8,
-			castle_rights: gs.BlackCastle,
+			Fwd: -8,
+			P_start_row: 6,
+			Castle_rights: gs.BlackCastle,
 		}
 	}
 
 	// king safety struct
-	opp_king_bubble := gs.MoveRays.KingRays[bp.opp_king_bb.Index()[0]]
+	opp_king_bubble := gs.MoveRays.KingRays[bp.Opp_king_bb.Index()[0]]
 	
 	king_safety = move_gen.KingSafetyRelBB{
-		King_sq: bp.king_bb.Index()[0],
-		King_bb: bp.king_bb,
-		Team_bb: bp.team_bb,
-		Team_bb_no_king: (bp.pawn_bb | bp.knight_bb | 
-				bp.bishop_bb | bp.rook_bb | bp.queen_bb),
-		Opp_bb: bp.opp_bb,
-		Fwd: bp.fwd,
+		King_sq: bp.King_bb.Index()[0],
+		King_bb: bp.King_bb,
+		Team_bb: bp.Team_bb,
+		Team_bb_no_king: bp.Team_bb & ^bp.King_bb,
+		Fwd: bp.Fwd,
+		P_start_row: bp.P_start_row,
+		Opp_bb: bp.Opp_bb,
 
-		Opp_pawn_bb: bp.opp_pawn_bb,
-		Opp_knight_bb: bp.opp_knight_bb,
-		Opp_bishop_bb: bp.opp_bishop_bb,
-		Opp_rook_bb: bp.opp_rook_bb,
-		Opp_queen_bb: bp.opp_queen_bb,
+		Opp_pawn_bb: bp.Opp_pawn_bb,
+		Opp_knight_bb: bp.Opp_knight_bb,
+		Opp_bishop_bb: bp.Opp_bishop_bb,
+		Opp_rook_bb: bp.Opp_rook_bb,
+		Opp_queen_bb: bp.Opp_queen_bb,
 		Opp_king_bubble: opp_king_bubble,
 	}
 
@@ -115,48 +92,48 @@ func (gs *GameState) GenMoves() {
 	// reset the moves
 	MoveList := move_gen.MoveList{}
 
-	var player BoardPerpective = gs.PlayerBoard
+	var player move_gen.BoardPerpective = gs.PlayerBoard
 
 	// generate pawn moves
-	pawn_moves := move_gen.GenPawnMoves(player.pawn_bb, gs.White_to_move, 
-				gs.Enpass_ind, player.team_bb, player.opp_bb)
+	pawn_moves := move_gen.GenPawnMoves(player.Pawn_bb, gs.White_to_move, 
+				gs.Enpass_ind, player.Team_bb, player.Opp_bb)
 
 	MoveList = append(MoveList, pawn_moves...)
 
 	// generate knight moves
-	knight_moves := move_gen.GenKnightMoves(player.knight_bb, 
-				&gs.MoveRays.KnightRays, player.team_bb, player.opp_bb)
+	knight_moves := move_gen.GenKnightMoves(player.Knight_bb, 
+				&gs.MoveRays.KnightRays, player.Team_bb, player.Opp_bb)
 
 	MoveList = append(MoveList, knight_moves...)
 	
 
 	// generate rook moves
-	rook_moves := magic.GenMagicMoves(player.rook_bb, &gs.MoveRays.Magic.RookMagic,
-				player.team_bb, player.opp_bb)
+	rook_moves := magic.GenMagicMoves(player.Rook_bb, &gs.MoveRays.Magic.RookMagic,
+				player.Team_bb, player.Opp_bb)
 
 	MoveList = append(MoveList, rook_moves...)
 
 
 	// generate bishop moves
-	bishop_moves := magic.GenMagicMoves(player.bishop_bb, &gs.MoveRays.Magic.BishopMagic,
-				player.team_bb, player.opp_bb)
+	bishop_moves := magic.GenMagicMoves(player.Bishop_bb, &gs.MoveRays.Magic.BishopMagic,
+				player.Team_bb, player.Opp_bb)
 	
 	MoveList = append(MoveList, bishop_moves...)
 
 
 	// generate queen moves
-	queen_moves := magic.GenMagicMoves(player.queen_bb, &gs.MoveRays.Magic.BishopMagic,
-				player.team_bb, player.opp_bb)
+	queen_moves := magic.GenMagicMoves(player.Queen_bb, &gs.MoveRays.Magic.BishopMagic,
+				player.Team_bb, player.Opp_bb)
 	MoveList = append(MoveList, queen_moves...)
 
-	queen_moves = magic.GenMagicMoves(player.queen_bb, &gs.MoveRays.Magic.RookMagic,
-				player.team_bb, player.opp_bb)
+	queen_moves = magic.GenMagicMoves(player.Queen_bb, &gs.MoveRays.Magic.RookMagic,
+				player.Team_bb, player.Opp_bb)
 	MoveList = append(MoveList, queen_moves...)
 
 
 
 	// generate king moves
-	king_moves := move_gen.GenKingMoves(gs.PlayerKingSaftey, player.castle_rights,
+	king_moves := move_gen.GenKingMoves(gs.PlayerKingSaftey, player.Castle_rights,
 				&gs.MoveRays.Magic.RookMagic, &gs.MoveRays.Magic.BishopMagic,
 				&gs.MoveRays.KnightRays, &gs.MoveRays.KingRays)
 	MoveList = append(MoveList, king_moves...)
@@ -168,5 +145,32 @@ func (gs *GameState) GenMoves() {
 // generate moves when king in check
 func (gs *GameState) GenCheckMoves() {
 
+	var MoveList []uint
 
+	king_sq := gs.PlayerKingSaftey.King_sq
+	// get threat details
+	threats, threat_path := move_gen.CheckDetails(gs.PlayerKingSaftey, gs.MoveRays.KnightRays[king_sq], 
+				&gs.MoveRays.Magic.RookMagic[king_sq],&gs.MoveRays.Magic.BishopMagic[king_sq])
+	
+	// threats - must be captures
+	// threat_path - must be blocks (i.e moved into)
+
+	if len(threats) == 1 { // calculate blockers
+
+		threat_sq := threats[0]
+
+		defender_moves := move_gen.DefenderMoves(threat_sq, threat_path, 
+			gs.PlayerBoard, &gs.MoveRays.KnightRays,
+			&gs.MoveRays.Magic.RookMagic, &gs.MoveRays.Magic.BishopMagic)
+
+		MoveList = append(MoveList, defender_moves...)
+
+	} 
+
+	king_moves := move_gen.GenKingMoves(gs.PlayerKingSaftey, 0,
+		&gs.MoveRays.Magic.RookMagic, &gs.MoveRays.Magic.BishopMagic,
+		&gs.MoveRays.KnightRays, &gs.MoveRays.KingRays)
+	MoveList = append(MoveList, king_moves...)
+
+	gs.MoveList = MoveList
 }

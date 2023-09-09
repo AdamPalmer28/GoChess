@@ -33,7 +33,6 @@ func GenPawnMoves(pawn_bb board.Bitboard, w_move bool, enpass uint,
 	for _, ind := range pawn_inds {
 
 		moveno = 0 // reset moveno
-		col := ind % 8
 		row := ind / 8
 		
 		// single pawn push
@@ -71,15 +70,8 @@ func GenPawnMoves(pawn_bb board.Bitboard, w_move bool, enpass uint,
 		}
 
 		// pawn captures
-		cap_sq := []uint{}
-		if col != 0 { // left capture
-			en_sq := uint(int(ind) + pawnstep - 1)
-			cap_sq = append(cap_sq, en_sq)
-		}
-		if col != 7 { // right capture
-			en_sq := uint(int(ind) + pawnstep + 1)
-			cap_sq = append(cap_sq, en_sq)
-		}
+		cap_bb := get_pawn_attack(ind, pawnstep)
+		cap_sq := cap_bb.Index()
 
 		for _, sq := range cap_sq {
 			if opp_bb & (1 << sq) != 0 {
@@ -113,7 +105,8 @@ func GenPawnMoves(pawn_bb board.Bitboard, w_move bool, enpass uint,
 	return movelist
 
 }
-
+// ==================================================================
+// helper function
 
 func promotion(moveno uint) [4]uint {
 
@@ -137,3 +130,33 @@ func promotion(moveno uint) [4]uint {
 
 	return promotion_list
 }
+
+// gen bitboard of pawn attacks
+func get_pawn_attack(sq uint, Fwd int) board.Bitboard {
+
+	var pawn_attack_bb board.Bitboard = 0
+
+	col := sq % 8
+
+	if col != 0 { // left capture
+		en_sq := int(sq) + Fwd - 1
+		pawn_attack_bb |= 1 << en_sq
+	} 
+	if col != 7 { // right capture
+		en_sq := int(sq) + Fwd + 1
+		pawn_attack_bb |= 1 << en_sq
+	}
+
+	return pawn_attack_bb
+}
+
+// // gen bitboard of pawn moves
+// func gen_pawn_moves(sq uint, Fwd int) board.Bitboard {
+
+// 	var pawn_attack_bb board.Bitboard = 0
+
+// 	if sq =
+
+// 	return pawn_attack_bb
+
+// }

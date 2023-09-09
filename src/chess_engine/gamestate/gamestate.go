@@ -22,7 +22,7 @@ type GameState struct {
 	MoveList move_gen.MoveList
 	Enpass_ind uint
 	MoveHumanList []string // CLI referencing
-	PlayerBoard  BoardPerpective
+	PlayerBoard  move_gen.BoardPerpective
 	PlayerKingSaftey move_gen.KingSafetyRelBB
 
 	Moveno   uint

@@ -75,14 +75,8 @@ func useful_error_msg(move_list []uint, expected []uint) string {
 	var expected_diff []uint
 	var move_diff []uint
 
-	if len(move_list) != len(expected) {
-		return "Different move lists sizes:\n" +
-			"Expected: "+ strconv.FormatInt(int64(len(expected)),10) + " " + move_list_to_string(expected_diff) + "\n" +
-			"Got: "+ strconv.FormatInt(int64(len(move_list)), 10) + " " + move_list_to_string(move_diff)
-			
-	}
-
-
+	
+	
 	// find the moves that are in expected but not in move_list
 	for _, exp := range expected {
 		if !contains(move_list, exp) {
@@ -96,7 +90,13 @@ func useful_error_msg(move_list []uint, expected []uint) string {
 			move_diff = append(move_diff, move)
 		}
 	}
-
+	
+	if len(move_list) != len(expected) {
+		return "Different move lists sizes:\n" +
+			"Expected: "+ strconv.FormatInt(int64(len(expected)),10) + " " + move_list_to_string(expected_diff) + "\n" +
+			"Got: "+ strconv.FormatInt(int64(len(move_list)), 10) + " " + move_list_to_string(move_diff)
+			
+	}
 	return "Expected: " + move_list_to_string(expected_diff) + "\n" +
 			"Got: " + move_list_to_string(move_diff)
 

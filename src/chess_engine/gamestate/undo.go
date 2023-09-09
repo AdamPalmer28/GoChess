@@ -1,5 +1,9 @@
 package gamestate
 
+import (
+	"chess/chess_engine/move_gen"
+)
+
 func (gs *GameState) Undo() {
 
 	last_move_num := gs.Moveno - 1
@@ -11,7 +15,7 @@ func (gs *GameState) Undo() {
 	gs.Enpass_ind = 64
 	gs.White_to_move = !gs.White_to_move
 	gs.Make_BP()
-	var player BoardPerpective = gs.PlayerBoard
+	var player move_gen.BoardPerpective = gs.PlayerBoard
 
 	// get last move
 	last_move := gs.History.PrevMoves[last_move_ind]
@@ -59,7 +63,7 @@ func (gs *GameState) Undo() {
 		// return old piece to board
 		if special == 0b0101 { // enpassent capture
 			// add the captured pawn back
-			*opp_bbs[cap_piece] |= (1 << (int(prev_end_sq) - player.fwd))
+			*opp_bbs[cap_piece] |= (1 << (int(prev_end_sq) - player.Fwd))
 
 		} else { // normal or promotion capture
 			*opp_bbs[cap_piece] |= (1 << prev_end_sq)
@@ -99,7 +103,7 @@ func (gs *GameState) Undo() {
 	if (prev_last_move>>12)&0xF == 0b0001 {
 		prev_last_end_sq := (prev_last_move >> 6) & 0x3F
 
-		gs.Enpass_ind = uint(int(prev_last_end_sq) + player.fwd)
+		gs.Enpass_ind = uint(int(prev_last_end_sq) + player.Fwd)
 	}
 
 	// update castle rights

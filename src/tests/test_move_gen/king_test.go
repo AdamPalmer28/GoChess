@@ -55,7 +55,7 @@ func TestBasicKing(t *testing.T) {
 
 	// expected moves
 	expected = []uint{}
-	moves = create_moves([]string{"d2"}, [][]string{{"e2","d1","c3"}}, 0)
+	moves = create_moves([]string{"d2"}, [][]string{{"e2","d1","c2","c3"}}, 0)
 	expected = append(expected, moves...)
 
 	result = check_moves(actual_king_moves, expected)
@@ -75,7 +75,7 @@ func TestBasicKing(t *testing.T) {
 
 	// expected moves
 	expected = []uint{}
-	moves = create_moves([]string{"d4"}, [][]string{{"e3", "e5"}}, 0)
+	moves = create_moves([]string{"d4"}, [][]string{{"e5"}}, 0)
 	expected = append(expected, moves...)
 	moves = create_moves([]string{"d4"}, [][]string{{"e4"}}, 0b0100) // capture
 	expected = append(expected, moves...)
@@ -91,14 +91,12 @@ func TestBasicKing(t *testing.T) {
 	fen = "1q6/2r2b2/8/5k2/3Kp3/8/2P3n1/2Q5 w - - 0 1"
 	gs = chess_engine.CreateGameFen(fen)
 
-
 	// get all the king moves
 	actual_king_moves = get_piece_moves(gs.MoveList, *gs.Board.WhiteKing)
 
 	// expected moves
 	expected = []uint{}
-	moves = create_moves([]string{"d4"}, [][]string{{"e3"}}, 0)
-	expected = append(expected, moves...)
+	// no moves
 
 	result = check_moves(actual_king_moves, expected)
 	if !result {

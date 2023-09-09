@@ -16,6 +16,7 @@ func Test_Gamestate_state(t *testing.T) {
 		"rnbqk2r/pp2bp1p/2p1pnp1/3p4/5P2/2P5/PP1PP1PP/RNBQKBNR w KQkq - 0 1",
 		"r1bqk2r/pp2bp1p/2p1pnp1/2np4/3P1P2/N1P1PN2/PP4PP/R1BQKB1R w KQkq - 0 1",
 		"r1b5/ppk2p1p/2pb1npr/1n1p4/3PpP1q/1PP1P1N1/PBN3PP/R2QKB1R b KQa - 0 1",
+		"3k4/8/8/8/3K4/4p3/8/8 w - - 0 1",
 	}
 
 	// check state

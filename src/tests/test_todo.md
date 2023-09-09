@@ -8,8 +8,7 @@
 
   - king moves
 
-    - not into check
-    - basic moves
+    - Basic moves (5,6,7)
     - castling
 
   - In check
