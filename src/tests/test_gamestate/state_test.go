@@ -29,6 +29,7 @@ func Test_Gamestate_state(t *testing.T) {
 		"r1b1k3/pp3pNp/2pb1npr/1n1p4/3PpP1q/N1P1P3/PP4PP/R1BQKB1R b KQq - 0 1", // b knight
 		"r1b1k3/pp1P1p1p/2pb1npr/1n1p4/3PpP1q/N1P1P1N1/P5PP/R1BQKB1R b KQq - 0 1", // b pawn
 		"1rb1R3/ppk2Q1p/2pb1npr/Pn1p4/3PpP1q/1PP1P1N1/1BN3PP/4KB1R b K - 0 1", // b queen
+		"6rk/pp5p/b5p1/P7/1B3P2/1Ppn4/2NrBQPP/4KR2 w - - 0 1", // capture kn
 	}
 
 

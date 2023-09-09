@@ -56,6 +56,7 @@ type BoardPerpective struct {
 	Fwd int
 	P_start_row uint
 	Castle_rights uint
+	Enpass_ind uint
 }
 
 

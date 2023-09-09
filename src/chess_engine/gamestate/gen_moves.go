@@ -32,6 +32,7 @@ func (gs *GameState) Make_BP() {
 			Fwd: 8,
 			P_start_row: 1,
 			Castle_rights: gs.WhiteCastle,
+			Enpass_ind: gs.Enpass_ind,
 		}
 
 	} else {
@@ -56,6 +57,7 @@ func (gs *GameState) Make_BP() {
 			Fwd: -8,
 			P_start_row: 6,
 			Castle_rights: gs.BlackCastle,
+			Enpass_ind: gs.Enpass_ind,
 		}
 	}
 
@@ -83,10 +85,10 @@ func (gs *GameState) Make_BP() {
 	gs.PlayerKingSaftey = king_safety
 }
 
-// Should add initial check to see if king is in check
-// then only generate relevant moves
 
+// ----------------------------------------------------------------------------
 
+// generate moves when king not in check
 func (gs *GameState) GenMoves() {
 
 	// reset the moves

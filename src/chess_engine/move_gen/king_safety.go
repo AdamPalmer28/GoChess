@@ -18,13 +18,13 @@ func Check_king_safety(kingSafety KingSafetyRelBB, knight_ray board.Bitboard,
 			magic_str_sq *magic.Magicsq, magic_diag_sq *magic.Magicsq) bool {
 					
 	// check diag attacks (bishop and queen)
-	if !check_safe_rays(magic_diag_sq, (kingSafety.Team_bb_no_king | kingSafety.Opp_bb), 
+	if !check_safe_rays(magic_diag_sq, (kingSafety.Team_bb | kingSafety.Opp_bb), 
 						(kingSafety.Opp_bishop_bb | kingSafety.Opp_queen_bb)) {
 		return false
 	}
 	
 	// check straight attacks (rook and queen)
-	if !check_safe_rays(magic_str_sq, (kingSafety.Team_bb_no_king | kingSafety.Opp_bb), 
+	if !check_safe_rays(magic_str_sq, (kingSafety.Team_bb | kingSafety.Opp_bb), 
 						(kingSafety.Opp_rook_bb | kingSafety.Opp_queen_bb)) {
 		return false
 	}
@@ -55,13 +55,14 @@ func Check_king_safety(kingSafety KingSafetyRelBB, knight_ray board.Bitboard,
 }
 
 // check if associated king rays are safe
-func check_safe_rays(magic_sqs *magic.Magicsq, 
+func check_safe_rays(magic_sq *magic.Magicsq, 
 				occ_bb board.Bitboard, rel_attacker_bb board.Bitboard) bool {
 
 	// get the column
-	rays := magic.Get_magic_rays(*magic_sqs, occ_bb)
+	rays := magic.Get_magic_rays(*magic_sq, occ_bb)
 
 	if (rays & rel_attacker_bb) != 0 {
+
 		return false
 	}
 

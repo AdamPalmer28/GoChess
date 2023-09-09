@@ -107,7 +107,12 @@ func (gs *GameState) Next_move() {
 	gs.Make_BP() // make board perspectives
 
 	gs.GetCheck() // get check status
-	gs.GenMoves() // generate moves
+
+	if gs.InCheck {
+		gs.GenCheckMoves() // generate moves // in check
+	} else {
+		gs.GenMoves() // generate moves
+	}
 
 	// check for game over
 	if len(gs.MoveList) == 0 {
@@ -135,7 +140,7 @@ func (gs *GameState) GetCheck() {
 
 	// get the king square
 	var king_sq uint
-	
+	king_sq = gs.PlayerKingSaftey.King_sq
 
 	// check if the king is attacked
 

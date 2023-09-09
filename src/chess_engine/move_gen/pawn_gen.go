@@ -71,21 +71,21 @@ func GenPawnMoves(pawn_bb board.Bitboard, w_move bool, enpass uint,
 
 		// pawn captures
 		cap_bb := get_pawn_attack(ind, pawnstep)
+		cap_bb &= opp_bb
 		cap_sq := cap_bb.Index()
 
 		for _, sq := range cap_sq {
-			if opp_bb & (1 << sq) != 0 {
-				moveno = 1 << 14
-				moveno |= sq << 6 | ind
+			moveno = 1 << 14
+			moveno |= sq << 6 | ind
 
-				// promotion
-				if (row == prom_row) {
-					promotion_list := promotion(moveno)
-					movelist = append(movelist, promotion_list[:]...)
-				} else { 
-					movelist = append(movelist, moveno)
-				}
+			// promotion
+			if (row == prom_row) {
+				promotion_list := promotion(moveno)
+				movelist = append(movelist, promotion_list[:]...)
+			} else { 
+				movelist = append(movelist, moveno)
 			}
+			
 		}
 
 		// enpassent capture
