@@ -48,7 +48,7 @@ func Test_Gamestate_state(t *testing.T) {
 	stalemate_state_fen := []string{
 		"6k1/1p5p/pB3QpR/P5P1/1p6/1P6/2N5/6K1 b - - 0 1",
 		"7k/1pR4p/pB4pN/P5P1/1p6/1P3Q2/8/6K1 b - - 0 1",
-		"4R3/1p5p/pB4p1/P5P1/1p3Q2/1P5k/2N5/6K1 b - - 0 1", // king bubble
+		"4R3/1p5p/pB4pP/P5P1/1p3Q2/1P5k/2N5/6K1 b - - 0 1", // king bubble
 		"4Rbk1/1p5p/pB3QpB/P5P1/1p6/1P6/2N5/4K3 b - - 0 1", // pinned pieces
 	}
 

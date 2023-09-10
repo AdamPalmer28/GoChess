@@ -95,3 +95,38 @@ func (gs *GameState) GenCheckMoves() {
 
 	gs.MoveList = MoveList
 }
+
+
+// ----------------------------------------------------------------------------
+
+// remove illegal moves
+func remove_illegal_moves(gs *GameState, pinned_pieces map[uint][]uint) {
+
+	var legal_moves []uint
+
+	var start_sq uint
+	var end_sq uint
+
+	for _, move := range gs.MoveList {
+
+		// check if move is legal
+		start_sq = move & 0b111111
+
+		legal_path, exist := pinned_pieces[start_sq]
+		if exist {
+			// pinned
+			end_sq = (move >> 6) & 0b111111
+			for _, ind := range legal_path {
+				if ind == end_sq {
+					legal_moves = append(legal_moves, move)
+					break
+				}
+			}
+		} else {
+			// not pinned
+			legal_moves = append(legal_moves, move)
+			continue
+		}
+	}
+	gs.MoveList = legal_moves
+}

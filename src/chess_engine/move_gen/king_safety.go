@@ -14,7 +14,7 @@ Possible double check combinations:
 */
 
 // check if king check
-func Check_king_safety(kingSafety KingSafetyRelBB, knight_ray board.Bitboard,
+func CheckKingSafety(kingSafety KingSafetyRelBB, knight_ray board.Bitboard,
 			magic_str_sq *magic.Magicsq, magic_diag_sq *magic.Magicsq) bool {
 					
 	// check diag attacks (bishop and queen)
@@ -156,10 +156,11 @@ func CheckDetails(kingSafety KingSafetyRelBB, knight_ray board.Bitboard,
 // path is either +/- 1,7,8,9
 
 // get the path between sq and end_sq
-func get_ray_paths(end_sq int, sq int) board.Bitboard {
+func get_ray_paths(sq int, end_sq int) board.Bitboard {
 
 	diff := end_sq - sq
 	var step int = 1 // step for creating bb
+
 	
 	if (diff % 7 == 0) && (sq % 8 != 0) {
 		step = 7
@@ -184,4 +185,113 @@ func get_ray_paths(end_sq int, sq int) board.Bitboard {
 	} 
 	
 	return ray_bb
+}
+
+
+// ============================================================================
+// - used in gs.GetCheck() to identify check and pinned pieces
+// ============================================================================
+ 
+// returns if king is *in check* and *pinned pieces*
+func BoardKingAnalysis(kingSafety KingSafetyRelBB, knight_ray board.Bitboard,
+	magic_str_sq *magic.Magicsq, magic_diag_sq *magic.Magicsq) (bool, map[uint][]uint) {
+
+	var result bool = true
+	var pinned_pieces map[uint][]uint = make(map[uint][]uint) // pinned piece -> list of path_sqs
+
+
+	// check diag attacks (bishop and queen) - potential pin
+	diag_safe, diag_pin_map := check_rays(magic_diag_sq, kingSafety.Team_bb, kingSafety.Opp_bb,
+			(kingSafety.Opp_bishop_bb | kingSafety.Opp_queen_bb))
+
+	// check straight attacks (rook and queen)
+	straight_safe, straight_pin_map := check_rays(magic_str_sq, kingSafety.Team_bb, kingSafety.Opp_bb,
+			(kingSafety.Opp_rook_bb | kingSafety.Opp_queen_bb))
+		
+	if !(diag_safe && straight_safe) {
+		result = false
+	}
+
+	// combine pin maps
+	for key, value := range diag_pin_map {
+		pinned_pieces[key] = value
+	}
+	for key, value := range straight_pin_map {
+		pinned_pieces[key] = value
+	}
+
+
+	// check knight attacks
+	if (knight_ray & kingSafety.Opp_knight_bb) != 0 {
+		result = false
+	}
+
+	if result {
+		
+		// check pawn attacks
+		pawn_attack_bb := board.Bitboard(0)
+		col := kingSafety.King_sq % 8
+		if col != 0 { // left capture
+		en_sq := int(kingSafety.King_sq) + kingSafety.Fwd - 1
+		pawn_attack_bb |= 1 << en_sq
+		}
+		if col != 7 { // right capture
+		en_sq := int(kingSafety.King_sq) + kingSafety.Fwd + 1
+		pawn_attack_bb |= 1 << en_sq
+		}
+	
+		if pawn_attack_bb & kingSafety.Opp_bb != 0 {
+			result = false
+		}
+	}
+
+	return result, pinned_pieces
+	}
+
+// check if associated king rays are safe - and get potential pinned pieces
+func check_rays(magic_sq *magic.Magicsq, 
+	team_bb board.Bitboard, opp_bb board.Bitboard, 
+	rel_attacker_bb board.Bitboard) (bool, map[uint][]uint) {
+
+	var safe bool = true
+	var pinned map[uint][]uint = make(map[uint][]uint) // pinned piece -> list of path_sqs
+
+	occ_bb := team_bb | opp_bb
+	// get the column
+	rays := magic.Get_magic_rays(*magic_sq, occ_bb)
+
+	if (rays & rel_attacker_bb) != 0 {
+		safe = false
+	}
+
+	// -----------------------------------------------------------------------
+	// potential pins
+	king_sq := magic_sq.Index
+
+	potential_pin := rays & team_bb
+	new_occ := occ_bb & ^potential_pin
+
+	rays_without_pieces  := magic.Get_magic_rays(*magic_sq, new_occ) // rays without pieces
+	pinning_threats := (rays_without_pieces & rel_attacker_bb) 
+
+	if (pinning_threats) != 0 {
+		var pinned_paths board.Bitboard // path of pinned pieces
+		var confirmed_pin board.Bitboard // confirmed pin
+
+		for _, threat := range pinning_threats.Index() { 
+			// loop through identified threats
+			
+			pinned_paths = get_ray_paths(int(king_sq), int(threat))
+
+			confirmed_pin = (pinned_paths & potential_pin)
+			if confirmed_pin != 0 {
+				// if potential pin piece is on path
+				pinned[confirmed_pin.Index()[0]] = append(pinned_paths.Index(), threat)
+				
+			}
+
+		}
+	}
+
+	return safe, pinned
 }

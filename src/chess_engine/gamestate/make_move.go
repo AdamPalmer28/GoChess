@@ -1,6 +1,8 @@
 package gamestate
 
-import "chess/chess_engine/move_gen"
+import (
+	"chess/chess_engine/move_gen"
+)
 
 // make move on gamestate
 func (gs *GameState) Make_move(move uint) {
@@ -106,7 +108,7 @@ func (gs *GameState) Next_move() {
 
 	gs.Make_BP() // make board perspectives
 
-	gs.GetCheck() // get check status
+	pinned_pieces := gs.GetCheck() // get check status
 
 	if gs.InCheck {
 		gs.GenCheckMoves() // generate moves // in check
@@ -114,16 +116,7 @@ func (gs *GameState) Next_move() {
 		gs.GenMoves() // generate moves
 	}
 
-	// !Pinned pieces
-	/*
-	find pinned pieces
-		look at king safety without piece x, 
-		if check 
-			then PINNED
-			pin path (same as threat path)
-	remove illegal moves which don't coincide with pin path
-	*/ 
-
+	remove_illegal_moves(gs, pinned_pieces) // remove illegal moves
 
 	// check for game over
 	if len(gs.MoveList) == 0 {
@@ -147,7 +140,7 @@ func (gs *GameState) Next_move() {
 
 
 // updates InCheck status depending on position
-func (gs *GameState) GetCheck() {
+func (gs *GameState) GetCheck() map[uint][]uint {
 
 	// get the king square
 	var king_sq uint
@@ -155,10 +148,12 @@ func (gs *GameState) GetCheck() {
 
 	// check if the king is attacked
 
-	results := move_gen.Check_king_safety(gs.PlayerKingSaftey,
+	results, pinned_pieces := move_gen.BoardKingAnalysis(gs.PlayerKingSaftey,
 		gs.MoveRays.KnightRays[king_sq],
 		&gs.MoveRays.Magic.RookMagic[king_sq],
 		&gs.MoveRays.Magic.BishopMagic[king_sq])
 
 	gs.InCheck = !results
+
+	return pinned_pieces
 }

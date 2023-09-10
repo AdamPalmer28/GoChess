@@ -10,7 +10,7 @@ import (
 )
 
 type Magicsq struct {
-	index uint
+	Index uint
 	magic board.Bitboard 
 	shift int 
 
@@ -94,7 +94,7 @@ func gen_magic(msq *Magicsq) (board.Bitboard, int, int, bool) {
 	wg.Add(goRoutineCount)
 	
 	// pre-load all occupancy 
-	all_occ := allOccupancy(msq.index, msq.diag)
+	all_occ := allOccupancy(msq.Index, msq.diag)
 
 	found_magics := []board.Bitboard{}
 	found_magics_mapsize := []int{}
@@ -105,7 +105,7 @@ func gen_magic(msq *Magicsq) (board.Bitboard, int, int, bool) {
 
 		if msq.mapsize < int(math.Pow(2, float64(msq.shift - 1))) {
 			// REDUCE the BITS of mapping
-			println("Ind:", msq.index, " MN - Bit reduction")
+			println("Ind:", msq.Index, " MN - Bit reduction")
 			target_shift  = target_shift - 1
 
 			for i := 0; i < goRoutineCount; i++ {
@@ -132,7 +132,7 @@ func gen_magic(msq *Magicsq) (board.Bitboard, int, int, bool) {
 				}()
 			}
 		} else {
-			println("Ind:", msq.index, " MN - Improve")
+			println("Ind:", msq.Index, " MN - Improve")
 			// REDUCE MAP SIZE 
 			for i := 0; i < goRoutineCount; i++ {
 				go func() {
@@ -163,7 +163,7 @@ func gen_magic(msq *Magicsq) (board.Bitboard, int, int, bool) {
 
 	} else { 
 		// find NEW MAGIC number
-		println("Ind:", msq.index, " MN - Search")
+		println("Ind:", msq.Index, " MN - Search")
 		for i := 0; i < goRoutineCount; i++ {
 			go func() {
 				defer wg.Done()
@@ -196,7 +196,7 @@ func gen_magic(msq *Magicsq) (board.Bitboard, int, int, bool) {
 
 		// find the best magic number
 		var best_magics_index int = 0
-		//println("Ind:", msq.index, " Magics Found!", len(found_magics), " ",len(found_magics_mapsize))
+		//println("Ind:", msq.Index, " Magics Found!", len(found_magics), " ",len(found_magics_mapsize))
 
 		
 		for i, mapsize := range found_magics_mapsize {
@@ -210,7 +210,7 @@ func gen_magic(msq *Magicsq) (board.Bitboard, int, int, bool) {
 		valid_magic = true
 	}
 	
-	fmt.Printf("Ind: %d - Output: valid %t // magic: %d // mapsize: %d (all_occs: %d)\n\n", msq.index, valid_magic, BestMagicNum, BestMagicMapsize, len(all_occ))
+	fmt.Printf("Ind: %d - Output: valid %t // magic: %d // mapsize: %d (all_occs: %d)\n\n", msq.Index, valid_magic, BestMagicNum, BestMagicMapsize, len(all_occ))
 	return BestMagicNum, target_shift, BestMagicMapsize, valid_magic
 }
 
@@ -300,7 +300,7 @@ func check_magicnum(msq Magicsq, all_occ *[]board.Bitboard, shift int) (bool, in
 	// create hash table
 	for _, occ := range *all_occ {
 
-		expected = exp_attack_ray(msq.index, occ) // expected attack ray - using basic sliding rays
+		expected = exp_attack_ray(msq.Index, occ) // expected attack ray - using basic sliding rays
 
 		magic_index = (magic * occ) >> (64 - shift)
 

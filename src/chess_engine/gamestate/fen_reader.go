@@ -36,16 +36,16 @@ func FEN_to_gs(fen string) *GameState {
 	var black_castle uint
 
 	if strings.Contains(castling_availability, "Q") {
-		white_castle |= 0b01
-	}
-	if strings.Contains(castling_availability, "K") {
 		white_castle |= 0b10
 	}
+	if strings.Contains(castling_availability, "K") {
+		white_castle |= 0b01
+	}
 	if strings.Contains(castling_availability, "q") {
-		black_castle |= 0b01
+		black_castle |= 0b10
 	}
 	if strings.Contains(castling_availability, "k") {
-		black_castle |= 0b10
+		black_castle |= 0b01
 	}
 
 	// en passant target

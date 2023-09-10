@@ -135,7 +135,7 @@ func legal_king_moves(movebb board.Bitboard, kingRel KingSafetyRelBB, special ui
 		kingRel.King_sq = uint(end_sq)
 		kingRel.King_bb = 1 << kingRel.King_sq
 
-		legal = Check_king_safety(kingRel, knight_ray, magic_str_sq, magic_diag_sq)
+		legal = CheckKingSafety(kingRel, knight_ray, magic_str_sq, magic_diag_sq)
 		if legal {
 			// make move number
 			moveno = special | (end_sq << 6)  | (start_sq)

@@ -25,7 +25,7 @@ type magicdata struct {
 // create hash table for magic square
 func magic_attack_rays(msq *Magicsq) {
 
-	index := msq.index
+	index := msq.Index
 	diag := msq.diag
 	magic_num := msq.magic
 	shift := msq.shift
@@ -34,7 +34,7 @@ func magic_attack_rays(msq *Magicsq) {
 	attack_rays := make(map[board.Bitboard]board.Bitboard)
 
 	// all occupancy bitboards
-	all_occ := allOccupancy(msq.index, msq.diag)
+	all_occ := allOccupancy(msq.Index, msq.diag)
 
 
 	var exp_attack_ray func(uint, board.Bitboard) board.Bitboard
@@ -70,7 +70,7 @@ func magic_attack_rays(msq *Magicsq) {
 func create_magicsq(data magicdata) Magicsq {
 
 	msq := Magicsq{
-		index: data.Index, 
+		Index: data.Index, 
 		diag: data.Diag,
 		magic: data.Magic,
 		shift: data.Shift,
@@ -185,7 +185,7 @@ func load_magic(diag bool) [64]Magicsq{
 		var data [64]magicdata
 	
 		for i := 0; i < 64; i++ {
-			data[i].Index = all_msq[i].index
+			data[i].Index = all_msq[i].Index
 			data[i].Magic = all_msq[i].magic
 			data[i].Shift = all_msq[i].shift
 			data[i].Default_shift = len(all_msq[i].occ_mask.Index()) // default shift

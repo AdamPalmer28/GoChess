@@ -161,12 +161,12 @@ func TestCastleGen(t *testing.T) {
 	castle_fen_map := map[string][]uint{
 		"r3k2r/8/8/8/8/8/8/4K2R w K - 0 1": {wKingCastle},
 		"r3k2r/8/8/8/8/8/8/R3K3 w Q - 0 1": {wQueenCastle},
-		"r3k2r/8/8/8/8/8/8/R3K2R w Q - 0 1": {wQueenCastle, wKingCastle},
+		"r3k2r/8/8/8/8/8/8/R3K2R w KQ - 0 1": {wQueenCastle, wKingCastle},
 		"r3k2r/8/8/8/8/8/8/R3K2R b KQkq - 0 1": {bQueenCastle, bKingCastle},
 		"r3k2r/8/8/8/8/8/5P2/1Q2KQ1R b kq - 0 1": {bQueenCastle, bKingCastle},
 		"r3k2r/8/8/8/8/8/5P2/1Q2K1QR b kq - 0 1": {bQueenCastle},
 		"r3k2r/8/8/8/1Q6/8/5P2/4K1QR b kq - 0 1": {bQueenCastle},
-		"r3k2r/8/6n1/1q3b2/1Q6/6Q1/5P2/R3K2R b KQkq - 0 1": {wQueenCastle},
+		"r3k2r/8/6n1/1q3b2/1Q6/6Q1/5P2/R3K2R b KQkq - 0 1": {bQueenCastle},
 		"r3k2r/8/8/8/1Qq5/6Q1/5P2/4K2R b Kkq - 0 1": {},
 		"r3k2r/8/8/1q6/1Q4b1/6Q1/5P2/R3K2R b KQkq - 0 1": {},
 		"r3k2r/8/8/1q6/1Q6/4n1Q1/5P2/R3K2R b KQkq - 0 1": {},
@@ -179,7 +179,7 @@ func TestCastleGen(t *testing.T) {
 
 		if !contains_list(gs.MoveList, expected) {
 
-			t.Errorf("%v. Castle moves not found\n", ind)
+			t.Errorf("Castle moves not found:\n%s\n", fen)
 		}
 		ind++
 	}
