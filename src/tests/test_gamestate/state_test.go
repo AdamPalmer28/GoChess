@@ -46,8 +46,8 @@ func Test_Gamestate_state(t *testing.T) {
 
 	// stalemate state
 	stalemate_state_fen := []string{
-		"4R1k1/1p5p/pB3Qp1/P5P1/1p6/1P6/2N5/6K1 b - - 0 1",
-		"4R1k1/1p5p/pB3Qp1/P5P1/1p6/1P6/2N5/6K1 b - - 0 1",
+		"6k1/1p5p/pB3QpR/P5P1/1p6/1P6/2N5/6K1 b - - 0 1",
+		"7k/1pR4p/pB4pN/P5P1/1p6/1P3Q2/8/6K1 b - - 0 1",
 		"4R3/1p5p/pB4p1/P5P1/1p3Q2/1P5k/2N5/6K1 b - - 0 1", // king bubble
 		"4Rbk1/1p5p/pB3QpB/P5P1/1p6/1P6/2N5/4K3 b - - 0 1", // pinned pieces
 	}
@@ -61,16 +61,17 @@ func Test_Gamestate_state(t *testing.T) {
 	for ind, fens := range(diff_states) {
 
 		for i, fen := range(fens) {
+			state_str := debug_states_text[ind]
 
 			gs := gamestate.FEN_to_gs(fen)
 			gs.Init()
 
 			if gs.InCheck != exp_InCheck[ind] {
-				t.Errorf("InCheck error: fen index %v (expected state: %v)", i, debug_states_text[ind])
+				t.Errorf("InCheck error: fen index %v (expected state: %v)", i, state_str)
 			}
 
 			if gs.GameOver != exp_GameOver[ind] {
-				t.Errorf("GameOver error: fen index %v (expected state: %v)", i, debug_states_text[ind])
+				t.Errorf("GameOver error: fen index %v (expected state: %v)", i, state_str)
 			}
 		}
 	}

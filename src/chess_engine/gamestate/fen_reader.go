@@ -139,3 +139,35 @@ func FENdata_to_board(fen_data string) *board.ChessBoard{
 
 	return board
 }
+
+// ==================================================================
+
+var PieceValLookup = map[int]string{
+	0: "P",
+	1: "N",
+	2: "B",
+	3: "R",
+	4: "Q",
+	5: "K",
+	6: "p",
+	7: "n",
+	8: "b",
+	9: "r",
+	10: "q",
+	11: "k",
+}
+
+var PieceBBind = map[string]uint{
+	"P": 0,
+	"N": 1,
+	"B": 2,
+	"R": 3,
+	"Q": 4,
+	"K": 5,
+	"p": 6,
+	"n": 7,
+	"b": 8,
+	"r": 9,
+	"q": 10,
+	"k": 11,
+}

@@ -114,6 +114,17 @@ func (gs *GameState) Next_move() {
 		gs.GenMoves() // generate moves
 	}
 
+	// !Pinned pieces
+	/*
+	find pinned pieces
+		look at king safety without piece x, 
+		if check 
+			then PINNED
+			pin path (same as threat path)
+	remove illegal moves which don't coincide with pin path
+	*/ 
+
+
 	// check for game over
 	if len(gs.MoveList) == 0 {
 		// no moves 
@@ -121,12 +132,12 @@ func (gs *GameState) Next_move() {
 		
 		if gs.InCheck {
 			if gs.White_to_move {
-				println("Black wins - checkmate")
+				//println("Black wins - checkmate")
 			} else {
-				println("White wins - checkmate")
+				//println("White wins - checkmate")
 			}
 		} else {
-			println("Stalemate")
+			//println("Stalemate")
 		}
 
 	} else {

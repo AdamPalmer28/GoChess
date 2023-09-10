@@ -44,23 +44,26 @@ func DefenderMoves(threat_sq uint, threat_paths []uint,
 		}
 
 		// pawn moves
-		double := uint(int(sq) - 2 * Player.Fwd) // double pawn push
-		single := uint(int(sq) - Player.Fwd) // single pawn push
+		if int(sq / 8) * (dirConstant) > int(Player.P_start_row) * (dirConstant) { // check if pawn move are possible
 
-		if (Player.P_start_row == double / 8) && (Player.Pawn_bb & (1 << double) != 0) {
-			// double pawn push
-			movelist = append(movelist, (1 << 12 | sq << 6 | double))
-
-		} else if (Player.Pawn_bb & (1 << single) != 0) { 
-			// single pawn push
-			moveno = (sq << 6 | single)
-
-			if (7 - Player.P_start_row) == single / 8 { // promotion
-				moveno |= 0b1000 << 12
-				promo_list := promotion(moveno)
-				movelist = append(movelist, promo_list[:]...)
-			} else {
-				movelist = append(movelist, moveno)
+			double := uint(int(sq) - 2 * Player.Fwd) // double pawn push
+			single := uint(int(sq) - Player.Fwd) // single pawn push
+	
+			if (Player.P_start_row == double / 8) && (Player.Pawn_bb & (1 << double) != 0) {
+				// double pawn push
+				movelist = append(movelist, (1 << 12 | sq << 6 | double))
+	
+			} else if (Player.Pawn_bb & (1 << single) != 0) { 
+				// single pawn push
+				moveno = (sq << 6 | single)
+	
+				if (7 - Player.P_start_row) == single / 8 { // promotion
+					moveno |= 0b1000 << 12
+					promo_list := promotion(moveno)
+					movelist = append(movelist, promo_list[:]...)
+				} else {
+					movelist = append(movelist, moveno)
+				}
 			}
 		}
 	}
@@ -69,7 +72,7 @@ func DefenderMoves(threat_sq uint, threat_paths []uint,
 	// captures moves (capture threats)
 
 	// knights caps
-	opp_knight_bb = knight_rays[threat_sq] & Player.Opp_bb
+	opp_knight_bb = knight_rays[threat_sq] & Player.Knight_bb
 
 	// straight caps
 	attack_ray = magic.Get_magic_rays(magic_str_sqs[threat_sq],
@@ -82,13 +85,14 @@ func DefenderMoves(threat_sq uint, threat_paths []uint,
 	diag_rays &= Player.Bishop_bb | Player.Queen_bb
 
 	defenders_bb = (opp_knight_bb | attack_ray | diag_rays)
+
+
 	for _, ind := range(defenders_bb.Index()) { // capture moves
 		movelist = append(movelist, 0b0100 << 12 | (threat_sq << 6) | ind)
 	}
 
 	// pawn caps
-	// ? does this work???
-	if int(threat_sq / 8) * (dirConstant) > int(Player.P_start_row) * (dirConstant){
+	if int(threat_sq / 8) * (dirConstant) > int(Player.P_start_row) * (dirConstant){ // check if pawn move are possible
 
 		cap_bb := get_pawn_attack(threat_sq, -Player.Fwd)
 		cap_bb &= Player.Pawn_bb
@@ -113,10 +117,8 @@ func DefenderMoves(threat_sq uint, threat_paths []uint,
 			cap_sq := cap_bb.Index()
 	
 			for _, sq := range cap_sq {
-				if Player.Enpass_ind == sq {
-					moveno = (0b0101 << 12 | (threat_sq << 6) | sq)
-					movelist = append(movelist, moveno)
-				}
+				moveno = (0b0101 << 12 | (threat_sq << 6) | sq)
+				movelist = append(movelist, moveno)	
 			}		
 		}
 	}

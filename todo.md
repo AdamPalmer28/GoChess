@@ -10,11 +10,6 @@ A ongoing to-do list of task for development of the chess engine.
 
 ### General
 
-- gamestate / move gen
-  - move gen for incheck
-    idea: gen the move rays for the threat squares (enemy piece and attack rays between enemy piece and king) plus king moves
-    - move gen for incheck
-      - pawn gen - need to improve
 - piece pins:
   idea: make if piece on king safety ray and moves must be on ray
 

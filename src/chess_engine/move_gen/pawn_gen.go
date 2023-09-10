@@ -85,20 +85,21 @@ func GenPawnMoves(pawn_bb board.Bitboard, w_move bool, enpass uint,
 			} else { 
 				movelist = append(movelist, moveno)
 			}
-			
 		}
+	}
 
-		// enpassent capture
-		if enpass < 64 {
+	// enpassent capture - detected from enpassent index, determining if their are pawns to cap enpassent
+	if enpass < 64 {
+		cap_bb := get_pawn_attack(enpass, -pawnstep)
+		cap_bb &= pawn_bb
+		cap_sq := cap_bb.Index()
 
-			for _, sq := range cap_sq {
-				if enpass == sq {
-					moveno = 0b0101 << 12
-					moveno |= enpass << 6 | ind
+		for _, sq := range cap_sq {
+			moveno = 0b0101 << 12
+			moveno |= enpass << 6 | sq
+			println(moveno)
 
-					movelist = append(movelist, moveno)
-				}
-			}
+			movelist = append(movelist, moveno)
 		}
 	}
 

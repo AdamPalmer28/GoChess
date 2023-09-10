@@ -17,12 +17,12 @@ func main() {
 		magic.Gen_all_magics(false) // generate straight magics
 	}
 
-	// fen := "r1b5/ppk2p1p/2pb1npr/1n1p4/3PpP1q/1PP1P1N1/PBN3PP/R2QKB1R b KQa - 0 1"
-	// gs := chess_engine.CreateGameFen(fen)
+	fen := "8/8/8/8/8/8/8/R3K3 w Q - 0 1"
+	gs := chess_engine.CreateGameFen(fen)
 
 
 	// start the game
-	gs := chess_engine.StartGame()
+	//gs := chess_engine.StartGame()
 
 	gs.Board.Print()
 

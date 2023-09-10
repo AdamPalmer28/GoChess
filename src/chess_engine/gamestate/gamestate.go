@@ -48,38 +48,88 @@ type GameState struct {
 			BishopMagic [64]magic.Magicsq
 		}
 	}
-
-
 }
 
-var PieceValLookup = map[int]string{
-	0: "P",
-	1: "N",
-	2: "B",
-	3: "R",
-	4: "Q",
-	5: "K",
-	6: "p",
-	7: "n",
-	8: "b",
-	9: "r",
-	10: "q",
-	11: "k",
+// BoardPerpective struct
+func (gs *GameState) Make_BP() {
+
+	var bp move_gen.BoardPerpective
+	var king_safety move_gen.KingSafetyRelBB
+
+	if gs.White_to_move {
+		
+		bp = move_gen.BoardPerpective{
+			
+			Pawn_bb: *gs.Board.WhitePawns,
+			Knight_bb: *gs.Board.WhiteKnights,
+			Bishop_bb: *gs.Board.WhiteBishops,
+			Rook_bb: *gs.Board.WhiteRooks,
+			Queen_bb: *gs.Board.WhiteQueens,
+			King_bb: *gs.Board.WhiteKing,
+			Opp_pawn_bb: *gs.Board.BlackPawns,
+			Opp_knight_bb: *gs.Board.BlackKnights,
+			Opp_bishop_bb: *gs.Board.BlackBishops,
+			Opp_rook_bb: *gs.Board.BlackRooks,
+			Opp_queen_bb: *gs.Board.BlackQueens,
+			Opp_king_bb: *gs.Board.BlackKing,
+			Team_bb: gs.Board.White,
+			Opp_bb: gs.Board.Black,
+
+			Fwd: 8,
+			P_start_row: 1,
+			Castle_rights: gs.WhiteCastle,
+			Enpass_ind: gs.Enpass_ind,
+		}
+
+	} else {
+
+		bp = move_gen.BoardPerpective{
+
+			Pawn_bb: *gs.Board.BlackPawns,
+			Knight_bb: *gs.Board.BlackKnights,
+			Bishop_bb: *gs.Board.BlackBishops,
+			Rook_bb: *gs.Board.BlackRooks,
+			Queen_bb: *gs.Board.BlackQueens,
+			King_bb: *gs.Board.BlackKing,
+			Opp_pawn_bb: *gs.Board.WhitePawns,
+			Opp_knight_bb: *gs.Board.WhiteKnights,
+			Opp_bishop_bb: *gs.Board.WhiteBishops,
+			Opp_rook_bb: *gs.Board.WhiteRooks,
+			Opp_queen_bb: *gs.Board.WhiteQueens,
+			Opp_king_bb: *gs.Board.WhiteKing,
+			Team_bb: gs.Board.Black,
+			Opp_bb: gs.Board.White,
+
+			Fwd: -8,
+			P_start_row: 6,
+			Castle_rights: gs.BlackCastle,
+			Enpass_ind: gs.Enpass_ind,
+		}
+	}
+
+	// king safety struct
+	opp_king_bubble := gs.MoveRays.KingRays[bp.Opp_king_bb.Index()[0]]
+	
+	king_safety = move_gen.KingSafetyRelBB{
+		King_sq: bp.King_bb.Index()[0],
+		King_bb: bp.King_bb,
+		Team_bb: bp.Team_bb,
+		Team_bb_no_king: bp.Team_bb & ^bp.King_bb,
+		Fwd: bp.Fwd,
+		P_start_row: bp.P_start_row,
+		Opp_bb: bp.Opp_bb,
+
+		Opp_pawn_bb: bp.Opp_pawn_bb,
+		Opp_knight_bb: bp.Opp_knight_bb,
+		Opp_bishop_bb: bp.Opp_bishop_bb,
+		Opp_rook_bb: bp.Opp_rook_bb,
+		Opp_queen_bb: bp.Opp_queen_bb,
+		Opp_king_bubble: opp_king_bubble,
+	}
+
+	gs.PlayerBoard = bp
+	gs.PlayerKingSaftey = king_safety
 }
 
-var PieceBBind = map[string]uint{
-	"P": 0,
-	"N": 1,
-	"B": 2,
-	"R": 3,
-	"Q": 4,
-	"K": 5,
-	"p": 6,
-	"n": 7,
-	"b": 8,
-	"r": 9,
-	"q": 10,
-	"k": 11,
-}
 
 
