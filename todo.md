@@ -10,9 +10,6 @@ A ongoing to-do list of task for development of the chess engine.
 
 ### General
 
-- piece pins:
-  idea: make if piece on king safety ray and moves must be on ray
-
 ### Low priority
 
 - Pawn ray generation pre-computed

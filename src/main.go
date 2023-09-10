@@ -17,7 +17,7 @@ func main() {
 		magic.Gen_all_magics(false) // generate straight magics
 	}
 
-	fen := "r3k2r/8/8/8/8/8/8/R3K2R w Q - 0 1"
+	fen := "4k1r1/8/1q6/3NQ3/N6R/2B5/3PPK2/8 w - - 0 1"
 	gs := chess_engine.CreateGameFen(fen)
 
 

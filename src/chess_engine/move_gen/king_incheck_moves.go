@@ -14,7 +14,7 @@ func DefenderMoves(threat_sq uint, threat_paths []uint,
 	var moveno uint
 	var defenders_bb board.Bitboard
 	
-	var opp_knight_bb board.Bitboard
+	var knight_bb board.Bitboard
 	var attack_ray board.Bitboard
 	var diag_rays board.Bitboard
 
@@ -26,7 +26,7 @@ func DefenderMoves(threat_sq uint, threat_paths []uint,
 		// get the king safety struct
 
 		// get the knight attacks
-		opp_knight_bb = knight_rays[sq] & Player.Knight_bb
+		knight_bb = knight_rays[sq] & Player.Knight_bb
 		
 		// straight attacks
 		attack_ray = magic.Get_magic_rays(magic_str_sqs[sq],
@@ -38,7 +38,8 @@ func DefenderMoves(threat_sq uint, threat_paths []uint,
 			(Player.Team_bb | Player.Opp_bb))
 		diag_rays &= Player.Bishop_bb | Player.Queen_bb
 		
-		defenders_bb |= (opp_knight_bb | attack_ray | diag_rays)
+		defenders_bb = (knight_bb | attack_ray | diag_rays)
+
 		for _, ind := range(defenders_bb.Index()) {
 			movelist = append(movelist, (sq << 6) | ind)
 		}
@@ -72,7 +73,7 @@ func DefenderMoves(threat_sq uint, threat_paths []uint,
 	// captures moves (capture threats)
 
 	// knights caps
-	opp_knight_bb = knight_rays[threat_sq] & Player.Knight_bb
+	knight_bb = knight_rays[threat_sq] & Player.Knight_bb
 
 	// straight caps
 	attack_ray = magic.Get_magic_rays(magic_str_sqs[threat_sq],
@@ -84,7 +85,7 @@ func DefenderMoves(threat_sq uint, threat_paths []uint,
 		(Player.Team_bb | Player.Opp_bb))
 	diag_rays &= Player.Bishop_bb | Player.Queen_bb
 
-	defenders_bb = (opp_knight_bb | attack_ray | diag_rays)
+	defenders_bb = (knight_bb | attack_ray | diag_rays)
 
 
 	for _, ind := range(defenders_bb.Index()) { // capture moves
