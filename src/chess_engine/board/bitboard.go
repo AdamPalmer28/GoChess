@@ -1,6 +1,8 @@
 package board
 
-type Bitboard uint64
+import "math/bits"
+
+type Bitboard uint
 
 const (
 	FileA Bitboard = 0x0101010101010101
@@ -41,6 +43,7 @@ func (b Bitboard) Print() {
 	println()
 }
 
+// get the index of the set bits
 func (b Bitboard) Index() []uint {
 	// convert a bitboard to slide index
 
@@ -58,19 +61,10 @@ func (b Bitboard) Index() []uint {
 	return ind
 }
 
-// slower method
-func (b Bitboard) BB_to_index2() []uint {
-	// convert a bitboard to slide index
+// get number of bits
+func (b Bitboard) Count() int {
 
-	var ind []uint
-
-	for i := uint(0); i < 64; i++ {
-		mask := Bitboard(1) << i
-		if (b & mask) != 0 {
-			ind = append(ind, uint(i))
-		}
-	}
-	return ind
+	return bits.OnesCount(uint(b))
 }
 
 // flip bb index

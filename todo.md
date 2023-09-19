@@ -12,6 +12,7 @@ A ongoing to-do list of task for development of the chess engine.
 
 ### Low priority
 
+- ChessBoard to uint64
 - Pawn ray generation pre-computed
   - pre-computed [2][2][64]board.Bitboard
     [move/capture][color][square]

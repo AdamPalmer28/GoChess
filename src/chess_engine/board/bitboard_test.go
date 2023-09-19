@@ -86,13 +86,13 @@ func BenchmarkBB_to_index(b *testing.B) {
 	b.ReportAllocs()
 }
 
-func BenchmarkBB_to_index2(b *testing.B) {
+// func BenchmarkBB_to_index2(b *testing.B) {
 
-	for i := 0; i < b.N; i++ {
-		for _, bb := range bb_set {
+// 	for i := 0; i < b.N; i++ {
+// 		for _, bb := range bb_set {
 
-			bb.BB_to_index2()
-		}
-	}
-	b.ReportAllocs()
-}
+// 			bb.BB_to_index2()
+// 		}
+// 	}
+// 	b.ReportAllocs()
+// }

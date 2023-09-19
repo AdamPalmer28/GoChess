@@ -80,4 +80,20 @@ func (moves *MoveList) SortMoves() {
 
 }
 
+func (moves *MoveList) ImportantMoves() MoveList {
+
+	// priority order: promotion, capture, castle
+	
+	// they are already in numerical value
+	// so we just can sort them by their value (highest to lowest)
+
+	important_moves := make(MoveList, 0)
+
+	for _, move := range *moves {
+		if special_move(move) > 1 {
+			important_moves = append(important_moves, move)
+		}
+	}
+	return important_moves
+}
 
