@@ -24,7 +24,6 @@ type ChessBoard struct {
 	Black        Bitboard
 }
 
-
 // ListBB returns a list of bitboards for each size
 func (cb *ChessBoard) ListBB(white bool) [6]*Bitboard {
 	// return a list of bitboards for each piece type
@@ -97,6 +96,36 @@ func (cb *ChessBoard) Print() {
 		fmt.Println("  +---+---+---+---+---+---+---+---+")
 	}
 }
+
+func (cb *ChessBoard) Copy() ChessBoard {
+
+	var new_cb ChessBoard
+
+	wp, wn, wb, wr, wq, wk := cb.WhitePawns.Copy(), cb.WhiteKnights.Copy(), cb.WhiteBishops.Copy(), 
+							cb.WhiteRooks.Copy(), cb.WhiteQueens.Copy(), cb.WhiteKing.Copy()
+	bp, bn, bb, br, bq, bk := cb.BlackPawns.Copy(), cb.BlackKnights.Copy(), cb.BlackBishops.Copy(),
+							cb.BlackRooks.Copy(), cb.BlackQueens.Copy(), cb.BlackKing.Copy()
+
+	new_cb.WhitePawns = &wp
+	new_cb.WhiteKnights = &wn
+	new_cb.WhiteBishops = &wb
+	new_cb.WhiteRooks = &wr
+	new_cb.WhiteQueens = &wq
+	new_cb.WhiteKing = &wk
+
+	new_cb.BlackPawns = &bp
+	new_cb.BlackKnights = &bn
+	new_cb.BlackBishops = &bb
+	new_cb.BlackRooks = &br
+	new_cb.BlackQueens = &bq
+	new_cb.BlackKing = &bk
+
+	new_cb.White = cb.White
+	new_cb.Black = cb.Black
+
+	return new_cb
+}
+
 
 
 func Move_to_index(cord string) uint {

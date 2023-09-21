@@ -80,3 +80,7 @@ func Make_bitboard(ind []uint) *Bitboard {
 	}
 	return &BB
 }
+
+func (b *Bitboard) Copy() Bitboard {
+	return *b
+}

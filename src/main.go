@@ -27,7 +27,6 @@ func main() {
 	
 	gs.Board.Print()
 	
-	var depth uint = 5
 
 	cli := cli_engine.MakeConfig(gs)
 	for {
@@ -35,7 +34,7 @@ func main() {
 			// AI move
 			println("AI move")
 
-			chess_bot.Best_Move(gs, depth)	
+			chess_bot.Best_Move(gs, 4)	
 			gs.Board.Print()
 		}
 

@@ -31,7 +31,7 @@ type GameState struct {
 	// history data - for undo
 	History struct {
 		PrevMoves []uint // previous moves (0000 000000 000000 form)
-		
+		EnPassHist []uint // enpassant history
 		Cap_pieces []uint // History of piece type
 		CastleRight []uint // castle rights at end of the move
 	}

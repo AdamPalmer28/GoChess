@@ -6,9 +6,39 @@ A ongoing to-do list of task for development of the chess engine.
 
 ### High priority
 
-- add testing for all 'test to-dos'
+- undo testing
+- convert best move num to text
 
 ### General
+
+- Evaluation:
+  - General
+    - activty
+    - defenders
+    - rays pieces:
+      - avaliable movement
+      - attacking movement
+  - Pawn
+    - promotion
+    - centre control
+    - chain
+  - Knight
+    - middle controls
+    - attacking sqs
+    - outposts
+  - Bishop
+    - xrays
+  - Rook
+    - xrays
+    - open files
+  - Queen
+    - xrays
+  - King
+    - king safety
+      - castle rights
+      - looming threats
+      - defensive pieces
+      - opponent activity
 
 ### Low priority
 

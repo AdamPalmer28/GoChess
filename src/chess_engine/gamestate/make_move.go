@@ -32,6 +32,7 @@ func (gs *GameState) Make_move(move uint) {
 		fwd = -8
 	}
 	gs.History.CastleRight = append(gs.History.CastleRight, *CastleRight) // castle rights at start of the move
+	gs.History.EnPassHist = append(gs.History.EnPassHist, gs.Enpass_ind)  // enpassant history
 
 	var sq uint
 	// update castling rights

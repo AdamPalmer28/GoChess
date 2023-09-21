@@ -12,7 +12,6 @@ func (gs *GameState) Undo() {
 	// restore board
 	gs.Moveno -= 1
 	gs.HalfMoveNo -= 1
-	gs.Enpass_ind = 64
 	gs.White_to_move = !gs.White_to_move
 	gs.Make_BP()
 	var player move_gen.BoardPerpective = gs.PlayerBoard
@@ -98,13 +97,7 @@ func (gs *GameState) Undo() {
 	}
 
 	// check update enpassent
-	prev_last_move := gs.History.PrevMoves[last_move_ind-1]
-
-	if (prev_last_move>>12)&0xF == 0b0001 {
-		prev_last_end_sq := (prev_last_move >> 6) & 0x3F
-
-		gs.Enpass_ind = uint(int(prev_last_end_sq) + player.Fwd)
-	}
+	gs.Enpass_ind = gs.History.EnPassHist[last_move_ind]
 
 	// update castle rights
 	if gs.White_to_move {
@@ -113,9 +106,11 @@ func (gs *GameState) Undo() {
 		gs.BlackCastle = gs.History.CastleRight[last_move_ind]
 	}
 
+
 	gs.History.PrevMoves = gs.History.PrevMoves[:last_move_ind]
 	gs.History.Cap_pieces = gs.History.Cap_pieces[:last_move_ind]
 	gs.History.CastleRight = gs.History.CastleRight[:last_move_ind]
+	gs.History.EnPassHist = gs.History.EnPassHist[:last_move_ind]
 
 	gs.GenMoves() // generate new moves
 }
