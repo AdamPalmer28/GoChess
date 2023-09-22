@@ -33,7 +33,7 @@ func Best_Move(gs *gamestate.GameState, depth uint) {
 
 	cur_search := Search{gs: gs, 
 		MaxDepth: depth, 
-		QuieDepth: 0, 
+		QuieDepth: 4, 
 
 		total_nodes: 0,
 		pruned_nodes: 0,
@@ -72,8 +72,7 @@ func AlphaBeta(cur_search *Search, alpha float64, beta float64,
 	if gs.GameOver {
 		if gs.InCheck {
 			// checkmate
-			score = (10_000 - float64(cur_depth) * 100)
-
+			score = float64(gs.PlayerBoard.Fwd / 8) * (10_000 - float64(cur_depth-1) * 100)
 		} else {
 			// stalemate
 			score = 0
@@ -87,28 +86,13 @@ func AlphaBeta(cur_search *Search, alpha float64, beta float64,
 	for _, move := range gs.MoveList {
 		cur_search.total_nodes += 1
 
-
-		//cb := cur_search.gs.Board.Copy()
 		gs.Make_move(move)
 
 		// beta alpha are negated because we are looking at the opponent's
 		score = -AlphaBeta(cur_search, -beta, -alpha, cur_depth + 1)
 
-		// if move == 0b011111_111011 {
-		// 	println(score, alpha, beta)
-		// }
 		gs.Undo()
 
-		// if !cb.Identical(gs.Board) {
-		// 	fmt.Printf("Move: %b\n", move)
-			
-		// 	println("Old board: ")
-		// 	cb.Print()	
-		// 	println("New board: ")
-		// 	gs.Board.Print()
-
-		// 	panic("board not equal")
-		// }
 		if score >= beta {
 			// beta cutoff - prune move
 			cur_search.pruned_nodes += 1
@@ -137,7 +121,8 @@ func Quiescence(cur_search *Search, alpha float64, beta float64, cur_quie_depth 
 	if gs.GameOver {
 		if gs.InCheck {
 			// checkmate
-			return turn_scalar * 100_000
+			depth := cur_search.MaxDepth + cur_quie_depth
+			return turn_scalar * (10_000 - float64(depth-1) * 100)
 		} else {
 			// stalemate
 			return 0

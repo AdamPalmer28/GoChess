@@ -8,6 +8,7 @@ A ongoing to-do list of task for development of the chess engine.
 
 - undo testing
 - convert best move num to text
+  - detect mate
 
 ### General
 

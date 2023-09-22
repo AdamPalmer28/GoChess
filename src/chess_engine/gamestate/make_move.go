@@ -128,9 +128,9 @@ func (gs *GameState) Next_move() {
 		
 		if gs.InCheck {
 			if gs.White_to_move {
-				//println("Black wins - checkmate")
+				// println("Black wins - checkmate")
 			} else {
-				//println("White wins - checkmate")
+				// println("White wins - checkmate")
 			}
 		} else {
 			//println("Stalemate")

@@ -18,19 +18,20 @@ func main() {
 		magic.Gen_all_magics(false) // generate straight magics
 	}
 
-	//fen := "4k1r1/8/1q6/3NQ3/N6R/2B5/3PPK2/8 w - - 0 1"
-	//gs := chess_engine.CreateGameFen(fen)
+	//fen := "2qk4/8/8/8/8/6K1/8/3q4 b - - 0 1" // black mate in 2
+	fen := "4k3/8/Q7/8/8/8/1R6/4K3 w - - 0 1" // white mate in 2
+	gs := chess_engine.CreateGameFen(fen)
 
 
 	// start the game
-	gs := chess_engine.StartGame()
+	//gs := chess_engine.StartGame()
 	
 	gs.Board.Print()
 	
 
 	cli := cli_engine.MakeConfig(gs)
 	for {
-		if !gs.White_to_move {
+		if gs.White_to_move {
 			// AI move
 			println("AI move")
 
