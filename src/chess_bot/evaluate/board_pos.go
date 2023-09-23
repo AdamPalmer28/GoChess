@@ -26,4 +26,10 @@ const (
 	WhiteSide board.Bitboard = board.Rank1 | board.Rank2 | board.Rank3 | board.Rank4
 	BlackSide board.Bitboard = board.Rank5 | board.Rank6 | board.Rank7 | board.Rank8
 
+	// cross
+	Cross4 board.Bitboard = Mid4Rows | Mid4File
+	Corners board.Bitboard = ^Cross4
+
+	// edge
+	Edge board.Bitboard = board.FileA | board.FileH | board.Rank1 | board.Rank8
 )

@@ -26,3 +26,20 @@ func InitKingRays() [64]board.Bitboard {
 
 	return moves
 }
+
+func InitPawnCaptureRays() [2][64]board.Bitboard {
+
+	moves := [2][64]board.Bitboard{}
+
+	// white
+	for i := 0; i < 64; i++ {
+		moves[0][i] = get_pawn_attack(uint(i), 8)
+	}
+
+	// black
+	for i := 0; i < 64; i++ {
+		moves[1][i] = get_pawn_attack(uint(i), -8)
+	}
+
+	return moves
+}

@@ -5,7 +5,7 @@ import (
 )
 
 // simplify this function to take inputs
-func GenPawnMoves(pawn_bb board.Bitboard, w_move bool, enpass uint,
+func GenPawnMoves(pawn_bb board.Bitboard, w_move bool, enpass uint, pawn_rays *[64]board.Bitboard,
 			team_bb board.Bitboard, opp_bb board.Bitboard) MoveList {
 
 	var movelist MoveList
@@ -70,7 +70,7 @@ func GenPawnMoves(pawn_bb board.Bitboard, w_move bool, enpass uint,
 		}
 
 		// pawn captures
-		cap_bb := get_pawn_attack(ind, pawnstep)
+		cap_bb := pawn_rays[ind]
 		cap_bb &= opp_bb
 		cap_sq := cap_bb.Index()
 
@@ -137,6 +137,10 @@ func get_pawn_attack(sq uint, Fwd int) board.Bitboard {
 	var pawn_attack_bb board.Bitboard = 0
 
 	col := sq % 8
+
+	if Fwd > 0 && sq > 55 || Fwd < 0 && sq < 8 { // not possible
+		return pawn_attack_bb
+	}
 
 	if col != 0 { // left capture
 		en_sq := int(sq) + Fwd - 1

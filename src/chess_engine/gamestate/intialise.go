@@ -33,4 +33,6 @@ func (gs *GameState) makeMoveRays() {
 	gs.MoveRays.KnightRays = move_gen.InitKnightRays()
 
 	gs.MoveRays.KingRays = move_gen.InitKingRays()
+
+	gs.MoveRays.PawnCapRays = move_gen.InitPawnCaptureRays()
 }

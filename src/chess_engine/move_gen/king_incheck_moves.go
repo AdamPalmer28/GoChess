@@ -7,7 +7,7 @@ import (
 
 
 func DefenderMoves(threat_sq uint, threat_paths []uint, 
-	Player BoardPerpective, knight_rays *[64]board.Bitboard,
+	Player BoardPerpective, knight_rays *[64]board.Bitboard, pawn_caps *[64]board.Bitboard,
 	magic_str_sqs *[64]magic.Magicsq, magic_diag_sqs *[64]magic.Magicsq) []uint {
 		
 	var movelist []uint
@@ -95,7 +95,7 @@ func DefenderMoves(threat_sq uint, threat_paths []uint,
 	// pawn caps
 	if int(threat_sq / 8) * (dirConstant) > int(Player.P_start_row) * (dirConstant){ // check if pawn move are possible
 
-		cap_bb := get_pawn_attack(threat_sq, -Player.Fwd)
+		cap_bb := pawn_caps[threat_sq]
 		cap_bb &= Player.Pawn_bb
 		cap_sq := cap_bb.Index()
 		
@@ -113,7 +113,7 @@ func DefenderMoves(threat_sq uint, threat_paths []uint,
 		}
 		
 		if Player.Enpass_ind < 64 { // enpassent capture
-			cap_bb := get_pawn_attack(Player.Enpass_ind, -Player.Fwd)
+			cap_bb := pawn_caps[threat_sq]
 			cap_bb &= Player.Pawn_bb
 			cap_sq := cap_bb.Index()
 	

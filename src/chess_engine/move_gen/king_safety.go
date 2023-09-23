@@ -73,7 +73,7 @@ func check_safe_rays(magic_sq *magic.Magicsq,
 // ============================================================================
 
 // identify check attacks and squares associated with check
-func CheckDetails(kingSafety KingSafetyRelBB, knight_ray board.Bitboard,
+func CheckDetails(kingSafety KingSafetyRelBB, knight_ray board.Bitboard, pawn_caps board.Bitboard,
 			magic_str_sq *magic.Magicsq, magic_diag_sq *magic.Magicsq) ([]uint, []uint){
 
 	var no_of_checks uint
@@ -139,8 +139,7 @@ func CheckDetails(kingSafety KingSafetyRelBB, knight_ray board.Bitboard,
 
 
 	// get the pawn attacks
-	pawn_attack_bb := get_pawn_attack(kingSafety.King_sq, kingSafety.Fwd)
-	opp_pawn_bb = pawn_attack_bb & kingSafety.Opp_pawn_bb
+	opp_pawn_bb = pawn_caps & kingSafety.Opp_pawn_bb
 
 	if opp_pawn_bb != 0 {
 		no_of_checks++

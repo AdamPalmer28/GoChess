@@ -14,8 +14,11 @@ func (gs *GameState) GenMoves() {
 	var player move_gen.BoardPerpective = gs.PlayerBoard
 
 	// generate pawn moves
-	pawn_moves := move_gen.GenPawnMoves(player.Pawn_bb, gs.White_to_move, 
-				gs.Enpass_ind, player.Team_bb, player.Opp_bb)
+	var pawn_caps_ind uint
+	if gs.White_to_move {pawn_caps_ind = 0} else {pawn_caps_ind = 1}
+	pawn_moves := move_gen.GenPawnMoves(player.Pawn_bb, gs.White_to_move, gs.Enpass_ind, 
+				&gs.MoveRays.PawnCapRays[pawn_caps_ind],
+				player.Team_bb, player.Opp_bb)
 
 	MoveList = append(MoveList, pawn_moves...)
 
@@ -67,10 +70,13 @@ func (gs *GameState) GenMoves() {
 func (gs *GameState) GenCheckMoves() {
 
 	var MoveList []uint
+	var pawn_caps_ind uint
+	if gs.White_to_move {pawn_caps_ind = 0} else {pawn_caps_ind = 1}
 
 	king_sq := gs.PlayerKingSaftey.King_sq
 	// get threat details
 	threats, threat_path := move_gen.CheckDetails(gs.PlayerKingSaftey, gs.MoveRays.KnightRays[king_sq], 
+				gs.MoveRays.PawnCapRays[pawn_caps_ind][king_sq],	
 				&gs.MoveRays.Magic.RookMagic[king_sq],&gs.MoveRays.Magic.BishopMagic[king_sq])
 	
 	// threats - must be captures
@@ -79,9 +85,10 @@ func (gs *GameState) GenCheckMoves() {
 	if len(threats) == 1 { // calculate blockers
 
 		threat_sq := threats[0]
+		opp_pawn_caps := gs.MoveRays.PawnCapRays[1 - pawn_caps_ind]
 
 		defender_moves := move_gen.DefenderMoves(threat_sq, threat_path, 
-			gs.PlayerBoard, &gs.MoveRays.KnightRays,
+			gs.PlayerBoard, &gs.MoveRays.KnightRays, &opp_pawn_caps,
 			&gs.MoveRays.Magic.RookMagic, &gs.MoveRays.Magic.BishopMagic)
 
 		MoveList = append(MoveList, defender_moves...)

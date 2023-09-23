@@ -77,7 +77,7 @@ func (cb *ChessBoard) Print() {
 				piece = " K |"
 
 			} else if (*cb.BlackPawns & mask) != 0 {
-				piece = " p |"
+				piece = " o |"//" p |"
 			} else if (*cb.BlackKnights & mask) != 0 {
 				piece = " n |" 
 			} else if (*cb.BlackBishops & mask) != 0 {
@@ -126,7 +126,37 @@ func (cb *ChessBoard) Copy() ChessBoard {
 	return new_cb
 }
 
+func (cb ChessBoard) PieceCount() int {
+	// number of pieces on the board
+	return cb.WhitePawns.Count() + cb.WhiteKnights.Count() + cb.WhiteBishops.Count() + 
+		cb.WhiteRooks.Count() + cb.WhiteQueens.Count() + cb.WhiteKing.Count() + 
+		cb.BlackPawns.Count() + cb.BlackKnights.Count() + cb.BlackBishops.Count() + 
+		cb.BlackRooks.Count() + cb.BlackQueens.Count() + cb.BlackKing.Count()
+}
 
+// check if two chessboards are identical
+func (cb ChessBoard) Identical(new_cb ChessBoard) bool {
+
+	if (*cb.WhitePawns == *new_cb.WhitePawns) &&
+		(*cb.WhiteKnights == *new_cb.WhiteKnights) &&
+		(*cb.WhiteBishops == *new_cb.WhiteBishops) &&
+		(*cb.WhiteRooks == *new_cb.WhiteRooks) &&
+		(*cb.WhiteQueens == *new_cb.WhiteQueens) &&
+		(*cb.WhiteKing == *new_cb.WhiteKing) &&
+		(*cb.BlackPawns == *new_cb.BlackPawns) &&
+		(*cb.BlackKnights == *new_cb.BlackKnights) &&
+		(*cb.BlackBishops == *new_cb.BlackBishops) &&
+		(*cb.BlackRooks == *new_cb.BlackRooks) &&
+		(*cb.BlackQueens == *new_cb.BlackQueens) &&
+		(*cb.BlackKing == *new_cb.BlackKing) {
+		return true
+	} 
+	
+	return false
+}
+
+// ============================================================================
+// CLI functions 
 
 func Move_to_index(cord string) uint {
 	// convert a chess cord to an index
@@ -152,25 +182,4 @@ func Index_to_move(ind uint) string {
 	cord = string(letter) + strconv.Itoa( int(rank) )
 
 	return cord
-}
-
-// check if two chessboards are identical
-func (cb ChessBoard) Identical(new_cb ChessBoard) bool {
-
-	if (*cb.WhitePawns == *new_cb.WhitePawns) &&
-		(*cb.WhiteKnights == *new_cb.WhiteKnights) &&
-		(*cb.WhiteBishops == *new_cb.WhiteBishops) &&
-		(*cb.WhiteRooks == *new_cb.WhiteRooks) &&
-		(*cb.WhiteQueens == *new_cb.WhiteQueens) &&
-		(*cb.WhiteKing == *new_cb.WhiteKing) &&
-		(*cb.BlackPawns == *new_cb.BlackPawns) &&
-		(*cb.BlackKnights == *new_cb.BlackKnights) &&
-		(*cb.BlackBishops == *new_cb.BlackBishops) &&
-		(*cb.BlackRooks == *new_cb.BlackRooks) &&
-		(*cb.BlackQueens == *new_cb.BlackQueens) &&
-		(*cb.BlackKing == *new_cb.BlackKing) {
-		return true
-	} 
-	
-	return false
 }
