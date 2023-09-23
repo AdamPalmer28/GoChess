@@ -1,6 +1,8 @@
 package board
 
-import "math/bits"
+import (
+	"math/bits"
+)
 
 type Bitboard uint
 

@@ -42,6 +42,8 @@ type GameState struct {
 		KnightRays [64]board.Bitboard
 		KingRays [64]board.Bitboard
 		PawnCapRays [2][64]board.Bitboard
+		RookRays [64]board.Bitboard
+		BishopRays [64]board.Bitboard
 
 		Magic struct {
 			// magic squares for each piece

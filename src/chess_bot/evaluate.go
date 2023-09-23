@@ -9,6 +9,8 @@ import (
 func Evaluate(gs *gamestate.GameState) float64 {
 
 	cb := gs.Board
+	
+	//MoveRAys
 
 	var score_scalar float64 = 1.0
 	if !gs.White_to_move {
@@ -17,14 +19,16 @@ func Evaluate(gs *gamestate.GameState) float64 {
 
 	var score float64 = 0.0
 
+	EvalMoves := evaluate.GetEvalMoveRays(gs)
+
 	// piece total
 	score += evaluate.EvalPieceCounts(cb)
 
 	// pawn eval
 	score += evaluate.PawnEval(cb, &gs.MoveRays.PawnCapRays)
 
-	// knight eval
-	score += evaluate.KnightEval(cb, &gs.MoveRays.KnightRays)
+	// knight eval 
+	score += evaluate.KnightEval(cb, EvalMoves.W_kn_rays, EvalMoves.B_kn_rays)
 
 	// bishop eval
 

@@ -12,7 +12,7 @@ func innerOccupancy(ind uint, diag bool) board.Bitboard {
 	col := int(ind % 8)
 
 	// directions of move
-	inner_occ := fullrays(ind, diag)
+	inner_occ := Fullrays(ind, diag)
 
 	if row != 0 {
 		// remove the bottom row
@@ -35,7 +35,7 @@ func innerOccupancy(ind uint, diag bool) board.Bitboard {
 }
 
 // full rays from a square
-func fullrays(ind uint, diag bool) board.Bitboard {
+func Fullrays(ind uint, diag bool) board.Bitboard {
 
 	row := int(ind / 8)
 	col := int(ind % 8)

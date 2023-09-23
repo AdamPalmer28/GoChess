@@ -7,7 +7,7 @@ import (
 const (
 
 	// optimized knight board
-	mid_sq_val float64 = 0.07
+	mid_sq_val float64 = 0.02
 	mid4_sq_val float64 = 0.05
 	edge_sq_val float64 = -0.1
 
@@ -15,31 +15,23 @@ const (
 
 )
 
-func KnightEval(cb board.ChessBoard, knight_rays *[64]board.Bitboard) float64 {
+func KnightEval(cb board.ChessBoard, white_attacks []board.Bitboard, black_attacks []board.Bitboard) float64 {
 
 	var score float64 = 0.0
 
 	// knight positions
 
 		// white
-	var white_attacks board.Bitboard
-	for _, ind := range cb.WhiteKnights.Index() {
-		white_attacks |= knight_rays[ind]
-	}
 	score += pos_capture_eval(*cb.WhiteKnights, white_attacks)
 
 		// black
-	var black_attacks board.Bitboard
-	for _, ind := range cb.BlackKnights.Index() {
-		black_attacks |= knight_rays[ind]
-	}
 	score -= pos_capture_eval(*cb.BlackKnights, black_attacks)
 	
 	return score
 }
 
 
-func pos_capture_eval(pieces board.Bitboard, attack_rays board.Bitboard) float64 {
+func pos_capture_eval(pieces board.Bitboard, attack_rays []board.Bitboard) float64 {
 
 	var score float64 = 0.0
 	var n int
@@ -63,16 +55,18 @@ func pos_capture_eval(pieces board.Bitboard, attack_rays board.Bitboard) float64
 	}
 
 	// attack rays on middle squares
-	attack_on_mid4 := attack_rays & Mid4Centre
-	if attack_on_mid4 != 0 {
+	for _, ray := range attack_rays {
+		attack_on_mid4 := ray & Mid4Centre
+		if attack_on_mid4 != 0 {
 
-		n = attack_on_mid4.Count()
-		score += float64(n) * mid4_sq_val / 2.5
+			n = attack_on_mid4.Count()
+			score += float64(n) * mid4_sq_val / 2.5
 
-		attack_on_mid := attack_rays & Mid4Centre
-		n = attack_on_mid.Count()
-		score += float64(n) * mid_sq_val / 2.5
+			attack_on_mid := ray & Mid4Centre
+			n = attack_on_mid.Count()
+			score += float64(n) * mid_sq_val / 2.5
 
+		}
 	}
 
 	return score

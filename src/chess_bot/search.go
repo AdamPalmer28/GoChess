@@ -2,7 +2,9 @@ package chess_bot
 
 import (
 	"chess/chess_engine/gamestate"
+	"chess/cli_engine"
 	"fmt"
+	"time"
 )
 
 type Search struct { 
@@ -38,17 +40,25 @@ func Best_Move(gs *gamestate.GameState, depth uint) {
 		total_nodes: 0,
 		pruned_nodes: 0,
 	}
-
+	start := time.Now()
 
 	AlphaBeta(&cur_search, -100000, 100000, 0)
 
-	fmt.Printf("Total nodes: %d Pruned nodes: %d\n", cur_search.total_nodes, cur_search.pruned_nodes)
+	elapsed := time.Since(start)
+	nodes_per_sec := float64(cur_search.total_nodes) / elapsed.Seconds()
+
+	fmt.Printf("\nTime elapsed: %.2f - Nodes per second: %.0f\n", elapsed.Seconds(), nodes_per_sec)
+	
+	fmt.Printf("Nodes: %d Pruned: %d\n", cur_search.total_nodes, cur_search.pruned_nodes)
+	fmt.Printf("Depth: %d, QuieDepth %d\n", cur_search.MaxDepth, cur_search.QuieDepth)
 
 	best_move := cur_search.best_move
 	best_score := cur_search.best_eval
 
 
-	fmt.Printf("Best move: %b Score: %f\n", best_move, best_score)
+	fmt.Printf("\nBest move:\n")
+	cli_engine.GetMoves([]uint{best_move})
+	fmt.Printf("Score: %f\n", best_score)
 	gs.Make_move(best_move)
 }
 
@@ -131,6 +141,7 @@ func Quiescence(cur_search *Search, alpha float64, beta float64, cur_quie_depth 
 
 	eval := turn_scalar * (Evaluate(gs))
 	//eval := Evaluate(cur_search.gs)
+
 	// assumes not in zugzwang
 	if eval >= beta {
 		cur_search.pruned_nodes += 1
@@ -140,7 +151,8 @@ func Quiescence(cur_search *Search, alpha float64, beta float64, cur_quie_depth 
 		alpha = eval
 	}
 
-	if cur_quie_depth == cur_search.QuieDepth {
+	if (cur_quie_depth >= cur_search.QuieDepth) && (!gs.InCheck) {
+		// if not in check and quiescence depth reached
 		return eval
 	}
 

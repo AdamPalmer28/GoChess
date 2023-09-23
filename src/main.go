@@ -22,11 +22,13 @@ func main() {
 	//fen := "4k3/8/Q7/8/8/8/1R6/4K3 w - - 0 1" // white mate in 2
 	//gs := chess_engine.CreateGameFen(fen)
 
+	
 
 	// start the game
 	gs := chess_engine.StartGame()
 	
 	gs.Board.Print()
+
 	
 
 	cli := cli_engine.MakeConfig(gs)
@@ -35,9 +37,11 @@ func main() {
 			// AI move
 			println("AI move")
 
-			chess_bot.Best_Move(gs, 4)	
+			chess_bot.Best_Move(gs, 6)	
 			gs.Board.Print()
 		}
+		// score := chess_bot.Evaluate(gs)
+		// println("Score: ", score)
 
 		result := cli.Run()
 

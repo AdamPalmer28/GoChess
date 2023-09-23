@@ -196,8 +196,7 @@ func gen_magic(msq *Magicsq) (board.Bitboard, int, int, bool) {
 
 		// find the best magic number
 		var best_magics_index int = 0
-		//println("Ind:", msq.Index, " Magics Found!", len(found_magics), " ",len(found_magics_mapsize))
-
+		
 		
 		for i, mapsize := range found_magics_mapsize {
 			if mapsize < BestMagicMapsize {
@@ -331,7 +330,7 @@ func allOccupancy(ind uint, diag bool) []board.Bitboard {
 	
 	all_occ := []board.Bitboard{board.Bitboard(0)}
 	
-	full_rays := fullrays(ind, diag)
+	full_rays := Fullrays(ind, diag)
 	full_rays &= innerOccupancy(ind, diag)
 	
 	index := full_rays.Index()
