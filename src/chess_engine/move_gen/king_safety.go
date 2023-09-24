@@ -161,13 +161,13 @@ func get_ray_paths(sq int, end_sq int) board.Bitboard {
 	var step int = 1 // step for creating bb
 
 	
-	if (diff % 7 == 0) && (sq % 8 != 0) {
-		step = 7
-	} else if (diff % 8 == 0) {
+	if (diff % 8 == 0) {
 		step = 8
-	} else if (diff % 9 == 0) {
+	} else if (diff % 9 == 0) { // must be before 7
 		step = 9
-	} 
+	} else if (diff % 7 == 0) && ( (end_sq/8 - sq/8) != 0) { // must be before 1
+		step = 7
+	}
 	// else step = 1
 	
 	if diff < 0 {
@@ -268,10 +268,11 @@ func check_rays(magic_sq *magic.Magicsq,
 	king_sq := magic_sq.Index
 
 	potential_pin := rays & team_bb
-	new_occ := occ_bb & ^potential_pin
+	new_occ := occ_bb ^ potential_pin
 
 	rays_without_pieces  := magic.Get_magic_rays(*magic_sq, new_occ) // rays without pieces
 	pinning_threats := (rays_without_pieces & rel_attacker_bb) 
+
 
 	if (pinning_threats) != 0 {
 		var pinned_paths board.Bitboard // path of pinned pieces
@@ -282,6 +283,7 @@ func check_rays(magic_sq *magic.Magicsq,
 			
 			pinned_paths = get_ray_paths(int(king_sq), int(threat))
 
+			
 			confirmed_pin = (pinned_paths & potential_pin)
 			if confirmed_pin != 0 {
 				// if potential pin piece is on path

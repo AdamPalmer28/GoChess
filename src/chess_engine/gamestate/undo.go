@@ -112,5 +112,7 @@ func (gs *GameState) Undo() {
 	gs.History.CastleRight = gs.History.CastleRight[:last_move_ind]
 	gs.History.EnPassHist = gs.History.EnPassHist[:last_move_ind]
 
-	gs.GenMoves() // generate new moves
+
+	gs.Next_move()
+
 }

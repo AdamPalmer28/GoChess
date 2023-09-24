@@ -112,7 +112,7 @@ func DefenderMoves(threat_sq uint, threat_paths []uint,
 			}
 		}
 		
-		if Player.Enpass_ind < 64 { // enpassent capture
+		if (int(Player.Enpass_ind) + Player.Fwd) == int(threat_sq) { // enpassent capture
 			cap_bb := pawn_caps[threat_sq]
 			cap_bb &= Player.Pawn_bb
 			cap_sq := cap_bb.Index()
