@@ -4,6 +4,7 @@ import (
 	"chess/chess_engine/board"
 	"chess/chess_engine/move_gen"
 	"chess/chess_engine/move_gen/magic"
+	"fmt"
 )
 
 type GameState struct {
@@ -114,6 +115,16 @@ func (gs *GameState) Make_BP() {
 	// king safety struct
 	opp_king_bubble := gs.MoveRays.KingRays[bp.Opp_king_bb.Index()[0]]
 	
+	if len(bp.King_bb.Index()) == 0 {
+		gs.Board.Print()
+
+		getMoves(gs.History.PrevMoves)
+		
+		panic("No king")
+	}
+
+
+
 	king_safety = move_gen.KingSafetyRelBB{
 		King_sq: bp.King_bb.Index()[0],
 		King_bb: bp.King_bb,
@@ -133,5 +144,22 @@ func (gs *GameState) Make_BP() {
 
 	gs.PlayerBoard = bp
 	gs.PlayerKingSaftey = king_safety
+}
+
+
+func getMoves(moves []uint) {
+
+	for _, move := range moves {
+
+		start_sq := move & 0b111111
+		end_sq := (move >> 6) & 0x3f
+		special := (move >> 12) & 0xf
+
+		start := board.Index_to_move(start_sq)
+		end := board.Index_to_move(end_sq)
+
+		fmt.Println(start+end, " special: ", special)
+	}
+
 }
 
