@@ -7,11 +7,15 @@ import (
 
 func (gs *GameState) Init() {
 
-	// update
+	// update board
 	gs.Board.UpdateSideBB(true)
 	gs.Board.UpdateSideBB(false)
 
-	
+		// piece locations
+	for i := uint(0); i < 12; i++ {
+		gs.Board.UpdatePieceLocations(i)
+	}
+
 	// initialise move rays
 	gs.makeMoveRays()
 	

@@ -3,6 +3,7 @@ package main
 import (
 	"chess/chess_bot"
 	"chess/chess_engine"
+	"chess/chess_engine/gamestate"
 	"chess/chess_engine/move_gen/magic"
 	"chess/cli_engine"
 )
@@ -22,7 +23,8 @@ func main() {
 	//fen := "4k3/8/Q7/8/8/8/1R6/4K3 w - - 0 1" // white mate in 2
 	//gs := chess_engine.CreateGameFen(fen)
 
-	
+	gamestate.InitZobrist()
+
 
 	// start the game
 	gs := chess_engine.StartGame()
@@ -33,15 +35,16 @@ func main() {
 
 	cli := cli_engine.MakeConfig(gs)
 	for {
+		
 		if !gs.White_to_move {
 			// AI move
 			println("AI move")
 
-			chess_bot.Best_Move(gs, 6)	
+			chess_bot.Best_Move(gs, 5)	
 			gs.Board.Print()
 		}
-		// score := chess_bot.Evaluate(gs)
-		// println("Score: ", score)
+		score := chess_bot.Evaluate(gs)
+		println("Score: ", score)
 
 		result := cli.Run()
 

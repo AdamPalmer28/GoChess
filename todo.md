@@ -7,6 +7,18 @@ A ongoing to-do list of task for development of the chess engine.
 ### High priority
 
 - undo testing
+
+  - moves
+    - normal move
+    - capture
+    - enpassant
+    - promotion
+    - castle
+      - castle rights
+  - history lists
+  - move gen
+    - incheck
+
 - convert best move num to text
   - detect mate
 
@@ -16,11 +28,11 @@ A ongoing to-do list of task for development of the chess engine.
   - General
     - activty
     - defenders
-    - rays pieces:
-      - avaliable movement
-      - attacking movement
+    - critical squads
   - Knight
     - outposts
+    - activity
+      - multiple attacks
   - King
     - king safety
       - castle rights

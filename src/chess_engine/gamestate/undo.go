@@ -22,10 +22,20 @@ func (gs *GameState) Undo() {
 	prev_end_sq := (last_move >> 6) & 0x3F
 	prev_start_sq := last_move & 0x3F
 
+	// piece locations
+	var piece_start_ind uint = 0
+	var piece_cap_start_ind uint = 6
+	if !gs.White_to_move { 
+		piece_start_ind = 6 
+		piece_cap_start_ind = 0
+	}
+	var cap_piece uint = 6
+
 	// reverse move
 	rev_move := (prev_start_sq << 6) | prev_end_sq
 
-	gs.Board.Move(rev_move, gs.White_to_move) // moves piece back to start_sq
+	piece_moved, _ := gs.Board.Move(rev_move, gs.White_to_move) // moves piece back to start_sq
+
 
 	// if promotion
 	if special&0b1000 > 0 {
@@ -57,7 +67,7 @@ func (gs *GameState) Undo() {
 	if special&0b0100 > 0 {
 
 		opp_bbs := gs.Board.ListBB(!gs.White_to_move)
-		cap_piece := gs.History.Cap_pieces[last_move_ind]
+		cap_piece = gs.History.Cap_pieces[last_move_ind]
 
 		// return old piece to board
 		if special == 0b0101 { // enpassent capture
@@ -69,6 +79,9 @@ func (gs *GameState) Undo() {
 		}
 
 		gs.Board.UpdateSideBB(!gs.White_to_move) // update BB
+
+		// update piece locations - pawn
+		gs.Board.UpdatePieceLocations(piece_start_ind + 0)
 	}
 
 	// castle
@@ -94,6 +107,9 @@ func (gs *GameState) Undo() {
 		*rook_bb |= (1 << rook_prev_sq)
 
 		gs.Board.UpdateSideBB(gs.White_to_move) // update
+
+		// update piece locations - rook
+		gs.Board.UpdatePieceLocations(piece_start_ind + 3)
 	}
 
 	// check update enpassent
@@ -106,11 +122,17 @@ func (gs *GameState) Undo() {
 		gs.BlackCastle = gs.History.CastleRight[last_move_ind]
 	}
 
-
 	gs.History.PrevMoves = gs.History.PrevMoves[:last_move_ind]
 	gs.History.Cap_pieces = gs.History.Cap_pieces[:last_move_ind]
 	gs.History.CastleRight = gs.History.CastleRight[:last_move_ind]
 	gs.History.EnPassHist = gs.History.EnPassHist[:last_move_ind]
 
-	gs.GenMoves() // generate new moves
+
+	// update piece locations
+	gs.Board.UpdatePieceLocations(piece_start_ind + piece_moved)
+	if cap_piece < 6 {
+		gs.Board.UpdatePieceLocations(piece_cap_start_ind + cap_piece)
+	}
+
+	gs.Next_move() // generate new moves
 }

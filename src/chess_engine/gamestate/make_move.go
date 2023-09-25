@@ -118,7 +118,7 @@ func (gs *GameState) Next_move() {
 	}
 	gs.MoveList.SortMoves() 
 	
-
+	// remove illegal moves
 	remove_illegal_moves(gs, pinned_pieces) // remove illegal moves
 
 	// check for game over
@@ -139,6 +139,9 @@ func (gs *GameState) Next_move() {
 	} else {
 		gs.GameOver = false
 	}
+
+	// zorbist hash
+	gs.Hash = Zobrist.GenHash(gs)
 }
 
 

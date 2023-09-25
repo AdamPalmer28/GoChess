@@ -26,6 +26,14 @@ func (cb *ChessBoard) Move(move_num uint, white_move bool) (uint, uint) {
 	var piece_moved uint
 	var cap_piece uint = 6
 		
+	var piece_start_ind uint = 0
+	var piece_cap_start_ind uint = 6
+	if !white_move { 
+		piece_start_ind = 6 
+		piece_cap_start_ind = 0
+	}
+
+
 	// Move type (see top of file)
 	// ========================================================================
 
@@ -53,6 +61,9 @@ func (cb *ChessBoard) Move(move_num uint, white_move bool) (uint, uint) {
 		piece_moved = normal_move(start_sq, finish_sq, BB_list)
 		// move rook
 		_ = normal_move(rook_start_sq, rook_finish_sq, BB_list)
+
+		// update rook locations on castle
+		cb.UpdatePieceLocations(piece_start_ind + 3)
 
 		// ----------------------------------------------------------
 	} else if special <= 5 { // capture
@@ -86,9 +97,21 @@ func (cb *ChessBoard) Move(move_num uint, white_move bool) (uint, uint) {
 		
 		piece_moved = 0 // pawn
 		prom_move(special, start_sq, finish_sq, BB_list)
+
+		// update piece locations for knight, bishop, rook, queen
+		cb.UpdatePieceLocations(piece_start_ind + 1)
+		cb.UpdatePieceLocations(piece_start_ind + 2)
+		cb.UpdatePieceLocations(piece_start_ind + 3)
+		cb.UpdatePieceLocations(piece_start_ind + 4)
 	}
 
 	cb.UpdateSideBB(white_move) // update bitboards after move execution
+
+	// update piece locations
+	cb.UpdatePieceLocations(piece_start_ind + piece_moved)
+	if cap_piece < 6 {
+		cb.UpdatePieceLocations(piece_cap_start_ind + cap_piece)
+	}
 
 	return piece_moved, cap_piece
 

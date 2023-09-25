@@ -8,6 +8,7 @@ import (
 
 type GameState struct {
 	Board board.ChessBoard
+	Hash uint64
 
 	// king 0b01, queen 0b10, both 0b11 
 	WhiteCastle uint 
@@ -133,6 +134,4 @@ func (gs *GameState) Make_BP() {
 	gs.PlayerBoard = bp
 	gs.PlayerKingSaftey = king_safety
 }
-
-
 

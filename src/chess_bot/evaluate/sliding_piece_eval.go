@@ -164,7 +164,6 @@ func QueenEval(eval_move *EvalMoveRays, cb board.ChessBoard) float64 {
 		opp_rk_atks = xray & *cb.WhiteRooks
 		opp_kn_atks = xray & *cb.WhiteKnights
 
-
 		score -= eval_sliding(ray, opp_q_atks, opp_b_atks, opp_rk_atks, opp_kn_atks,
 			q_mv_count_val, q_opp_q_val, q_opp_b_val, q_opp_r_val, q_opp_kn_val, q_ray_xray_ratio)
 	}
@@ -175,7 +174,7 @@ func QueenEval(eval_move *EvalMoveRays, cb board.ChessBoard) float64 {
 
 // ============================================================================
 
-
+// eval_sliding - general sliding piece evaluation
 func eval_sliding(rays, opp_q_xray, opp_b_xray, opp_rk_xray, opp_kn_xray board.Bitboard,
 		move_cnt_val, opp_q_val, opp_b_val, opp_rk_val, opp_kn_val, ray_xray_ratio float64) float64 {
 
@@ -183,27 +182,30 @@ func eval_sliding(rays, opp_q_xray, opp_b_xray, opp_rk_xray, opp_kn_xray board.B
 
 	score += float64(rays.Count()) * move_cnt_val // mobility
 
+	// ray/xray attacks on valuable pieces
+
+	// queen
 	if (opp_q_xray) != 0 {
 		// queen is on full move rays
 		score += opp_q_val * float64(opp_q_xray.Count()) * ray_xray_ratio
 		// queen is on direct move rays
 		score += opp_q_val * float64((rays & opp_q_xray).Count()) * (1- ray_xray_ratio)
 	}
-
+	// rook
 	if (opp_rk_xray) != 0 {
 		// rook is on full move rays
 		score += opp_rk_val * float64(opp_rk_xray.Count()) * ray_xray_ratio
 		// rook is on direct move rays
 		score += opp_rk_val * float64((rays & opp_rk_xray).Count()) * (1- ray_xray_ratio)
 	}
-
+	// bishop
 	if (opp_b_xray) != 0 {
 		// bishop is on full move rays
 		score += opp_b_val * float64(opp_b_xray.Count()) * ray_xray_ratio
 		// bishop is on direct move rays
 		score += opp_b_val * float64((rays & opp_b_xray).Count()) * (1- ray_xray_ratio)
 	}
-	
+	// knight
 	if (opp_kn_xray) != 0 {
 		// knight is on full move rays
 		score += opp_kn_val * float64(opp_kn_xray.Count()) * ray_xray_ratio

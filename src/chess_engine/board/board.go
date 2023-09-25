@@ -22,6 +22,8 @@ type ChessBoard struct {
 
 	White        Bitboard
 	Black        Bitboard
+
+	PieceLocations   [12][]uint
 }
 
 // ListBB returns a list of bitboards for each size
