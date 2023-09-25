@@ -25,7 +25,6 @@ func main() {
 
 	gamestate.InitZobrist()
 
-
 	// start the game
 	gs := chess_engine.StartGame()
 	
@@ -40,7 +39,7 @@ func main() {
 			// AI move
 			println("AI move")
 
-			chess_bot.Best_Move(gs, 5)	
+			chess_bot.Best_Move(gs, 6)	
 			gs.Board.Print()
 		}
 		score := chess_bot.Evaluate(gs)

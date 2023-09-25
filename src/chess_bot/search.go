@@ -15,15 +15,14 @@ type Search struct {
 	MaxDepth uint
 	QuieDepth uint
 	
-	TT TranspositionTable
+	TT map[uint64]TT
 	
 	total_nodes uint
 	pruned_nodes uint
+	TT_hits uint
 }
 
-type TranspositionTable struct {
-
-	chesshash uint
+type TT struct {
 	depth uint // depth of the position
 	score float64 // score of the position
 }
@@ -36,9 +35,10 @@ func Best_Move(gs *gamestate.GameState, depth uint) {
 	cur_search := Search{gs: gs, 
 		MaxDepth: depth, 
 		QuieDepth: 4, 
-
 		total_nodes: 0,
 		pruned_nodes: 0,
+		TT_hits: 0,
+		TT: make(map[uint64]TT),
 	}
 	start := time.Now()
 
@@ -49,7 +49,7 @@ func Best_Move(gs *gamestate.GameState, depth uint) {
 
 	fmt.Printf("\nTime elapsed: %.2f - Nodes per second: %.0f\n", elapsed.Seconds(), nodes_per_sec)
 	
-	fmt.Printf("Nodes: %d Pruned: %d\n", cur_search.total_nodes, cur_search.pruned_nodes)
+	fmt.Printf("Nodes: %d Pruned: %d (TT: hits %d)\n", cur_search.total_nodes, cur_search.pruned_nodes, cur_search.TT_hits)
 	fmt.Printf("Depth: %d, QuieDepth %d\n", cur_search.MaxDepth, cur_search.QuieDepth)
 
 	best_move := cur_search.best_move
@@ -71,28 +71,33 @@ func Best_Move(gs *gamestate.GameState, depth uint) {
 func AlphaBeta(cur_search *Search, alpha float64, beta float64, 
 						cur_depth uint) float64{
 	var score float64 = 0
+
+	// check transposition table
+	gs_hash := cur_search.gs.Hash
+	tt_entry, ok := cur_search.TT[gs_hash]; 
+
+	if (tt_entry.depth >= cur_depth) && ok {
+		// TT hit
+		cur_search.TT_hits += 1
+		return tt_entry.score
+	}
 	
-	if cur_depth == cur_search.MaxDepth {
+	if cur_depth == cur_search.MaxDepth { // max depth reached
 		// quiescence search
 		return Quiescence(cur_search, alpha, beta, 0)
 	}
 	gs := cur_search.gs
 
-	// game over
+	// game over ----------------------------------------
 	if gs.GameOver {
-		if gs.InCheck {
-			// checkmate
-			score = float64(gs.PlayerBoard.Fwd / 8) * (10_000 - float64(cur_depth-1) * 100)
-		} else {
-			// stalemate
-			score = 0
+		if gs.InCheck {// checkmate
+			return float64(gs.PlayerBoard.Fwd / 8) * (10_000 - float64(cur_depth-1) * 100)
+		} else {// stalemate
+			return 0
 		}
-		if score > alpha{
-			alpha = score
-		}
-		return alpha
 	}
 
+	// search moves --------------------------------------
 	for _, move := range gs.MoveList {
 		cur_search.total_nodes += 1
 
@@ -100,6 +105,9 @@ func AlphaBeta(cur_search *Search, alpha float64, beta float64,
 
 		// beta alpha are negated because we are looking at the opponent's
 		score = -AlphaBeta(cur_search, -beta, -alpha, cur_depth + 1)
+
+		// add to transposition table
+		cur_search.TT[gs_hash] = TT{depth: cur_depth, score: score}
 
 		gs.Undo()
 
@@ -126,21 +134,28 @@ func Quiescence(cur_search *Search, alpha float64, beta float64, cur_quie_depth 
 	
 	gs := cur_search.gs
 	turn_scalar := float64(gs.PlayerBoard.Fwd / 8) 
+	var score float64 = 0
+
+	// check transposition table
+	gs_hash := gs.Hash
+	tt_entry, ok := cur_search.TT[gs_hash]
+	if (tt_entry.depth >= cur_search.MaxDepth + cur_quie_depth) && ok {
+		// TT hit
+		cur_search.TT_hits += 1
+		return tt_entry.score
+	}
 
 	// game over
 	if gs.GameOver {
-		if gs.InCheck {
-			// checkmate
+		if gs.InCheck {// checkmate
 			depth := cur_search.MaxDepth + cur_quie_depth
 			return turn_scalar * (10_000 - float64(depth-1) * 100)
-		} else {
-			// stalemate
+		} else {// stalemate
 			return 0
 		}
 	}
 
 	eval := turn_scalar * (Evaluate(gs))
-	//eval := Evaluate(cur_search.gs)
 
 	// assumes not in zugzwang
 	if eval >= beta {
@@ -164,7 +179,11 @@ func Quiescence(cur_search *Search, alpha float64, beta float64, cur_quie_depth 
 
 		gs.Make_move(move)
 		
-		score := -Quiescence(cur_search, -beta, -alpha, cur_quie_depth + 1)
+		score = -Quiescence(cur_search, -beta, -alpha, cur_quie_depth + 1)
+
+		// add to transposition table
+		cur_search.TT[gs_hash] = TT{depth: cur_search.MaxDepth + cur_quie_depth, score: score}
+
 		
 		gs.Undo()
 		
