@@ -76,7 +76,7 @@ func AlphaBeta(cur_search *Search, alpha float64, beta float64,
 	gs_hash := cur_search.gs.Hash
 	tt_entry, ok := cur_search.TT[gs_hash]; 
 
-	if (tt_entry.depth >= cur_depth) && ok {
+	if (tt_entry.depth <= cur_depth) && ok {
 		// TT hit
 		cur_search.TT_hits += 1
 		return tt_entry.score
@@ -139,7 +139,7 @@ func Quiescence(cur_search *Search, alpha float64, beta float64, cur_quie_depth 
 	// check transposition table
 	gs_hash := gs.Hash
 	tt_entry, ok := cur_search.TT[gs_hash]
-	if (tt_entry.depth >= cur_search.MaxDepth + cur_quie_depth) && ok {
+	if (tt_entry.depth <= cur_search.MaxDepth + cur_quie_depth) && ok {
 		// TT hit
 		cur_search.TT_hits += 1
 		return tt_entry.score

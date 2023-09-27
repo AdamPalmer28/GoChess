@@ -42,7 +42,8 @@ A ongoing to-do list of task for development of the chess engine.
 
 ### Low priority
 
-- ChessBoard to uint64
+- Test ChessBoard to uint64
+- Test TT is working correctly
 
 ---
 
