@@ -156,8 +156,8 @@ func TestUndo(t *testing.T) {
 	gs.Init()
 	cb = gs.Board.Copy()
 
-	w_queen_castle = 0b0011_000010_000100
-	b_king_castle = 0b0010_111110_111100
+	var w_queen_castle uint = 0b0011_000010_000100
+	var b_king_castle uint = 0b0010_111110_111100
 
 	w_castle_rights := gs.WhiteCastle
 	b_castle_rights := gs.BlackCastle
@@ -173,28 +173,76 @@ func TestUndo(t *testing.T) {
 	gs.Undo()
 
 	// check if the board is the same
-	if !cb.Identical(gs.Board) {
-		t.Errorf("4. Board not the same after undo")
+	if !cb2.Identical(gs.Board) {
+		t.Errorf("4. Board not the same after undo 1")
 		cb.Print()
 		gs.Board.Print()
 	}
 
+	// check castle rights 
+	if (gs.BlackCastle != b_castle_rights) || (gs.WhiteCastle != 0) {
+		t.Errorf("4. Castle rights error %b, %b (expected 0, 11)", gs.WhiteCastle, gs.BlackCastle)
+	}
 
+	// undo the white move
+	gs.Undo()
 
+	// check if the board is the same
+	if !cb.Identical(gs.Board) {
+		t.Errorf("4. Board not the same after undo 2")
+		cb.Print()
+		gs.Board.Print()
+	}
 
-
+	// check castle rights
+	if (gs.BlackCastle != b_castle_rights) || (gs.WhiteCastle != w_castle_rights) {
+		t.Errorf("4. Castle rights error %b, %b (expected 11, 11)", gs.WhiteCastle, gs.BlackCastle)
+	}
 
 
 	// ------------------------------------------------------------------------
 	// 5. Gamestate data
+	fen = "r3k2r/ppppqppp/n1b1p1n1/4P3/1bNP2N1/2B3B1/PPPQ1PPP/R3K2R w KQkq - 0 1"
 
-		// move number, half move number, white to move
+	gs = gamestate.FEN_to_gs(fen)
+	gs.Init()
+	cb = gs.Board.Copy()
 
-		// castling rights
+	move_hist := []uint{}
+	// make a move
+	moves = create_moves([]string{"a2a3"}, 0b0000)
+	move_hist = append(move_hist, moves[0])
+	gs.Make_move(moves[0])
+	moves = create_moves([]string{"b3a4"}, 0b0000)
+	move_hist = append(move_hist, moves[0])
+	gs.Make_move(moves[0])
+	moves = create_moves([]string{"b2b4"}, 0b0001)
+	move_hist = append(move_hist, moves[0])
+	gs.Make_move(moves[0])
+	moves = create_moves([]string{"a4b3"}, 0b0100)
+	gs.Make_move(moves[0])
+	move_hist = append(move_hist, moves[0])
 
-		// hash
+	// check postion is as expected
+	if gs.Moveno != 5 || !gs.White_to_move {
+		t.Errorf("5. Gamestate data not correct %d, %t (expected 5, true)", gs.Moveno, gs.White_to_move)
+	}
+	if !same_lists(gs.History.PrevMoves, move_hist) {
+		error_msg = test_move_gen.MoveListErrorMsg(gs.History.PrevMoves, move_hist)
+		t.Errorf("5. MoveList not the same after undo \n%s", error_msg)
+	}
 
-		// history lists
+	// undo the move
+	gs.Undo()
+
+	// move number, half move number, white to move
+	if gs.Moveno != 4 || gs.White_to_move {
+		t.Errorf("5. Gamestate data not correct %d, %t (expected 4, false)", gs.Moveno, gs.White_to_move)
+	}
+	if !same_lists(gs.History.PrevMoves, move_hist[:3]) {
+		error_msg = test_move_gen.MoveListErrorMsg(gs.History.PrevMoves, move_hist[:len(move_hist)-1])
+		t.Errorf("5. MoveList not the same after undo \n%s", error_msg)
+	}
 
 	// ------------------------------------------------------------------------
 	// 6. InCheck
