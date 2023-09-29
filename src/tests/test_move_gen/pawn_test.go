@@ -37,7 +37,7 @@ func TestPawnStandardMove(t *testing.T) {
 	// check moves
 	result := check_moves(pawn_moves, expected)
 	if !result {
-		error_str := useful_error_msg(pawn_moves, expected)
+		error_str := MoveListErrorMsg(pawn_moves, expected)
 		t.Errorf("Standard_moves failed :\n%s", error_str)
 	}
 
@@ -59,7 +59,7 @@ func TestPawnStandardMove(t *testing.T) {
 	// check moves
 	result = check_moves(pawn_moves, expected)
 	if !result {
-		error_str := useful_error_msg(pawn_moves, expected)
+		error_str := MoveListErrorMsg(pawn_moves, expected)
 		t.Errorf("Standard_moves failed :\n%s", error_str)
 	}
 }
@@ -87,7 +87,7 @@ func TestPawnCapture(t *testing.T) {
 	// check moves
 	result := check_moves(pawn_moves, expected)
 	if !result {
-		error_str := useful_error_msg(pawn_moves, expected)
+		error_str := MoveListErrorMsg(pawn_moves, expected)
 		t.Errorf("Pawn Capture failed :\n%s", error_str)
 	}
 }
@@ -105,7 +105,9 @@ func TestEnpassCapture(t *testing.T) {
 		t.Errorf("Move %b not found in move list", move_num)
 	}
 	gs.Make_move(move_num)
-
+	if gs.Enpass_ind != 43 {
+		t.Errorf("Enpassant index not set correctly %d (expected 43)", gs.Enpass_ind)
+	}
 
 	// get all the pawn moves
 	pawn_moves := get_piece_moves(gs.MoveList, *gs.Board.WhitePawns)
@@ -126,7 +128,7 @@ func TestEnpassCapture(t *testing.T) {
 	// check moves
 	result := check_moves(pawn_moves, expected)
 	if !result {
-		error_str := useful_error_msg(pawn_moves, expected)
+		error_str := MoveListErrorMsg(pawn_moves, expected)
 		t.Errorf("Enpassent test failed :\n%s", error_str)
 	}
 }
@@ -153,7 +155,7 @@ func TestPawnPromotion(t *testing.T) {
 	// check moves
 	result := check_moves(pawn_moves, expected)
 	if !result {
-		error_str := useful_error_msg(pawn_moves, expected)
+		error_str := MoveListErrorMsg(pawn_moves, expected)
 		t.Errorf("Promotion test failed :\n%s", error_str)
 	}
 }

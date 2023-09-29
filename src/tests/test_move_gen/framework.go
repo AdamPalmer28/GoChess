@@ -9,8 +9,6 @@ func create_moves(start []string, moves [][]string, special uint) []uint {
 
 	var result []uint
 
-
-
 	for ind, start_sq := range start {
 		sq_moves := moves[ind]
 
@@ -70,7 +68,7 @@ func check_moves(moves []uint, expected []uint) bool {
 
 
 
-func useful_error_msg(move_list []uint, expected []uint) string {
+func MoveListErrorMsg(move_list []uint, expected []uint) string {
 	
 	var expected_diff []uint
 	var move_diff []uint

@@ -41,7 +41,7 @@ func Test_InCheck_MoveGen(t *testing.T) {
 
 	result = check_moves(actual_moves, expected)
 	if !result {
-		error_str := useful_error_msg(actual_moves, expected)
+		error_str := MoveListErrorMsg(actual_moves, expected)
 		t.Errorf("Single check: moves failed :\n%s", error_str)
 	}
 	
@@ -60,7 +60,7 @@ func Test_InCheck_MoveGen(t *testing.T) {
 
 	result = check_moves(gs.MoveList, expected)
 	if !result {
-		error_str := useful_error_msg(gs.MoveList, expected)
+		error_str := MoveListErrorMsg(gs.MoveList, expected)
 		t.Errorf("Double check: moves failed :\n%s", error_str)
 	}
 

@@ -140,7 +140,7 @@ func (gs *GameState) Next_move() {
 		gs.GameOver = false
 	}
 
-	// zorbist hash
+	// update zorbist hash
 	gs.Hash = Zobrist.GenHash(gs)
 }
 

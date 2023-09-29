@@ -32,7 +32,7 @@ func Test_PinnedPieces_Moves(t *testing.T) {
 	
 	result = check_moves(actual_moves, expected)
 	if !result {
-		error_str := useful_error_msg(actual_moves, expected)
+		error_str := MoveListErrorMsg(actual_moves, expected)
 		t.Errorf("1. Pawn moves failed :\n%s", error_str)
 	}
 	
@@ -48,7 +48,7 @@ func Test_PinnedPieces_Moves(t *testing.T) {
 
 	result = check_moves(actual_moves, expected)
 	if !result {
-		error_str := useful_error_msg(actual_moves, expected)
+		error_str := MoveListErrorMsg(actual_moves, expected)
 		t.Errorf("2. Queen moves failed :\n%s", error_str)
 	}
 
@@ -62,7 +62,7 @@ func Test_PinnedPieces_Moves(t *testing.T) {
 
 	result = check_moves(actual_moves, expected)
 	if !result {
-		error_str := useful_error_msg(actual_moves, expected)
+		error_str := MoveListErrorMsg(actual_moves, expected)
 		t.Errorf("3. Knight moves failed :\n%s", error_str)
 	}
 

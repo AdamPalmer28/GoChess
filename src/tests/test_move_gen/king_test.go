@@ -40,7 +40,7 @@ func TestBasicKing(t *testing.T) {
 
 	result = check_moves(actual_king_moves, expected)
 	if !result {
-		error_str := useful_error_msg(actual_king_moves, expected)
+		error_str := MoveListErrorMsg(actual_king_moves, expected)
 		t.Errorf("1. King moves failed :\n%s", error_str)
 	}
 	
@@ -60,7 +60,7 @@ func TestBasicKing(t *testing.T) {
 
 	result = check_moves(actual_king_moves, expected)
 	if !result {
-		error_str := useful_error_msg(actual_king_moves, expected)
+		error_str := MoveListErrorMsg(actual_king_moves, expected)
 		t.Errorf("2. King moves failed :\n%s", error_str)
 	}
 
@@ -82,7 +82,7 @@ func TestBasicKing(t *testing.T) {
 
 	result = check_moves(actual_king_moves, expected)
 	if !result {
-		error_str := useful_error_msg(actual_king_moves, expected)
+		error_str := MoveListErrorMsg(actual_king_moves, expected)
 		t.Errorf("3. King moves failed :\n%s", error_str)
 	}
 
@@ -100,7 +100,7 @@ func TestBasicKing(t *testing.T) {
 
 	result = check_moves(actual_king_moves, expected)
 	if !result {
-		error_str := useful_error_msg(actual_king_moves, expected)
+		error_str := MoveListErrorMsg(actual_king_moves, expected)
 		t.Errorf("4. King moves failed :\n%s", error_str)
 	}
 
@@ -122,7 +122,7 @@ func TestBasicKing(t *testing.T) {
 
 	result = check_moves(actual_king_moves, expected)
 	if !result {
-		error_str := useful_error_msg(actual_king_moves, expected)
+		error_str := MoveListErrorMsg(actual_king_moves, expected)
 		t.Errorf("5. King moves failed :\n%s", error_str)
 	}
 
@@ -142,7 +142,7 @@ func TestBasicKing(t *testing.T) {
 
 	result = check_moves(actual_king_moves, expected)
 	if !result {
-		error_str := useful_error_msg(actual_king_moves, expected)
+		error_str := MoveListErrorMsg(actual_king_moves, expected)
 		t.Errorf("6. King moves failed :\n%s", error_str)
 	}
 }

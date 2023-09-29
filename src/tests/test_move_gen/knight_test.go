@@ -29,7 +29,7 @@ func TestKnightMoves(t *testing.T) {
 	// check moves
 	result := check_moves(knight_moves, expected)
 	if !result {
-		error_str := useful_error_msg(knight_moves, expected)
+		error_str := MoveListErrorMsg(knight_moves, expected)
 		t.Errorf("Standard_moves failed :\n%s", error_str)
 	}
 }

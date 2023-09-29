@@ -8,7 +8,7 @@ import (
 
 func Test_FEN_to_gs(t *testing.T) {
 
-	fen := "rnb1k2r/1pp2ppp/2q2nb1/p1Ppp3/3PP2P/1B1N1B2/PP3PP1/R2QK1NR b KQkq e4 1 32"
+	fen := "rnb1k2r/1pp2ppp/2q2nb1/p1Ppp3/3PP2P/1B1N1B2/PP3PP1/R2QK1NR b KQkq e3 1 32"
 	gs := *(gamestate.FEN_to_gs(fen))
 
 	// player to move
@@ -25,7 +25,7 @@ func Test_FEN_to_gs(t *testing.T) {
 
 	// enpassant
 	if gs.Enpass_ind != 20 {
-		t.Errorf("Enpassant square incorrect, got %d, expected 28", gs.Enpass_ind)
+		t.Errorf("Enpassant square incorrect, got %d, expected 20", gs.Enpass_ind)
 	}
 
 	// move counts

@@ -31,17 +31,20 @@ func Evaluate(gs *gamestate.GameState) float64 {
 	score += evaluate.KnightEval(cb, EvalMoves.W_kn_rays, EvalMoves.B_kn_rays)
 
 	// bishop eval
+	score += evaluate.BishopEval(&EvalMoves, cb)
 
 	// rook eval
+	score += evaluate.RookEval(&EvalMoves, cb)
 
 	// queen eval
+	score += evaluate.QueenEval(&EvalMoves, cb)
 
 	// king eval
 
 
 
 	// general
-	score += score_scalar * float64(len(gs.MoveList)) / 50 // number of moves
+	// score += score_scalar * float64(len(gs.MoveList)) / 50 // number of moves
 	if gs.InCheck {
 		score += score_scalar * 0.2 // check
 	}

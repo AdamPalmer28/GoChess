@@ -92,6 +92,7 @@ func GenPawnMoves(pawn_bb board.Bitboard, w_move bool, enpass uint, pawn_rays *[
 	// enpassent capture - detected from enpassent index, determining if their are pawns to cap enpassent
 	if enpass < 64 {
 		cap_bb := pawn_rays[enpass]
+		if w_move {cap_bb >>= 16} else {cap_bb <<= 16}
 		cap_bb &= pawn_bb
 		cap_sq := cap_bb.Index()
 
@@ -157,13 +158,3 @@ func get_pawn_attack(sq uint, Fwd int) board.Bitboard {
 	return pawn_attack_bb
 }
 
-// // gen bitboard of pawn moves
-// func gen_pawn_moves(sq uint, Fwd int) board.Bitboard {
-
-// 	var pawn_attack_bb board.Bitboard = 0
-
-// 	if sq =
-
-// 	return pawn_attack_bb
-
-// }

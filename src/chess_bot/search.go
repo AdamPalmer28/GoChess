@@ -4,40 +4,44 @@ import (
 	"chess/chess_engine/gamestate"
 	"chess/cli_engine"
 	"fmt"
+	"math"
+	"strconv"
 	"time"
 )
 
+// Search struct
 type Search struct { 
+
 	gs *gamestate.GameState 
+
+	// parameters
+	MaxDepth uint
+	QuieDepth uint
+
+	// results data
 	best_move uint
 	best_eval float64
 	
-	MaxDepth uint
-	QuieDepth uint
-	
+	// Internal data
 	TT map[uint64]TT
 	
+	// stats
 	total_nodes uint
 	pruned_nodes uint
 	TT_hits uint
+	TT_success uint
 }
 
-type TT struct {
-	depth uint // depth of the position
-	score float64 // score of the position
-}
 
 // Search for the best move
-func Best_Move(gs *gamestate.GameState, depth uint) {
+func FindBestMove(gs *gamestate.GameState, depth uint, make_move bool) {
 
 	// loop through the moves
 
-	cur_search := Search{gs: gs, 
+	cur_search := Search{
+		gs: gs, 
 		MaxDepth: depth, 
 		QuieDepth: 4, 
-		total_nodes: 0,
-		pruned_nodes: 0,
-		TT_hits: 0,
 		TT: make(map[uint64]TT),
 	}
 	start := time.Now()
@@ -45,157 +49,106 @@ func Best_Move(gs *gamestate.GameState, depth uint) {
 	AlphaBeta(&cur_search, -100000, 100000, 0)
 
 	elapsed := time.Since(start)
-	nodes_per_sec := float64(cur_search.total_nodes) / elapsed.Seconds()
 
-	fmt.Printf("\nTime elapsed: %.2f - Nodes per second: %.0f\n", elapsed.Seconds(), nodes_per_sec)
-	
-	fmt.Printf("Nodes: %d Pruned: %d (TT: hits %d)\n", cur_search.total_nodes, cur_search.pruned_nodes, cur_search.TT_hits)
-	fmt.Printf("Depth: %d, QuieDepth %d\n", cur_search.MaxDepth, cur_search.QuieDepth)
+	// print results
+	cur_search.Print(elapsed.Seconds())
 
+
+	if make_move {
+		// make the best move
+		best_move := cur_search.best_move
+		gs.Make_move(best_move)
+	}
+}
+
+
+
+
+
+// ============================================================================
+// Display search results
+// ============================================================================
+
+
+// print stats of the search
+func (cur_search *Search) Print(time float64) {
+
+	fmt.Printf("\nSearch stats\n===============================================\n")
+
+	// best move
 	best_move := cur_search.best_move
 	best_score := cur_search.best_eval
-
-
-	fmt.Printf("\nBest move:\n")
+	displayScore(best_score)
 	cli_engine.GetMoves([]uint{best_move})
-	fmt.Printf("Score: %f\n", best_score)
-	gs.Make_move(best_move)
+
+	// time
+	nodes_per_sec := float64(cur_search.total_nodes) / time
+	fmt.Printf("\nTime elapsed: %.2f - Nodes per second: %.2f\n", time, nodes_per_sec)
+
+	// depth
+	fmt.Printf("Depth\n--------------------------------------\n")
+	fmt.Printf("Depth: %d\n", cur_search.MaxDepth)
+	fmt.Printf("QuieDepth: %d\n", cur_search.QuieDepth)
+
+	// nodes
+	fmt.Printf("\nNodes\n--------------------------------------\n")
+	fmt.Printf("Nodes: %s\n", formatWithCommas(cur_search.total_nodes))
+	fmt.Printf("Pruned: %s\n", formatWithCommas(cur_search.pruned_nodes))
+	fmt.Printf("\nTT:\n")
+	fmt.Printf("   successes: %s\n", formatWithCommas(cur_search.TT_success))
+	fmt.Printf("   hits: %s\n", formatWithCommas(cur_search.TT_hits))
+
+	// create gap
+	fmt.Printf("\n\n\n")
 }
 
-
-// ============================================================================
-// AlphaBeta search
-// ============================================================================
-
-// AlphaBeta search for the best move
-func AlphaBeta(cur_search *Search, alpha float64, beta float64, 
-						cur_depth uint) float64{
-	var score float64 = 0
-
-	// check transposition table
-	gs_hash := cur_search.gs.Hash
-	tt_entry, ok := cur_search.TT[gs_hash]; 
-
-	if (tt_entry.depth <= cur_depth) && ok {
-		// TT hit
-		cur_search.TT_hits += 1
-		return tt_entry.score
-	}
+// display evaluation score (+ mate in x)
+func displayScore(score float64) {
 	
-	if cur_depth == cur_search.MaxDepth { // max depth reached
-		// quiescence search
-		return Quiescence(cur_search, alpha, beta, 0)
-	}
-	gs := cur_search.gs
+	if (score > 5000) || (score < -5000) {
+		// mate in x
+		diff := 10_000 - math.Abs(score) 
 
-	// game over ----------------------------------------
-	if gs.GameOver {
-		if gs.InCheck {// checkmate
-			return float64(gs.PlayerBoard.Fwd / 8) * (10_000 - float64(cur_depth-1) * 100)
-		} else {// stalemate
-			return 0
+		depth := int(diff / 100) 
+		mate_in := (depth + 1) / 2 
+
+		if score < 0 { 
+			// black has mate in x
+			fmt.Printf("\nMate in %d\n", -mate_in)
+		} else {
+			// white has mate in x
+			fmt.Printf("\nMate in %d\n", mate_in)
 		}
+
+	} else {
+		fmt.Printf("\nScore: %.3f\n", score)
 	}
-
-	// search moves --------------------------------------
-	for _, move := range gs.MoveList {
-		cur_search.total_nodes += 1
-
-		gs.Make_move(move)
-
-		// beta alpha are negated because we are looking at the opponent's
-		score = -AlphaBeta(cur_search, -beta, -alpha, cur_depth + 1)
-
-		// add to transposition table
-		cur_search.TT[gs_hash] = TT{depth: cur_depth, score: score}
-
-		gs.Undo()
-
-		if score >= beta {
-			// beta cutoff - prune move
-			cur_search.pruned_nodes += 1
-			return beta
-		}
-		if score > alpha {
-			// new best move
-			alpha = score
-			if cur_depth == 0 {
-				cur_search.best_move = move
-				cur_search.best_eval = float64(cur_search.gs.PlayerBoard.Fwd / 8) * score
-			}
-		}
-	}
-	return alpha
 }
 
+func formatWithCommas(number uint) string {
+    // Convert the integer to a string
+    str := strconv.Itoa(int(number))
 
-// Quiescence search for the best move
-func Quiescence(cur_search *Search, alpha float64, beta float64, cur_quie_depth uint) float64 {
-	
-	gs := cur_search.gs
-	turn_scalar := float64(gs.PlayerBoard.Fwd / 8) 
-	var score float64 = 0
+    // Determine the length of the string
+    length := len(str)
 
-	// check transposition table
-	gs_hash := gs.Hash
-	tt_entry, ok := cur_search.TT[gs_hash]
-	if (tt_entry.depth <= cur_search.MaxDepth + cur_quie_depth) && ok {
-		// TT hit
-		cur_search.TT_hits += 1
-		return tt_entry.score
-	}
+    // Calculate the number of commas needed
+    numCommas := (length - 1) / 3
 
-	// game over
-	if gs.GameOver {
-		if gs.InCheck {// checkmate
-			depth := cur_search.MaxDepth + cur_quie_depth
-			return turn_scalar * (10_000 - float64(depth-1) * 100)
-		} else {// stalemate
-			return 0
-		}
-	}
+    // Create a buffer to hold the formatted string
+    formatted := make([]byte, length+numCommas)
 
-	eval := turn_scalar * (Evaluate(gs))
+    // Loop through the original string and insert commas
+    j := 0
+    for i := 0; i < length; i++ {
+        if i > 0 && (length-i)%3 == 0 {
+            formatted[j] = ','
+            j++
+        }
+        formatted[j] = str[i]
+        j++
+    }
 
-	// assumes not in zugzwang
-	if eval >= beta {
-		cur_search.pruned_nodes += 1
-		return beta
-	}
-	if eval > alpha {
-		alpha = eval
-	}
-
-	if (cur_quie_depth >= cur_search.QuieDepth) && (!gs.InCheck) {
-		// if not in check and quiescence depth reached
-		return eval
-	}
-
-
-	important_moves := gs.MoveList.ImportantMoves()
-	for _, move := range important_moves {
-		cur_search.total_nodes += 1
-
-
-		gs.Make_move(move)
-		
-		score = -Quiescence(cur_search, -beta, -alpha, cur_quie_depth + 1)
-
-		// add to transposition table
-		cur_search.TT[gs_hash] = TT{depth: cur_search.MaxDepth + cur_quie_depth, score: score}
-
-		
-		gs.Undo()
-		
-		if score >= beta {
-			// beta cutoff - prune move 
-			cur_search.pruned_nodes += 1
-			return beta
-		}
-		if score > alpha {
-			// new best move
-			alpha = score
-		}
-	}
-	return alpha
+    // Convert the byte slice back to a string
+    return string(formatted)
 }

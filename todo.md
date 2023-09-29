@@ -9,7 +9,6 @@ A ongoing to-do list of task for development of the chess engine.
 - undo testing
 
   - moves
-    - normal move
     - capture
     - enpassant
     - promotion
@@ -18,9 +17,6 @@ A ongoing to-do list of task for development of the chess engine.
   - history lists
   - move gen
     - incheck
-
-- convert best move num to text
-  - detect mate
 
 ### General
 
@@ -42,9 +38,6 @@ A ongoing to-do list of task for development of the chess engine.
 
 ### Low priority
 
-- Test ChessBoard to uint64
-- Test TT is working correctly
-
 ---
 
 # Ideas
@@ -53,12 +46,3 @@ A ongoing to-do list of task for development of the chess engine.
 
 - Test environment for testing the engine against previous versions
 - Test scripts - Correct moves i.e. as expected - Function outputs - Benchmark test & function's speed
-
-# Go Notes:
-
-packages:
-lower case = private
-upper case = public
-
-&x is the address of x
-\*x is the value of x

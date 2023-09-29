@@ -6,6 +6,7 @@ import (
 	"chess/chess_engine/gamestate"
 	"chess/chess_engine/move_gen/magic"
 	"chess/cli_engine"
+	"fmt"
 )
 
 func main() {
@@ -29,8 +30,6 @@ func main() {
 	gs := chess_engine.StartGame()
 	
 	gs.Board.Print()
-
-	print(gs.Enpass_ind)
 	
 
 	cli := cli_engine.MakeConfig(gs)
@@ -38,13 +37,14 @@ func main() {
 		
 		if !gs.White_to_move {
 			// AI move
-			println("AI move")
+			println("\nAI move\n")
 
-			chess_bot.Best_Move(gs, 6)	
+			chess_bot.FindBestMove(gs, 7, true)	
 			gs.Board.Print()
 		}
 		score := chess_bot.Evaluate(gs)
-		println("Score: ", score)
+		fmt.Printf("\nCurrent Eval: %.3f", score)
+		println("\n")
 
 		result := cli.Run()
 
