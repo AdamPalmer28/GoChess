@@ -82,11 +82,15 @@ func (cur_search *Search) Print(time float64) {
 	cli_engine.GetMoves([]uint{best_move})
 
 	// time
+	computed_nodes := cur_search.total_nodes - cur_search.TT_success
 	nodes_per_sec := float64(cur_search.total_nodes) / time
-	fmt.Printf("\nTime elapsed: %.2f - Nodes per second: %.2f\n", time, nodes_per_sec)
+	computed_nodes_per_sec := float64(computed_nodes) / time
+
+	fmt.Printf("\nTime elapsed: %.1f", time)
+	fmt.Printf("\nNPS: %.0f\nCNPS: %.0f)\n", nodes_per_sec, computed_nodes_per_sec)
 
 	// depth
-	fmt.Printf("Depth\n--------------------------------------\n")
+	fmt.Printf("\nDepth\n--------------------------------------\n")
 	fmt.Printf("Depth: %d\n", cur_search.MaxDepth)
 	fmt.Printf("QuieDepth: %d\n", cur_search.QuieDepth)
 

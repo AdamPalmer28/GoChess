@@ -7,6 +7,7 @@ Useful board segments
 */
 import (
 	"chess/chess_engine/board"
+	"chess/chess_engine/gamestate"
 )
 
 const (
@@ -33,3 +34,36 @@ const (
 	// edge
 	Edge board.Bitboard = board.FileA | board.FileH | board.Rank1 | board.Rank8
 )
+
+/*
+Get areas of the board which are of high activity / importance this is used for
+significant mappings in evaluation functions
+*/
+
+type BoardActivity struct {
+
+	// high activity pieces
+	wHighActivty [64]float64
+	bHighActivty [64]float64
+
+	// king critical & threats
+	wKingThreats [64]float64
+	bKingThreats [64]float64
+
+	// critical sqaures for knights to use
+	wCriticalAtx [64]float64
+	bCriticalAtx [64]float64
+
+	// knight outposts
+	wKnightOutposts [64]float64
+	bKnightOutposts [64]float64	 
+
+}
+
+
+func getBoardActivity(gs *gamestate.GameState, mv_ray EvalMoveRays) BoardActivity {
+
+	var ba BoardActivity
+	
+	return ba
+}

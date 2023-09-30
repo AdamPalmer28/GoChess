@@ -6,17 +6,24 @@ A ongoing to-do list of task for development of the chess engine.
 
 ### High priority
 
-- undo testing
-
-  - moves
-    - capture
-    - enpassant
-    - promotion
-    - castle
+- Search improvements
+  - GetBestMove search before alpha-beta
+  - move ordering improvements
+    - history heuristic
+    - killer moves
+    - take into account TT
+  - iterative deepening
+  - track line
+  - TT improvements:
+    - track line
+    - track best line
+- Evaluation:
+  - King
+    - king safety
       - castle rights
-  - history lists
-  - move gen
-    - incheck
+      - looming threats
+      - defensive pieces
+      - opponent activity
 
 ### General
 
@@ -29,12 +36,22 @@ A ongoing to-do list of task for development of the chess engine.
     - outposts
     - activity
       - multiple attacks
-  - King
-    - king safety
-      - castle rights
-      - looming threats
-      - defensive pieces
-      - opponent activity
+  - Board activity:
+    - Identify weaknesses
+      - Pawn structure
+      - King safety
+    - Identify threats
+    - Identify critical squares
+    - Identify outposts
+
+### Testing
+
+- Test ChessBoard to uint64
+  - Test Collisions
+- Test TT is working correctly
+
+- benchmark 20 move game
+  - use FindBestMove with make_move = false
 
 ### Low priority
 
