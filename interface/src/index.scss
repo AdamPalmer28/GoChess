@@ -1,0 +1,20 @@
+$body-color: rgb(255, 255, 255);
+
+$font-family-sans-serif: "Roboto", sans-serif;
+$font-size-base: 1.2rem;
+
+//theme colors
+$theme-colors: (
+	"primary": #42036b,
+	"secondary": #facf10,
+	"success": #28a745,
+	"info": #17a2b8,
+	"warning": #ffc107,
+	"danger": #dc3545,
+	"light": #f8f9fa,
+	"dark": #c9601b,
+);
+
+$enable-gradients: true;
+
+@import "../node_modules/bootstrap/scss/bootstrap";
