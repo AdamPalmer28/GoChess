@@ -25,8 +25,6 @@ const DrawBoard = (props) => {
 
 	// Sq - right click
 	function highlightSquare(index) {
-		console.log("right click ", index); // !temp
-
 		let highlight_sq_copy = [...highlight_sq]; // copy array
 
 		highlight_sq_copy[index] = !highlight_sq_copy[index]; // set square to true

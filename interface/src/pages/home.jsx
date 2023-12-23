@@ -1,9 +1,16 @@
 import DrawChess from "../Components/chess/DrawChess";
+import MyComponent from "../Components/demo";
 import BallWithTrail from "../Components/chess/background_nero";
 import { Button, Navbar, Container } from "react-bootstrap";
 
 const Home = () => {
-	return <DrawChess />;
+	return (
+		<>
+			<MyComponent />
+			<DrawChess />
+		</>
+	);
+
 	//return <BallWithTrail />;
 };
 

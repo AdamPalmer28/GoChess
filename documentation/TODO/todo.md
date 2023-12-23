@@ -6,10 +6,12 @@ A ongoing to-do list of task for development of the chess project.
 
 ### List
 
-- Create Makefile of commands
-- Docker container for chess engine
+- Create basic Server for react app to connect to
+- Create a few basic commands for the server
+- Plan server functionality
 
 ### Lower priority
 
-- Docker container for interface
+- Create Makefile of commands
+- Docker container for chess engine
 - Docker container for chess program (engine + interface)

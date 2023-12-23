@@ -5,8 +5,7 @@
 ### Higher priority
 
 - Move detection
-- Pass board state to interface
 
 ### Lower priority
 
-- Docker container for interface
+- Fix Docker container for interface
