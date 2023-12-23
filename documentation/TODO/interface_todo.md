@@ -4,8 +4,7 @@
 
 ### Higher priority
 
-- Create initial styling
-- Draw chess pieces
+- Move detection
 - Pass board state to interface
 
 ### Lower priority

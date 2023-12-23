@@ -4,6 +4,27 @@
 A ongoing to-do list of task for development of the chess engine.
 ---
 
+### List
+
+- Copy of gamestate
+- Initalise go server
+- Deveelop chess server
+- Convert client to use server
+
+### Testing
+
+- Test ChessBoard to uint64
+  - Test Collisions
+- Test TT is working correctly
+- Copy of gamestate (create copy and check all of previous properties remain the same without affecting the original)
+
+- benchmark 20 move game
+  - use FindBestMove with make_move = false
+
+---
+
+# Algorithm improvements
+
 ### High priority
 
 - Search improvements
@@ -43,17 +64,6 @@ A ongoing to-do list of task for development of the chess engine.
     - Identify threats
     - Identify critical squares
     - Identify outposts
-
-### Testing
-
-- Test ChessBoard to uint64
-  - Test Collisions
-- Test TT is working correctly
-
-- benchmark 20 move game
-  - use FindBestMove with make_move = false
-
-### Low priority
 
 ---
 
