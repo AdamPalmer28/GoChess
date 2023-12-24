@@ -80,10 +80,14 @@ const DrawBoard = (props) => {
 	});
 
 	return (
-		<div id="board-layout">
-			<Container fluid className="grid" id="board">
+		<div
+			id="board-ui"
+			className={`${props.className}`}
+			style={{ width: boardSize }}
+		>
+			<div fluid className="chess-board grid" id="board">
 				{rowsRender}
-			</Container>
+			</div>
 		</div>
 	);
 };

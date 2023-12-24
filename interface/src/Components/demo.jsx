@@ -39,7 +39,7 @@ const MyComponent = () => {
 
 	return (
 		<div>
-			<h1>Data:</h1>
+			<p>Data:</p>
 			<pre>{JSON.stringify(data, null, 2)}</pre>
 		</div>
 	);

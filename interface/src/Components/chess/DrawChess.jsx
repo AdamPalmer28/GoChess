@@ -1,4 +1,7 @@
 import DrawBoard from "./board";
+import ChessUItabs from "./chessTabs";
+
+import "./chess.scss";
 
 const startingBoard = [
 	3, 2, 1, 4, 5, 1, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 12, 12, 12, 12, 12, 12, 12,
@@ -20,14 +23,13 @@ const DrawChess = () => {
 	//const playerWhite = bool; // is the player white or black
 
 	return (
-		<div class="container Chess">
-			<div className="Chess-board d-flex justify-content-center">
-				<DrawBoard
-					onSquareSelect={squareSelected}
-					boardLength={boardLength}
-					pieces={boardPieces}
-				/>
-			</div>
+		<div className="container chess-ui d-flex">
+			<DrawBoard
+				onSquareSelect={squareSelected}
+				boardLength={boardLength}
+				pieces={boardPieces}
+			/>
+			<ChessUItabs />
 		</div>
 	);
 };
