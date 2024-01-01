@@ -4,12 +4,12 @@
 
 ### Higher priority
 
+- MoveNumber to square
 - Move detection
 - Design interface
   - Build tab system
     - move lists
     - analysis elments
-  - build board ui
 
 ### Lower priority
 

@@ -8,7 +8,7 @@ A ongoing to-do list of task for development of the chess engine.
 
 - Copy of gamestate
 - Initalise go server
-- Deveelop chess server
+- Develop chess server
 - Convert client to use server
 
 ### Testing
