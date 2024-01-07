@@ -99,6 +99,25 @@ func (cb *ChessBoard) Print() {
 	}
 }
 
+// Create a chessboard for exporting to the client
+func (cb *ChessBoard) ServerBoard() [64]uint {
+
+	var serverBoard [64]uint 
+	// start with all 12s (empty square) in the board
+	for i := 0; i < 64; i++ {
+		serverBoard[i] = 12
+	}
+
+	for p := uint(0); p < 12; p++ {
+		for _, ind := range(cb.PieceLocations[p]) {
+			serverBoard[ind] = p
+		}
+	}
+
+	return serverBoard
+}
+
+
 func (cb *ChessBoard) Copy() ChessBoard {
 
 	var new_cb ChessBoard

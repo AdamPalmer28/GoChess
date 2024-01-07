@@ -10,7 +10,7 @@ const startingBoard = [
 	12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
 	12, 12, 12, 12, 12, 12, 6, 6, 6, 6, 6, 6, 6, 6, 9, 8, 7, 10, 11, 7, 8, 9,
 ];
-let boardPieces = startingBoard;
+
 const DrawChess = () => {
 	const [sqSelected, setSqSelected] = useState(64); // selected squares [from, to]
 	const [lastMove, setLastMove] = useState([64, 64]); // last move [from, to]
@@ -39,12 +39,16 @@ const DrawChess = () => {
 		fetchData();
 	}, []);
 
+	let boardPieces = startingBoard;
+
 	// decode data once loaded
 	if (!isLoading || error) {
-		let { message, moveListArray, HumanMoveListArray } = ChessData(GSdata);
-		console.log(`message: ${message}`);
-		console.log(`Index move list: ${moveListArray}`);
-		console.log(`Move list: ${HumanMoveListArray}`);
+		let gameData = ChessData(GSdata);
+		console.log(`message: ${gameData.message}`);
+		//console.log(`movelist: ${gameData.moveList}`);
+		console.log(`board: ${gameData.board}`);
+		console.log(`w_move: ${gameData.w_move}`);
+		boardPieces = gameData.board;
 	}
 
 	const squareSelected = (index) => {
