@@ -4,8 +4,6 @@
 
 ### Higher priority
 
-- MoveNumber to square
-- Move detection
 - Design interface
   - Build tab system
     - move lists

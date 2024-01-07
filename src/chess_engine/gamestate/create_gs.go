@@ -1,7 +1,7 @@
 package gamestate
 
 import (
-	"chess/chess_engine/board"
+	"chess/src/chess_engine/board"
 )
 func MakeGameState() *GameState {
 	// Make a new game state

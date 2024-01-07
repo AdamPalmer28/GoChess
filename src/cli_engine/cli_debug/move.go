@@ -1,8 +1,8 @@
 package cli_debug
 
 import (
-	"chess/chess_engine/board"
-	"chess/chess_engine/move_gen"
+	"chess/src/chess_engine/board"
+	"chess/src/chess_engine/move_gen"
 )
 
 func Move_cli(movelist move_gen.MoveList, sq string) {

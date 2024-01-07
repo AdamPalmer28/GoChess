@@ -6,8 +6,8 @@ Useful board segments
 
 */
 import (
-	"chess/chess_engine/board"
-	"chess/chess_engine/gamestate"
+	"chess/src/chess_engine/board"
+	"chess/src/chess_engine/gamestate"
 )
 
 const (

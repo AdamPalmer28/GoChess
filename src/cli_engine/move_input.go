@@ -1,7 +1,7 @@
 package cli_engine
 
 import (
-	"chess/chess_engine/board"
+	"chess/src/chess_engine/board"
 	"fmt"
 )
 

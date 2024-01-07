@@ -1,7 +1,7 @@
 package gamestate
 
 import (
-	"chess/chess_engine/move_gen"
+	"chess/src/chess_engine/move_gen"
 )
 
 // make move on gamestate

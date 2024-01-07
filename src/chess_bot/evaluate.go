@@ -1,8 +1,8 @@
 package chess_bot
 
 import (
-	"chess/chess_bot/evaluate"
-	"chess/chess_engine/gamestate"
+	"chess/src/chess_bot/evaluate"
+	"chess/src/chess_engine/gamestate"
 )
 
 // Evaluate the board

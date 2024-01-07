@@ -1,8 +1,8 @@
 package cli_debug
 
 import (
-	"chess/chess_engine/board"
-	"chess/chess_engine/gamestate"
+	"chess/src/chess_engine/board"
+	"chess/src/chess_engine/gamestate"
 )
 
 func Bitboard_cli(gs gamestate.GameState, inputs []string) {

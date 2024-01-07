@@ -1,8 +1,8 @@
 package chess_bot
 
 import (
-	"chess/chess_engine/gamestate"
-	"chess/cli_engine"
+	"chess/src/chess_engine/gamestate"
+	"chess/src/cli_engine"
 	"fmt"
 	"math"
 	"strconv"

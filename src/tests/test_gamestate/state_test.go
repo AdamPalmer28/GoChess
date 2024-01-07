@@ -3,7 +3,7 @@ package test_gamestate
 // test game state and
 
 import (
-	"chess/chess_engine/gamestate"
+	"chess/src/chess_engine/gamestate"
 	"testing"
 )
 

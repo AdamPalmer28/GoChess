@@ -1,7 +1,7 @@
 package test_move_gen
 
 import (
-	"chess/chess_engine/board"
+	"chess/src/chess_engine/board"
 	"strconv"
 )
 

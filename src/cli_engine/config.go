@@ -1,7 +1,7 @@
 package cli_engine
 
 import (
-	gamestate "chess/chess_engine/gamestate"
+	gamestate "chess/src/chess_engine/gamestate"
 )
 
 type Config struct {

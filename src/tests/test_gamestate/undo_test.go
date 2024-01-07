@@ -1,9 +1,9 @@
 package test_gamestate
 
 import (
-	"chess/chess_engine/board"
-	"chess/chess_engine/gamestate"
-	"chess/tests/test_move_gen"
+	"chess/src/chess_engine/board"
+	"chess/src/chess_engine/gamestate"
+	"chess/src/tests/test_move_gen"
 	"testing"
 )
 

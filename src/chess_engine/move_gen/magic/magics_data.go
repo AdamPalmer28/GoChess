@@ -1,7 +1,7 @@
 package magic
 
 import (
-	"chess/chess_engine/board"
+	"chess/src/chess_engine/board"
 	"encoding/json"
 	"fmt"
 	"os"

@@ -1,6 +1,6 @@
 package magic
 
-import "chess/chess_engine/board"
+import "chess/src/chess_engine/board"
 
 // ============================================================================
 // 		Occupancy

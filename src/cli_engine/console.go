@@ -2,7 +2,7 @@ package cli_engine
 
 import (
 	"bufio"
-	"chess/cli_engine/cli_debug"
+	"chess/src/cli_engine/cli_debug"
 	"fmt"
 	"os"
 	"strings"

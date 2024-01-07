@@ -1,7 +1,7 @@
 package magic
 
 import (
-	"chess/chess_engine/board"
+	"chess/src/chess_engine/board"
 	"fmt"
 	"math"
 	"math/rand"

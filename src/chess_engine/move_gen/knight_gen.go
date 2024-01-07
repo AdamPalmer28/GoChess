@@ -1,7 +1,7 @@
 package move_gen
 
 import (
-	"chess/chess_engine/board"
+	"chess/src/chess_engine/board"
 )
 
 func GenKnightMoves(knight_bb board.Bitboard, knight_rays *[64]board.Bitboard,

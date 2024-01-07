@@ -1,7 +1,7 @@
 package move_gen
 
 import (
-	"chess/chess_engine/board"
+	"chess/src/chess_engine/board"
 )
 
 // simplify this function to take inputs

@@ -1,9 +1,9 @@
 package gamestate
 
 import (
-	"chess/chess_engine/board"
-	"chess/chess_engine/move_gen"
-	"chess/chess_engine/move_gen/magic"
+	"chess/src/chess_engine/board"
+	"chess/src/chess_engine/move_gen"
+	"chess/src/chess_engine/move_gen/magic"
 	"fmt"
 )
 

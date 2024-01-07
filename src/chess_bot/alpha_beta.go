@@ -1,6 +1,6 @@
 package chess_bot
 
-import "chess/chess_engine/gamestate"
+import "chess/src/chess_engine/gamestate"
 
 // ============================================================================
 // AlphaBeta search

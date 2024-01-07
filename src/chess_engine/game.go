@@ -1,7 +1,7 @@
 package chess_engine
 
 import (
-	"chess/chess_engine/gamestate"
+	"chess/src/chess_engine/gamestate"
 )
 
 

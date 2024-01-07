@@ -1,7 +1,7 @@
 package magic
 
 import (
-	"chess/chess_engine/board"
+	"chess/src/chess_engine/board"
 )
 
 // A basic sliding generation - used for verification of the magic bitboards

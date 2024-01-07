@@ -1,13 +1,13 @@
 package evaluate
 
 import (
-	"chess/chess_engine/board"
+	"chess/src/chess_engine/board"
 	"math"
 )
 
 /*
 Pawn eval:
-	- centre control 
+	- centre control
 	- pomotion potential
 		- blocked
 		- past pawns

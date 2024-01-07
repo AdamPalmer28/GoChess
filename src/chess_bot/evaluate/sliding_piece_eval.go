@@ -1,7 +1,7 @@
 package evaluate
 
 import (
-	"chess/chess_engine/board"
+	"chess/src/chess_engine/board"
 )
 
 /*
