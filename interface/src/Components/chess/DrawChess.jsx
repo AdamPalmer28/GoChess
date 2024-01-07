@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import DrawBoard from "./board";
 import ChessUItabs from "./chessTabs";
 
@@ -10,16 +11,29 @@ const startingBoard = [
 ];
 let boardPieces = startingBoard;
 const DrawChess = () => {
-	const squareSelected = (index) => {
-		console.log(`Draw Chess: You clicked square ${index}`);
+	const [sqSelected, setSqSelected] = useState(64); // selected squares [from, to]
+	const [lastMove, setLastMove] = useState([64, 64]); // last move [from, to]
 
-		if (boardPieces[index] == 12) {
-			console.log(`Draw Chess: You clicked empty square`);
+	const squareSelected = (index) => {
+		// square selected / clicked
+		if (sqSelected != 64) {
+			console.log(`UserMove: ${sqSelected} -> ${index}`);
+
+			setSqSelected(64); // reset selected square
 			return;
 		}
-		console.log(`Draw Chess: You clicked piece ${boardPieces[index]}`);
+
+		if (boardPieces[index] == 12) {
+			// empty square
+
+			setSqSelected(64); // reset selected square
+			return;
+		}
+		// clicked on a piece
+		setSqSelected(index);
 	};
-	let boardLength = 920;
+
+	let boardLength = 800;
 	//const playerWhite = bool; // is the player white or black
 
 	return (
@@ -28,6 +42,8 @@ const DrawChess = () => {
 				onSquareSelect={squareSelected}
 				boardLength={boardLength}
 				pieces={boardPieces}
+				sqSelected={sqSelected}
+				lastMove={lastMove}
 			/>
 			<ChessUItabs />
 		</div>

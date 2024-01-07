@@ -13,7 +13,12 @@ const DrawBoard = (props) => {
 	// board prorperties
 	let boardSize = props.boardLength; // board size
 	let sqLength = boardSize / 8; // square length
-	const [highlight_sq, setHighlight] = useState(Array(64).fill(false));
+
+	const [highlight_sq, setHighlight] = useState(Array(64).fill(false)); // right click highlight squares
+
+	let lastMoveFrom,
+		lastMoveTo = props.lastMove;
+	let sqSelected = props.sqSelected;
 
 	// helper functions -------------------------------------------------------
 
@@ -46,7 +51,7 @@ const DrawBoard = (props) => {
 
 		// loop through columns of a row
 		columns.forEach((column, i) => {
-			// create properties for square
+			// create propserties for square
 			const squareNum = (row - 1) * 8 + i;
 			const square = column + row;
 
@@ -59,6 +64,7 @@ const DrawBoard = (props) => {
 					sqLength={sqLength}
 					piece={props.pieces[squareNum]}
 					highlightSq={highlight_sq[squareNum]}
+					styleClasses={squareNum == sqSelected ? "selected" : ""}
 				></DrawSquare>
 			);
 		});
@@ -96,13 +102,13 @@ const DrawBoard = (props) => {
 // Square
 
 // Chess Square
-const DrawSquare = (prop) => {
-	let sqLength = prop.sqLength; // square length
+const DrawSquare = (props) => {
+	let sqLength = props.sqLength; // square length
 
 	let pieceHeight, pieceWidth;
 	// determine piece scaling
-	if (prop.piece != 12) {
-		switch (prop.piece % 6) {
+	if (props.piece != 12) {
+		switch (props.piece % 6) {
 			case 0: // pawn
 				pieceHeight = 0.7;
 				pieceWidth = 0.6;
@@ -132,15 +138,16 @@ const DrawSquare = (prop) => {
 
 	// determine square color
 	let color_sq_sass = "black-sq";
-	if ((prop.index + ((Math.floor(prop.index / 8) - 1) % 2)) % 2 === 0) {
+	if ((props.index + ((Math.floor(props.index / 8) - 1) % 2)) % 2 === 0) {
 		color_sq_sass = "white-sq";
 	}
 
 	return (
-		<Col id={prop.index} className="m-0 p-0">
+		<Col id={props.index} className="m-0 p-0">
 			{/* SQUARE ------------------------------------*/}
 			<div
-				className={`${color_sq_sass}  ${prop.highlightSq ? "highlight" : ""}`}
+				className={`${color_sq_sass}  ${props.highlightSq ? "highlight" : ""} 
+					${props.styleClasses}`}
 				style={{
 					height: sqLength,
 					width: sqLength,
@@ -152,16 +159,16 @@ const DrawSquare = (prop) => {
 				}}
 				onClick={() => {
 					// left click
-					prop.onLeftClick(prop.index, prop.id);
+					props.onLeftClick(props.index, props.id);
 				}}
 				onContextMenu={(e) => {
 					// right click
 					e.preventDefault(); // prevent context menu from showing
-					prop.onContextMenu(prop.index);
+					props.onContextMenu(props.index);
 				}}
 			>
 				{/* ID / TEXT -----------------------------*/}
-				{prop.index % 8 == 0 || Math.floor(prop.index / 8) == 0 ? (
+				{props.index % 8 == 0 || Math.floor(props.index / 8) == 0 ? (
 					<div
 						style={{
 							position: "absolute",
@@ -171,16 +178,16 @@ const DrawSquare = (prop) => {
 							zIndex: 2,
 						}}
 					>
-						{prop.id}
+						{props.id}
 					</div>
 				) : (
 					<></>
 				)}
 
 				{/* PIECE ---------------------------------*/}
-				{prop.piece != 12 ? (
+				{props.piece != 12 ? (
 					<DrawPiece
-						piece={prop.piece}
+						piece={props.piece}
 						style={{
 							height: pieceHeight * sqLength,
 							width: pieceWidth * sqLength,

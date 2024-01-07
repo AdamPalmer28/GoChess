@@ -1,10 +1,17 @@
+import React, { useState } from "react";
 import Nav from "react-bootstrap/Nav";
 
 function ChessUItabs() {
+	const [activeTab, setActiveTab] = useState("game");
+
+	const handleSelect = (selectedKey) => setActiveTab(selectedKey);
 	return (
 		<div className="chess-ui-tabs flex-grow-1">
-			<Navtabs />
-			<div>Tabs here</div>
+			<Navtabs onSelect={handleSelect} />
+
+			{activeTab === "game" && <div>Game content here</div>}
+			{activeTab === "link-1" && <div>Analysis content here</div>}
+			{activeTab === "link-2" && <div>Settings content here</div>}
 		</div>
 	);
 }
@@ -17,6 +24,7 @@ function Navtabs(props) {
 			variant="tabs"
 			className="w-100 border-0 background"
 			defaultActiveKey="/home"
+			onSelect={props.onSelect}
 		>
 			<Nav.Item>
 				<Nav.Link eventKey="game" className="chess-nav-tab-item">

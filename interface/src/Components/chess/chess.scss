@@ -90,12 +90,22 @@ $red: #460c05;
 	&::before {
 		content: "";
 		position: absolute;
-		// top: 0;
-		// left: 0;
 		width: 100%;
 		height: 100%;
 		background-color: rgba(0, 110, 255, 0.338);
 		z-index: 1; // set z-index to 1 to place it on top of the square
+	}
+}
+
+.selected {
+	position: relative; // set position to relative
+	&::before {
+		border: 3px solid rgb(255, 213, 0);
+		z-index: 1;
+		content: "";
+		position: absolute;
+		width: 100%;
+		height: 100%;
 	}
 }
 
