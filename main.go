@@ -7,20 +7,14 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"time"
 
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )
 
-type Data struct {
-	Message string `json:"message"`
-    Timestamp time.Time `json:"timestamp"`
-}
-
 type ChessData struct {
 	Message string `json:"message"`
-	MoveList []uint `json:"movelist"`
+	MoveList [][3]uint `json:"movelist"`
 }
 
 func main() {
@@ -35,28 +29,8 @@ func main() {
 	// Use CORS middleware for all routes
 	router.Use(corsHandler)
 
-	router.HandleFunc("/api/data", func(w http.ResponseWriter, r *http.Request) {
-		// Simulating data retrieval from a database or external source
-		myData := Data{
-			Message: "Hello from the server!",
-			Timestamp: time.Now(),
-		}
-	
-		// Convert the data to JSON
-		jsonData, err := json.Marshal(myData)
-		if err != nil {
-			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-			return
-		}
-	
-		// Set response headers
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
-	
-		// Send the JSON response
-		w.Write(jsonData)
-	})
 
+	// -------------------------------------------------------------------------
 
 	// start game host
 	gh := src.StartGameHost()
@@ -66,18 +40,17 @@ func main() {
 	var SimpleMoveList [][3]uint // [special, startSq, endSq]
 	for _, move := range moveList {
 		var simpleMove [3]uint
-		simpleMove[0] = move && 
-		simpleMove[1] = move.StartSq
-		simpleMove[2] = move.EndSq
+		simpleMove[0] = move >> 12
+		simpleMove[1] = move & 0b111111
+		simpleMove[2] = (move >> 6) & 0b111111
 		SimpleMoveList = append(SimpleMoveList, simpleMove)
 	}
 
 	router.HandleFunc("/chessgame", func(w http.ResponseWriter, r *http.Request) {
 		// Simulating data retrieval from a database or external source
-		myData := Data{
+		myData := ChessData{
 			Message: "Chess Game!",
-			MoveList: moveList,
-
+			MoveList: SimpleMoveList,
 		}
 	
 		// Convert the data to JSON

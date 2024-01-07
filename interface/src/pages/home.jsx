@@ -1,12 +1,13 @@
 import DrawChess from "../Components/chess/DrawChess";
-import MyComponent from "../Components/demo";
-import BallWithTrail from "../Components/chess/background_nero";
-import { Button, Navbar, Container } from "react-bootstrap";
+import MoveList from "../Components/chess/GameData/moveList";
+import ChessData from "../Components/chess/GameData/usefullData";
+//import { Button, Navbar, Container } from "react-bootstrap";
 
 const Home = () => {
+	// chess data
+
 	return (
 		<>
-			<MyComponent />
 			<DrawChess />
 		</>
 	);

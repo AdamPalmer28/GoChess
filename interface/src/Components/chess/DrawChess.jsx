@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DrawBoard from "./board";
 import ChessUItabs from "./chessTabs";
+import ChessData from "./GameData/usefullData";
 
 import "./chess.scss";
 
@@ -13,6 +14,38 @@ let boardPieces = startingBoard;
 const DrawChess = () => {
 	const [sqSelected, setSqSelected] = useState(64); // selected squares [from, to]
 	const [lastMove, setLastMove] = useState([64, 64]); // last move [from, to]
+
+	const [GSdata, setData] = useState(null);
+	const [isLoading, setIsLoading] = useState(true);
+	const [error, setError] = useState(null);
+
+	// fetch data from API url = http://localhost:8080/chessgame
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await fetch("http://localhost:8080/chessgame"); // Replace with your API endpoint
+				if (!response.ok) {
+					throw new Error(`HTTP error! Status: ${response.status}`);
+				}
+				console.log(response);
+				const result = await response.json();
+				setData(result);
+			} catch (error) {
+				setError(error);
+			} finally {
+				setIsLoading(false);
+			}
+		};
+		fetchData();
+	}, []);
+
+	// decode data once loaded
+	if (!isLoading || error) {
+		let { message, moveListArray, HumanMoveListArray } = ChessData(GSdata);
+		console.log(`message: ${message}`);
+		console.log(`Index move list: ${moveListArray}`);
+		console.log(`Move list: ${HumanMoveListArray}`);
+	}
 
 	const squareSelected = (index) => {
 		// square selected / clicked
