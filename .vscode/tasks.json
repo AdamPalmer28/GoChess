@@ -1,0 +1,58 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			// Start Go Server - Chess Engine
+			"label": "Chess Server",
+			"type": "shell",
+			"command": "go run main.go",
+			"group": "build",
+			"options": {
+				"statusbar": {
+					"label": "Chess Server",
+					"hide": true,
+					"color": "#b52616",
+					"backgroundColor": "#ffffff"
+				},
+				"isBackground": true
+			}
+		},
+		{
+			// Start interface
+			"label": "Chess Interface",
+			"type": "shell",
+			"command": "npm",
+			"args": ["run", "dev"],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			//"dependsOn": ["Chess Server"],
+			"options": {
+				"cwd": "${workspaceFolder}/interface",
+				"statusbar": {
+					"label": "Chess Interface",
+					"hide": true,
+					"color": "#b52616",
+					"backgroundColor": "#ffffff"
+				}
+			},
+			"isBackground": true
+		},
+		{
+			"label": "Run Chess",
+			"type": "shell",
+			"command": "echo",
+			"group": "build",
+			"args": ["Starting Backend and Frontend..."],
+			"dependsOn": ["Chess Interface", "Chess Server"],
+			"options": {
+				"statusbar": {
+					"label": "Run Chess",
+					"color": "#ffffff",
+					"backgroundColor": "#ffffff"
+				}
+			}
+		}
+	]
+}

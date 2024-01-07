@@ -5,9 +5,12 @@
 ### Higher priority
 
 - Design interface
-  - Build tab system
-    - move lists
-    - analysis elments
+  - Engine interface
+    - MoveList
+    - Gamestate / General information
+      - Move Number
+      - Turn
+      - Castling rights
 
 ### Lower priority
 
