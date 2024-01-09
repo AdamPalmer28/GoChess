@@ -6,6 +6,7 @@ import ChessData from "./GameData/usefullData";
 import "./chess.scss";
 
 const startingBoard = [
+	// default board
 	3, 2, 1, 4, 5, 1, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 12, 12, 12, 12, 12, 12, 12,
 	12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12, 12,
 	12, 12, 12, 12, 12, 12, 6, 6, 6, 6, 6, 6, 6, 6, 9, 8, 7, 10, 11, 7, 8, 9,
@@ -19,7 +20,7 @@ const DrawChess = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState(null);
 
-	// fetch data from API url = http://localhost:8080/chessgame
+	// fetch game-data from API url = http://localhost:8080/chessgame
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -74,15 +75,20 @@ const DrawChess = () => {
 	//const playerWhite = bool; // is the player white or black
 
 	return (
-		<div className="container chess-ui d-flex">
-			<DrawBoard
-				onSquareSelect={squareSelected}
-				boardLength={boardLength}
-				pieces={boardPieces}
-				sqSelected={sqSelected}
-				lastMove={lastMove}
-			/>
-			<ChessUItabs />
+		<div className="mx-3">
+			<div className="my-2 chess-ui d-flex">
+				<DrawBoard
+					onSquareSelect={squareSelected}
+					boardLength={boardLength}
+					pieces={boardPieces}
+					sqSelected={sqSelected}
+					lastMove={lastMove}
+				/>
+				<ChessUItabs />
+			</div>
+			<div className="chess-analysis">
+				<p>Analysis</p>
+			</div>
 		</div>
 	);
 };
