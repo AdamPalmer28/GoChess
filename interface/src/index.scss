@@ -12,7 +12,9 @@ $theme-colors: (
 	"warning": #ffc107,
 	"danger": #dc3545,
 	"light": #d3dde8,
-	"dark": #252525,
+	"dark": rgb(55, 55, 55),
+	"dark-light": rgb(65, 65, 65),
+	"grey": rgb(100, 100, 100),
 );
 
 $enable-gradients: true;

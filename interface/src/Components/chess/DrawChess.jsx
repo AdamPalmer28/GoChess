@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import DrawBoard from "./board";
 import ChessUItabs from "./chessTabs";
 import ChessData from "./GameData/usefullData";
+import ChessTabsFooter from "./chessTabsFooter";
 
 import "./chess.scss";
 
@@ -71,12 +72,12 @@ const DrawChess = () => {
 		setSqSelected(index);
 	};
 
-	let boardLength = 800;
+	let boardLength = 720;
 	//const playerWhite = bool; // is the player white or black
 
 	return (
-		<div className="mx-3">
-			<div className="my-2 chess-ui d-flex">
+		<div className="mx-3 my-2 chess-ui flex">
+			<div className="flex">
 				<DrawBoard
 					onSquareSelect={squareSelected}
 					boardLength={boardLength}
@@ -84,11 +85,9 @@ const DrawChess = () => {
 					sqSelected={sqSelected}
 					lastMove={lastMove}
 				/>
-				<ChessUItabs />
+				<ChessTabsFooter />
 			</div>
-			<div className="chess-analysis">
-				<p>Analysis</p>
-			</div>
+			<ChessUItabs />
 		</div>
 	);
 };

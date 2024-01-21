@@ -19,11 +19,10 @@ function ChessUItabs() {
 function Navtabs(props) {
 	return (
 		<Nav
-			justify
 			fill
 			variant="tabs"
 			className="w-100 border-0 background"
-			defaultActiveKey="/home"
+			defaultActiveKey="game"
 			onSelect={props.onSelect}
 		>
 			<Nav.Item>

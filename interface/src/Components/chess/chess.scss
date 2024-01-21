@@ -1,15 +1,17 @@
+@import "../../index.scss";
 // Variables
 
-$dark-color: rgb(55, 55, 55);
-$dark-color2: rgb(65, 65, 65);
+$bg-color: map-get($theme-colors, "dark");
+$darkalt-color: map-get($theme-colors, "dark-light");
+$grey: map-get($theme-colors, "grey");
 
 $dark-gradient: radial-gradient(
 	ellipse,
-	$dark-color 80%,
+	$darkalt-color 80%,
 	rgb(100, 100, 100) 100%
 );
 
-$red: #460c05;
+$red: #860909;
 
 // ============================================================================
 // UI Styling
@@ -50,7 +52,7 @@ $red: #460c05;
 	//border: 1px solid #ffffff;
 	border-radius: 0% !important;
 
-	background: $dark-color;
+	background: $darkalt-color;
 	color: #ffffff;
 
 	&:hover {
@@ -59,7 +61,7 @@ $red: #460c05;
 	}
 
 	&.active {
-		background-color: $dark-color2 !important;
+		background-color: $grey !important;
 
 		border: 0;
 		color: $red !important;
@@ -68,6 +70,43 @@ $red: #460c05;
 	border-width: 0 !important;
 	padding: 0.5vh 1vh;
 	margin: 0;
+}
+
+.chessFooter {
+	padding-top: 1vh;
+}
+
+.center-nav-items {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.chess-footer-nav-tab-item {
+	//border: 1px solid #ffffff;
+	border-radius: 30% !important;
+
+	width: 30px !important;
+	padding: 0% !important;
+
+	// padding x
+
+	background: $darkalt-color;
+	color: #ffffff;
+
+	&:hover {
+		background-color: #ffffff;
+		color: #000000;
+	}
+
+	&.active {
+		background-color: $grey !important;
+
+		border: 0;
+		color: $red !important;
+	}
+
+	//border-width: 0 !important;
 }
 
 // ============================================================================
