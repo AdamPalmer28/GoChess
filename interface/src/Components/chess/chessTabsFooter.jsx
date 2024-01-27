@@ -1,46 +1,51 @@
 import React, { useState, useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
 import "./chess.scss";
+// icons
+import { Sliders2, Cpu, Activity } from "react-bootstrap-icons";
 
 function ChessTabsFooter() {
 	const [activeTab, setActiveTab] = useState("game");
 
 	const handleSelect = (selectedKey) => setActiveTab(selectedKey);
 	return (
-		<div className="chessfooter w-10 d-flex">
+		<div className="chessfooter d-flex my-3">
 			<Footertabs onSelect={handleSelect} />
 
-			{activeTab === "game" && <div>Changed</div>}
-			{activeTab === "link-1" && <div>Analysis content here</div>}
-			{activeTab === "link-2" && <div>Settings content here</div>}
+			<div className="">
+				{activeTab === "gamestate" && <div>GameState</div>}
+				{activeTab === "ai" && <div>AI Info</div>}
+				{activeTab === "settings" && <div>Settings content here</div>}
+			</div>
 		</div>
 	);
 }
 
 function Footertabs(props) {
+	let image_size = 24;
 	return (
 		<Nav
 			justify
 			fill
 			variant="tabs"
-			className="flex-column bg-primary px-1 center-nav-items"
+			className="center-nav-items flex-column"
 			style={{ width: "40px" }}
-			defaultActiveKey="game"
+			defaultActiveKey="gamestate"
 			onSelect={props.onSelect}
 		>
-			<Nav.Item className="pt-2">
-				<Nav.Link eventKey="game" className="chess-footer-nav-tab-item">
-					1
+			<Nav.Item>
+				<Nav.Link eventKey="ai" className="chess-footer-nav-tab-item">
+					<Cpu size={image_size} />
 				</Nav.Link>
 			</Nav.Item>
-			<Nav.Item className="pt-2">
-				<Nav.Link eventKey="link-1" className="chess-footer-nav-tab-item">
-					2
+			<Nav.Item className="pt-3">
+				<Nav.Link eventKey="gamestate" className="chess-footer-nav-tab-item">
+					<Activity size={image_size} />
 				</Nav.Link>
 			</Nav.Item>
-			<Nav.Item className="py-2">
-				<Nav.Link eventKey="link-2" className="chess-footer-nav-tab-item">
-					3
+			<Nav.Item className="pt-3">
+				<Nav.Link eventKey="settings" className="chess-footer-nav-tab-item">
+					<Sliders2 size={image_size} />
 				</Nav.Link>
 			</Nav.Item>
 		</Nav>

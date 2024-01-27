@@ -4,8 +4,7 @@ import RoutePages from "./Route";
 
 function App() {
 	return (
-		<div class="bg-dark">
-			test
+		<div class="bg-dark h-100 p-0">
 			<RoutePages />
 		</div>
 	);

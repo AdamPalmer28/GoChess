@@ -76,7 +76,7 @@ const DrawChess = () => {
 	//const playerWhite = bool; // is the player white or black
 
 	return (
-		<div className="mx-3 my-2 chess-ui flex">
+		<div className="px-3 py-2 chess-ui flex">
 			<div className="flex">
 				<DrawBoard
 					onSquareSelect={squareSelected}

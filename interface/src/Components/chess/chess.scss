@@ -4,6 +4,7 @@
 $bg-color: map-get($theme-colors, "dark");
 $darkalt-color: map-get($theme-colors, "dark-light");
 $grey: map-get($theme-colors, "grey");
+$light: map-get($theme-colors, "light");
 
 $dark-gradient: radial-gradient(
 	ellipse,
@@ -22,17 +23,12 @@ $red: #860909;
 
 	justify-content: center;
 	padding: 0;
+
+	height: 100vh; // Extend to the bottom of the page
 }
 
-.chess-board {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-
-	// border: 2px solid #ffffff;
-	// border-style: double;
-	box-shadow: 0px 0px 20px 3px #888;
-}
+// ============================================================================
+// UI Tabs
 
 .chess-ui-tabs {
 	margin-left: 1vh;
@@ -52,8 +48,8 @@ $red: #860909;
 	//border: 1px solid #ffffff;
 	border-radius: 0% !important;
 
-	background: $darkalt-color;
-	color: #ffffff;
+	background: $grey;
+	color: $red;
 
 	&:hover {
 		background-color: #ffffff;
@@ -61,10 +57,10 @@ $red: #860909;
 	}
 
 	&.active {
-		background-color: $grey !important;
+		background-color: $bg-color !important;
 
 		border: 0;
-		color: $red !important;
+		color: #ffffff !important;
 	}
 
 	border-width: 0 !important;
@@ -72,27 +68,38 @@ $red: #860909;
 	margin: 0;
 }
 
+// ============================================================================
+// Footer UI (beneath board)
+
 .chessFooter {
-	padding-top: 1vh;
+	height: 200px;
 }
 
 .center-nav-items {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	margin-right: 4px;
+	border-width: 0px !important;
 }
 
 .chess-footer-nav-tab-item {
-	//border: 1px solid #ffffff;
+	// boarding and colours
 	border-radius: 30% !important;
+	border: 1px solid #ffffff !important;
+	background: $grey;
+	color: $red;
 
-	width: 30px !important;
+	// content postioning
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	// sizing
+	width: 36px !important;
+	height: 36px !important;
 	padding: 0% !important;
-
-	// padding x
-
-	background: $darkalt-color;
-	color: #ffffff;
 
 	&:hover {
 		background-color: #ffffff;
@@ -100,17 +107,25 @@ $red: #860909;
 	}
 
 	&.active {
-		background-color: $grey !important;
+		background-color: $darkalt-color !important;
 
-		border: 0;
-		color: $red !important;
+		border: 1px solid #ffffff;
+		color: #ffffff !important;
 	}
 
-	//border-width: 0 !important;
+	border-width: 1 !important;
 }
 
 // ============================================================================
-// Squares Styling
+// Board Styling
+
+.chess-board {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+
+	box-shadow: 0px 0px 20px 3px #888;
+}
 
 .white-sq {
 	background-color: #9c9c9c;
