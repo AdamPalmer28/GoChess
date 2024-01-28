@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
-import "./chess.scss";
+import "../chess.scss";
 // icons
 import { Sliders2, Cpu, Activity } from "react-bootstrap-icons";
+import GameStateTab from "./gamestateTab";
 
-function ChessTabsFooter() {
-	const [activeTab, setActiveTab] = useState("game");
+function ChessTabsFooter(props) {
+	const [activeTab, setActiveTab] = useState("ai");
 
 	const handleSelect = (selectedKey) => setActiveTab(selectedKey);
 	return (
-		<div className="chessfooter d-flex my-3">
+		<div className="chessfooter d-flex my-3  bg-dark">
 			<Footertabs onSelect={handleSelect} />
 
 			<div className="">
-				{activeTab === "gamestate" && <div>GameState</div>}
 				{activeTab === "ai" && <div>AI Info</div>}
+				{activeTab === "gamestate" && (
+					<GameStateTab
+						moveList={props.moveList}
+						w_move={props.w_move}
+						moveHistory={props.moveHistory}
+					/>
+				)}
 				{activeTab === "settings" && <div>Settings content here</div>}
 			</div>
 		</div>
