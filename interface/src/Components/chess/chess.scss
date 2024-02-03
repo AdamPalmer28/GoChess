@@ -69,58 +69,6 @@ $red: #860909;
 }
 
 // ============================================================================
-// Footer UI (beneath board)
-
-.chessFooter {
-	height: 200px;
-}
-
-.chessfooter div {
-	font-size: 1rem;
-}
-
-.center-nav-items {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	margin-right: 4px;
-	border-width: 0px !important;
-}
-
-.chess-footer-nav-tab-item {
-	// boarding and colours
-	border-radius: 30% !important;
-	border: 1px solid #ffffff !important;
-	background: $grey;
-	color: $red;
-
-	// content postioning
-	display: flex;
-	justify-content: center;
-	align-items: center;
-
-	// sizing
-	width: 36px !important;
-	height: 36px !important;
-	padding: 0% !important;
-
-	&:hover {
-		background-color: #ffffff;
-		color: #000000;
-	}
-
-	&.active {
-		background-color: $darkalt-color !important;
-
-		border: 1px solid #ffffff;
-		color: #ffffff !important;
-	}
-
-	border-width: 1 !important;
-}
-
-// ============================================================================
 // Board Styling
 
 .chess-board {

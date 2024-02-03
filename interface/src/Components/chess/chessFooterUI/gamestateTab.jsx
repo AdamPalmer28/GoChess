@@ -1,8 +1,11 @@
+import "./footer.scss";
+
 const GameStateTab = (props) => {
 	return (
 		<div>
-			<h5>Game State</h5>
-			Move: {props.w_move ? "White" : "Black"}
+			<h5 className="tab-title">GameState data</h5>
+			Move:{" "}
+			<span className="gamestate-text">{props.w_move ? "White" : "Black"}</span>
 			<MoveList ml={props.moveList} />
 			<MoveHistory mh={props.moveHistory} />
 		</div>
@@ -19,10 +22,10 @@ const MoveList = (props) => {
 	return (
 		<div>
 			Moves (ordered by engine): <br />
-			<div className="d-inline-flex">
+			<div className="ps-3 d-flex flex-wrap">
 				{props.ml.human.map((move, index) => (
-					<div className="text-nowrap" key={index}>
-						{formatMove(move)} &nbsp;
+					<div className="move-text" key={index}>
+						{formatMove(move)}
 					</div>
 				))}
 			</div>

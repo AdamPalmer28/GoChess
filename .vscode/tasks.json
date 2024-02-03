@@ -3,13 +3,13 @@
 	"tasks": [
 		{
 			// Start Go Server - Chess Engine
-			"label": "Chess Server",
+			"label": "Server",
 			"type": "shell",
 			"command": "go run main.go",
 			"group": "build",
 			"options": {
 				"statusbar": {
-					"label": "Chess Server",
+					"label": "Server",
 					"hide": true,
 					"color": "#b52616",
 					"backgroundColor": "#ffffff"
@@ -19,7 +19,7 @@
 		},
 		{
 			// Start interface
-			"label": "Chess Interface",
+			"label": "Interface",
 			"type": "shell",
 			"command": "npm",
 			"args": ["run", "dev"],
@@ -31,7 +31,7 @@
 			"options": {
 				"cwd": "${workspaceFolder}/interface",
 				"statusbar": {
-					"label": "Chess Interface",
+					"label": "Interface",
 					"hide": true,
 					"color": "#b52616",
 					"backgroundColor": "#ffffff"
@@ -45,7 +45,7 @@
 			"command": "echo",
 			"group": "build",
 			"args": ["Starting Backend and Frontend..."],
-			"dependsOn": ["Chess Interface", "Chess Server"],
+			"dependsOn": ["Interface", "Server"],
 			"options": {
 				"statusbar": {
 					"label": "Run Chess",

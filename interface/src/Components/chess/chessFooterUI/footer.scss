@@ -1,0 +1,97 @@
+@import "../chess.scss";
+
+// Footer UI styling (directly beneath chess board)
+
+.chessFooter {
+	height: 216px;
+
+	border: rgba(255, 255, 255, 0.5) 1px solid !important;
+	border-radius: 5px !important;
+	padding: 2px;
+}
+
+.chessFooter div {
+	font-size: 1rem;
+}
+
+// ============================================================================
+// nav
+
+.nav-tabs-footer {
+	// centering elements
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	margin-right: 4px;
+	margin-left: 4px;
+
+	min-width: 40px !important;
+
+	border-right: 1px solid rgba(255, 255, 255, 0.5) !important;
+	border-bottom: 0px !important;
+}
+
+.chess-footer-nav-tab-item {
+	// boarding and colours
+	border-radius: 30% !important;
+	border: 1px solid #ffffff !important;
+	background: $grey;
+	color: $red;
+
+	// content postioning
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	// sizing
+	width: 36px !important;
+	height: 36px !important;
+	padding: 0% !important;
+
+	&:hover {
+		background-color: #ffffff;
+		color: #000000;
+	}
+
+	&.active {
+		// background-color: $darkalt-color !important;
+		background-color: $red !important;
+
+		border: 1px solid #ffffff;
+		color: #ffffff !important;
+	}
+
+	border-width: 1 !important;
+}
+
+// ============================================================================
+// text
+
+.tab-title {
+	font-size: 1.5rem;
+
+	// border
+	border-bottom: 1px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+.gamestate-text {
+	margin: 0.2rem;
+	//padding: 0.2rem;
+
+	color: #f79103;
+}
+
+.move-text {
+	font-size: 0.8rem !important;
+
+	margin: 0.2rem;
+	padding: 0.2rem;
+
+	background-color: #000000a7;
+	color: #f79103;
+	border-radius: 20%;
+
+	// no wrap
+	//white-space: nowrap;
+}
