@@ -1,4 +1,4 @@
-cd src/ 
+cd ../src/ 
 
 
 printf "\nBenchmarking: chess engine...\n"
