@@ -22,8 +22,8 @@ const DrawChess = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState(null);
 
-	// fetch game-data from API url = http://localhost:8080/chessgame
 	useEffect(() => {
+		// fetch game-data from API url = http://localhost:8080/chessgame
 		const fetchData = async () => {
 			try {
 				const response = await fetch("http://localhost:8080/chessgame"); // Replace with your API endpoint
@@ -32,13 +32,21 @@ const DrawChess = () => {
 				}
 				console.log(response);
 				const result = await response.json();
-				setData(result);
+
+				// Decode data and handle it
+				const decodedData = ChessData(result);
+
+				setData(decodedData);
+
+				console.log(`message: ${decodedData.message}`);
+				console.log(`moveList: ${decodedData.gamestate.movelist}`);
 			} catch (error) {
 				setError(error);
 			} finally {
 				setIsLoading(false);
 			}
 		};
+
 		fetchData();
 	}, []);
 
@@ -48,15 +56,20 @@ const DrawChess = () => {
 	let moveHistory = {};
 
 	// decode data once loaded
-	if (!isLoading || error) {
-		let gameData = ChessData(GSdata);
-		console.log(`message: ${gameData.message}`);
+	if (!isLoading && !error) {
+		let chessData = GSdata;
 
+		let gameData = chessData.gamestate;
 		boardPieces = gameData.board;
 		moveList = gameData.movelist;
 
-		w_move = gameData.w_move;
+		w_move = gameData.state.w_move;
 		moveHistory = gameData.movehistory;
+
+		// console.log(`moveList: ${moveList}`);
+		// console.log(`moveList: ${moveList.human}`);
+		// console.log(`w_move: ${w_move}`);
+		// console.log(`castling: ${gameData.state.castle_rights}`);
 	}
 
 	const squareSelected = (index) => {

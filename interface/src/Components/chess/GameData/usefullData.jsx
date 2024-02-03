@@ -34,22 +34,16 @@ const makeMoveLists = (ml) => {
 // Create useful chess data from JSON data (from API)
 const ChessData = (data) => {
 	let message = data.message;
-	let moveList = data.movelist;
-	let moveHistory = data.movehistory;
-	let board = data.board;
-	let w_move = data.w_move;
 
 	// Clean Move lists -
-	moveList = makeMoveLists(moveList);
-	moveHistory = makeMoveLists(moveHistory);
+	let moveList = makeMoveLists(data.gamestate.movelist);
+	let moveHistory = makeMoveLists(data.gamestate.movehistory);
 
-	return {
-		message: message,
-		movelist: moveList,
-		movehistory: moveHistory,
-		board: board,
-		w_move: w_move,
-	};
+	// overwrite moveList and moveHistory
+	data.gamestate.movelist = moveList;
+	data.gamestate.movehistory = moveHistory;
+
+	return data;
 };
 
 export default ChessData;
