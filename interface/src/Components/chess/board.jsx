@@ -19,6 +19,7 @@ const DrawBoard = (props) => {
 	let lastMoveFrom,
 		lastMoveTo = props.lastMove;
 	let sqSelected = props.sqSelected;
+	let moveOptions = props.moveOptions;
 
 	// helper functions -------------------------------------------------------
 
@@ -64,7 +65,10 @@ const DrawBoard = (props) => {
 					sqLength={sqLength}
 					piece={props.pieces[squareNum]}
 					highlightSq={highlight_sq[squareNum]}
-					styleClasses={squareNum == sqSelected ? "selected" : ""}
+					styleClasses={
+						(squareNum == sqSelected ? "selected" : "") +
+						(moveOptions.includes(squareNum) ? "move-option" : "")
+					}
 				></DrawSquare>
 			);
 		});

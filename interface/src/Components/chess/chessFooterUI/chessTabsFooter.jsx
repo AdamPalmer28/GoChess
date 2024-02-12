@@ -37,7 +37,7 @@ function Footertabs(props) {
 			variant="tabs"
 			className="nav-tabs-footer"
 			style={{ width: "40px" }}
-			defaultActiveKey="gamestate"
+			defaultActiveKey="ai"
 			onSelect={props.onSelect}
 		>
 			<Nav.Item>

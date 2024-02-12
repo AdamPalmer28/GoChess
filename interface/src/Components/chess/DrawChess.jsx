@@ -14,8 +14,10 @@ const startingBoard = [
 ];
 
 const DrawChess = () => {
+	// selected squares [from, to]
 	const [sqSelected, setSqSelected] = useState(64); // selected squares [from, to]
 	const [lastMove, setLastMove] = useState([64, 64]); // last move [from, to]
+	const [selectedSqMoves, setSqMoves] = useState([]); // selected square moves
 
 	// fetch game-data from API
 	const [GSdata, setData] = useState(null);
@@ -39,7 +41,6 @@ const DrawChess = () => {
 				setData(decodedData);
 
 				console.log(`message: ${decodedData.message}`);
-				console.log(`moveList: ${decodedData.gamestate.movelist}`);
 			} catch (error) {
 				setError(error);
 			} finally {
@@ -54,6 +55,7 @@ const DrawChess = () => {
 	let moveList = {};
 	let w_move = true;
 	let moveHistory = {};
+	let opp_pieces = [6, 7, 8, 9, 10, 11];
 
 	// decode data once loaded
 	if (!isLoading && !error) {
@@ -66,29 +68,53 @@ const DrawChess = () => {
 		w_move = gameData.state.w_move;
 		moveHistory = gameData.movehistory;
 
-		// console.log(`moveList: ${moveList}`);
-		// console.log(`moveList: ${moveList.human}`);
-		// console.log(`w_move: ${w_move}`);
-		// console.log(`castling: ${gameData.state.castle_rights}`);
+		let opp_pieces = [];
+
+		if (w_move) {
+			opp_pieces = [6, 7, 8, 9, 10, 11]; // Opponent's pieces for white move
+		} else {
+			opp_pieces = [0, 1, 2, 3, 4, 5]; // Opponent's pieces for black move
+		}
 	}
 
+	// square selected / clicked
 	const squareSelected = (index) => {
-		// square selected / clicked
+		// square already selected - therefore 2nd click is possible move
 		if (sqSelected != 64) {
-			console.log(`UserMove: ${sqSelected} -> ${index}`);
+			let move = [sqSelected, index]; // possible move
 
+			// check if move is valid
+			if (selectedSqMoves.includes(index)) {
+				console.log("Valid Move");
+
+				setSqSelected(64); // reset selected square
+				setSqMoves([]); // reset moves
+				return;
+			} else {
+				console.log("Invalid Move");
+			}
+		}
+
+		// (empty square) or (selected opponent pieces)
+		let piece_selected = boardPieces[index];
+		if (piece_selected == 12 || opp_pieces.includes(piece_selected)) {
 			setSqSelected(64); // reset selected square
+			setSqMoves([]); // reset moves
 			return;
 		}
 
-		if (boardPieces[index] == 12) {
-			// empty square
-
-			setSqSelected(64); // reset selected square
-			return;
-		}
 		// clicked on a piece
 		setSqSelected(index);
+
+		// get available moves
+		let new_moves = [];
+		for (let i = 0; i < moveList.index.length; i++) {
+			if (moveList.index[i][0] === index) {
+				new_moves.push(moveList.index[i][1]);
+			}
+		}
+		setSqMoves(new_moves);
+		//console.log(`Moves: ${new_moves}`);
 	};
 
 	let boardLength = 720;
@@ -103,6 +129,7 @@ const DrawChess = () => {
 					pieces={boardPieces}
 					sqSelected={sqSelected}
 					lastMove={lastMove}
+					moveOptions={selectedSqMoves}
 				/>
 				<ChessTabsFooter
 					moveList={moveList}

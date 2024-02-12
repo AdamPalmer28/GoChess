@@ -115,6 +115,28 @@ $red: #860909;
 	}
 }
 
+.move-option {
+	// highlight move options
+	position: relative;
+	&::before {
+		content: "";
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		//background-color: rgba(0, 187, 255, 0.4);
+
+		// gradient bg color
+		background: radial-gradient(
+			circle,
+			rgba(243, 242, 255, 0.9) 0%,
+			rgba(0, 187, 255, 0.7) 80%,
+			rgb(255, 213, 0) 100%
+		);
+
+		z-index: 1; // set z-index to 1 to place it on top of the square
+	}
+}
+
 .flipped {
 	transform: rotate(180deg);
 }

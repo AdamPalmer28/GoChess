@@ -15,7 +15,7 @@ type ChessData struct {
 	GameState GameStateData `json:"gamestate"`
 }
 
-type GameStateData struct {
+type GameStateData struct { // Info about the gamestate
 	MoveList [][3]uint `json:"movelist"`
 	MoveHistory [][3]uint `json:"movehistory"`
 	Board [64]uint `json:"board"`
@@ -27,6 +27,26 @@ type GameStateData struct {
 		HalfMoveNo uint `json:"half_move_no"`
 		CastleRights [2]uint `json:"castle_rights"`
 	} `json:"state"`
+}
+
+type BotData struct { // Info of bot analysis of gamestate
+
+	Eval struct {
+		Total float64 `json:"eval"`
+		White float64 `json:"white"`
+		Black float64 `json:"black"`
+	} `json:"eval"`
+
+	BestMove [3]uint `json:"bestmove"`
+	BestLine [][3]uint `json:"bestline"`
+		
+	Depth struct {
+		Depth uint `json:"depth"`
+		Nodes uint `json:"nodes"`
+		Pruned uint `json:"pruned"`
+		TT_hits uint `json:"tt_hits"`
+		TT_success uint `json:"tt_success"`
+	} `json:"depth"`
 }
 
 // ============================================================================
