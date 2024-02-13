@@ -1,12 +1,5 @@
 package src
 
-import (
-	"encoding/json"
-	"net/http"
-
-	"github.com/gorilla/mux"
-)
-
 // ============================================================================
 // Data structure
 
@@ -51,7 +44,7 @@ type BotData struct { // Info of bot analysis of gamestate
 
 // ============================================================================
 
-func SendGameData(router *mux.Router, gh *GameHost) {
+func CreateData(gh *GameHost) ChessData {
 	// Sends ChessData to client
 
 	moveList := gh.GameState.MoveList
@@ -85,25 +78,10 @@ func SendGameData(router *mux.Router, gh *GameHost) {
 			},
 			
 		},
+	
+		
 	}
-
-	router.HandleFunc("/chessgame", func(w http.ResponseWriter, r *http.Request) {
-	
-		// Convert the data to JSON
-		jsonData, err := json.Marshal(gamedata)
-		if err != nil {
-			http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-			return
-		}
-	
-		// Set response headers
-		w.Header().Set("Content-Type", "application/json")
-		w.WriteHeader(http.StatusOK)
-	
-		// Send the JSON response
-		w.Write(jsonData)
-	})
-
+	return gamedata
 }
 
 // ============================================================================

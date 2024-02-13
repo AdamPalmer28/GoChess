@@ -14,40 +14,72 @@ const startingBoard = [
 ];
 
 const DrawChess = () => {
-	// selected squares [from, to]
-	const [sqSelected, setSqSelected] = useState(64); // selected squares [from, to]
-	const [lastMove, setLastMove] = useState([64, 64]); // last move [from, to]
-	const [selectedSqMoves, setSqMoves] = useState([]); // selected square moves
+	// Draw chess UI (board, footer, tabs)
+
+	// ========================================================================
+	// API data / request
 
 	// fetch game-data from API
 	const [GSdata, setData] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState(null);
 
-	useEffect(() => {
-		// fetch game-data from API url = http://localhost:8080/chessgame
-		const fetchData = async () => {
-			try {
-				const response = await fetch("http://localhost:8080/chessgame"); // Replace with your API endpoint
-				if (!response.ok) {
-					throw new Error(`HTTP error! Status: ${response.status}`);
-				}
-				console.log(response);
-				const result = await response.json();
-
-				// Decode data and handle it
-				const decodedData = ChessData(result);
-
-				setData(decodedData);
-
-				console.log(`message: ${decodedData.message}`);
-			} catch (error) {
-				setError(error);
-			} finally {
-				setIsLoading(false);
+	// fetch game-data -> http://localhost:8080/chessgame
+	const fetchData = async () => {
+		try {
+			const response = await fetch("http://localhost:8080/chessgame"); // Replace with your API endpoint
+			if (!response.ok) {
+				throw new Error(`HTTP error! Status: ${response.status}`);
 			}
-		};
+			console.log(response);
+			const result = await response.json();
 
+			// Decode data and handle it
+			const decodedData = ChessData(result);
+
+			setData(decodedData);
+
+			console.log(`message: ${decodedData.message}`);
+		} catch (error) {
+			setError(error);
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
+	// fetch Move -> http://localhost:8080/move
+	const sendMove = async (move) => {
+		console.log(`Send move: ${move}`);
+		try {
+			// ! this request is not working
+			const response = await fetch("http://localhost:8080/move", {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(move),
+			});
+			if (!response.ok) {
+				throw new Error(`HTTP error! Status: ${response.status}`);
+			}
+			console.log(response);
+			const result = await response.json();
+
+			// Decode data and handle it
+			const decodedData = ChessData(result);
+
+			setData(decodedData);
+
+			console.log(`message: ${decodedData.message}`);
+		} catch (error) {
+			setError(error);
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
+	// mount fetch data to UI
+	useEffect(() => {
 		fetchData();
 	}, []);
 
@@ -77,6 +109,14 @@ const DrawChess = () => {
 		}
 	}
 
+	// ========================================================================
+	// Interactions
+
+	// selected squares [from, to]
+	const [sqSelected, setSqSelected] = useState(64); // selected squares [from, to]
+	const [lastMove, setLastMove] = useState([64, 64]); // last move [from, to]
+	const [selectedSqMoves, setSqMoves] = useState([]); // selected square moves
+
 	// square selected / clicked
 	const squareSelected = (index) => {
 		// square already selected - therefore 2nd click is possible move
@@ -86,6 +126,10 @@ const DrawChess = () => {
 			// check if move is valid
 			if (selectedSqMoves.includes(index)) {
 				console.log("Valid Move");
+
+				// send move to API
+
+				sendMove(move);
 
 				setSqSelected(64); // reset selected square
 				setSqMoves([]); // reset moves
@@ -116,6 +160,9 @@ const DrawChess = () => {
 		setSqMoves(new_moves);
 		//console.log(`Moves: ${new_moves}`);
 	};
+
+	// ========================================================================
+	// Drawing Component
 
 	let boardLength = 720;
 	//const playerWhite = bool; // is the player white or black

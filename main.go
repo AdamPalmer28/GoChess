@@ -31,7 +31,8 @@ func main() {
 	// start game host
 	gh := src.StartGameHost()
 
-	src.SendGameData(router, gh) // listen for requests for game data
+	// listen for requests for game data
+	src.GetChessData(router, gh) 
 	
 	
 
