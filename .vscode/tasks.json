@@ -10,8 +10,8 @@
 			"options": {
 				"statusbar": {
 					"label": "Server",
-					"hide": true,
-					"color": "#b52616",
+					"hide": false,
+					"color": "#ff0000",
 					"backgroundColor": "#ffffff"
 				},
 				"isBackground": true

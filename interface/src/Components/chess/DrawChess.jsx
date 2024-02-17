@@ -31,7 +31,6 @@ const DrawChess = () => {
 			if (!response.ok) {
 				throw new Error(`HTTP error! Status: ${response.status}`);
 			}
-			console.log(response);
 			const result = await response.json();
 
 			// Decode data and handle it
@@ -50,14 +49,17 @@ const DrawChess = () => {
 	// fetch Move -> http://localhost:8080/move
 	const sendMove = async (move) => {
 		console.log(`Send move: ${move}`);
+
+		let jsondata = { move: move };
+		console.log(JSON.stringify(jsondata));
 		try {
-			// ! this request is not working
+			//const response = await fetch("http://localhost:8080/move");
 			const response = await fetch("http://localhost:8080/move", {
-				method: "GET",
+				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify(move),
+				body: JSON.stringify(jsondata),
 			});
 			if (!response.ok) {
 				throw new Error(`HTTP error! Status: ${response.status}`);
@@ -87,7 +89,7 @@ const DrawChess = () => {
 	let moveList = {};
 	let w_move = true;
 	let moveHistory = {};
-	let opp_pieces = [6, 7, 8, 9, 10, 11];
+	let opp_pieces = []; //[6, 7, 8, 9, 10, 11];
 
 	// decode data once loaded
 	if (!isLoading && !error) {
