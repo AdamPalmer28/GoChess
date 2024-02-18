@@ -20,7 +20,7 @@ const DrawChess = () => {
 	// API data / request
 
 	// fetch game-data from API
-	const [GSdata, setData] = useState(null);
+	const [GSdata, setData] = useState(null); // gamestate state
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState(null);
 
@@ -48,10 +48,10 @@ const DrawChess = () => {
 
 	// fetch Move -> http://localhost:8080/move
 	const sendMove = async (move) => {
-		console.log(`Send move: ${move}`);
+		//console.log(`Send move: ${move}`);
 
 		let jsondata = { move: move };
-		console.log(JSON.stringify(jsondata));
+		//console.log(JSON.stringify(jsondata));
 		try {
 			//const response = await fetch("http://localhost:8080/move");
 			const response = await fetch("http://localhost:8080/move", {
@@ -64,15 +64,12 @@ const DrawChess = () => {
 			if (!response.ok) {
 				throw new Error(`HTTP error! Status: ${response.status}`);
 			}
-			console.log(response);
 			const result = await response.json();
 
 			// Decode data and handle it
 			const decodedData = ChessData(result);
 
 			setData(decodedData);
-
-			console.log(`message: ${decodedData.message}`);
 		} catch (error) {
 			setError(error);
 		} finally {
@@ -84,6 +81,9 @@ const DrawChess = () => {
 	useEffect(() => {
 		fetchData();
 	}, []);
+
+	// ------------------------------------------------------------------------
+	// Data handling
 
 	let boardPieces = startingBoard;
 	let moveList = {};
@@ -112,7 +112,7 @@ const DrawChess = () => {
 	}
 
 	// ========================================================================
-	// Interactions
+	// UI Interactions
 
 	// selected squares [from, to]
 	const [sqSelected, setSqSelected] = useState(64); // selected squares [from, to]
@@ -127,18 +127,18 @@ const DrawChess = () => {
 
 			// check if move is valid
 			if (selectedSqMoves.includes(index)) {
-				console.log("Valid Move");
+				//console.log("Valid Move");
 
 				// send move to API
-
 				sendMove(move);
+				// set last move
+				setLastMove(move);
 
 				setSqSelected(64); // reset selected square
 				setSqMoves([]); // reset moves
 				return;
-			} else {
-				console.log("Invalid Move");
 			}
+			// else - invalid move
 		}
 
 		// (empty square) or (selected opponent pieces)
@@ -152,7 +152,7 @@ const DrawChess = () => {
 		// clicked on a piece
 		setSqSelected(index);
 
-		// get available moves
+		// get available moves for square selected
 		let new_moves = [];
 		for (let i = 0; i < moveList.index.length; i++) {
 			if (moveList.index[i][0] === index) {
@@ -160,7 +160,6 @@ const DrawChess = () => {
 			}
 		}
 		setSqMoves(new_moves);
-		//console.log(`Moves: ${new_moves}`);
 	};
 
 	// ========================================================================
@@ -171,21 +170,29 @@ const DrawChess = () => {
 
 	return (
 		<div className="px-3 py-2 chess-ui flex">
-			<div className="flex" style={{ width: boardLength }}>
-				<DrawBoard
-					onSquareSelect={squareSelected}
-					boardLength={boardLength}
-					pieces={boardPieces}
-					sqSelected={sqSelected}
-					lastMove={lastMove}
-					moveOptions={selectedSqMoves}
-				/>
+			<div className="flex">
+				<div className="d-flex">
+					<div>settings</div>
+
+					<DrawBoard
+						onSquareSelect={squareSelected}
+						boardLength={boardLength}
+						pieces={boardPieces}
+						sqSelected={sqSelected}
+						lastMove={lastMove}
+						moveOptions={selectedSqMoves}
+					/>
+
+					<div>eval</div>
+				</div>
+
 				<ChessTabsFooter
 					moveList={moveList}
 					w_move={w_move}
 					moveHistory={moveHistory}
 				/>
 			</div>
+
 			<ChessUItabs />
 		</div>
 	);

@@ -22,7 +22,7 @@ const MoveList = (props) => {
 	return (
 		<div>
 			Moves (ordered by engine): <br />
-			<div className="ps-3 d-flex flex-wrap">
+			<div className="ps-3 move-list">
 				{props.ml.human.map((move, index) => (
 					<div className="move-text" key={index}>
 						{formatMove(move)}

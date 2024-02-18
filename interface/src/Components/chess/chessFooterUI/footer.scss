@@ -4,6 +4,11 @@
 
 .chessFooter {
 	height: 216px;
+	width: 100%;
+	overflow: hidden;
+
+	display: flex;
+	flex-wrap: wrap;
 
 	border: rgba(255, 255, 255, 0.5) 1px solid !important;
 	border-radius: 5px !important;
@@ -91,7 +96,10 @@
 	background-color: #000000a7;
 	color: #f79103;
 	border-radius: 20%;
+}
 
-	// no wrap
-	//white-space: nowrap;
+.move-list {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%; // This will make the container take the full width of its parent
 }

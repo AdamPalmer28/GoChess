@@ -6,8 +6,6 @@ A ongoing to-do list of task for development of the chess project.
 
 ## High priority
 
-### Interface
-
 - Options menu (left of the board)
 
   - New game
@@ -17,21 +15,23 @@ A ongoing to-do list of task for development of the chess project.
   - ...
 
 - Eval bar (on right of board)
-- Footer UI
 
-  - finish gamestate UI
-  - Settings UI (with settings)
-  - AI UI
-    - Calculate next move
+### Interface
+
+- Footer gamestate UI
+  - turn
+- Footer Settings UI (with settings)
+- Footer AI UI
+
+  - Calculate next move
 
 - Promotion UI (popup)
 
-- Side UI
+- Basic display of Move history log (side UI game tab)
+- Analysis section (side UI)
 
-  - Basic display of Move history log (game tab)
-  - Analysis section:
-    - select areas of the program like gamestate, ai, ... (expandable)
-      - cause the board to high light areas of interest
+  - select areas of the program like gamestate, ai, ... (expandable)
+    - cause the board to high light areas of interest
 
 - Flexible board square drawing
 

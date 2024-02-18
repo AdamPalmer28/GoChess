@@ -91,6 +91,8 @@ $red: #860909;
 	color: #eeeeee;
 }
 
+// highlighing style
+
 .highlight {
 	position: relative; // set position to relative
 	&::before {
@@ -106,12 +108,38 @@ $red: #860909;
 .selected {
 	position: relative; // set position to relative
 	&::before {
-		border: 3px solid rgb(255, 213, 0);
-		z-index: 1;
 		content: "";
+		border: 3px ridge rgb(255, 213, 0);
+		z-index: 1;
 		position: absolute;
 		width: 100%;
 		height: 100%;
+	}
+}
+
+$last-move-color: rgba(5, 118, 179, 0.9);
+
+.last-move-from {
+	position: relative;
+	&::before {
+		content: "";
+		z-index: 1;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		background-color: $last-move-color;
+		opacity: 0.5;
+	}
+}
+.last-move-to {
+	position: relative;
+	&::before {
+		content: "";
+		z-index: 1;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		border: 5px ridge $last-move-color;
 	}
 }
 
@@ -137,6 +165,6 @@ $red: #860909;
 	}
 }
 
-.flipped {
-	transform: rotate(180deg);
-}
+// .flipped {
+// 	transform: rotate(180deg);
+// }

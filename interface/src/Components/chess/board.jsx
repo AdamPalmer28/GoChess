@@ -16,8 +16,9 @@ const DrawBoard = (props) => {
 
 	const [highlight_sq, setHighlight] = useState(Array(64).fill(false)); // right click highlight squares
 
-	let lastMoveFrom,
-		lastMoveTo = props.lastMove;
+	// highlight variables
+	let lastMoveFrom = props.lastMove[0];
+	let lastMoveTo = props.lastMove[1];
 	let sqSelected = props.sqSelected;
 	let moveOptions = props.moveOptions;
 
@@ -66,8 +67,10 @@ const DrawBoard = (props) => {
 					piece={props.pieces[squareNum]}
 					highlightSq={highlight_sq[squareNum]}
 					styleClasses={
-						(squareNum == sqSelected ? "selected" : "") +
-						(moveOptions.includes(squareNum) ? "move-option" : "")
+						(squareNum == sqSelected ? "selected " : "") +
+						(moveOptions.includes(squareNum) ? "move-option " : "") +
+						(squareNum == lastMoveFrom ? "last-move-from " : "") +
+						(squareNum == lastMoveTo ? "last-move-to " : "")
 					}
 				></DrawSquare>
 			);
