@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import DrawBoard from "./board";
 import ChessUItabs from "./chessTabs";
 import ChessData from "./GameData/usefullData";
 import ChessTabsFooter from "./chessFooterUI/chessTabsFooter";
+import BoardUI from "./board_ui";
 
 import "./chess.scss";
 
@@ -101,90 +101,43 @@ const DrawChess = () => {
 
 		w_move = gameData.state.w_move;
 		moveHistory = gameData.movehistory;
-
-		let opp_pieces = [];
-
-		if (w_move) {
-			opp_pieces = [6, 7, 8, 9, 10, 11]; // Opponent's pieces for white move
-		} else {
-			opp_pieces = [0, 1, 2, 3, 4, 5]; // Opponent's pieces for black move
-		}
 	}
-
 	// ========================================================================
-	// UI Interactions
+	// UI functions
 
-	// selected squares [from, to]
-	const [sqSelected, setSqSelected] = useState(64); // selected squares [from, to]
-	const [lastMove, setLastMove] = useState([64, 64]); // last move [from, to]
-	const [selectedSqMoves, setSqMoves] = useState([]); // selected square moves
+	const newGame = () => {
+		// reset game
+		console.log("New Game");
+	};
 
-	// square selected / clicked
-	const squareSelected = (index) => {
-		// square already selected - therefore 2nd click is possible move
-		if (sqSelected != 64) {
-			let move = [sqSelected, index]; // possible move
+	const undoMove = () => {
+		// undo last move
+		console.log("Undo Move");
+	};
 
-			// check if move is valid
-			if (selectedSqMoves.includes(index)) {
-				//console.log("Valid Move");
-
-				// send move to API
-				sendMove(move);
-				// set last move
-				setLastMove(move);
-
-				setSqSelected(64); // reset selected square
-				setSqMoves([]); // reset moves
-				return;
-			}
-			// else - invalid move
-		}
-
-		// (empty square) or (selected opponent pieces)
-		let piece_selected = boardPieces[index];
-		if (piece_selected == 12 || opp_pieces.includes(piece_selected)) {
-			setSqSelected(64); // reset selected square
-			setSqMoves([]); // reset moves
-			return;
-		}
-
-		// clicked on a piece
-		setSqSelected(index);
-
-		// get available moves for square selected
-		let new_moves = [];
-		for (let i = 0; i < moveList.index.length; i++) {
-			if (moveList.index[i][0] === index) {
-				new_moves.push(moveList.index[i][1]);
-			}
-		}
-		setSqMoves(new_moves);
+	const flipBoard = () => {
+		// flip board
+		console.log("Flip Board");
 	};
 
 	// ========================================================================
 	// Drawing Component
 
 	let boardLength = 720;
-	//const playerWhite = bool; // is the player white or black
 
 	return (
 		<div className="px-3 py-2 chess-ui flex">
 			<div className="flex">
-				<div className="d-flex">
-					<div>settings</div>
-
-					<DrawBoard
-						onSquareSelect={squareSelected}
-						boardLength={boardLength}
-						pieces={boardPieces}
-						sqSelected={sqSelected}
-						lastMove={lastMove}
-						moveOptions={selectedSqMoves}
-					/>
-
-					<div>eval</div>
-				</div>
+				<BoardUI
+					boardLength={boardLength}
+					boardPieces={boardPieces}
+					w_move={w_move}
+					movelist={moveList}
+					sendMove={sendMove}
+					newGame={newGame}
+					undo={undoMove}
+					flipBoard={flipBoard}
+				/>
 
 				<ChessTabsFooter
 					moveList={moveList}

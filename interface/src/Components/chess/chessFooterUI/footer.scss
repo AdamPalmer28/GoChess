@@ -41,13 +41,13 @@
 	// boarding and colours
 	border-radius: 30% !important;
 	border: 1px solid #ffffff !important;
-	background: $grey;
-	color: $red;
+	//background: $grey !important;
+	color: $light-red !important;
 
 	// content postioning
-	display: flex;
+	display: flex !important;
 	justify-content: center;
-	align-items: center;
+	align-items: center !important;
 
 	// sizing
 	width: 36px !important;
