@@ -97,15 +97,15 @@ const BoardSettings = (props) => {
 		- New Game
 		- Undo
 		- Flip
-		- 
-
+		- Upload PGN
+		
 	*/
 	let image_size = 24;
 
 	return (
 		<div id="board-settings" className="board-settings">
 			<Button
-				variant="dark"
+				variant="black-light"
 				id="new-game"
 				className="setting-btn"
 				onClick={props.newGame}
@@ -113,7 +113,7 @@ const BoardSettings = (props) => {
 				<PlusLg size={image_size} />
 			</Button>
 			<Button
-				variant="dark"
+				variant="black-light"
 				id="Undo"
 				className="setting-btn"
 				onClick={props.undo}
@@ -121,7 +121,7 @@ const BoardSettings = (props) => {
 				<ArrowCounterclockwise size={image_size} />
 			</Button>
 			<Button
-				variant="dark"
+				variant="black-light"
 				id="Flip"
 				className="setting-btn"
 				onClick={props.flipBoard}
@@ -145,12 +145,12 @@ const EvalBar = (props) => {
 	let top_height = 50 + score_height;
 
 	return (
-		<div id="eval-bar" className="eval-bar ms-2 mx-1">
+		<div id="eval-bar" className="eval-bar ms-3 mx-1">
 			<div className="score-ticker " style={{ top: `${top_height}%` }} />
 			<div id="black-2" className="eval-bar-item black">
 				{score < 0 ? score : ""}
 			</div>
-			<div id="black-1" className="eval-bar-item black" />
+			<div id="black-1" className="eval-bar-item black " />
 			<div id="white-1" className="eval-bar-item white" />
 			<div id="white-2" className="eval-bar-item white">
 				{score > 0 ? score : ""}

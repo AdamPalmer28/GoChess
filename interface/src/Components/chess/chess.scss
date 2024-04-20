@@ -179,7 +179,7 @@ $last-move-color: rgba(5, 118, 179, 0.9);
 	justify-content: top;
 
 	//padding-left: 3px;
-	padding-right: 10px;
+	padding-right: 12px;
 	padding-top: 5px;
 	padding-bottom: 5px;
 }
@@ -206,14 +206,19 @@ $last-move-color: rgba(5, 118, 179, 0.9);
 	align-items: center;
 
 	width: 40px;
+
+	border-radius: 20px;
+	border: 3px ridge rgb(26, 26, 26);
+
+	overflow: hidden;
+
+	z-index: 1;
 }
 
 .eval-bar-item {
 	height: 25%;
-	width: 90%;
+	width: 100%;
 
-	padding-top: 5px;
-	padding-bottom: 5px;
 	margin: 0;
 
 	font-size: 1.2vh;
@@ -227,7 +232,8 @@ $last-move-color: rgba(5, 118, 179, 0.9);
 .black {
 	background-color: #000000;
 	color: #ffffff;
-	border: 1px solid #ffffff;
+
+	border-bottom: 1px solid #ffffff;
 
 	align-items: top;
 }
@@ -235,7 +241,8 @@ $last-move-color: rgba(5, 118, 179, 0.9);
 .white {
 	background-color: #ffffff;
 	color: #000000;
-	border: 1px solid #000000;
+
+	border-top: 1px solid #000000;
 
 	display: flex;
 	flex-direction: column;
