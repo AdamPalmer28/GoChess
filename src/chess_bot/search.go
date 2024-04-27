@@ -33,7 +33,7 @@ type Search struct {
 }
 
 
-// Search for the best move
+// ChessBot Main function
 func FindBestMove(gs *gamestate.GameState, depth uint, make_move bool) {
 
 	// loop through the moves

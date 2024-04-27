@@ -100,11 +100,12 @@ func (gs *GameState) Make_move(move uint) {
 	// change move color
 	gs.White_to_move = !gs.White_to_move
 
+	//? could this be made optional in the future to save compute? (e.g. last depth of search)
 	gs.Next_move()
 }
 
 
-// Calcs for next move
+// Get gamestate ready for the next move
 func (gs *GameState) Next_move() {
 
 	gs.Make_BP() // make board perspectives
