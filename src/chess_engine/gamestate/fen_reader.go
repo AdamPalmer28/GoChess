@@ -70,7 +70,8 @@ func FEN_to_gs(fen string) *GameState {
 		Enpass_ind: en_passant_squ_ind,
 
 		MoveList: []uint{},
-		Moveno: uint(move_number),
+		DisplayMoveNo: uint(move_number),
+		Moveno: 1,
 		HalfMoveNo: uint(halfmove_clock),
 	}
 

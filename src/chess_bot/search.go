@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"math"
 	"strconv"
-	"time"
 )
 
 // Search struct
@@ -44,14 +43,14 @@ func FindBestMove(gs *gamestate.GameState, depth uint, make_move bool) {
 		QuieDepth: 4, 
 		TT: make(map[uint64]TT),
 	}
-	start := time.Now()
+	//start := time.Now()
 
 	AlphaBeta(&cur_search, -100000, 100000, 0)
 
-	elapsed := time.Since(start)
+	//elapsed := time.Since(start)
 
 	// print results
-	cur_search.Print(elapsed.Seconds())
+	//cur_search.Print(elapsed.Seconds())
 
 
 	if make_move {

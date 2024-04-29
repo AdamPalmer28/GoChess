@@ -1,0 +1,57 @@
+PASS
+ok  	chess/src/tests	0.194s
+goos: windows
+goarch: amd64
+pkg: chess/src/tests/benchmark
+cpu: 13th Gen Intel(R) Core(TM) i5-13600K
+Benchmark_Evaluation/Evaluate-Starting_pos-20         	  726876	      1439 ns/op	     864 B/op	      70 allocs/op
+Benchmark_Evaluation/Evaluate-Starting_pos#01-20      	  999600	      1139 ns/op	    1672 B/op	      40 allocs/op
+Benchmark_Evaluation/FindBestMove-Starting_pos-Depth-1-20         	   12944	     94146 ns/op	   90688 B/op	    3276 allocs/op
+Benchmark_Evaluation/FindBestMove-Starting_pos-Depth-4-20         	      16	  69894119 ns/op	62457129 B/op	 2143573 allocs/op
+Benchmark_Evaluation/FindBestMove-Starting_pos-Depth-6-20         	       1	4549767100 ns/op	4030341368 B/op	133785431 allocs/op
+Benchmark_Evaluation/Evaluate-End_of_opening-20                   	  798981	      1423 ns/op	     864 B/op	      70 allocs/op
+Benchmark_Evaluation/Evaluate-End_of_opening#01-20                	  510126	      2353 ns/op	    3320 B/op	      84 allocs/op
+Benchmark_Evaluation/FindBestMove-End_of_opening-Depth-1-20       	    1059	   1137428 ns/op	 1086486 B/op	   33518 allocs/op
+Benchmark_Evaluation/FindBestMove-End_of_opening-Depth-4-20       	       3	 355681133 ns/op	341925181 B/op	10115917 allocs/op
+Benchmark_Evaluation/FindBestMove-End_of_opening-Depth-6-20       	       1	13693746400 ns/op	13165623888 B/op	384926430 allocs/op
+Benchmark_Evaluation/Evaluate-Middle_1-20                         	  798924	      1351 ns/op	     784 B/op	      65 allocs/op
+Benchmark_Evaluation/Evaluate-Middle_1#01-20                      	  452130	      2642 ns/op	    3152 B/op	      86 allocs/op
+Benchmark_Evaluation/FindBestMove-Middle_1-Depth-1-20             	    1554	    762909 ns/op	  771212 B/op	   22742 allocs/op
+Benchmark_Evaluation/FindBestMove-Middle_1-Depth-4-20             	       9	 118650033 ns/op	117218353 B/op	 3421663 allocs/op
+Benchmark_Evaluation/FindBestMove-Middle_1-Depth-6-20             	       1	4991386500 ns/op	4958638008 B/op	143413435 allocs/op
+Benchmark_Evaluation/Evaluate-Middle_2-20                         	  855450	      1357 ns/op	     784 B/op	      65 allocs/op
+Benchmark_Evaluation/Evaluate-Middle_2#01-20                      	  521745	      2302 ns/op	    3784 B/op	      83 allocs/op
+panic: runtime error: index out of range [19] with length 5
+
+goroutine 83 [running]:
+chess/src/chess_engine/gamestate.(*GameState).Undo(0xc0001b7000)
+	C:/Users/Adam/code/golang/chess/src/chess_engine/gamestate/undo.go:20 +0x8a5
+chess/src/chess_bot.Quiescence(0xc0000c1e88, 0x3fcf1a9fbe76c8b6?, 0x3ff45e353f7ced92, 0x3)
+	C:/Users/Adam/code/golang/chess/src/chess_bot/alpha_beta.go:114 +0x26e
+chess/src/chess_bot.Quiescence(0xc0000c1e88, 0xc009b851eb851eb8?, 0xbfcf1a9fbe76c8b6, 0x2)
+	C:/Users/Adam/code/golang/chess/src/chess_bot/alpha_beta.go:110 +0x252
+chess/src/chess_bot.Quiescence(0xc0000c1e88, 0xc0f86a0000000000?, 0x4009b851eb851eb8, 0x1)
+	C:/Users/Adam/code/golang/chess/src/chess_bot/alpha_beta.go:110 +0x252
+chess/src/chess_bot.Quiescence(0xc0000c1e88, 0xc0f86a0000000000?, 0x40f86a0000000000, 0x0)
+	C:/Users/Adam/code/golang/chess/src/chess_bot/alpha_beta.go:110 +0x252
+chess/src/chess_bot.AlphaBeta(0xc0001b7000?, 0x4b5f?, 0x0?, 0x100000000?)
+	C:/Users/Adam/code/golang/chess/src/chess_bot/alpha_beta.go:30 +0x108
+chess/src/chess_bot.AlphaBeta(0xc0000c1e88, 0x2?, 0x40f86a0000000000, 0x0)
+	C:/Users/Adam/code/golang/chess/src/chess_bot/alpha_beta.go:45 +0x20d
+chess/src/chess_bot.FindBestMove(0xc0001b7000, 0x1, 0x0)
+	C:/Users/Adam/code/golang/chess/src/chess_bot/search.go:48 +0x10e
+chess/src/tests/benchmark.Benchmark_Evaluation.func3(0xc000127180)
+	C:/Users/Adam/code/golang/chess/src/tests/benchmark/search_benchmark_test.go:61 +0x45
+testing.(*B).runN(0xc000127180, 0x1)
+	C:/Program Files/Go/src/testing/benchmark.go:193 +0x102
+testing.(*B).run1.func1()
+	C:/Program Files/Go/src/testing/benchmark.go:233 +0x59
+created by testing.(*B).run1
+	C:/Program Files/Go/src/testing/benchmark.go:226 +0x9c
+exit status 2
+FAIL	chess/src/tests/benchmark	42.056s
+PASS
+ok  	chess/src/tests/test_gamestate	0.217s
+PASS
+ok  	chess/src/tests/test_move_gen	0.216s
+FAIL

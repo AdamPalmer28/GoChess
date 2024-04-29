@@ -11,6 +11,7 @@ func (gs *GameState) Undo() {
 
 	// restore board
 	gs.Moveno -= 1
+	gs.DisplayMoveNo -= 1
 	gs.HalfMoveNo -= 1
 	gs.White_to_move = !gs.White_to_move
 	gs.Make_BP()

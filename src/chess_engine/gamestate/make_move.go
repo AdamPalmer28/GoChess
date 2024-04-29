@@ -96,6 +96,7 @@ func (gs *GameState) Make_move(move uint) {
 
 	// update move number
 	gs.Moveno++
+	gs.DisplayMoveNo++
 
 	// change move color
 	gs.White_to_move = !gs.White_to_move

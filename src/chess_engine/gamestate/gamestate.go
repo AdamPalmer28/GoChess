@@ -28,6 +28,7 @@ type GameState struct {
 	PlayerKingSaftey move_gen.KingSafetyRelBB
 
 	Moveno   uint
+	DisplayMoveNo uint
 	HalfMoveNo uint
 	
 	// history data - for undo

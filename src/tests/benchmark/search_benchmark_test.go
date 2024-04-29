@@ -3,11 +3,13 @@ package benchmark
 // Benchmarks the time to generate moves from a set of fen positions
 
 import (
+	"chess/src/chess_bot"
 	"chess/src/chess_engine"
+	"strconv"
 	"testing"
 )
 
-var fen_positions = [][2]string{
+var Fen_positions = [][2]string{
 	{"Starting pos","rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"},
 	{"End of opening","r3k2r/pppb1ppp/1qnbpn2/3P4/3P1N2/2N3P1/PP1BPPBP/R2QK2R w KQkq - 0 1"},
 	{"Middle 1", "r3k2r/pppb2pp/1qn1pnp1/8/1B1P4/P1N3P1/1P2PPBP/R2Q1RK1 b kq - 0 1"},
@@ -24,25 +26,44 @@ var fen_positions = [][2]string{
 
 
 
+func Benchmark_Evaluation(b *testing.B) {
+	// Benchmark the Evaluate function 
+	//	- this function is used to Evaluate the gamestate for search (bot move selection) 
+	depth := []uint{1,  4, 6}
 
-
-func Benchmark_Next_move(b *testing.B) {
-	// Benchmark the Next_move function 
-	//	- this function is used to prepare the gamestate for the next move 
-
-	// loop through the fen positions
-	for _, fen := range fen_positions {
+	for _, fen := range Fen_positions {
 		
 		name, fen := fen[0], fen[1]
 
 		gs := chess_engine.CreateGameFen(fen)
 
-		b.Run(name, func(b *testing.B) {
+		// Benchmark the Evaluate function
+		b.Run("Evaluate-" + name, func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				chess_bot.Evaluate(gs)
+			}
+			b.ReportAllocs()
+		})
+
+		// Benchmark the Next_move function
+		b.Run("Next_move-" + name, func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
 				gs.Next_move()
 			}
 			b.ReportAllocs()
 		})
+
+		// Benchmark the FindBestMove function
+		for _, d := range depth {
+
+			b.Run("FindBestMove-" + name + "-Depth-" + strconv.Itoa(int(d)), func(b *testing.B) {
+				for i := 0; i < b.N; i++ {
+					chess_bot.FindBestMove(gs, d, false)
+				}
+				b.ReportAllocs()
+			})
+		}
 	}
 
 }
+

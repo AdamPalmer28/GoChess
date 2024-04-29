@@ -1,4 +1,4 @@
-cd src/
+cd ../src/
 
 
 printf "\nTesting: chess_engine/board...\n"
