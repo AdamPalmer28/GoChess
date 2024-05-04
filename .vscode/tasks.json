@@ -55,15 +55,15 @@
 			}
 		},
 		{
-			// Benchmark chess engine
-			"label": "Benchmark",
+			// Full Benchmark chess engine
+			"label": "Full Benchmark",
 			"type": "shell",
 			"command": "bash perf/chess_benchmark.sh",
 			"group": "test",
 			"options": {
 				"cwd": "${workspaceFolder}",
 				"statusbar": {
-					"label": "Benchmarking",
+					"label": "Full Benchmark",
 					"hide": false,
 					"color": "#000000",
 					"backgroundColor": "#ffffff"
