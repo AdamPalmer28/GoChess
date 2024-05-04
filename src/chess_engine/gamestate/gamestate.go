@@ -27,7 +27,7 @@ type GameState struct {
 	PlayerBoard  move_gen.BoardPerpective
 	PlayerKingSaftey move_gen.KingSafetyRelBB
 
-	Moveno   uint
+	MoveNo   uint
 	DisplayMoveNo uint
 	HalfMoveNo uint
 	

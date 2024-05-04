@@ -95,7 +95,7 @@ func (gs *GameState) Make_move(move uint) {
 	gs.History.Cap_pieces = append(gs.History.Cap_pieces, cap_piece)
 
 	// update move number
-	gs.Moveno++
+	gs.MoveNo++
 	gs.DisplayMoveNo++
 
 	// change move color

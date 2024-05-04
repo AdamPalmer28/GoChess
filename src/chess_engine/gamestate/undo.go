@@ -6,11 +6,11 @@ import (
 
 func (gs *GameState) Undo() {
 
-	last_move_num := gs.Moveno - 1
+	last_move_num := gs.MoveNo - 1
 	last_move_ind := last_move_num - 1
 
 	// restore board
-	gs.Moveno -= 1
+	gs.MoveNo -= 1
 	gs.DisplayMoveNo -= 1
 	gs.HalfMoveNo -= 1
 	gs.White_to_move = !gs.White_to_move

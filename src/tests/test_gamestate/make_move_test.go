@@ -39,8 +39,8 @@ func Test_Make_Move(t *testing.T) {
 	if gs.Enpass_ind != 17 { // enpassent index
 		t.Errorf("Enpass index not correct - got %d (expected 17)", gs.Enpass_ind)
 	}
-	if gs.Moveno != 2 { // move number
-		t.Errorf("Move number not correct - got %d (expected 2)", gs.Moveno)
+	if gs.MoveNo != 2 { // move number
+		t.Errorf("Move number not correct - got %d (expected 2)", gs.MoveNo)
 	}
 	if gs.White_to_move != false { // player to move
 		t.Errorf("Should be black to move - 1st move")
@@ -70,8 +70,8 @@ func Test_Make_Move(t *testing.T) {
 	if gs.Enpass_ind != 64 { // enpassent index
 		t.Errorf("Enpass index not correct - got %d (expected 64)", gs.Enpass_ind)
 	}
-	if gs.Moveno != 3 { // move number
-		t.Errorf("Move number not correct - got %d (expected 3)", gs.Moveno)
+	if gs.MoveNo != 3 { // move number
+		t.Errorf("Move number not correct - got %d (expected 3)", gs.MoveNo)
 	}
 	if gs.White_to_move != true { // player to move
 		t.Errorf("Should be white to move - 2nd move")
@@ -101,8 +101,8 @@ func Test_Make_Move(t *testing.T) {
 	if gs.Enpass_ind != 64 { // enpassent index
 		t.Errorf("Enpass index not correct - got %d (expected 64)", gs.Enpass_ind)
 	}
-	if gs.Moveno != 4 { // move number
-		t.Errorf("Move number not correct - got %d (expected 4)", gs.Moveno)
+	if gs.MoveNo != 4 { // move number
+		t.Errorf("Move number not correct - got %d (expected 4)", gs.MoveNo)
 	}
 	if gs.White_to_move != false { // player to move
 		t.Errorf("Should be black to move - 3rd move")
@@ -134,8 +134,8 @@ func Test_Make_Move(t *testing.T) {
 	if gs.Enpass_ind != 64 { // enpassent index
 		t.Errorf("Enpass index not correct - got %d (expected 17)", gs.Enpass_ind)
 	}
-	if gs.Moveno != 2 { // move number
-		t.Errorf("Move number not correct - got %d (expected 2)", gs.Moveno)
+	if gs.MoveNo != 2 { // move number
+		t.Errorf("Move number not correct - got %d (expected 2)", gs.MoveNo)
 	}
 	if gs.White_to_move != false { // player to move
 		t.Errorf("Should be black to move - king move")

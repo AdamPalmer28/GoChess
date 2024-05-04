@@ -71,7 +71,7 @@ func FEN_to_gs(fen string) *GameState {
 
 		MoveList: []uint{},
 		DisplayMoveNo: uint(move_number),
-		Moveno: 1,
+		MoveNo: 1,
 		HalfMoveNo: uint(halfmove_clock),
 	}
 

@@ -17,7 +17,7 @@ func MakeGameState() *GameState {
 		Enpass_ind: 64,
 		MoveList: []uint{},
 		MoveHumanList: []string{},
-		Moveno: 1,
+		MoveNo: 1,
 	}
 
 	return gs

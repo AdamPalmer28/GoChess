@@ -224,8 +224,8 @@ func TestUndo(t *testing.T) {
 	move_hist = append(move_hist, moves[0])
 
 	// check postion is as expected
-	if gs.Moveno != 5 || !gs.White_to_move {
-		t.Errorf("5. Gamestate data not correct %d, %t (expected 5, true)", gs.Moveno, gs.White_to_move)
+	if gs.MoveNo != 5 || !gs.White_to_move {
+		t.Errorf("5. Gamestate data not correct %d, %t (expected 5, true)", gs.MoveNo, gs.White_to_move)
 	}
 	if !same_lists(gs.History.PrevMoves, move_hist) {
 		error_msg = test_move_gen.MoveListErrorMsg(gs.History.PrevMoves, move_hist)
@@ -236,8 +236,8 @@ func TestUndo(t *testing.T) {
 	gs.Undo()
 
 	// move number, half move number, white to move
-	if gs.Moveno != 4 || gs.White_to_move {
-		t.Errorf("5. Gamestate data not correct %d, %t (expected 4, false)", gs.Moveno, gs.White_to_move)
+	if gs.MoveNo != 4 || gs.White_to_move {
+		t.Errorf("5. Gamestate data not correct %d, %t (expected 4, false)", gs.MoveNo, gs.White_to_move)
 	}
 	if !same_lists(gs.History.PrevMoves, move_hist[:3]) {
 		error_msg = test_move_gen.MoveListErrorMsg(gs.History.PrevMoves, move_hist[:len(move_hist)-1])

@@ -15,7 +15,7 @@ func (cfg *Config) Run() bool {
 	var user_cmd string
 
     // Prompt the user for input
-	fmt.Printf("\nMove: %d ", cfg.gs.Moveno)
+	fmt.Printf("\nMove: %d ", cfg.gs.MoveNo)
 	if cfg.gs.White_to_move {
 		fmt.Print("(White to move)")
 	} else {

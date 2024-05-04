@@ -29,8 +29,11 @@ func Test_FEN_to_gs(t *testing.T) {
 	}
 
 	// move counts
-	if gs.Moveno != 32 {
-		t.Errorf("Move number incorrect, got %d, expected 32", gs.Moveno)
+	if gs.DisplayMoveNo != 32 {
+		t.Errorf("Move number incorrect, got %d, expected 32", gs.DisplayMoveNo)
+	}
+	if gs.MoveNo != 1 {
+		t.Errorf("Move number incorrect, got %d, expected 1", gs.MoveNo)
 	}
 	if gs.HalfMoveNo != 1 {
 		t.Errorf("Half move number incorrect, got %d, expected 1", gs.HalfMoveNo)
