@@ -53,6 +53,38 @@
 					"backgroundColor": "#ffffff"
 				}
 			}
+		},
+		{
+			// Benchmark chess engine
+			"label": "Benchmark",
+			"type": "shell",
+			"command": "bash perf/chess_benchmark.sh",
+			"group": "test",
+			"options": {
+				"cwd": "${workspaceFolder}",
+				"statusbar": {
+					"label": "Benchmarking",
+					"hide": false,
+					"color": "#000000",
+					"backgroundColor": "#ffffff"
+				}
+			}
+		},
+		{
+			// Test chess engine
+			"label": "Test Chess Engine",
+			"type": "shell",
+			"command": "bash perf/test_chess.sh",
+			"group": "test",
+			"options": {
+				"cwd": "${workspaceFolder}",
+				"statusbar": {
+					"label": "Test Chess Engine",
+					"hide": false,
+					"color": "#000000",
+					"backgroundColor": "#ffffff"
+				}
+			}
 		}
 	]
 }

@@ -5,6 +5,7 @@ package benchmark
 import (
 	"chess/src/chess_bot"
 	"chess/src/chess_engine"
+	"fmt"
 	"strconv"
 	"testing"
 )
@@ -26,43 +27,47 @@ var Fen_positions = [][2]string{
 
 
 
-func Benchmark_Evaluation(b *testing.B) {
-	// Benchmark the Evaluate function 
+func Benchmark_Search(b *testing.B) {
+	// Benchmark the AI Search process
 	//	- this function is used to Evaluate the gamestate for search (bot move selection) 
 	depth := []uint{1,  4, 6}
+	b.ReportAllocs()
 
-	for _, fen := range Fen_positions {
-		
+	for pos_ind, fen := range Fen_positions {
+		str_ind := strconv.Itoa(pos_ind) 
+
 		name, fen := fen[0], fen[1]
+
+		fmt.Println("\nPostion: ", name)
 
 		gs := chess_engine.CreateGameFen(fen)
 
 		// Benchmark the Evaluate function
-		b.Run("Evaluate-" + name, func(b *testing.B) {
+		b.Run(str_ind + "__Evaluate__", func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
 				chess_bot.Evaluate(gs)
 			}
-			b.ReportAllocs()
 		})
 
 		// Benchmark the Next_move function
-		b.Run("Next_move-" + name, func(b *testing.B) {
+		b.Run(str_ind + "__Next_move__", func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
 				gs.Next_move()
 			}
-			b.ReportAllocs()
 		})
 
 		// Benchmark the FindBestMove function
 		for _, d := range depth {
 
-			b.Run("FindBestMove-" + name + "-Depth-" + strconv.Itoa(int(d)), func(b *testing.B) {
+			b.Run(str_ind + "__FindBestMove__" + "-Depth-" + strconv.Itoa(int(d)), func(b *testing.B) {
 				for i := 0; i < b.N; i++ {
 					chess_bot.FindBestMove(gs, d, false)
 				}
-				b.ReportAllocs()
 			})
 		}
+		   
+		
+			
 	}
 
 }
