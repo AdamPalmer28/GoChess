@@ -17,7 +17,7 @@ var Fen_positions_short = [][2]string{
 	{"InCheck 1", "r2bnk1r/ppp3pp/1qn1p1p1/8/1B1P4/P1N3P1/1P2PPBP/R2Q1RK1 b - - 0 1"},
 	{"InCheck 3", "1b4rk/1p2qp1p/p1n5/2p1p2P/P1NpP3/1P1P1N2/2PQ1Kr1/R5R1 w - - 0 29"},
 	{"End 2", "2k5/4rp1p/p1n5/Ppp1p1NP/3pP3/1P1P4/2PK1R2/8 w - b6 0 29"},
-	{"End 4", "2b5/3PnP1k/5ppP/KP6/P2p2r1/2p3P1/2Rb4/8 b - - 0 44 w - - 0 1"},
+	{"End 4", "2b5/3PnP1k/5ppP/KP6/P2p2r1/2p3P1/2Rb4/8 b - - 0 44"},
 }
 
 func Benchmark_Next_move(b *testing.B) {
@@ -75,7 +75,7 @@ func Benchmark_Next_move(b *testing.B) {
 		
 		// MOVE GENERATION
 		// --------------------------------------------------------------------
-		move_gen_str := "__MoveGen_/"
+		move_gen_prefix := "__MoveGen_"
 		// check if InCheck is in name
 		if strings.Contains(name, "InCheck") {
 			continue
@@ -83,7 +83,7 @@ func Benchmark_Next_move(b *testing.B) {
 		var player move_gen.BoardPerpective = gs.PlayerBoard
 
 		// pawn moves
-		b.Run(str_ind + move_gen_str + "_PawnMoves__", func(b *testing.B) {
+		b.Run(str_ind + move_gen_prefix + "_PawnMoves__", func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
 				var pawn_caps_ind uint
 				if gs.White_to_move {pawn_caps_ind = 0} else {pawn_caps_ind = 1}
@@ -93,28 +93,28 @@ func Benchmark_Next_move(b *testing.B) {
 			}
 		})
 		// knight moves
-		b.Run(str_ind + move_gen_str + "_KnightMoves__", func(b *testing.B) {
+		b.Run(str_ind + move_gen_prefix + "_KnightMoves__", func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
 				move_gen.GenKnightMoves(player.Knight_bb, 
 										&gs.MoveRays.KnightRays, player.Team_bb, player.Opp_bb)
 			}
 		})
 		// rook moves
-		b.Run(str_ind + move_gen_str + "_RookMoves__", func(b *testing.B) {
+		b.Run(str_ind + move_gen_prefix + "_RookMoves__", func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
 				magic.GenMagicMoves((player.Rook_bb | player.Queen_bb), &gs.MoveRays.Magic.RookMagic,
 									player.Team_bb, player.Opp_bb)
 			}
 		})
 		// bishop moves
-		b.Run(str_ind + move_gen_str + "_BishopMoves__", func(b *testing.B) {
+		b.Run(str_ind + move_gen_prefix + "_BishopMoves__", func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
 				magic.GenMagicMoves((player.Bishop_bb | player.Queen_bb), &gs.MoveRays.Magic.BishopMagic,
 									player.Team_bb, player.Opp_bb)
 			}
 		})
 		// // queen moves
-		// b.Run(str_ind + move_gen_str + "__QueenMoves__", func(b *testing.B) {
+		// b.Run(str_ind + move_gen_prefix + "__QueenMoves__", func(b *testing.B) {
 		// 	for i := 0; i < b.N; i++ {
 		// 		magic.GenMagicMoves(player.Queen_bb, &gs.MoveRays.Magic.BishopMagic,
 		// 							player.Team_bb, player.Opp_bb)
@@ -124,7 +124,7 @@ func Benchmark_Next_move(b *testing.B) {
 		// })
 
 		// king moves
-		b.Run(str_ind + move_gen_str + "_KingMoves__", func(b *testing.B) {
+		b.Run(str_ind + move_gen_prefix + "_KingMoves__", func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
 				move_gen.GenKingMoves(gs.PlayerKingSaftey, player.Castle_rights,
 									&gs.MoveRays.Magic.RookMagic, &gs.MoveRays.Magic.BishopMagic,

@@ -6,6 +6,7 @@ import (
 )
 
 func (gs *GameState) Init() {
+	// initialise board ready to begine
 
 	// update board
 	gs.Board.UpdateSideBB(true)
@@ -16,16 +17,15 @@ func (gs *GameState) Init() {
 		gs.Board.UpdatePieceLocations(i)
 	}
 
-	// initialise move rays
+	// initialise move rays 
 	gs.makeMoveRays()
-	
-	// magic squares
-	strt, diag := magic.Load_all_magicsq()
 
+		// magic squares
+	strt, diag := magic.Load_all_magicsq()
 	gs.MoveRays.Magic.RookMagic = strt
 	gs.MoveRays.Magic.BishopMagic = diag
 	
-	// next move
+	// get gamestate ready for next move
 	gs.Next_move()
 
 

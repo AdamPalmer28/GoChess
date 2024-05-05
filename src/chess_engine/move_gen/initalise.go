@@ -46,7 +46,7 @@ func InitPawnCaptureRays() [2][64]board.Bitboard {
 }
 
 // ----------------------------------------------------------------------------
-// Xray moves of sliding pieces - i.e. the moves that are blocked by other pieces
+// Xray moves of sliding pieces - i.e. the full moves bitboard if not blocked by other pieces
 
 func InitRookXRays() [64]board.Bitboard {
 

@@ -58,6 +58,8 @@ type GameState struct {
 
 // BoardPerpective struct
 func (gs *GameState) Make_BP() {
+	// Make a board perpective struct for the player to move
+		// This is used to make generate moves have simpler references
 
 	var bp move_gen.BoardPerpective
 	var king_safety move_gen.KingSafetyRelBB
@@ -125,7 +127,6 @@ func (gs *GameState) Make_BP() {
 	}
 
 
-
 	king_safety = move_gen.KingSafetyRelBB{
 		King_sq: bp.King_bb.Index()[0],
 		King_bb: bp.King_bb,
@@ -147,8 +148,8 @@ func (gs *GameState) Make_BP() {
 	gs.PlayerKingSaftey = king_safety
 }
 
-
 func getMoves(moves []uint) {
+	// prints moves out in human readable form
 
 	for _, move := range moves {
 

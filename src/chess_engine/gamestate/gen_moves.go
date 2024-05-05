@@ -5,8 +5,8 @@ import (
 	"chess/src/chess_engine/move_gen/magic"
 )
 
-// generate moves when king not in check
 func (gs *GameState) GenMoves() {
+	// Move generation when not in check
 
 	var player move_gen.BoardPerpective = gs.PlayerBoard
 
@@ -55,8 +55,8 @@ func (gs *GameState) GenMoves() {
 }
 
 // ----------------------------------------------------------------------------
-// generate moves when king in check
 func (gs *GameState) GenCheckMoves() {
+	// Move generation when InCheck
 
 	var MoveList []uint
 	var pawn_caps_ind uint

@@ -15,9 +15,6 @@ A ongoing to-do list of task for development of the chess engine.
 - Test TT is working correctly
 - Copy of gamestate (create copy and check all of previous properties remain the same without affecting the original)
 
-- benchmark 20 move game
-  - use FindBestMove with make_move = false
-
 ---
 
 # Algorithm improvements
@@ -26,7 +23,7 @@ A ongoing to-do list of task for development of the chess engine.
 
 - Search improvements
   - GetBestMove search before alpha-beta
-  - move ordering improvements
+  - move sorting
     - history heuristic
     - killer moves
     - take into account TT
@@ -63,10 +60,3 @@ A ongoing to-do list of task for development of the chess engine.
     - Identify outposts
 
 ---
-
-# Ideas
-
----
-
-- Test environment for testing the engine against previous versions
-- Test scripts - Correct moves i.e. as expected - Function outputs - Benchmark test & function's speed

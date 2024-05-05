@@ -64,6 +64,7 @@ func special_move(move uint) uint {
 	return (move >> 12)
 }
 
+// ? should it take the input of the BoardPerpective struct?
 func (moves *MoveList) SortMoves() {
 
 	// priority order: promotion, capture, castle, double pawn push
@@ -80,6 +81,7 @@ func (moves *MoveList) SortMoves() {
 
 }
 
+// ! can likely be removed and replaced by a simple move_score > threshold check
 func (moves *MoveList) ImportantMoves() MoveList {
 
 	// priority order: promotion, capture, castle
