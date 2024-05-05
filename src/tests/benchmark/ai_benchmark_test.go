@@ -22,7 +22,7 @@ var Fen_positions = [][2]string{
 	{"End 1", "6rk/1p3p1p/p1n5/2p1p2P/P2pP3/1P1P1N2/2P2KR1/R7 w - - 0 29"},
 	{"End 2", "2k5/4rp1p/p1n5/Ppp1p1NP/3pP3/1P1P4/2PK1R2/8 w - b6 0 29"},
 	{"End 3", "8/7k/5ppP/K7/P5r1/2p5/2Rb4/8 w - - 0 44"},
-	{"End 4", "2b5/3PnP1k/5ppP/KP6/P2p2r1/2p3P1/2Rb4/8 w - - 0 44 w - - 0 1"},
+	{"End 4", "2b5/3PnP1k/5ppP/KP6/P2p2r1/2p3P1/2Rb4/8 b - - 0 44 w - - 0 1"},
 }
 
 
@@ -66,9 +66,7 @@ func Benchmark_Search(b *testing.B) {
 			})
 		}
 		   
-		
 			
 	}
-
 }
 

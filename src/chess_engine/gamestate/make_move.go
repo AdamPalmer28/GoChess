@@ -121,7 +121,7 @@ func (gs *GameState) Next_move() {
 	gs.MoveList.SortMoves() 
 	
 	// remove illegal moves
-	remove_illegal_moves(gs, pinned_pieces) // remove illegal moves
+	gs.RM_IllegalMoves(pinned_pieces) // remove illegal moves
 
 	// check for game over
 	if len(gs.MoveList) == 0 {

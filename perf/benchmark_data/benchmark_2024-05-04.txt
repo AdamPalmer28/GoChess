@@ -1,19 +1,12 @@
 PASS
-ok  	chess/src/tests	0.037s
+ok  	chess/src/tests	0.041s
 
 Postion:  Starting pos
 goos: windows
 goarch: amd64
 pkg: chess/src/tests/benchmark
 cpu: 13th Gen Intel(R) Core(TM) i5-13600K
-Benchmark_Search/0__Evaluate__-20         	  749990	      1471 ns/op	     864 B/op	      70 allocs/op
-Benchmark_Search/0__Next_move__-20        	 1000000	      1177 ns/op	    1672 B/op	      40 allocs/op
-Benchmark_Search/0__FindBestMove__-Depth-1-20         	   10000	    101700 ns/op	   90688 B/op	    3276 allocs/op
-Benchmark_Search/0__FindBestMove__-Depth-4-20         	      14	  73110200 ns/op	62457078 B/op	 2143573 allocs/op
-Benchmark_Search/0__FindBestMove__-Depth-6-20         	       1	4661691700 ns/op	4030346552 B/op	133785479 allocs/op
-
-Postion:  End of opening
-Benchmark_Search/1__Evaluate__-20                     	  769822	      1493 ns/op	     864 B/op	      70 allocs/op
-Benchmark_Search/1__Next_move__-20                    	  499713	      2390 ns/op	    3320 B/op	      84 allocs/op
-Benchmark_Search/1__FindBestMove__-Depth-1-20         	    1010	   1182168 ns/op	 1086487 B/op	   33518 allocs/op
-Benchmark_Search/1__FindBestMove__-Depth-4-20         	       3	 373767300 ns/op	341925352 B/op	10115920 allocs/op
+Benchmark_Search/0__Evaluate__-20         	  750000	      1553 ns/op	     864 B/op	      70 allocs/op
+Benchmark_Search/0__Next_move__-20        	  992892	      1213 ns/op	    1672 B/op	      40 allocs/op
+Benchmark_Search/0__FindBestMove__-Depth-1-20         	   10000	    105563 ns/op	   90688 B/op	    3276 allocs/op
+Benchmark_Search/0__FindBestMove__-Depth-4-20         	      13	  77584138 ns/op	62457011 B/op	 2143572 allocs/op

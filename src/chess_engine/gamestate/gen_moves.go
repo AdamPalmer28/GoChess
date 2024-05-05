@@ -8,9 +8,6 @@ import (
 // generate moves when king not in check
 func (gs *GameState) GenMoves() {
 
-	// reset the moves
-	MoveList := move_gen.MoveList{}
-
 	var player move_gen.BoardPerpective = gs.PlayerBoard
 
 	// generate pawn moves
@@ -20,47 +17,39 @@ func (gs *GameState) GenMoves() {
 				&gs.MoveRays.PawnCapRays[pawn_caps_ind],
 				player.Team_bb, player.Opp_bb)
 
-	MoveList = append(MoveList, pawn_moves...)
-
-
 	// generate knight moves
 	knight_moves := move_gen.GenKnightMoves(player.Knight_bb, 
 				&gs.MoveRays.KnightRays, player.Team_bb, player.Opp_bb)
 
-	MoveList = append(MoveList, knight_moves...)
-
-
 	// generate rook moves
-	rook_moves := magic.GenMagicMoves(player.Rook_bb, &gs.MoveRays.Magic.RookMagic,
+	rook_moves := magic.GenMagicMoves(
+				(player.Rook_bb | player.Queen_bb), 
+				&gs.MoveRays.Magic.RookMagic,
 				player.Team_bb, player.Opp_bb)
-
-	MoveList = append(MoveList, rook_moves...)
-
-
 	// generate bishop moves
-	bishop_moves := magic.GenMagicMoves(player.Bishop_bb, &gs.MoveRays.Magic.BishopMagic,
+	bishop_moves := magic.GenMagicMoves(
+				(player.Bishop_bb | player.Queen_bb), 
+				&gs.MoveRays.Magic.BishopMagic,
 				player.Team_bb, player.Opp_bb)
-	
-	MoveList = append(MoveList, bishop_moves...)
-
 
 	// generate queen moves
-	queen_moves := magic.GenMagicMoves(player.Queen_bb, &gs.MoveRays.Magic.BishopMagic,
-				player.Team_bb, player.Opp_bb)
-	MoveList = append(MoveList, queen_moves...)
+	// queen_moves := magic.GenMagicMoves(player.Queen_bb, &gs.MoveRays.Magic.BishopMagic,
+	// 			player.Team_bb, player.Opp_bb)
 
-	queen_moves = magic.GenMagicMoves(player.Queen_bb, &gs.MoveRays.Magic.RookMagic,
-				player.Team_bb, player.Opp_bb)
-	MoveList = append(MoveList, queen_moves...)
-
-
+	// queen_moves = magic.GenMagicMoves(player.Queen_bb, &gs.MoveRays.Magic.RookMagic,
+	// 			player.Team_bb, player.Opp_bb)
+	
 
 	// generate king moves
 	king_moves := move_gen.GenKingMoves(gs.PlayerKingSaftey, player.Castle_rights,
 				&gs.MoveRays.Magic.RookMagic, &gs.MoveRays.Magic.BishopMagic,
 				&gs.MoveRays.KnightRays, &gs.MoveRays.KingRays)
-	MoveList = append(MoveList, king_moves...)
 
+	// combine move lists together to make complete gamestate move list
+	MoveList := append(pawn_moves, knight_moves...)
+	MoveList = append(MoveList, rook_moves...)
+	MoveList = append(MoveList, bishop_moves...)
+	MoveList = append(MoveList, king_moves...)
 	
 	gs.MoveList = MoveList
 }
@@ -107,7 +96,7 @@ func (gs *GameState) GenCheckMoves() {
 // ----------------------------------------------------------------------------
 
 // remove illegal moves
-func remove_illegal_moves(gs *GameState, pinned_pieces map[uint][]uint) {
+func (gs *GameState) RM_IllegalMoves(pinned_pieces map[uint][]uint) {
 
 	var legal_moves []uint
 

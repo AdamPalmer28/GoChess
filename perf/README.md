@@ -14,13 +14,8 @@
 
   - FindBestMove [Implemented] - "ChessAI main", finds the best move for the AI to make
 
-- Next_move - tests each stage of move generation
+- Next_move  [Implemented] - tests each stage of move generation
 
-  - Make_BP
-  - GetCheck
-  - GenMoves (GenCheckMoves if in check)
-  - SortMoves
-  - remove_illegal_moves
 
 - Evaluation - tests each section of the evaluation function
   - GetEvalMoveRays
@@ -32,5 +27,7 @@
   - QueenEval
   - KingEval (not designed)
   - ... more
+
+- MoveGen [Implemented]
 
 ### Results

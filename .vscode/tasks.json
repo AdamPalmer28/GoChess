@@ -11,8 +11,7 @@
 				"statusbar": {
 					"label": "Server",
 					"hide": false,
-					"color": "#ff0000",
-					"backgroundColor": "#ffffff"
+					"color": "#ff0000"
 				},
 				"isBackground": true
 			}
@@ -33,8 +32,7 @@
 				"statusbar": {
 					"label": "Interface",
 					"hide": true,
-					"color": "#b52616",
-					"backgroundColor": "#ffffff"
+					"color": "#b52616"
 				}
 			},
 			"isBackground": true
@@ -49,8 +47,7 @@
 			"options": {
 				"statusbar": {
 					"label": "Run Chess",
-					"color": "#ffffff",
-					"backgroundColor": "#ffffff"
+					"color": "#ffffff"
 				}
 			}
 		},
@@ -65,8 +62,22 @@
 				"statusbar": {
 					"label": "Full Benchmark",
 					"hide": false,
-					"color": "#000000",
-					"backgroundColor": "#ffffff"
+					"color": "#0ff108"
+				}
+			}
+		},
+		{
+			// Low-level Benchmark chess engine
+			"label": "Low-level Benchmark",
+			"type": "shell",
+			"command": "go test ./src/tests/... -bench='^(Benchmark_GenMoves)|(Benchmark_Next_move).*'  -run=^#  -benchmem | tee perf/detailed_data/Data.txt",
+			"group": "test",
+			"options": {
+				"cwd": "${workspaceFolder}",
+				"statusbar": {
+					"label": "Low-level Benchmark",
+					"hide": false,
+					"color": "#0ff108"
 				}
 			}
 		},
@@ -81,8 +92,7 @@
 				"statusbar": {
 					"label": "Test Chess Engine",
 					"hide": false,
-					"color": "#000000",
-					"backgroundColor": "#ffffff"
+					"color": "#021e01"
 				}
 			}
 		}

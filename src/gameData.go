@@ -70,7 +70,7 @@ func CreateData(gh *GameHost) ChessData {
 				CastleRights [2]uint `json:"castle_rights"`
 			}{
 				WtoMove: gh.GameState.White_to_move,
-				MoveNo: gh.GameState.Moveno,
+				MoveNo: gh.GameState.MoveNo,
 				Incheck: gh.GameState.InCheck,
 				GameOver: gh.GameState.GameOver,
 				HalfMoveNo: gh.GameState.HalfMoveNo,
