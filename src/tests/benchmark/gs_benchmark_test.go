@@ -49,14 +49,30 @@ func Benchmark_Next_move(b *testing.B) {
 			for i := 0; i < b.N; i++ {
 				gs.GetCheck()
 			}
-		})		
+		})	
+		
 		pinned_pieces := gs.GetCheck() // get check status
-		// Benchmark remove_illegal_moves function
+		// remove_illegal_moves function
 		b.Run(str_ind+"__RM_IllegalMoves__", func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
 				gs.RM_IllegalMoves(pinned_pieces)
 			}
 		})
+
+		// Sort moves
+		b.Run(str_ind+"__SortMoves__", func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				gs.SortMoves()
+			}
+		})
+
+		// GetMoveScore
+		b.Run(str_ind+"__GetMoveScore__", func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				gs.MoveList.GetMoveScore(gs.PlayerBoard, gs.PlayerKingSaftey)
+			}
+		})
+		
 		// MoveGen function
 		var moveGenFn func()
 		if gs.InCheck {
@@ -70,9 +86,7 @@ func Benchmark_Next_move(b *testing.B) {
 				}
 			})
 			
-
-		
-		
+			
 		// MOVE GENERATION
 		// --------------------------------------------------------------------
 		move_gen_prefix := "__MoveGen_"

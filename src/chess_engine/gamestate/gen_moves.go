@@ -126,3 +126,14 @@ func (gs *GameState) RM_IllegalMoves(pinned_pieces map[uint][]uint) {
 	}
 	gs.MoveList = legal_moves
 }
+
+// ----------------------------------------------------------------------------
+
+
+func (gs *GameState) SortMoves() {
+	// Sorts movelist - based on move score
+
+	gs.ScoreMoveList = gs.MoveList.GetMoveScore(gs.PlayerBoard, gs.PlayerKingSaftey)
+	gs.MoveList = gs.ScoreMoveList.SortMoves()
+
+}

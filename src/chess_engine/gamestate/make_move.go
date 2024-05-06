@@ -118,11 +118,11 @@ func (gs *GameState) Next_move() {
 	} else {
 		gs.GenMoves() // generate moves
 	}
-	gs.MoveList.SortMoves() 
-	
 	// remove illegal moves
 	gs.RM_IllegalMoves(pinned_pieces) // remove illegal moves
-
+	
+	gs.SortMoves()
+	 
 	// check for game over
 	if len(gs.MoveList) == 0 {
 		// no moves 

@@ -22,6 +22,7 @@ type GameState struct {
 	
 	// move list
 	MoveList move_gen.MoveList
+	ScoreMoveList move_gen.ScoreMoveList
 	Enpass_ind uint
 	MoveHumanList []string // CLI referencing
 	PlayerBoard  move_gen.BoardPerpective

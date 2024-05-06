@@ -1,0 +1,69 @@
+PASS
+ok  	chess/src/tests	0.191s
+
+Postion:  Starting pos
+goos: windows
+goarch: amd64
+pkg: chess/src/tests/benchmark
+cpu: 13th Gen Intel(R) Core(TM) i5-13600K
+Benchmark_Search/0__Evaluate__-20         	  790089	      1472 ns/op	     864 B/op	      70 allocs/op
+Benchmark_Search/0__Next_move__-20        	  887672	      1299 ns/op	    2104 B/op	      42 allocs/op
+Benchmark_Search/0__FindBestMove__-Depth-1-20         	   10000	    100607 ns/op	  107968 B/op	    3356 allocs/op
+Benchmark_Search/0__FindBestMove__-Depth-4-20         	       6	 188978250 ns/op	181741568 B/op	 5395045 allocs/op
+Benchmark_Search/0__FindBestMove__-Depth-6-20         	       1	17445405500 ns/op	16766847520 B/op	486774729 allocs/op
+
+Postion:  End of opening
+Benchmark_Search/1__Evaluate__-20                     	  749896	      1457 ns/op	     864 B/op	      70 allocs/op
+Benchmark_Search/1__Next_move__-20                    	  427365	      2981 ns/op	    4568 B/op	      83 allocs/op
+Benchmark_Search/1__FindBestMove__-Depth-1-20         	    3422	    368690 ns/op	  420938 B/op	    9954 allocs/op
+Benchmark_Search/1__FindBestMove__-Depth-4-20         	      14	  85556957 ns/op	91106998 B/op	 2131194 allocs/op
+Benchmark_Search/1__FindBestMove__-Depth-6-20         	       1	2992431600 ns/op	3282659712 B/op	76671772 allocs/op
+
+Postion:  Middle 1
+Benchmark_Search/2__Evaluate__-20                     	  827254	      1421 ns/op	     784 B/op	      65 allocs/op
+Benchmark_Search/2__Next_move__-20                    	  381933	      3156 ns/op	    3968 B/op	      84 allocs/op
+Benchmark_Search/2__FindBestMove__-Depth-1-20         	    3919	    307790 ns/op	  349018 B/op	    8513 allocs/op
+Benchmark_Search/2__FindBestMove__-Depth-4-20         	       2	 723244000 ns/op	816708040 B/op	18834526 allocs/op
+Benchmark_Search/2__FindBestMove__-Depth-6-20         	       1	10121269500 ns/op	11750812744 B/op	264666145 allocs/op
+
+Postion:  Middle 2
+Benchmark_Search/3__Evaluate__-20                     	  855717	      1389 ns/op	     784 B/op	      65 allocs/op
+Benchmark_Search/3__Next_move__-20                    	  386390	      2840 ns/op	    5128 B/op	      80 allocs/op
+Benchmark_Search/3__FindBestMove__-Depth-1-20         	    2994	    398545 ns/op	  524714 B/op	   11220 allocs/op
+Benchmark_Search/3__FindBestMove__-Depth-4-20         	      14	  80582450 ns/op	95956717 B/op	 2014383 allocs/op
+Benchmark_Search/3__FindBestMove__-Depth-6-20         	       1	5365852600 ns/op	6300924288 B/op	134015474 allocs/op
+
+Postion:  Middle 3
+Benchmark_Search/4__Evaluate__-20                     	  886872	      1305 ns/op	     704 B/op	      60 allocs/op
+Benchmark_Search/4__Next_move__-20                    	  443631	      2646 ns/op	    4544 B/op	      69 allocs/op
+Benchmark_Search/4__FindBestMove__-Depth-1-20         	    4423	    270029 ns/op	  349554 B/op	    7505 allocs/op
+Benchmark_Search/4__FindBestMove__-Depth-4-20         	       3	 337321067 ns/op	407073992 B/op	 8709711 allocs/op
+Benchmark_Search/4__FindBestMove__-Depth-6-20         	       1	26476222300 ns/op	31735831648 B/op	682132893 allocs/op
+
+Postion:  InCheck 1
+Benchmark_Search/5__Evaluate__-20                     	  826884	      1419 ns/op	     784 B/op	      65 allocs/op
+Benchmark_Search/5__Next_move__-20                    	  856059	      1424 ns/op	    1304 B/op	      41 allocs/op
+Benchmark_Search/5__FindBestMove__-Depth-1-20         	   14706	     81101 ns/op	   87232 B/op	    2364 allocs/op
+Benchmark_Search/5__FindBestMove__-Depth-4-20         	      10	 103784780 ns/op	117487449 B/op	 2718821 allocs/op
+Benchmark_Search/5__FindBestMove__-Depth-6-20         	       1	4472373300 ns/op	5019726544 B/op	116085610 allocs/op
+
+Postion:  InCheck 2
+Benchmark_Search/6__Evaluate__-20                     	  920245	      1183 ns/op	     584 B/op	      51 allocs/op
+Benchmark_Search/6__Next_move__-20                    	 1204364	      1004 ns/op	     816 B/op	      35 allocs/op
+Benchmark_Search/6__FindBestMove__-Depth-1-20         	   42460	     27747 ns/op	   29896 B/op	     821 allocs/op
+Benchmark_Search/6__FindBestMove__-Depth-4-20         	      28	  39512968 ns/op	42589546 B/op	  974883 allocs/op
+Benchmark_Search/6__FindBestMove__-Depth-6-20         	       1	4015066000 ns/op	4411102144 B/op	101921777 allocs/op
+
+Postion:  InCheck 3
+Benchmark_Search/7__Evaluate__-20                     	  856206	      1351 ns/op	     712 B/op	      59 allocs/op
+Benchmark_Search/7__Next_move__-20                    	 1546117	       777.8 ns/op	     536 B/op	      27 allocs/op
+Benchmark_Search/7__FindBestMove__-Depth-1-20         	  107311	     11158 ns/op	   12336 B/op	     334 allocs/op
+Benchmark_Search/7__FindBestMove__-Depth-4-20         	     139	   8622612 ns/op	10114373 B/op	  210180 allocs/op
+Benchmark_Search/7__FindBestMove__-Depth-6-20         	       5	 232397800 ns/op	258157432 B/op	 5763965 allocs/op
+
+Postion:  End 1
+Benchmark_Search/8__Evaluate__-20                     	 1361200	       890.8 ns/op	     480 B/op	      35 allocs/op
+Benchmark_Search/8__Next_move__-20                    	  450987	      2587 ns/op	    4656 B/op	      66 allocs/op
+Benchmark_Search/8__FindBestMove__-Depth-1-20         	    5708	    207608 ns/op	  268265 B/op	    5370 allocs/op
+Benchmark_Search/8__FindBestMove__-Depth-4-20         	     189	   6521341 ns/op	 6632142 B/op	  151996 allocs/op
+Benchmark_Search/8__FindBestMove__-Depth-6-20         	

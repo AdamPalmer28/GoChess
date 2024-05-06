@@ -11,8 +11,6 @@ func Evaluate(gs *gamestate.GameState) float64 {
 	cb := gs.Board
 	
 	//MoveRAys
-
-	
 	var score float64 = 0.0
 	
 	EvalMoves := evaluate.GetEvalMoveRays(gs)

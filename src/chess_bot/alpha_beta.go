@@ -96,7 +96,7 @@ func Quiescence(cur_search *Search, alpha float64, beta float64, cur_quie_depth 
 	}
 
 	// search moves --------------------------------------
-	important_moves := gs.MoveList.ImportantMoves()
+	important_moves := gs.ScoreMoveList.ImportantMoves()
 	for _, move := range important_moves {
 		cur_search.total_nodes += 1
 

@@ -33,6 +33,11 @@ special moves
 
 type MoveList []uint
 
+// move list for sorting [move, score] uint, float
+type ScoreMoveList []struct {
+	Move uint
+	Score float64
+}
 
 type BoardPerpective struct {
 	// friendly pieces
@@ -60,42 +65,98 @@ type BoardPerpective struct {
 }
 
 
-func special_move(move uint) uint {
-	return (move >> 12)
+
+func (moves MoveList) GetMoveScore(bp BoardPerpective, ks KingSafetyRelBB) ScoreMoveList {
+	// Give each move a quick estimate of score value - which will be used to sort moves
+
+	sorted_moves := make(ScoreMoveList, len(moves))
+
+	for i, move := range moves {
+		sorted_moves[i].Move = move
+		score := 0.0
+
+		// move details
+		special_move := move >> 12
+		end_sq := (move >> 6) & 0b111111
+		start_sq := (move) & 0b111111
+
+		piece_moved := move_getPiece(start_sq, [6]*board.Bitboard{&bp.Pawn_bb, &bp.Knight_bb, &bp.Bishop_bb, &bp.Rook_bb, &bp.Queen_bb, &bp.King_bb})
+		
+		// promotion 
+		if special_move > 0b1000 { 
+
+			if special_move & 0b0011 == 0b0011 { // queen promotion
+				score += 9.0
+			} else if special_move & 0b0011 == 0b0000 { // knight promotion
+				score += 5.0
+			} else { // rook or bishop promotion - not worth searching much
+				score += 1.5 
+			} 
+		}
+		// capture
+		if special_move >= 0b0100 { 
+			score += 1.0
+
+			// player piece, opp piece
+			piece_captured := move_getPiece(end_sq, [6]*board.Bitboard{&bp.Opp_pawn_bb, &bp.Opp_knight_bb, &bp.Opp_bishop_bb, &bp.Opp_rook_bb, &bp.Opp_queen_bb, &bp.Opp_king_bb})
+			piece_value := [6]float64{1, 3, 3, 5, 9, 100}
+
+			score += piece_value[piece_captured] - piece_value[piece_moved]
+		}
+
+		// king safety
+
+		sorted_moves[i].Score = score
+	}
+
+	return sorted_moves
 }
 
-// ? should it take the input of the BoardPerpective struct?
-func (moves *MoveList) SortMoves() {
 
-	// priority order: promotion, capture, castle, double pawn push
-	
-	// they are already in numerical value
-	// so we just can sort them by their value (highest to lowest)
+func (move *ScoreMoveList) SortMoves() MoveList {
+	// Sort MoveList based on moveScore
 
-	sort.Slice(*moves, func(i, j int) bool {
-
-		return (special_move((*moves)[i]) > special_move((*moves)[j]))
-		
+	sort.Slice(*move, func(i, j int) bool {
+		return (*move)[i].Score > (*move)[j].Score
 	})
 
+	// make move list
+	movelist := make(MoveList, len(*move))
+	for i, m := range *move {
+		movelist[i] = m.Move
+	}
 
+	return movelist
 }
 
-// ! can likely be removed and replaced by a simple move_score > threshold check
-func (moves *MoveList) ImportantMoves() MoveList {
-
-	// priority order: promotion, capture, castle
-	
-	// they are already in numerical value
-	// so we just can sort them by their value (highest to lowest)
+func (moves *ScoreMoveList) ImportantMoves() MoveList {
+	// only look at moves with a score above a certain threshold
 
 	important_moves := make(MoveList, 0)
 
-	for _, move := range *moves {
-		if special_move(move) > 1 {
-			important_moves = append(important_moves, move)
+	for _, m := range *moves {
+		if m.Score > 2 {
+			important_moves = append(important_moves, m.Move)
 		}
 	}
 	return important_moves
 }
 
+// ----------------------------------------------------------------------------
+// helper functions
+
+// Move to board
+func move_getPiece(sq uint, BB_list [6]*board.Bitboard) uint {
+
+	// update piece bitboards
+	var piece_moved uint
+	for ind, BB := range BB_list {
+
+		// ? would this be faster with BB != 0 
+		if (*BB & (1 << sq) != 0) {
+			piece_moved = uint(ind)
+			break
+		}
+	}
+	return piece_moved
+}
