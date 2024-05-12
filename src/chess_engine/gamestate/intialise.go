@@ -17,6 +17,9 @@ func (gs *GameState) Init() {
 		gs.Board.UpdatePieceLocations(i)
 	}
 
+	// update hash
+	InitZobrist()
+
 	// initialise move rays 
 	gs.makeMoveRays()
 
@@ -27,6 +30,8 @@ func (gs *GameState) Init() {
 	
 	// get gamestate ready for next move
 	gs.Next_move()
+
+
 
 
 }

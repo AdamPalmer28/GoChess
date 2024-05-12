@@ -7,7 +7,8 @@ import "chess/src/chess_engine/gamestate"
 // ============================================================================
 
 // AlphaBeta search for the best move
-func AlphaBeta(cur_search *Search, alpha float64, beta float64, cur_depth uint) float64 {
+func AlphaBeta(cur_search *Search, alpha float64, beta float64, cur_depth uint, moveTreeRef *[]MoveScoreTree) float64 {
+	
 	var score float64 = 0
 	gs := cur_search.gs
 
@@ -34,19 +35,33 @@ func AlphaBeta(cur_search *Search, alpha float64, beta float64, cur_depth uint) 
 	for _, move := range gs.MoveList {
 		cur_search.total_nodes += 1
 
+		// new tree ref - for next move(s)
+		var NewTreeRef []MoveScoreTree
+
 		gs.Make_move(move)
 
 		found, tt_score := checkTT(cur_search, cur_depth)
 
 		if found == 2 { // TT hit
 			score = tt_score
-		} else { // no TT hit
+		} else { // no TT hit - search
 			// beta alpha are negated because we are looking at the opponent's
-			score = -AlphaBeta(cur_search, -beta, -alpha, cur_depth+1)
-			//cur_search.TT[gs.Hash] = TT{depth: cur_depth, score: score}
+			score = -AlphaBeta(cur_search, -beta, -alpha, cur_depth+1, &NewTreeRef)
+			cur_search.TT[gs.Hash] = TT{depth: cur_depth, score: score}
 		}
 
 		gs.Undo() // undo move before exiting loop
+
+		// log the move and score to Search (Up to 4 moves deep)
+		if cur_depth <= 4 {
+
+			*moveTreeRef = append(*moveTreeRef, 
+					MoveScoreTree{
+						MoveNo: move, // move considering
+						Score: score, // best score
+						NextMove: &NewTreeRef,
+					})
+		}
 
 		// --------------------------------------
 		// alpha beta pruning
@@ -61,6 +76,7 @@ func AlphaBeta(cur_search *Search, alpha float64, beta float64, cur_depth uint) 
 				cur_search.best_eval = float64(cur_search.gs.PlayerBoard.Fwd/8) * score
 			}
 		}
+
 	}
 	return alpha
 }

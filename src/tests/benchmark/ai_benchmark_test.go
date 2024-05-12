@@ -27,10 +27,10 @@ var Fen_positions = [][2]string{
 
 
 
-func Benchmark_Search(b *testing.B) {
+func Benchmark_Search_Time(b *testing.B) {
 	// Benchmark the AI Search process
 	//	- this function is used to Evaluate the gamestate for search (bot move selection) 
-	depth := []uint{1,  4, 6}
+	depth := []uint{2, 4, 6}
 	b.ReportAllocs()
 
 	for pos_ind, fen := range Fen_positions {

@@ -20,6 +20,8 @@ type Search struct {
 	// results data
 	best_move uint
 	best_eval float64
+
+	MoveTree []MoveScoreTree
 	
 	// Internal data
 	TT map[uint64]TT
@@ -31,6 +33,12 @@ type Search struct {
 	TT_success uint
 }
 
+// move eval lists
+type MoveScoreTree struct {
+		MoveNo uint
+		Score float64
+		NextMove *[]MoveScoreTree
+	}
 
 // ChessBot Main function
 func FindBestMove(gs *gamestate.GameState, depth uint, make_move bool) {
@@ -45,7 +53,9 @@ func FindBestMove(gs *gamestate.GameState, depth uint, make_move bool) {
 	}
 	//start := time.Now()
 
-	AlphaBeta(&cur_search, -100000, 100000, 0)
+	MoveEvalTree := []MoveScoreTree{}
+
+	AlphaBeta(&cur_search, -100000, 100000, 0, &MoveEvalTree)
 
 	//elapsed := time.Since(start)
 

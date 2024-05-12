@@ -1,0 +1,191 @@
+PASS
+ok  	chess/src/tests	0.201s
+
+Postion:  Starting pos
+goos: windows
+goarch: amd64
+pkg: chess/src/tests/benchmark
+cpu: 13th Gen Intel(R) Core(TM) i5-13600K
+Benchmark_Search/0__Evaluate__-20         	  745656	      1473 ns/op	     864 B/op	      70 allocs/op
+Benchmark_Search/0__Next_move__-20        	  938511	      1346 ns/op	    2104 B/op	      42 allocs/op
+Benchmark_Search/0__FindBestMove__-Depth-2-20         	     601	   1881665 ns/op	 1864347 B/op	   55335 allocs/op
+Benchmark_Search/0__FindBestMove__-Depth-4-20         	       6	 174839767 ns/op	169239666 B/op	 4730853 allocs/op
+Benchmark_Search/0__FindBestMove__-Depth-6-20         	       1	15596255900 ns/op	16154558272 B/op	434766234 allocs/op
+
+Postion:  End of opening
+Benchmark_Search/1__Evaluate__-20                     	  827340	      1456 ns/op	     864 B/op	      70 allocs/op
+Benchmark_Search/1__Next_move__-20                    	  419364	      2833 ns/op	    4568 B/op	      83 allocs/op
+Benchmark_Search/1__FindBestMove__-Depth-2-20         	     333	   3560846 ns/op	 3684761 B/op	   86724 allocs/op
+Benchmark_Search/1__FindBestMove__-Depth-4-20         	      10	 108485310 ns/op	117627116 B/op	 2644724 allocs/op
+Benchmark_Search/1__FindBestMove__-Depth-6-20         	       1	16745304900 ns/op	18801790904 B/op	428357157 allocs/op
+
+Postion:  Middle 1
+Benchmark_Search/2__Evaluate__-20                     	  856377	      1384 ns/op	     784 B/op	      65 allocs/op
+Benchmark_Search/2__Next_move__-20                    	  399762	      3230 ns/op	    3968 B/op	      84 allocs/op
+Benchmark_Search/2__FindBestMove__-Depth-2-20         	     385	   2989535 ns/op	 3267382 B/op	   74103 allocs/op
+Benchmark_Search/2__FindBestMove__-Depth-4-20         	       2	 743509300 ns/op	847525576 B/op	18883610 allocs/op
+Benchmark_Search/2__FindBestMove__-Depth-6-20         	       1	13751599600 ns/op	16672180920 B/op	361688531 allocs/op
+
+Postion:  Middle 2
+Benchmark_Search/3__Evaluate__-20                     	  885007	      1409 ns/op	     784 B/op	      65 allocs/op
+Benchmark_Search/3__Next_move__-20                    	  418677	      2882 ns/op	    5128 B/op	      80 allocs/op
+Benchmark_Search/3__FindBestMove__-Depth-2-20         	     429	   2783048 ns/op	 3306222 B/op	   67927 allocs/op
+Benchmark_Search/3__FindBestMove__-Depth-4-20         	      15	  75684413 ns/op	90126748 B/op	 1818347 allocs/op
+Benchmark_Search/3__FindBestMove__-Depth-6-20         	       1	5554616000 ns/op	6824078488 B/op	141058305 allocs/op
+
+Postion:  Middle 3
+Benchmark_Search/4__Evaluate__-20                     	  922749	      1311 ns/op	     704 B/op	      60 allocs/op
+Benchmark_Search/4__Next_move__-20                    	  436147	      2684 ns/op	    4544 B/op	      69 allocs/op
+Benchmark_Search/4__FindBestMove__-Depth-2-20         	     590	   2014131 ns/op	 2429636 B/op	   51376 allocs/op
+Benchmark_Search/4__FindBestMove__-Depth-4-20         	       4	 296361750 ns/op	362231720 B/op	 7491521 allocs/op
+Benchmark_Search/4__FindBestMove__-Depth-6-20         	       1	38215147200 ns/op	47617502816 B/op	989520120 allocs/op
+
+Postion:  InCheck 1
+Benchmark_Search/5__Evaluate__-20                     	  768476	      1387 ns/op	     784 B/op	      65 allocs/op
+Benchmark_Search/5__Next_move__-20                    	  849984	      1431 ns/op	    1304 B/op	      41 allocs/op
+Benchmark_Search/5__FindBestMove__-Depth-2-20         	    1534	    787918 ns/op	  887064 B/op	   20726 allocs/op
+Benchmark_Search/5__FindBestMove__-Depth-4-20         	       7	 158773100 ns/op	185705893 B/op	 4124804 allocs/op
+Benchmark_Search/5__FindBestMove__-Depth-6-20         	       1	11862494800 ns/op	14064080128 B/op	316311938 allocs/op
+
+Postion:  InCheck 2
+Benchmark_Search/6__Evaluate__-20                     	 1000000	      1155 ns/op	     584 B/op	      51 allocs/op
+Benchmark_Search/6__Next_move__-20                    	 1207081	       996.5 ns/op	     816 B/op	      35 allocs/op
+Benchmark_Search/6__FindBestMove__-Depth-2-20         	    2466	    484444 ns/op	  527440 B/op	   11626 allocs/op
+Benchmark_Search/6__FindBestMove__-Depth-4-20         	      26	  44750492 ns/op	47438842 B/op	 1051128 allocs/op
+Benchmark_Search/6__FindBestMove__-Depth-6-20         	       1	3373422700 ns/op	3716627544 B/op	82277761 allocs/op
+
+Postion:  InCheck 3
+Benchmark_Search/7__Evaluate__-20                     	  827004	      1361 ns/op	     712 B/op	      59 allocs/op
+Benchmark_Search/7__Next_move__-20                    	 1534831	       775.6 ns/op	     536 B/op	      27 allocs/op
+Benchmark_Search/7__FindBestMove__-Depth-2-20         	    4120	    290733 ns/op	  378852 B/op	    7426 allocs/op
+Benchmark_Search/7__FindBestMove__-Depth-4-20         	     100	  10775338 ns/op	12462864 B/op	  258342 allocs/op
+Benchmark_Search/7__FindBestMove__-Depth-6-20         	       5	 221707740 ns/op	250207750 B/op	 5400108 allocs/op
+
+Postion:  End 1
+Benchmark_Search/8__Evaluate__-20                     	 1363177	       886.2 ns/op	     480 B/op	      35 allocs/op
+Benchmark_Search/8__Next_move__-20                    	  384960	      2621 ns/op	    4656 B/op	      66 allocs/op
+Benchmark_Search/8__FindBestMove__-Depth-2-20         	    3028	    396783 ns/op	  446969 B/op	    9266 allocs/op
+Benchmark_Search/8__FindBestMove__-Depth-4-20         	     183	   6370647 ns/op	 6250209 B/op	  140430 allocs/op
+Benchmark_Search/8__FindBestMove__-Depth-6-20         	       2	 569677050 ns/op	550756112 B/op	12796232 allocs/op
+
+Postion:  End 2
+Benchmark_Search/9__Evaluate__-20                     	 1482777	       825.1 ns/op	     432 B/op	      32 allocs/op
+Benchmark_Search/9__Next_move__-20                    	  530677	      2239 ns/op	    2768 B/op	      57 allocs/op
+Benchmark_Search/9__FindBestMove__-Depth-2-20         	    2959	    393708 ns/op	  401370 B/op	    9643 allocs/op
+Benchmark_Search/9__FindBestMove__-Depth-4-20         	      72	  17010086 ns/op	16676232 B/op	  410090 allocs/op
+Benchmark_Search/9__FindBestMove__-Depth-6-20         	       2	 876618150 ns/op	848334872 B/op	21245311 allocs/op
+
+Postion:  End 3
+Benchmark_Search/10__Evaluate__-20                    	 1606579	       746.1 ns/op	     264 B/op	      28 allocs/op
+Benchmark_Search/10__Next_move__-20                   	  999566	      1213 ns/op	    1080 B/op	      36 allocs/op
+Benchmark_Search/10__FindBestMove__-Depth-2-20        	    1974	    606126 ns/op	  537009 B/op	   14930 allocs/op
+Benchmark_Search/10__FindBestMove__-Depth-4-20        	      50	  23610620 ns/op	21778065 B/op	  563350 allocs/op
+Benchmark_Search/10__FindBestMove__-Depth-6-20        	       3	 407956400 ns/op	392795293 B/op	 9812757 allocs/op
+
+Postion:  End 4
+Benchmark_Search/11__Evaluate__-20                    	 1223012	       984.4 ns/op	     424 B/op	      35 allocs/op
+Benchmark_Search/11__Next_move__-20                   	  521383	      2319 ns/op	    2744 B/op	      65 allocs/op
+Benchmark_Search/11__FindBestMove__-Depth-2-20        	     871	   1346738 ns/op	 1046554 B/op	   29641 allocs/op
+Benchmark_Search/11__FindBestMove__-Depth-4-20        	      32	  36134472 ns/op	31620139 B/op	  803444 allocs/op
+Benchmark_Search/11__FindBestMove__-Depth-6-20        	       1	1262755900 ns/op	1144487056 B/op	28832909 allocs/op
+
+
+Postion:  Starting pos  - Incheck: false
+Fen:  rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+Benchmark_Next_move/0__Make_BP__-20                   	15991002	        75.77 ns/op	      24 B/op	       3 allocs/op
+Benchmark_Next_move/0__GetCheck__-20                  	12227754	        82.33 ns/op	     144 B/op	       3 allocs/op
+Benchmark_Next_move/0__RM_IllegalMoves__-20           	 7515387	       161.0 ns/op	     504 B/op	       6 allocs/op
+Benchmark_Next_move/0__SortMoves__-20                 	 3941707	       305.5 ns/op	     568 B/op	       5 allocs/op
+Benchmark_Next_move/0__GetMoveScore__-20              	 6544780	       185.2 ns/op	     320 B/op	       1 allocs/op
+Benchmark_Next_move/0__MoveGen_Total__-20             	 2244735	       578.4 ns/op	     864 B/op	      25 allocs/op
+Benchmark_Next_move/0__MoveGen__PawnMoves__-20        	 6183380	       180.6 ns/op	     368 B/op	       9 allocs/op
+Benchmark_Next_move/0__MoveGen__KnightMoves__-20      	 7730334	       155.7 ns/op	     128 B/op	       9 allocs/op
+Benchmark_Next_move/0__MoveGen__RookMoves__-20        	17853954	        65.37 ns/op	      56 B/op	       3 allocs/op
+Benchmark_Next_move/0__MoveGen__BishopMoves__-20      	18105883	        66.37 ns/op	      56 B/op	       3 allocs/op
+Benchmark_Next_move/0__MoveGen__KingMoves__-20        	79589318	        15.14 ns/op	       0 B/op	       0 allocs/op
+
+
+Postion:  End of opening  - Incheck: false
+Fen:  r3k2r/pppb1ppp/1qnbpn2/3P4/3P1N2/2N3P1/PP1BPPBP/R2QK2R w KQkq - 0 1
+Benchmark_Next_move/1__Make_BP__-20                   	15736837	        74.86 ns/op	      24 B/op	       3 allocs/op
+Benchmark_Next_move/1__GetCheck__-20                  	12037822	        84.60 ns/op	     144 B/op	       3 allocs/op
+Benchmark_Next_move/1__RM_IllegalMoves__-20           	 4640623	       257.6 ns/op	    1016 B/op	       7 allocs/op
+Benchmark_Next_move/1__SortMoves__-20                 	 2237913	       536.6 ns/op	    1048 B/op	       5 allocs/op
+Benchmark_Next_move/1__GetMoveScore__-20              	 3326402	       358.6 ns/op	     640 B/op	       1 allocs/op
+Benchmark_Next_move/1__MoveGen_Total__-20             	  888427	      1413 ns/op	    2336 B/op	      65 allocs/op
+Benchmark_Next_move/1__MoveGen__PawnMoves__-20        	 4611051	       261.7 ns/op	     392 B/op	      11 allocs/op
+Benchmark_Next_move/1__MoveGen__KnightMoves__-20      	 3876871	       310.5 ns/op	     392 B/op	      14 allocs/op
+Benchmark_Next_move/1__MoveGen__RookMoves__-20        	 5872639	       204.4 ns/op	     248 B/op	      13 allocs/op
+Benchmark_Next_move/1__MoveGen__BishopMoves__-20      	 4034416	       297.3 ns/op	     440 B/op	      16 allocs/op
+Benchmark_Next_move/1__MoveGen__KingMoves__-20        	 7313407	       164.8 ns/op	      96 B/op	       9 allocs/op
+
+
+Postion:  Middle 2  - Incheck: false
+Fen:  2rq1rk1/1p1b1pp1/p4n1p/2bp4/3N3B/2N1P3/PPQ2PPP/R4RK1 w - - 0 16
+Benchmark_Next_move/2__Make_BP__-20                   	15351157	        77.83 ns/op	      24 B/op	       3 allocs/op
+Benchmark_Next_move/2__GetCheck__-20                  	14251018	        83.61 ns/op	     144 B/op	       3 allocs/op
+Benchmark_Next_move/2__RM_IllegalMoves__-20           	 4257658	       279.5 ns/op	    1016 B/op	       7 allocs/op
+Benchmark_Next_move/2__SortMoves__-20                 	 1850449	       640.7 ns/op	    1240 B/op	       5 allocs/op
+Benchmark_Next_move/2__GetMoveScore__-20              	 2683734	       439.7 ns/op	     768 B/op	       1 allocs/op
+Benchmark_Next_move/2__MoveGen_Total__-20             	  917914	      1347 ns/op	    2704 B/op	      62 allocs/op
+Benchmark_Next_move/2__MoveGen__PawnMoves__-20        	 6965958	       174.0 ns/op	     368 B/op	       9 allocs/op
+Benchmark_Next_move/2__MoveGen__KnightMoves__-20      	 3232594	       365.9 ns/op	     520 B/op	      16 allocs/op
+Benchmark_Next_move/2__MoveGen__RookMoves__-20        	 3854020	       287.1 ns/op	     472 B/op	      17 allocs/op
+Benchmark_Next_move/2__MoveGen__BishopMoves__-20      	 3599752	       333.8 ns/op	     552 B/op	      15 allocs/op
+Benchmark_Next_move/2__MoveGen__KingMoves__-20        	20651520	        59.51 ns/op	      24 B/op	       3 allocs/op
+
+
+Postion:  InCheck 1  - Incheck: true
+Fen:  r2bnk1r/ppp3pp/1qn1p1p1/8/1B1P4/P1N3P1/1P2PPBP/R2Q1RK1 b - - 0 1
+Benchmark_Next_move/3__Make_BP__-20                   	11414894	       102.2 ns/op	      24 B/op	       3 allocs/op
+Benchmark_Next_move/3__GetCheck__-20                  	 9078666	       126.2 ns/op	     152 B/op	       4 allocs/op
+Benchmark_Next_move/3__RM_IllegalMoves__-20           	11048583	       101.7 ns/op	     248 B/op	       5 allocs/op
+Benchmark_Next_move/3__SortMoves__-20                 	 6193611	       195.2 ns/op	     312 B/op	       5 allocs/op
+Benchmark_Next_move/3__GetMoveScore__-20              	10886822	       110.7 ns/op	     144 B/op	       1 allocs/op
+Benchmark_Next_move/3__MoveGen_Total__-20             	 1882924	       647.5 ns/op	     568 B/op	      24 allocs/op
+
+
+Postion:  InCheck 3  - Incheck: true
+Fen:  1b4rk/1p2qp1p/p1n5/2p1p2P/P1NpP3/1P1P1N2/2PQ1Kr1/R5R1 w - - 0 29
+Benchmark_Next_move/4__Make_BP__-20                   	14399366	        81.63 ns/op	      24 B/op	       3 allocs/op
+Benchmark_Next_move/4__GetCheck__-20                  	10652680	       110.8 ns/op	     152 B/op	       4 allocs/op
+Benchmark_Next_move/4__RM_IllegalMoves__-20           	43604334	        26.91 ns/op	      24 B/op	       2 allocs/op
+Benchmark_Next_move/4__SortMoves__-20                 	11457410	       103.2 ns/op	     136 B/op	       5 allocs/op
+Benchmark_Next_move/4__GetMoveScore__-20              	30693597	        38.96 ns/op	      32 B/op	       1 allocs/op
+Benchmark_Next_move/4__MoveGen_Total__-20             	 3667171	       328.8 ns/op	     200 B/op	      13 allocs/op
+
+
+Postion:  End 2  - Incheck: false
+Fen:  2k5/4rp1p/p1n5/Ppp1p1NP/3pP3/1P1P4/2PK1R2/8 w - b6 0 29
+Benchmark_Next_move/5__Make_BP__-20                   	14799429	        79.78 ns/op	      24 B/op	       3 allocs/op
+Benchmark_Next_move/5__GetCheck__-20                  	13864369	        85.45 ns/op	     144 B/op	       3 allocs/op
+Benchmark_Next_move/5__RM_IllegalMoves__-20           	 7375672	       163.4 ns/op	     504 B/op	       6 allocs/op
+Benchmark_Next_move/5__SortMoves__-20                 	 3161787	       377.9 ns/op	     664 B/op	       5 allocs/op
+Benchmark_Next_move/5__GetMoveScore__-20              	 4937108	       242.7 ns/op	     384 B/op	       1 allocs/op
+Benchmark_Next_move/5__MoveGen_Total__-20             	 1000000	      1001 ns/op	    1432 B/op	      40 allocs/op
+Benchmark_Next_move/5__MoveGen__PawnMoves__-20        	 6585579	       181.3 ns/op	     248 B/op	       9 allocs/op
+Benchmark_Next_move/5__MoveGen__KnightMoves__-20      	 5170358	       229.5 ns/op	     208 B/op	      10 allocs/op
+Benchmark_Next_move/5__MoveGen__RookMoves__-20        	 5430742	       222.5 ns/op	     384 B/op	      11 allocs/op
+Benchmark_Next_move/5__MoveGen__BishopMoves__-20      	271093196	         4.435 ns/op	       0 B/op	       0 allocs/op
+Benchmark_Next_move/5__MoveGen__KingMoves__-20        	 5668984	       214.5 ns/op	     208 B/op	       8 allocs/op
+
+
+Postion:  End 4  - Incheck: false
+Fen:  2b5/3PnP1k/5ppP/KP6/P2p2r1/2p3P1/2Rb4/8 b - - 0 44
+Benchmark_Next_move/6__Make_BP__-20                   	14059819	        83.61 ns/op	      24 B/op	       3 allocs/op
+Benchmark_Next_move/6__GetCheck__-20                  	14081730	        85.18 ns/op	     144 B/op	       3 allocs/op
+Benchmark_Next_move/6__RM_IllegalMoves__-20           	 7315622	       163.4 ns/op	     504 B/op	       6 allocs/op
+Benchmark_Next_move/6__SortMoves__-20                 	 3246844	       370.4 ns/op	     664 B/op	       5 allocs/op
+Benchmark_Next_move/6__GetMoveScore__-20              	 5050582	       238.2 ns/op	     384 B/op	       1 allocs/op
+Benchmark_Next_move/6__MoveGen_Total__-20             	 1000000	      1085 ns/op	    1408 B/op	      48 allocs/op
+Benchmark_Next_move/6__MoveGen__PawnMoves__-20        	11014084	       109.9 ns/op	     112 B/op	       6 allocs/op
+Benchmark_Next_move/6__MoveGen__KnightMoves__-20      	 7279905	       164.9 ns/op	     120 B/op	       7 allocs/op
+Benchmark_Next_move/6__MoveGen__RookMoves__-20        	 7060712	       169.3 ns/op	     192 B/op	       9 allocs/op
+Benchmark_Next_move/6__MoveGen__BishopMoves__-20      	 3751011	       320.7 ns/op	     432 B/op	      15 allocs/op
+Benchmark_Next_move/6__MoveGen__KingMoves__-20        	 5727576	       209.4 ns/op	     104 B/op	       8 allocs/op
+PASS
+ok  	chess/src/tests/benchmark	276.242s
+PASS
+ok  	chess/src/tests/test_gamestate	0.231s
+PASS
+ok  	chess/src/tests/test_move_gen	0.217s

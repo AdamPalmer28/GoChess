@@ -15,14 +15,29 @@ A ongoing to-do list of task for development of the chess engine.
 - Test TT is working correctly
 - Copy of gamestate (create copy and check all of previous properties remain the same without affecting the original)
 
+- Benchmark search effectiveness
+  - Calculate total number of nodes (i.e. all possible move combinations)
+  - Calculate nodes searched
+    - Calculate nodes searched per second
+  - Pruned nodes
+  - TT hits / successes
+- Benchmark move-sorting effectiveness
+  - Compare (depth=0) movelist order to MoveScoreTree order (after depth-6 search)
+
 ---
 
 # Algorithm improvements
 
 ### High priority
 
+- Computation saving:
+
+  - Can I share compute of eval and board perpsective?
+  -
+
 - Search improvements
-  - GetBestMove search before alpha-beta
+  - MoveScoreTree
+    - Turn into map[uint64]MoveScoreTree
   - move sorting
     - history heuristic
     - killer moves

@@ -16,6 +16,17 @@ A ongoing to-do list of task for development of the chess project.
 
 - Eval bar (on right of board)
 
+- AI:
+
+  - Calculate AI move, using setting parameters (server call)
+  - Implement AI settings
+  - Display AI move feedback from server
+    - MoveEvalTree
+    - TT stats
+
+- Update react
+  - Implement new server calls
+
 ### Interface
 
 - Footer gamestate UI
@@ -42,9 +53,6 @@ A ongoing to-do list of task for development of the chess project.
   - bitboards
 
 - Undo end point
-
-- Calculate AI move
-  (take in setting parameters)
 
 ### Misc tasks
 
