@@ -24,20 +24,20 @@ const DrawChess = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState(null);
 
-	// fetch game-data -> http://localhost:8080/chessgame
-	const fetchData = async () => {
+	// fetch chess game-data
+	const fetchData = async (url, data) => {
+		// URL: /chessgame, /move
+		//setIsLoading(true);
 		try {
-			const response = await fetch("http://localhost:8080/chessgame"); // Replace with your API endpoint
+			const response = await fetch(url, data);
 			if (!response.ok) {
 				throw new Error(`HTTP error! Status: ${response.status}`);
 			}
+
 			const result = await response.json();
 
-			// Decode data and handle it
 			const decodedData = ChessData(result);
-
 			setData(decodedData);
-
 			console.log(`message: ${decodedData.message}`);
 		} catch (error) {
 			setError(error);
@@ -49,37 +49,38 @@ const DrawChess = () => {
 	// fetch Move -> http://localhost:8080/move
 	const sendMove = async (move) => {
 		//console.log(`Send move: ${move}`);
-
 		let jsondata = { move: move };
-		//console.log(JSON.stringify(jsondata));
-		try {
-			//const response = await fetch("http://localhost:8080/move");
-			const response = await fetch("http://localhost:8080/move", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(jsondata),
-			});
-			if (!response.ok) {
-				throw new Error(`HTTP error! Status: ${response.status}`);
-			}
-			const result = await response.json();
 
-			// Decode data and handle it
-			const decodedData = ChessData(result);
+		fetchData("http://localhost:8080/move", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(jsondata),
+		});
+	};
 
-			setData(decodedData);
-		} catch (error) {
-			setError(error);
-		} finally {
-			setIsLoading(false);
-		}
+	const SendUndo = async () => {
+		//console.log(`Undo move`);
+
+		fetchData("http://localhost:8080/undo", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({}),
+		});
+	};
+
+	const SendNewGame = async () => {
+		//console.log(`New Game`);
+
+		fetchData("http://localhost:8080/newgame", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({}),
+		});
 	};
 
 	// mount fetch data to UI
 	useEffect(() => {
-		fetchData();
+		fetchData("http://localhost:8080/chessgame", {});
 	}, []);
 
 	// ------------------------------------------------------------------------
@@ -107,12 +108,13 @@ const DrawChess = () => {
 
 	const newGame = () => {
 		// reset game
-		console.log("New Game");
+		SendNewGame();
+
 	};
 
 	const undoMove = () => {
 		// undo last move
-		console.log("Undo Move");
+		SendUndo();
 	};
 
 	const flipBoard = () => {

@@ -5,6 +5,17 @@ import (
 	"chess/src/chess_engine/gamestate"
 )
 
+// TODO: Create Eval Score
+
+type EvalScore struct {
+	Total float64
+
+	White float64
+	Black float64
+
+}
+
+
 // Evaluate the board
 func Evaluate(gs *gamestate.GameState) float64 {
 

@@ -32,6 +32,7 @@ func StartGameHost() *GameHost {
 	return gh
 }
 
+
 // Converts the Current GameHost data to JSON for outgoing server data
 func (gh *GameHost) PackageChessData (w http.ResponseWriter, r *http.Request) {
 	// Convert the data to JSON
@@ -58,9 +59,25 @@ type clientData struct {
 // Get Chess data from the GameHost
 func ChessGameEndpoints(router *mux.Router, gh *GameHost) {
 
+	// ---------------------------------------------------------------------
 	// normal client request for game data
 	router.HandleFunc("/chessgame", gh.PackageChessData).Methods("GET")
 
+	// ---------------------------------------------------------------------
+	// undo request from client 
+	router.HandleFunc("/undo", func(w http.ResponseWriter, r *http.Request) {
+		gh.GameState.Undo()
+		gh.PackageChessData(w, r)
+	})
+
+	// ---------------------------------------------------------------------
+	// reset request from client
+	router.HandleFunc("/newgame", func(w http.ResponseWriter, r *http.Request) {
+		gh = StartGameHost()
+		gh.PackageChessData(w, r)
+	})
+
+	// ---------------------------------------------------------------------
 	// move request from client
 	router.HandleFunc("/move", func(w http.ResponseWriter, r *http.Request) {
 
@@ -114,4 +131,6 @@ func ChessGameEndpoints(router *mux.Router, gh *GameHost) {
 		gh.PackageChessData(w, r)
 	
 	})
+
+	// ---------------------------------------------------------------------
 }

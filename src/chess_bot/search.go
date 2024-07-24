@@ -41,7 +41,7 @@ type MoveScoreTree struct {
 	}
 
 // ChessBot Main function
-func FindBestMove(gs *gamestate.GameState, depth uint, make_move bool) {
+func FindBestMove(gs *gamestate.GameState, depth uint, make_move bool) Search {
 
 	// loop through the moves
 
@@ -68,6 +68,8 @@ func FindBestMove(gs *gamestate.GameState, depth uint, make_move bool) {
 		best_move := cur_search.best_move
 		gs.Make_move(best_move)
 	}
+
+	return cur_search
 }
 
 

@@ -64,9 +64,14 @@ func Benchmark_Search_Time(b *testing.B) {
 					chess_bot.FindBestMove(gs, d, false)
 				}
 			})
+
+			// ! search results --------------------------
+			//results := chess_bot.FindBestMove(gs, d, false)
+
+			// TODO - print the results back in presentable format
+
 		}
 		   
 			
 	}
 }
-

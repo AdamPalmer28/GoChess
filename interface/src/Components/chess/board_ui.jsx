@@ -68,12 +68,24 @@ const BoardUI = (props) => {
 		setSqMoves(new_moves);
 	};
 
+	// helper api functions
+
+	const BoardNewGame = () => {
+		// reset game
+		props.newGame();
+
+		// reset squares
+		setSqSelected(64);
+		setLastMove([64, 64]);
+		setSqMoves([]);
+	};
+
 	// ========================================================================
 	// Drawing Component
 	return (
 		<div id="board-ui" className="d-flex">
 			<BoardSettings
-				newGame={props.newGame}
+				newGame={BoardNewGame}
 				undo={props.undo}
 				flipBoard={props.flipBoard}
 			/>
