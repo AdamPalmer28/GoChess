@@ -106,19 +106,18 @@ const DrawChess = () => {
 	// ========================================================================
 	// UI functions
 
+	// start new game
 	const newGame = () => {
-		// reset game
 		SendNewGame();
-
 	};
 
+	// undo last move
 	const undoMove = () => {
-		// undo last move
 		SendUndo();
 	};
 
+	// TODO: flip board
 	const flipBoard = () => {
-		// flip board
 		console.log("Flip Board");
 	};
 

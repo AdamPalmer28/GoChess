@@ -18,6 +18,12 @@ const BoardUI = (props) => {
 	const [lastMove, setLastMove] = useState([64, 64]); // last move [from, to]
 	const [selectedSqMoves, setSqMoves] = useState([]); // selected square moves
 
+	const resetSquares = () => {
+		setSqSelected(64);
+		setLastMove([64, 64]);
+		setSqMoves([]);
+	};
+
 	let opp_pieces = [];
 	if (props.w_move) {
 		opp_pieces = [6, 7, 8, 9, 10, 11]; // Opponent's pieces for white move
@@ -68,16 +74,23 @@ const BoardUI = (props) => {
 		setSqMoves(new_moves);
 	};
 
+	// ------------------------------------------------------------------------
 	// helper api functions
 
 	const BoardNewGame = () => {
 		// reset game
 		props.newGame();
 
-		// reset squares
-		setSqSelected(64);
-		setLastMove([64, 64]);
-		setSqMoves([]);
+		resetSquares();
+	};
+
+	// undo last move
+	const BoardUndo = () => {
+
+		
+		props.undo();
+
+		resetSquares();
 	};
 
 	// ========================================================================
@@ -86,7 +99,7 @@ const BoardUI = (props) => {
 		<div id="board-ui" className="d-flex">
 			<BoardSettings
 				newGame={BoardNewGame}
-				undo={props.undo}
+				undo={BoardUndo}
 				flipBoard={props.flipBoard}
 			/>
 
