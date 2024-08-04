@@ -15,17 +15,17 @@ const (
 
 )
 
-func KnightEval(cb board.ChessBoard, white_attacks []board.Bitboard, black_attacks []board.Bitboard) float64 {
+func KnightEval(cb board.ChessBoard, white_attacks []board.Bitboard, black_attacks []board.Bitboard) [2]float64 {
 
-	var score float64 = 0.0
+	score := [2]float64{0.0, 0.0}
 
 	// knight positions
 
 		// white
-	score += pos_capture_eval(*cb.WhiteKnights, white_attacks)
+	score[0] += pos_capture_eval(*cb.WhiteKnights, white_attacks)
 
 		// black
-	score -= pos_capture_eval(*cb.BlackKnights, black_attacks)
+	score[1] += pos_capture_eval(*cb.BlackKnights, black_attacks)
 	
 	return score
 }

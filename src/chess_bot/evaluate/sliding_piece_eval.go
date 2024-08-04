@@ -50,9 +50,9 @@ const (
 
 // Rook eval
 // -----------------
-func RookEval(eval_move *EvalMoveRays, cb board.ChessBoard) float64 {
+func RookEval(eval_move *EvalMoveRays, cb board.ChessBoard) [2]float64 {
 	
-	var score float64 = 0.0
+	score := [2]float64{0.0, 0.0}
 
 	var ind int
 	var ray, xray board.Bitboard
@@ -68,7 +68,7 @@ func RookEval(eval_move *EvalMoveRays, cb board.ChessBoard) float64 {
 		opp_rk_atks = xray & *cb.BlackRooks
 		opp_kn_atks = xray & *cb.BlackKnights
 		
-		score += eval_sliding(ray, opp_q_atks, opp_b_atks, opp_rk_atks, opp_kn_atks,
+		score[0] += eval_sliding(ray, opp_q_atks, opp_b_atks, opp_rk_atks, opp_kn_atks,
 			rk_mv_count_val, rk_opp_q_val, rk_opp_b_val, rk_opp_r_val, rk_opp_kn_val, rk_ray_xray_ratio)
 	}
 
@@ -81,7 +81,7 @@ func RookEval(eval_move *EvalMoveRays, cb board.ChessBoard) float64 {
 		opp_kn_atks = xray & *cb.WhiteKnights
 		
 
-		score -= eval_sliding(ray, opp_q_atks, opp_b_atks, opp_rk_atks, opp_kn_atks,
+		score[1] += eval_sliding(ray, opp_q_atks, opp_b_atks, opp_rk_atks, opp_kn_atks,
 			rk_mv_count_val, rk_opp_q_val, rk_opp_b_val, rk_opp_r_val, rk_opp_kn_val, rk_ray_xray_ratio)
 	}
 	
@@ -91,9 +91,9 @@ func RookEval(eval_move *EvalMoveRays, cb board.ChessBoard) float64 {
 
 // Bishop eval
 // -----------------
-func BishopEval(eval_move *EvalMoveRays, cb board.ChessBoard) float64 {
+func BishopEval(eval_move *EvalMoveRays, cb board.ChessBoard) [2]float64 {
 
-	var score float64 = 0.0
+	score := [2]float64{0.0, 0.0}
 
 	var ind int
 	var ray, xray board.Bitboard
@@ -110,7 +110,7 @@ func BishopEval(eval_move *EvalMoveRays, cb board.ChessBoard) float64 {
 		opp_kn_atks = xray & *cb.BlackKnights
 
 
-		score += eval_sliding(ray, opp_q_atks, opp_b_atks, opp_rk_atks, opp_kn_atks,
+		score[0] += eval_sliding(ray, opp_q_atks, opp_b_atks, opp_rk_atks, opp_kn_atks,
 			b_mv_count_val, b_opp_q_val, b_opp_b_val, b_opp_r_val, b_opp_kn_val, b_ray_xray_ratio)
 	}
 
@@ -123,7 +123,7 @@ func BishopEval(eval_move *EvalMoveRays, cb board.ChessBoard) float64 {
 		opp_kn_atks = xray & *cb.WhiteKnights
 
 
-		score -= eval_sliding(ray, opp_q_atks, opp_b_atks, opp_rk_atks, opp_kn_atks,
+		score[1] += eval_sliding(ray, opp_q_atks, opp_b_atks, opp_rk_atks, opp_kn_atks,
 			b_mv_count_val, b_opp_q_val, b_opp_b_val, b_opp_r_val, b_opp_kn_val, b_ray_xray_ratio)
 	}
 
@@ -133,9 +133,9 @@ func BishopEval(eval_move *EvalMoveRays, cb board.ChessBoard) float64 {
 
 // Queen eval
 // -----------------
-func QueenEval(eval_move *EvalMoveRays, cb board.ChessBoard) float64 {
+func QueenEval(eval_move *EvalMoveRays, cb board.ChessBoard) [2]float64 {
 	
-	var score float64 = 0.0
+	score := [2]float64{0.0, 0.0}
 
 	var ind int
 	var ray, xray board.Bitboard
@@ -152,7 +152,7 @@ func QueenEval(eval_move *EvalMoveRays, cb board.ChessBoard) float64 {
 		opp_kn_atks = xray & *cb.BlackKnights
 
 
-		score += eval_sliding(ray, opp_q_atks, opp_b_atks, opp_rk_atks, opp_kn_atks,
+		score[0] += eval_sliding(ray, opp_q_atks, opp_b_atks, opp_rk_atks, opp_kn_atks,
 			q_mv_count_val, q_opp_q_val, q_opp_b_val, q_opp_r_val, q_opp_kn_val, q_ray_xray_ratio)
 	}
 
@@ -164,7 +164,7 @@ func QueenEval(eval_move *EvalMoveRays, cb board.ChessBoard) float64 {
 		opp_rk_atks = xray & *cb.WhiteRooks
 		opp_kn_atks = xray & *cb.WhiteKnights
 
-		score -= eval_sliding(ray, opp_q_atks, opp_b_atks, opp_rk_atks, opp_kn_atks,
+		score[1] += eval_sliding(ray, opp_q_atks, opp_b_atks, opp_rk_atks, opp_kn_atks,
 			q_mv_count_val, q_opp_q_val, q_opp_b_val, q_opp_r_val, q_opp_kn_val, q_ray_xray_ratio)
 	}
 
