@@ -1,5 +1,7 @@
 package src
 
+import "chess/src/chess_bot"
+
 // ============================================================================
 // Data structure
 
@@ -20,15 +22,10 @@ type GameStateData struct { // Info about the gamestate
 		HalfMoveNo uint `json:"half_move_no"`
 		CastleRights [2]uint `json:"castle_rights"`
 	} `json:"state"`
+
+	Eval chess_bot.EvalScore `json:"evalScore"`
 }
 
-type Eval struct {
-	Total float64 `json:"eval"`
-	White float64 `json:"white"`
-	Black float64 `json:"black"`
-
-	
-} 
 
 type BotData struct { // Info of bot analysis of gamestate
 
@@ -59,6 +56,8 @@ func CreateData(gh *GameHost) ChessData {
 	SimpleMoveList := ExportMoveList(moveList)
 	SimplePrevMoveList := ExportMoveList(gh.GameState.History.PrevMoves)
 
+	evalData := chess_bot.EvalScoreData(gh.GameState)
+
 	// create the data
 	gamedata := ChessData{
 		Message: "Chess Game!",
@@ -83,6 +82,7 @@ func CreateData(gh *GameHost) ChessData {
 				CastleRights: [2]uint{gh.GameState.WhiteCastle, gh.GameState.BlackCastle},	
 			},
 			
+			Eval: evalData,
 		},
 	
 		

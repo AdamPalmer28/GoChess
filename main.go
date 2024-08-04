@@ -33,6 +33,9 @@ func main() {
 
 	// listen for requests for game data
 	src.ChessGameEndpoints(router, gh) 
+
+	// listen for requests for AI data
+	src.ChessAIEndpoints(router, gh)
 	
 	
 
