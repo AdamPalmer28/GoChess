@@ -86,8 +86,6 @@ const BoardUI = (props) => {
 
 	// undo last move
 	const BoardUndo = () => {
-
-		
 		props.undo();
 
 		resetSquares();

@@ -38,7 +38,6 @@ const DrawChess = () => {
 
 			const decodedData = ChessData(result);
 			setData(decodedData);
-			console.log(`message: ${decodedData.message}`);
 		} catch (error) {
 			setError(error);
 		} finally {
@@ -91,6 +90,7 @@ const DrawChess = () => {
 	let w_move = true;
 	let moveHistory = {};
 	let opp_pieces = []; //[6, 7, 8, 9, 10, 11];
+	let evalData = {};
 
 	// decode data once loaded
 	if (!isLoading && !error) {
@@ -102,6 +102,8 @@ const DrawChess = () => {
 
 		w_move = gameData.state.w_move;
 		moveHistory = gameData.movehistory;
+
+		evalData = gameData.evalScore;
 	}
 	// ========================================================================
 	// UI functions
@@ -147,7 +149,7 @@ const DrawChess = () => {
 				/>
 			</div>
 
-			<ChessUItabs />
+			<ChessUItabs eval={evalData} />
 		</div>
 	);
 };

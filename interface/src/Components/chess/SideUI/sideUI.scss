@@ -1,0 +1,144 @@
+@import "../chess.scss";
+
+// ============================================================================
+// Analysis page
+
+.analysisPage {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+
+	justify-content: center;
+	align-items: center;
+
+	position: relative;
+
+	height: 100%;
+	width: 95%;
+}
+
+// ============================================================================
+// Analysis/Eval tab
+
+.evalTable {
+	//border-collapse: collapse;
+	width: 100%;
+	flex: 1;
+
+	th {
+		border: 1px solid #ddd;
+		padding: 8px;
+		text-align: center;
+		color: #ffffff;
+	}
+	td {
+		border: "1px solid #ddd";
+		padding: "50px";
+		border: 1px solid #ddd;
+
+		color: $orange;
+	}
+
+	// Style for the first column
+	td:nth-child(1) {
+		padding: 1vh;
+		width: min-content;
+	}
+
+	// Style for the second column
+	td:nth-child(2) {
+		// width is 100%
+		width: 100%;
+		position: relative;
+	}
+
+	// Draw line at 50%
+	td:nth-child(2)::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 50%;
+		width: 1px;
+		height: 100%;
+		background-color: #000000;
+	}
+}
+
+.FunctionEval {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+
+	justify-content: center;
+	align-items: center;
+
+	height: 100%;
+	width: 100%;
+}
+
+.FunctionEvalBar {
+	padding: 1px;
+
+	margin-left: 50%;
+
+	&.black {
+		background-color: #000000;
+		color: #ffffff;
+	}
+	&.white {
+		background-color: #ffffff;
+		color: #000000;
+	}
+}
+
+.analysis-eval-bar {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	height: 40px;
+	width: 100%;
+
+	border-radius: 20px;
+	border: 3px ridge rgb(26, 26, 26);
+
+	overflow: hidden;
+
+	z-index: 1;
+}
+
+.analysis-eval-bar-item {
+	height: 100%;
+	width: 25%;
+
+	font-size: 1.2vh;
+	// text is bold
+	font-weight: bold;
+	text-align: center;
+
+	z-index: 0;
+
+	&.black {
+		background-color: #000000;
+		color: #ffffff;
+		border-right: 1px solid #ffffff;
+	}
+
+	&.white {
+		background-color: #ffffff;
+		color: #000000;
+		border-left: 1px solid #000000;
+	}
+}
+
+.analysis-evalscore-ticker {
+	display: flex;
+	position: absolute;
+	border-radius: 1px;
+
+	background-color: $light-red;
+	width: 3px;
+	height: 100%;
+	z-index: 2;
+}
