@@ -22,13 +22,19 @@ type GameStateData struct { // Info about the gamestate
 	} `json:"state"`
 }
 
+type Eval struct {
+	Total float64 `json:"eval"`
+	White float64 `json:"white"`
+	Black float64 `json:"black"`
+
+	
+} 
+
 type BotData struct { // Info of bot analysis of gamestate
 
-	Eval struct {
-		Total float64 `json:"eval"`
-		White float64 `json:"white"`
-		Black float64 `json:"black"`
-	} `json:"eval"`
+	Level uint `json:"level"`
+
+
 
 	BestMove [3]uint `json:"bestmove"`
 	BestLine [][3]uint `json:"bestline"`

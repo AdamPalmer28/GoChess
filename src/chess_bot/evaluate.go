@@ -5,16 +5,6 @@ import (
 	"chess/src/chess_engine/gamestate"
 )
 
-// TODO: Create Eval Score
-
-type EvalScore struct {
-	Total float64
-
-	White float64
-	Black float64
-
-}
-
 
 // Evaluate the board
 func Evaluate(gs *gamestate.GameState) float64 {
@@ -60,3 +50,31 @@ func Evaluate(gs *gamestate.GameState) float64 {
 
 	return score
 }
+
+
+// ============================================================================
+// Eval score for analysis
+
+type EvalScore struct {
+	Total float64
+
+	playerScore [2]float64
+
+	PawnEval [2]float64
+	KnightEval [2]float64
+	BishopEval [2]float64
+	RookEval [2]float64
+	QueenEval [2]float64
+	KingSafety [2]float64
+
+}
+
+func EvalScoreData(gs *gamestate.GameState) EvalScore {
+	var eval EvalScore
+
+	cb := gs.Board
+	
+	//MoveRAys
+	var score float64 = 0.0
+	
+	EvalMoves := evaluate.GetEvalMoveRays(gs)

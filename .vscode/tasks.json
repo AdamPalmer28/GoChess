@@ -67,17 +67,32 @@
 			}
 		},
 		{
-			// Low-level Benchmark chess engine
-			"label": "Low-level Benchmark",
+			// Gamestate Benchmark chess engine
+			"label": "GameState Benchmark",
 			"type": "shell",
-			"command": "go test ./src/tests/... -bench='^(Benchmark_GenMoves)|(Benchmark_Next_move).*'  -run=^#  -benchmem | tee perf/detailed_data/Data.txt",
+			"command": "go test ./src/tests/... -bench='^(Benchmark_GenMoves)|(Benchmark_Next_move).*'  -run=^#  -benchmem | tee perf/detailed_data/Gamestate_bench.txt",
 			"group": "test",
 			"options": {
 				"cwd": "${workspaceFolder}",
 				"statusbar": {
-					"label": "Low-level Benchmark",
+					"label": "GameState BM",
 					"hide": false,
-					"color": "#0ff108"
+					"color": "#ea73f7"
+				}
+			}
+		},
+		{
+			// AI Benchmark chess engine
+			"label": "AI Benchmark",
+			"type": "shell",
+			"command": "go test ./src/tests/... -bench='^(Benchmark_Search_Time).*'  -run=^#  -benchmem | tee perf/detailed_data/AI_bench.txt",
+			"group": "test",
+			"options": {
+				"cwd": "${workspaceFolder}",
+				"statusbar": {
+					"label": "AI BM",
+					"hide": false,
+					"color": "#ff7f17"
 				}
 			}
 		},

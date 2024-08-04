@@ -66,7 +66,7 @@ func ChessGameEndpoints(router *mux.Router, gh *GameHost) {
 	// ---------------------------------------------------------------------
 	// undo request from client 
 	router.HandleFunc("/undo", func(w http.ResponseWriter, r *http.Request) {
-		if gh.GameState.MoveNo == 0 {
+		if gh.GameState.MoveNo == 1 {
 			http.Error(w, "No moves to undo", http.StatusBadRequest)
 			return
 		}
