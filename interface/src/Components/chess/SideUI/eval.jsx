@@ -16,10 +16,14 @@ function DrawFunctionBars(props) {
 		<div className="FunctionEval">
 			<div
 				className="FunctionEvalBar white"
-				style={
-					//{ width: `${w_width}%` }
-					{ width: `40%` }
-				}
+				style={{
+					width: `${w_width}%`,
+
+					// if w_width is > 0 then  align right with 50% right margin
+					// else align left with 50% left margin
+					marginRight: w_width > 0 ? "50%" : "0",
+					marginLeft: w_width > 0 ? "0" : "50%",
+				}}
 			>
 				{w_val}
 			</div>
