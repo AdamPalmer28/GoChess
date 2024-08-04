@@ -70,7 +70,7 @@
 	flex-wrap: wrap;
 
 	justify-content: center;
-	align-items: center;
+	align-items: left;
 
 	height: 100%;
 	width: 100%;
@@ -79,7 +79,7 @@
 .FunctionEvalBar {
 	padding: 1px;
 
-	margin-left: 50%;
+	//margin-left: 50%;
 
 	&.black {
 		background-color: #000000;
