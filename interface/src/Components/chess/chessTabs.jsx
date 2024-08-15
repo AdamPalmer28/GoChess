@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Nav from "react-bootstrap/Nav";
-import DrawEvalScore from "./SideUI/eval";
+import DrawEvalTab from "./SideUI/eval";
 
 function ChessUItabs(props) {
 	const [activeTab, setActiveTab] = useState("game");
@@ -11,7 +11,7 @@ function ChessUItabs(props) {
 			<Navtabs onSelect={handleSelect} />
 
 			{activeTab === "game" && <div>Game content here</div>}
-			{activeTab === "analysis" && <DrawEvalScore eval={props.eval} />}
+			{activeTab === "analysis" && <DrawEvalTab eval={props.eval} />}
 			{activeTab === "link-2" && <div>Settings content here</div>}
 		</div>
 	);

@@ -26,9 +26,11 @@ const DrawBoard = (props) => {
 
 	// Sq - left click
 	function LeftSqClick(index, id) {
+		//console.log(id);
 		props.onSquareSelect(index);
 		resetHighlight(); // reset all highlighted squares
 	}
+
 
 	// Sq - right click
 	function highlightSquare(index) {
@@ -77,11 +79,7 @@ const DrawBoard = (props) => {
 		});
 
 		return (
-			<Row
-				id={`row ${rows[row]}`}
-				class="d-inline-block position-absolute"
-				style={{ width: boardSize }}
-			>
+			<Row id={`row ${rows[row]}`} style={{ width: boardSize }}>
 				{RowSquareDivs}
 			</Row>
 		);
