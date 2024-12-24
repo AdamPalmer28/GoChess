@@ -63,6 +63,8 @@ func Evaluate(gs *gamestate.GameState) float64 {
 type EvalScore struct {
 	Total float64  `json:"total"`
 
+	PieceValue float64 `json:"pieceValue"`
+
 	PawnEval [2]float64 `json:"pawnEval"`
 	KnightEval [2]float64 `json:"knightEval"`
 	BishopEval [2]float64 `json:"bishopEval"`
