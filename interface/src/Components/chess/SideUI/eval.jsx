@@ -26,12 +26,12 @@ function DrawEvalFunctionTable(props) {
 
 	return (
 		<table className="evalTable">
-			<thead>
+			{/* <thead>
 				<tr>
 					<th>Function</th>
 					<th>Score Value</th>
 				</tr>
-			</thead>
+			</thead> */}
 			<tbody>
 				{evalKeys.map((key, index) => (
 					<tr key={index}>
@@ -53,7 +53,7 @@ function DrawEvalFunctionTable(props) {
 // draw 2 (white and black) evaluation pairs blocks
 function DrawFunctionBars(props) {
 	let w_val = parseFloat(props.eval[0]);
-	let b_val = parseFloat(props.eval[1]);
+	let b_val = -parseFloat(props.eval[1]);
 
 	let max_value = props.maxEval;
 

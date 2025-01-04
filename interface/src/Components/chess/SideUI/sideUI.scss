@@ -8,8 +8,8 @@
 	flex-direction: column;
 	flex-wrap: wrap;
 
-	justify-content: center;
-	align-items: center;
+	justify-content: flex-start;
+	align-items: flex-start;
 
 	position: relative;
 
@@ -23,20 +23,24 @@
 .evalTable {
 	//border-collapse: collapse;
 	width: 100%;
-	flex: 1;
+	//flex: 1;
+
+	margin-bottom: 2vh;
 
 	th {
-		border: 1px solid #ddd;
-		padding: 8px;
+		border: 1px solid #ffffff;
 		text-align: center;
 		color: #ffffff;
 	}
+
 	td {
 		border: "1px solid #ddd";
-		padding: "50px";
-		border: 1px solid #ddd;
+		border: 1px solid #7f7f7f;
 
 		color: $orange;
+
+		padding-top: 0.5vh;
+		padding-bottom: 0.5vh;
 	}
 
 	// Style for the first column
