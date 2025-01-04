@@ -85,7 +85,6 @@ func PawnEval(cb board.ChessBoard, pawn_cap_rays *[2][64]board.Bitboard) [2]floa
 		if (wp & (adj_files & ^adj_files_past)).Count() == 1 {
 			score[0] += backward_val
 		}
-
 	}
 	// chain
 	chains := wp & white_attacks
@@ -166,7 +165,7 @@ func pawn_centre_control(wp board.Bitboard, wp_cap board.Bitboard,
 	score[1] += float64(n) * centre_sq_val / 2
 
 		// attacks
-	attacks_on_centre = bp_cap & (Mid4Centre & board.Rank6)
+	attacks_on_centre = bp_cap & (Mid4Centre & ^board.Rank6)
 	n = attacks_on_centre.Count()
 	score[1] += float64(n) * centre_sq_val
 				
