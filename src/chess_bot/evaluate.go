@@ -65,22 +65,25 @@ type EvalScore struct {
 
 	PieceValue float64 `json:"pieceValue"`
 
-	PawnEval [2]float64 `json:"pawnEval"`
-	KnightEval [2]float64 `json:"knightEval"`
-	BishopEval [2]float64 `json:"bishopEval"`
-	RookEval [2]float64 `json:"rookEval"`
-	QueenEval [2]float64 `json:"queenEval"`
-	KingSafety [2]float64 `json:"kingSafety"`
+	PawnEval [2]float64 `json:"Pawn"`
+	KnightEval [2]float64 `json:"Knight"`
+	BishopEval [2]float64 `json:"Bishop"`
+	RookEval [2]float64 `json:"Rook"`
+	QueenEval [2]float64 `json:"Queen"`
+	KingSafety [2]float64 `json:"King"`
 
 }
 
 func EvalScoreData(gs *gamestate.GameState) EvalScore {
+	// gets eval data manually for the website output
 	var eval EvalScore
 
 	eval.Total = Evaluate(gs)
 
 	cb := gs.Board
 	EvalMoves := evaluate.GetEvalMoveRays(gs)
+
+	eval.PieceValue = evaluate.EvalPieceCounts(cb)
 
 	eval.PawnEval = evaluate.PawnEval(cb, &gs.MoveRays.PawnCapRays)
 	eval.KnightEval = evaluate.KnightEval(cb, EvalMoves.W_kn_rays, EvalMoves.B_kn_rays)
