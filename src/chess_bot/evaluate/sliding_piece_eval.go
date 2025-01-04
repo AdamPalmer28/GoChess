@@ -47,10 +47,11 @@ const (
 	q_opp_r_val float64 = 0.02
 	q_opp_kn_val float64 = 0.05
 )
+// ============================================================================
 
 // Rook eval
 // -----------------
-func RookEval(eval_move *EvalMoveRays, cb board.ChessBoard) [2]float64 {
+func RookEval(cb board.ChessBoard, eval_move *EvalMoveRays) [2]float64 {
 	
 	score := [2]float64{0.0, 0.0}
 
@@ -91,7 +92,7 @@ func RookEval(eval_move *EvalMoveRays, cb board.ChessBoard) [2]float64 {
 
 // Bishop eval
 // -----------------
-func BishopEval(eval_move *EvalMoveRays, cb board.ChessBoard) [2]float64 {
+func BishopEval(cb board.ChessBoard, eval_move *EvalMoveRays) [2]float64 {
 
 	score := [2]float64{0.0, 0.0}
 
@@ -133,7 +134,7 @@ func BishopEval(eval_move *EvalMoveRays, cb board.ChessBoard) [2]float64 {
 
 // Queen eval
 // -----------------
-func QueenEval(eval_move *EvalMoveRays, cb board.ChessBoard) [2]float64 {
+func QueenEval(cb board.ChessBoard, eval_move *EvalMoveRays) [2]float64 {
 	
 	score := [2]float64{0.0, 0.0}
 
@@ -175,8 +176,11 @@ func QueenEval(eval_move *EvalMoveRays, cb board.ChessBoard) [2]float64 {
 // ============================================================================
 
 // eval_sliding - general sliding piece evaluation
-func eval_sliding(rays, opp_q_xray, opp_b_xray, opp_rk_xray, opp_kn_xray board.Bitboard,
-		move_cnt_val, opp_q_val, opp_b_val, opp_rk_val, opp_kn_val, ray_xray_ratio float64) float64 {
+func eval_sliding(
+		rays, 
+		opp_q_xray, opp_b_xray, opp_rk_xray, opp_kn_xray board.Bitboard,
+		move_cnt_val,
+		opp_q_val, opp_b_val, opp_rk_val, opp_kn_val, ray_xray_ratio float64) float64 {
 
 	var score float64 = 0.0
 

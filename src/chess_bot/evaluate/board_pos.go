@@ -60,8 +60,8 @@ type BoardActivity struct {
 
 }
 
-
-func getBoardActivity(gs *gamestate.GameState, mv_ray EvalMoveRays) BoardActivity {
+// TODO: Implement this function
+func GetBoardActivity(gs *gamestate.GameState, mv_ray EvalMoveRays) BoardActivity {
 
 	var ba BoardActivity
 	

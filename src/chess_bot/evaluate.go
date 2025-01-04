@@ -10,11 +10,12 @@ func Evaluate(gs *gamestate.GameState) float64 {
 
 	cb := gs.Board
 	
-	//MoveRAys
-	var score float64 = 0.0
-	
+	// Pre requisite data
 	EvalMoves := evaluate.GetEvalMoveRays(gs)
+	//BoardActivity := evaluate.GetBoardActivity(gs, EvalMoves) // function not implemented yet
 	
+	// get scores
+	var score float64 = 0.0
 	// piece total
 	score += evaluate.EvalPieceCounts(cb)
 	
@@ -27,19 +28,20 @@ func Evaluate(gs *gamestate.GameState) float64 {
 	score += KnightScore[0] - KnightScore[1]
 	
 	// bishop eval
-	BishopScore := evaluate.BishopEval(&EvalMoves, cb)
+	BishopScore := evaluate.BishopEval(cb, &EvalMoves)
 	score += BishopScore[0] - BishopScore[1]
 	
 	// rook eval
-	RookScore := evaluate.RookEval(&EvalMoves, cb)
+	RookScore := evaluate.RookEval(cb, &EvalMoves)
 	score += RookScore[0] - RookScore[1]
 	
 	// queen eval
-	QueenScore := evaluate.QueenEval(&EvalMoves, cb)
+	QueenScore := evaluate.QueenEval(cb, &EvalMoves)
 	score += QueenScore[0] - QueenScore[1]
 	
 	// king eval
-	
+	KingScore := evaluate.KingSafetyEval(cb, &EvalMoves)
+	score += KingScore[0] - KingScore[1]
 	
 	
 	var score_scalar float64 = 1.0
@@ -63,7 +65,7 @@ func Evaluate(gs *gamestate.GameState) float64 {
 type EvalScore struct {
 	Total float64  `json:"total"`
 
-	PieceValue float64 `json:"pieceValue"`
+	PieceValue float64 `json:"Piece Value"`
 
 	PawnEval [2]float64 `json:"Pawn"`
 	KnightEval [2]float64 `json:"Knight"`
@@ -87,10 +89,10 @@ func EvalScoreData(gs *gamestate.GameState) EvalScore {
 
 	eval.PawnEval = evaluate.PawnEval(cb, &gs.MoveRays.PawnCapRays)
 	eval.KnightEval = evaluate.KnightEval(cb, EvalMoves.W_kn_rays, EvalMoves.B_kn_rays)
-	eval.BishopEval = evaluate.BishopEval(&EvalMoves, cb)
-	eval.RookEval = evaluate.RookEval(&EvalMoves, cb)
-	eval.QueenEval = evaluate.QueenEval(&EvalMoves, cb)
+	eval.BishopEval = evaluate.BishopEval(cb, &EvalMoves)
+	eval.RookEval = evaluate.RookEval(cb, &EvalMoves)
+	eval.QueenEval = evaluate.QueenEval(cb, &EvalMoves)
+	eval.KingSafety = evaluate.KingSafetyEval(cb, &EvalMoves)
 
-	
 	return eval
 }

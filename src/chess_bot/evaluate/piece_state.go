@@ -4,25 +4,33 @@ import (
 	"chess/src/chess_engine/board"
 )
 
+const (
+	pawn_val float64 = 1.0
+	knight_val float64 = 3.0
+	bishop_val float64 = 3.0
+	rook_val float64 = 5.0
+	queen_val float64 = 9.0
+)
+
 // piece total
 func EvalPieceCounts(cb board.ChessBoard) float64 {
 
 	score := 0.0
 
 	// pawns
-	score += 1.0 * float64(cb.WhitePawns.Count() - cb.BlackPawns.Count())
+	score += pawn_val * float64(cb.WhitePawns.Count() - cb.BlackPawns.Count())
 
 	// knights
-	score += 3.0 * float64(cb.WhiteKnights.Count() - cb.BlackKnights.Count())
+	score += knight_val * float64(cb.WhiteKnights.Count() - cb.BlackKnights.Count())
 
 	// bishops
-	score += 3.0 * float64(cb.WhiteBishops.Count() - cb.BlackBishops.Count())
+	score += bishop_val * float64(cb.WhiteBishops.Count() - cb.BlackBishops.Count())
 
 	// rooks
-	score += 5.0 * float64(cb.WhiteRooks.Count() - cb.BlackRooks.Count())
+	score += rook_val * float64(cb.WhiteRooks.Count() - cb.BlackRooks.Count())
 
 	// queens
-	score += 9.0 * float64(cb.WhiteQueens.Count() - cb.BlackQueens.Count())
+	score += queen_val * float64(cb.WhiteQueens.Count() - cb.BlackQueens.Count())
 
 	return score
 }
