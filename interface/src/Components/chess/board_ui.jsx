@@ -39,10 +39,8 @@ const BoardUI = (props) => {
 
 			// check if move is valid
 			if (selectedSqMoves.includes(index)) {
-				//console.log("Valid Move");
-
 				// send move to API
-				props.sendMove(move);
+				props.userMove(move);
 				// set last move
 				setLastMove(move);
 
@@ -66,9 +64,9 @@ const BoardUI = (props) => {
 
 		// get available moves for square selected
 		let new_moves = [];
-		for (let i = 0; i < moveList.index.length; i++) {
-			if (moveList.index[i][0] === index) {
-				new_moves.push(moveList.index[i][1]);
+		for (let i = 0; i < moveList.length; i++) {
+			if (moveList[i][1] === index) {
+				new_moves.push(moveList[i][2]);
 			}
 		}
 		setSqMoves(new_moves);

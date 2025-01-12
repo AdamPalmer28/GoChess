@@ -26,11 +26,9 @@ const DrawBoard = (props) => {
 
 	// Sq - left click
 	function LeftSqClick(index, id) {
-		//console.log(id);
 		props.onSquareSelect(index);
 		resetHighlight(); // reset all highlighted squares
 	}
-
 
 	// Sq - right click
 	function highlightSquare(index) {

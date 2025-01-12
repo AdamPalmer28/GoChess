@@ -57,7 +57,6 @@ function DrawFunctionBars(props) {
 
 	let max_value = props.maxEval;
 
-	//console.log(w_val, b_val);
 	let w_width = Math.abs(Math.round(((w_val / max_value) * 100) / 2));
 	let b_width = Math.abs(Math.round(((b_val / max_value) * 100) / 2));
 

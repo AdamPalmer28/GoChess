@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ChessUItabs from "./chessTabs";
-import ChessData from "./GameData/usefullData";
+import ChessData from "./GameData/gamestate";
+import { fetchData, sendNewGame, sendUndo, sendMove } from "./.api/api";
 import ChessTabsFooter from "./chessFooterUI/chessTabsFooter";
 import BoardUI from "./board_ui";
 
@@ -24,62 +25,15 @@ const DrawChess = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState(null);
 
-	// fetch chess game-data
-	const fetchData = async (url, data) => {
-		// URL: /chessgame, /move
-		//setIsLoading(true);
-		try {
-			const response = await fetch(url, data);
-			if (!response.ok) {
-				throw new Error(`HTTP error! Status: ${response.status}`);
-			}
-
-			const result = await response.json();
-
-			const decodedData = ChessData(result);
-			setData(decodedData);
-		} catch (error) {
-			setError(error);
-		} finally {
-			setIsLoading(false);
-		}
-	};
-
-	// fetch Move -> http://localhost:8080/move
-	const sendMove = async (move) => {
-		//console.log(`Send move: ${move}`);
-		let jsondata = { move: move };
-
-		fetchData("http://localhost:8080/move", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(jsondata),
-		});
-	};
-
-	const SendUndo = async () => {
-		//console.log(`Undo move`);
-
-		fetchData("http://localhost:8080/undo", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({}),
-		});
-	};
-
-	const SendNewGame = async () => {
-		//console.log(`New Game`);
-
-		fetchData("http://localhost:8080/newgame", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({}),
-		});
-	};
-
 	// mount fetch data to UI
 	useEffect(() => {
-		fetchData("http://localhost:8080/chessgame", {});
+		fetchData(
+			"http://localhost:8080/chessgame",
+			{},
+			setData,
+			setError,
+			setIsLoading
+		);
 	}, []);
 
 	// ------------------------------------------------------------------------
@@ -105,18 +59,14 @@ const DrawChess = () => {
 
 		evalData = gameData.evalScore;
 	}
+	console.log(moveHistory);
+
 	// ========================================================================
 	// UI functions
 
-	// start new game
-	const newGame = () => {
-		SendNewGame();
-	};
-
-	// undo last move
-	const undoMove = () => {
-		SendUndo();
-	};
+	const newGame = () => sendNewGame(setData, setError, setIsLoading);
+	const userMove = (move) => sendMove(move, setData, setError, setIsLoading);
+	const undoMove = () => sendUndo(setData, setError, setIsLoading);
 
 	// TODO: flip board
 	const flipBoard = () => {
@@ -136,7 +86,7 @@ const DrawChess = () => {
 					boardPieces={boardPieces}
 					w_move={w_move}
 					movelist={moveList}
-					sendMove={sendMove}
+					userMove={userMove}
 					newGame={newGame}
 					undo={undoMove}
 					flipBoard={flipBoard}
