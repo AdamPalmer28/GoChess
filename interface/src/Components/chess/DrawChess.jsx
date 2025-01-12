@@ -59,7 +59,6 @@ const DrawChess = () => {
 
 		evalData = gameData.evalScore;
 	}
-	console.log(moveHistory);
 
 	// ========================================================================
 	// UI functions

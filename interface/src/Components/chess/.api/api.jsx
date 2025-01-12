@@ -1,6 +1,6 @@
 // api.js
 export const fetchData = async (url, data, setData, setError, setIsLoading) => {
-	setIsLoading(true);
+	//setIsLoading(true);
 	try {
 		const response = await fetch(url, data);
 		if (!response.ok) {
