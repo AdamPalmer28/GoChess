@@ -1,6 +1,9 @@
 package src
 
-import "chess/src/chess_bot"
+import (
+	"chess/src/chess_bot"
+	"chess/src/chess_engine/board"
+)
 
 // ============================================================================
 // Data structure
@@ -26,24 +29,10 @@ type GameStateData struct { // Info about the gamestate
 	Eval chess_bot.EvalScore `json:"evalScore"`
 }
 
-
-type BotData struct { // Info of bot analysis of gamestate
-
-	Level uint `json:"level"`
-
-
-
-	BestMove [3]uint `json:"bestmove"`
-	BestLine [][3]uint `json:"bestline"`
-		
-	Depth struct {
-		Depth uint `json:"depth"`
-		Nodes uint `json:"nodes"`
-		Pruned uint `json:"pruned"`
-		TT_hits uint `json:"tt_hits"`
-		TT_success uint `json:"tt_success"`
-	} `json:"depth"`
+type BitboardData struct {
+	WhitePawns board.Bitboard `json:"test"`
 }
+
 
 // ============================================================================
 
