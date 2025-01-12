@@ -8,8 +8,6 @@ A ongoing to-do list of task for development of the chess project.
 
 - Options menu (left of the board)
 
-  - New game
-  - Undo
   - Load game (png)
   - AI eval
   - ...
@@ -43,6 +41,7 @@ A ongoing to-do list of task for development of the chess project.
 
   - select areas of the program like gamestate, ai, ... (expandable)
     - cause the board to high light areas of interest
+      - select elements / bitboards of eval score (GetEvalMoveRays, BoardActivity) which easily draws any of them on the board
 
 - Flexible board square drawing
 
@@ -51,8 +50,6 @@ A ongoing to-do list of task for development of the chess project.
 - Create exports to packageChessData for gamestate
 
   - bitboards
-
-- Undo end point
 
 ### Misc tasks
 
