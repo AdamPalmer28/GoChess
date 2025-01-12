@@ -62,7 +62,9 @@ func ChessGameEndpoints(router *mux.Router, gh *GameHost) {
 
 	// ---------------------------------------------------------------------
 	// normal client request for game data
-	router.HandleFunc("/chessgame", gh.PackageChessData).Methods("GET")
+	router.HandleFunc("/chessgame", func(w http.ResponseWriter, r *http.Request) {
+		gh.PackageChessData(w, r)
+	}).Methods("GET")
 
 	// ---------------------------------------------------------------------
 	// undo request from client 
