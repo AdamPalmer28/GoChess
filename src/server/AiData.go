@@ -27,7 +27,7 @@ type BotData struct { // Info of bot analysis of gamestate
 
 // Get Chess data from the GameHost
 func ChessAIEndpoints(router *mux.Router, gh *GameHost) {
-
+	// ! all functions here not used currently
 
 	// ---------------------------------------------------------------------
 	// undo request from client 

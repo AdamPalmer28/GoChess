@@ -4,7 +4,7 @@ import (
 	"math/bits"
 )
 
-type Bitboard uint
+type Bitboard uint 
 
 const (
 	FileA Bitboard = 0x0101010101010101

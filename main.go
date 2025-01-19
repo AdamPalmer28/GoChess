@@ -25,17 +25,20 @@ func main() {
 	// Use CORS middleware for all routes
 	router.Use(corsHandler)
 
-
 	// -------------------------------------------------------------------------
 
 	// start game host
 	gh := server.StartGameHost()
+
 
 	// listen for requests for game data
 	server.ChessGameEndpoints(router, gh) 
 
 	// listen for requests for AI data
 	server.ChessAIEndpoints(router, gh)
+
+	// listen for requests for analysis data
+	server.AnalysisEndpoints(router, gh)
 	
 	
 
