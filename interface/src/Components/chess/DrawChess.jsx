@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from "react";
 import ChessUItabs from "./chessTabs";
 import ChessData from "./GameData/gamestate";
-import { fetchData, sendNewGame, sendUndo, sendMove } from "./.api/api";
+import {
+	fetchData,
+	sendNewGame,
+	sendUndo,
+	sendMove,
+	getAnalysis,
+} from "./.api/api";
 import ChessTabsFooter from "./chessFooterUI/chessTabsFooter";
 import BoardUI from "./board_ui";
 
@@ -22,18 +28,17 @@ const DrawChess = () => {
 
 	// fetch game-data from API
 	const [GSdata, setData] = useState(null); // gamestate state
+	const [AnalysisData, setAnalysisData] = useState(null); // analysis parameters
+	const [AIData, setAIData] = useState(null); // AI/search data
+
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState(null);
 
 	// mount fetch data to UI
 	useEffect(() => {
-		fetchData(
-			"http://localhost:8080/chessgame",
-			{},
-			setData,
-			setError,
-			setIsLoading
-		);
+		fetchData("http://localhost:8080/chessgame", {}, setData, setError);
+		getAnalysis(setAnalysisData, setError);
+		setIsLoading(false);
 	}, []);
 
 	// ------------------------------------------------------------------------
@@ -47,7 +52,7 @@ const DrawChess = () => {
 	let evalData = {};
 
 	// decode data once loaded
-	if (!isLoading && !error) {
+	if (GSdata !== null) {
 		let chessData = GSdata;
 
 		let gameData = chessData.gamestate;
@@ -56,16 +61,28 @@ const DrawChess = () => {
 
 		w_move = gameData.state.w_move;
 		moveHistory = gameData.movehistory;
-
-		evalData = gameData.evalScore;
+	}
+	if (AnalysisData !== null) {
+		evalData = AnalysisData.evalScore;
 	}
 
 	// ========================================================================
 	// UI functions
 
-	const newGame = () => sendNewGame(setData, setError, setIsLoading);
-	const userMove = (move) => sendMove(move, setData, setError, setIsLoading);
-	const undoMove = () => sendUndo(setData, setError, setIsLoading);
+	const newGame = async () => {
+		await sendNewGame(setData, setError);
+
+		getAnalysis(setAnalysisData, setError);
+	};
+	const userMove = async (move) => {
+		await sendMove(move, setData, setError);
+		console.log("finish move");
+		getAnalysis(setAnalysisData, setError);
+	};
+	const undoMove = async () => {
+		await sendUndo(setData, setError);
+		getAnalysis(setAnalysisData, setError);
+	};
 
 	// TODO: flip board
 	const flipBoard = () => {
@@ -77,6 +94,7 @@ const DrawChess = () => {
 
 	let boardLength = 720;
 
+	// TODO: pass gameData to board UI
 	return (
 		<div className="px-3 py-2 chess-ui flex">
 			<div className="flex">

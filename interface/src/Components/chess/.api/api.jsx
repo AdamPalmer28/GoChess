@@ -1,5 +1,5 @@
 // api.js
-export const fetchData = async (url, data, setData, setError, setIsLoading) => {
+export const fetchData = async (url, data, setData, setError) => {
 	//setIsLoading(true);
 	try {
 		const response = await fetch(url, data);
@@ -10,12 +10,10 @@ export const fetchData = async (url, data, setData, setError, setIsLoading) => {
 		setData(result);
 	} catch (error) {
 		setError(error);
-	} finally {
-		setIsLoading(false);
 	}
 };
 
-export const sendMove = (move, setData, setError, setIsLoading) => {
+export const sendMove = (move, setData, setError) => {
 	const jsondata = { move };
 	fetchData(
 		"http://localhost:8080/move",
@@ -25,12 +23,11 @@ export const sendMove = (move, setData, setError, setIsLoading) => {
 			body: JSON.stringify(jsondata),
 		},
 		setData,
-		setError,
-		setIsLoading
+		setError
 	);
 };
 
-export const sendUndo = (setData, setError, setIsLoading) => {
+export const sendUndo = (setData, setError) => {
 	fetchData(
 		"http://localhost:8080/undo",
 		{
@@ -39,12 +36,11 @@ export const sendUndo = (setData, setError, setIsLoading) => {
 			body: JSON.stringify({}),
 		},
 		setData,
-		setError,
-		setIsLoading
+		setError
 	);
 };
 
-export const sendNewGame = (setData, setError, setIsLoading) => {
+export const sendNewGame = (setData, setError) => {
 	fetchData(
 		"http://localhost:8080/newgame",
 		{
@@ -53,7 +49,22 @@ export const sendNewGame = (setData, setError, setIsLoading) => {
 			body: JSON.stringify({}),
 		},
 		setData,
-		setError,
-		setIsLoading
+		setError
 	);
+};
+
+export const getAnalysis = async (setAnalysisData, setError) => {
+	try {
+		const response = await fetch("http://localhost:8080/analysis", {
+			method: "GET",
+			headers: { "Content-Type": "application/json" },
+		});
+		if (!response.ok) {
+			throw new Error(`HTTP error! Status: ${response.status}`);
+		}
+		const result = await response.json();
+		setAnalysisData(result);
+	} catch (error) {
+		setError(error);
+	}
 };
