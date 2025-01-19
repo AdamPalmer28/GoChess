@@ -1,4 +1,4 @@
-package src
+package server
 
 import (
 	"chess/src/chess_bot"

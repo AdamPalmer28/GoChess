@@ -2,7 +2,7 @@
 package main
 
 import (
-	"chess/src"
+	"chess/src/server"
 
 	"fmt"
 	"net/http"
@@ -29,13 +29,13 @@ func main() {
 	// -------------------------------------------------------------------------
 
 	// start game host
-	gh := src.StartGameHost()
+	gh := server.StartGameHost()
 
 	// listen for requests for game data
-	src.ChessGameEndpoints(router, gh) 
+	server.ChessGameEndpoints(router, gh) 
 
 	// listen for requests for AI data
-	src.ChessAIEndpoints(router, gh)
+	server.ChessAIEndpoints(router, gh)
 	
 	
 
