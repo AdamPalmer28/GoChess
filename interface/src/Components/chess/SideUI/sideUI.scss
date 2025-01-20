@@ -93,6 +93,9 @@
 		background-color: #ffffff;
 		color: #000000;
 	}
+	&.transition {
+		transition: width 0.8s ease, margin-left 0.8s ease;
+	}
 
 	overflow: "hidden";
 	text-overflow: "ellipsis";
@@ -148,4 +151,6 @@
 	width: 3px;
 	height: 100%;
 	z-index: 2;
+
+	transition: left 1s ease;
 }

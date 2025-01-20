@@ -73,10 +73,16 @@ function DrawFunctionBars(props) {
 	// build retangles from the center
 	return (
 		<div className="FunctionEval">
-			<div className="FunctionEvalBar white" style={getStyle(w_width, w_val)}>
+			<div
+				className="FunctionEvalBar white transition"
+				style={getStyle(w_width, w_val)}
+			>
 				{w_val.toFixed(2)}
 			</div>
-			<div className="FunctionEvalBar black" style={getStyle(b_width, b_val)}>
+			<div
+				className="FunctionEvalBar black transition"
+				style={getStyle(b_width, b_val)}
+			>
 				{b_val.toFixed(2)}
 			</div>
 		</div>
