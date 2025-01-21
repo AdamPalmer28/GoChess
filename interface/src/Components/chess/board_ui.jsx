@@ -9,8 +9,8 @@ import Button from "react-bootstrap/Button";
 
 const BoardUI = (props) => {
 	let boardLength = props.boardLength;
-	let boardPieces = props.boardPieces;
-	let moveList = props.movelist;
+	let boardPieces = props.gamestate.board;
+	let moveList = props.gamestate.movelist.index;
 
 	// selected squares [from, to]
 
@@ -25,7 +25,7 @@ const BoardUI = (props) => {
 	};
 
 	let opp_pieces = [];
-	if (props.w_move) {
+	if (props.gamestate.state.w_move) {
 		opp_pieces = [6, 7, 8, 9, 10, 11]; // Opponent's pieces for white move
 	} else {
 		opp_pieces = [0, 1, 2, 3, 4, 5]; // Opponent's pieces for black move
@@ -34,6 +34,7 @@ const BoardUI = (props) => {
 	// square selected / clicked
 	const squareSelected = (index) => {
 		// square already selected - therefore 2nd click is possible move
+
 		if (sqSelected != 64) {
 			let move = [sqSelected, index]; // possible move
 
@@ -65,8 +66,8 @@ const BoardUI = (props) => {
 		// get available moves for square selected
 		let new_moves = [];
 		for (let i = 0; i < moveList.length; i++) {
-			if (moveList[i][1] === index) {
-				new_moves.push(moveList[i][2]);
+			if (moveList[i][0] === index) {
+				new_moves.push(moveList[i][1]);
 			}
 		}
 		setSqMoves(new_moves);

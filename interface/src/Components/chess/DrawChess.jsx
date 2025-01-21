@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import ChessUItabs from "./chessTabs";
-import ChessData from "./GameData/gamestate";
 import {
 	fetchData,
 	sendNewGame,
@@ -44,39 +43,37 @@ const DrawChess = () => {
 	// ------------------------------------------------------------------------
 	// Data handling
 
-	let boardPieces = startingBoard;
-	let moveList = {};
-	let w_move = true;
-	let moveHistory = {};
-	let opp_pieces = []; //[6, 7, 8, 9, 10, 11];
 	let evalData = {};
 
-	// decode data once loaded
-	if (GSdata !== null) {
-		let chessData = GSdata;
+	// set defaults if no data
+	let defaults_GS = {
+		board: startingBoard,
+		movelist: {
+			index: [],
+			human: [],
+		},
+		state: {
+			w_move: true,
+		},
+		movehistory: {
+			index: [],
+			human: [],
+		},
+		opp_pieces: [],
+	};
 
-		let gameData = chessData.gamestate;
-		boardPieces = gameData.board;
-		moveList = gameData.movelist;
-
-		w_move = gameData.state.w_move;
-		moveHistory = gameData.movehistory;
-	}
 	if (AnalysisData !== null) {
 		evalData = AnalysisData.evalScore;
 	}
-
 	// ========================================================================
 	// UI functions
 
 	const newGame = async () => {
 		await sendNewGame(setData, setError);
-
 		getAnalysis(setAnalysisData, setError);
 	};
 	const userMove = async (move) => {
 		await sendMove(move, setData, setError);
-		console.log("finish move");
 		getAnalysis(setAnalysisData, setError);
 	};
 	const undoMove = async () => {
@@ -99,21 +96,15 @@ const DrawChess = () => {
 		<div className="px-3 py-2 chess-ui flex">
 			<div className="flex">
 				<BoardUI
+					gamestate={GSdata ? GSdata.gamestate : defaults_GS}
 					boardLength={boardLength}
-					boardPieces={boardPieces}
-					w_move={w_move}
-					movelist={moveList}
 					userMove={userMove}
 					newGame={newGame}
 					undo={undoMove}
 					flipBoard={flipBoard}
 				/>
 
-				<ChessTabsFooter
-					moveList={moveList}
-					w_move={w_move}
-					moveHistory={moveHistory}
-				/>
+				<ChessTabsFooter gamestate={GSdata ? GSdata.gamestate : defaults_GS} />
 			</div>
 
 			<ChessUItabs eval={evalData} />

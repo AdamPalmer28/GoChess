@@ -82,7 +82,6 @@ const DrawBoard = (props) => {
 			</Row>
 		);
 	}
-
 	// Render rows of board - reverse order so that row 1 is at the bottom
 	const rowsRender = rows.reverse().map((row, index) => {
 		return <CreateRow row={row} key={index} pieces={props.pieces} />;

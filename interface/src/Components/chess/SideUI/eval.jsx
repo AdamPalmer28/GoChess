@@ -95,7 +95,7 @@ function DrawEvalBar(props) {
 	let score_width = 0;
 
 	if (Math.abs(score) > 2) {
-		score_width = (50 * (score - 1)) / score;
+		score_width = (50 * (Math.abs(score) - 1)) / score;
 	} else {
 		score_width = (25 * score) / 2;
 	}
@@ -105,6 +105,7 @@ function DrawEvalBar(props) {
 	score = score.toFixed(2);
 
 	let top_width = 50 + score_width;
+	console.log("top_width", top_width, score, score_width);
 
 	return (
 		<div id="analysis-eval-bar" className="analysis-eval-bar my-3">
