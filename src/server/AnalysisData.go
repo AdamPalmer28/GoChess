@@ -4,7 +4,6 @@ import (
 	"chess/src/chess_bot"
 	"chess/src/chess_engine/board"
 	"encoding/json"
-	"fmt"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -36,14 +35,8 @@ func AnalysisEndpoints(router *mux.Router, gh *GameHost) {
 	
 	// ---------------------------------------------------------------------
 	router.HandleFunc("/analysis", func(w http.ResponseWriter, r *http.Request) {
-		// memory address of the game host
-		fmt.Println("AnalysisData: GameHost memory address: ", gh)
 		
 		evalData := chess_bot.EvalScoreData(gh.GameState)
-
-		gh.GameState.Board.Print()
-
-		fmt.Println("Move: ", gh.GameState.MoveNo)
 
 		data := analysisData{
 			Eval: evalData,

@@ -39,9 +39,6 @@ type GameStateData struct { // Info about the gamestate
 func CreateData(gh *GameHost) ChessData {
 	// Sends ChessData to client
 
-	// memory address of the game host
-	fmt.Println("CreateData: GameHost memory address: ", gh)
-
 	moveList := gh.GameState.MoveList
 
 	// simple move lists
