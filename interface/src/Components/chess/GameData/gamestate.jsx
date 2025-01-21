@@ -34,6 +34,7 @@ const makeMoveLists = (ml) => {
 // Create useful chess data from JSON data (from API)
 const ChessData = (data) => {
 	// Clean Move lists -
+
 	let moveList = makeMoveLists(data.gamestate.movelist);
 	let moveHistory = makeMoveLists(data.gamestate.movehistory);
 

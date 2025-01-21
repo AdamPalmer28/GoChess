@@ -1,3 +1,5 @@
+import ChessData from "../GameData/gamestate";
+
 // api.js
 export const fetchData = async (url, data, setData, setError) => {
 	//setIsLoading(true);
@@ -7,7 +9,8 @@ export const fetchData = async (url, data, setData, setError) => {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
 		const result = await response.json();
-		setData(result);
+
+		setData(ChessData(result));
 	} catch (error) {
 		setError(error);
 	}

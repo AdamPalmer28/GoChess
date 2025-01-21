@@ -17,9 +17,9 @@ function ChessTabsFooter(props) {
 				{activeTab === "ai" && <div>AI Info</div>}
 				{activeTab === "gamestate" && (
 					<GameStateTab
-						moveList={props.moveList}
-						w_move={props.w_move}
-						moveHistory={props.moveHistory}
+						moveList={props.gamestate.movelist}
+						w_move={props.gamestate.state.w_move}
+						moveHistory={props.gamestate.movehistory}
 					/>
 				)}
 				{activeTab === "settings" && <div>Settings content here</div>}
