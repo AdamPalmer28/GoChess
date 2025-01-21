@@ -105,6 +105,7 @@ function DrawEvalBar(props) {
 	score = score.toFixed(2);
 
 	let top_width = 50 + score_width;
+	console.log("top_width", top_width, score, score_width);
 
 	return (
 		<div id="analysis-eval-bar" className="analysis-eval-bar my-3">
