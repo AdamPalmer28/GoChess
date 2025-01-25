@@ -24,6 +24,12 @@ const BoardUI = (props) => {
 		setSqMoves([]);
 	};
 
+	const [is_flipBoard, changeFlipboard] = useState(false); // gamestate state
+
+	const doFlipBoard = () => {
+		changeFlipboard(!is_flipBoard);
+	};
+
 	let opp_pieces = [];
 	if (props.gamestate.state.w_move) {
 		opp_pieces = [6, 7, 8, 9, 10, 11]; // Opponent's pieces for white move
@@ -97,13 +103,15 @@ const BoardUI = (props) => {
 			<BoardSettings
 				newGame={BoardNewGame}
 				undo={BoardUndo}
-				flipBoard={props.flipBoard}
+				flipBoard={doFlipBoard}
 			/>
 
 			<DrawBoard
 				onSquareSelect={squareSelected}
+				analysisHighlight={props.boardBitboards}
 				boardLength={boardLength}
 				pieces={boardPieces}
+				flipBoard={is_flipBoard}
 				sqSelected={sqSelected}
 				lastMove={lastMove}
 				moveOptions={selectedSqMoves}

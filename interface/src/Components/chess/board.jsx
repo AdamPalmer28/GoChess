@@ -10,6 +10,8 @@ const DrawBoard = (props) => {
 	const columns = ["A", "B", "C", "D", "E", "F", "G", "H"];
 	const rows = ["1", "2", "3", "4", "5", "6", "7", "8"];
 
+	let analysisHighlight = props.analysisHighlight.green;
+
 	// board prorperties
 	let boardSize = props.boardLength; // board size
 	let sqLength = boardSize / 8; // square length
@@ -70,7 +72,8 @@ const DrawBoard = (props) => {
 						(squareNum == sqSelected ? "selected " : "") +
 						(moveOptions.includes(squareNum) ? "move-option " : "") +
 						(squareNum == lastMoveFrom ? "last-move-from " : "") +
-						(squareNum == lastMoveTo ? "last-move-to " : "")
+						(squareNum == lastMoveTo ? "last-move-to " : "") +
+						(analysisHighlight.includes(squareNum) ? "analysis-highlight " : "")
 					}
 				></DrawSquare>
 			);
@@ -83,7 +86,12 @@ const DrawBoard = (props) => {
 		);
 	}
 	// Render rows of board - reverse order so that row 1 is at the bottom
-	const rowsRender = rows.reverse().map((row, index) => {
+	let row_order = rows;
+	if (!props.flipBoard) {
+		row_order = rows.reverse();
+	}
+
+	const rowsRender = row_order.map((row, index) => {
 		return <CreateRow row={row} key={index} pieces={props.pieces} />;
 	});
 
@@ -139,9 +147,9 @@ const DrawSquare = (props) => {
 	}
 
 	// determine square color
-	let color_sq_sass = "black-sq";
+	let color_sq_sass = "black square";
 	if ((props.index + ((Math.floor(props.index / 8) - 1) % 2)) % 2 === 0) {
-		color_sq_sass = "white-sq";
+		color_sq_sass = "white square";
 	}
 
 	return (

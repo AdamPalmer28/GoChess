@@ -19,6 +19,24 @@ const startingBoard = [
 	12, 12, 12, 12, 12, 12, 6, 6, 6, 6, 6, 6, 6, 6, 9, 8, 7, 10, 11, 7, 8, 9,
 ];
 
+let evalData = {};
+
+let defaults_GS = {
+	board: startingBoard,
+	movelist: {
+		index: [],
+		human: [],
+	},
+	state: {
+		w_move: true,
+	},
+	movehistory: {
+		index: [],
+		human: [],
+	},
+	opp_pieces: [],
+};
+
 const DrawChess = () => {
 	// Draw chess UI (board, footer, tabs)
 
@@ -43,23 +61,10 @@ const DrawChess = () => {
 	// ------------------------------------------------------------------------
 	// Data handling
 
-	let evalData = {};
-
-	// set defaults if no data
-	let defaults_GS = {
-		board: startingBoard,
-		movelist: {
-			index: [],
-			human: [],
-		},
-		state: {
-			w_move: true,
-		},
-		movehistory: {
-			index: [],
-			human: [],
-		},
-		opp_pieces: [],
+	let bitbardData = {
+		red: [1, 2, 3],
+		green: [3, 10, 15, 16],
+		blue: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
 	};
 
 	if (AnalysisData !== null) {
@@ -81,11 +86,6 @@ const DrawChess = () => {
 		getAnalysis(setAnalysisData, setError);
 	};
 
-	// TODO: flip board
-	const flipBoard = () => {
-		console.log("Flip Board");
-	};
-
 	// ========================================================================
 	// Drawing Component
 
@@ -97,11 +97,11 @@ const DrawChess = () => {
 			<div className="flex">
 				<BoardUI
 					gamestate={GSdata ? GSdata.gamestate : defaults_GS}
+					boardBitboards={bitbardData}
 					boardLength={boardLength}
 					userMove={userMove}
 					newGame={newGame}
 					undo={undoMove}
-					flipBoard={flipBoard}
 				/>
 
 				<ChessTabsFooter gamestate={GSdata ? GSdata.gamestate : defaults_GS} />
