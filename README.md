@@ -2,7 +2,7 @@
 
 AdderChess is a from-scratch chess engine and analysis application. The core engine is written in Go, with a React/Vite browser interface connected through a small JSON HTTP API.
 
-> **Project status:** inactive / archived. This repository is preserved as a portfolio case study rather than a production-ready chess service. The implementation and setup instructions reflect the state of the project when it was actively developed.
+> **Project status:** revival in progress. The existing engine and UI are experimental; correctness and build checks are being re-established. Start with the [revival audit and staged work items](documentation/revival-roadmap.md).
 
 ## Portfolio snapshot
 
@@ -161,6 +161,8 @@ The most valuable part of this project is the end-to-end reasoning it required: 
 
 ## Repository guide
 
+- [`AGENTS.md`](AGENTS.md) — guidance for AI coding work that keeps engine changes explainable and measurable
+- [`documentation/revival-roadmap.md`](documentation/revival-roadmap.md) — current gaps, priorities, and suggested learning recap
 - [`src/chess_engine`](src/chess_engine) — board representation, game state, FEN parsing, move generation, and magic tables
 - [`src/chess_bot`](src/chess_bot) — search and evaluation
 - [`src/server`](src/server) — Go HTTP API
