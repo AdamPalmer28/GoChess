@@ -37,7 +37,8 @@ type GameState struct {
 		PrevMoves []uint // previous moves (0000 000000 000000 form)
 		EnPassHist []uint // enpassant history
 		Cap_pieces []uint // History of piece type
-		CastleRight []uint // castle rights at end of the move
+		CastleRight []uint // mover's castling rights before the move
+		OppCastleRight []uint // opponent castling rights before the move
 	}
 	
 	// move arrays - for move gen

@@ -46,7 +46,7 @@ func CheckKingSafety(kingSafety KingSafetyRelBB, knight_ray board.Bitboard,
 		pawn_attack_bb |= 1 << en_sq
 	}
 
-	if pawn_attack_bb & kingSafety.Opp_bb != 0 {
+	if pawn_attack_bb & kingSafety.Opp_pawn_bb != 0 {
 		return false
 	}
 	
@@ -239,7 +239,7 @@ func BoardKingAnalysis(kingSafety KingSafetyRelBB, knight_ray board.Bitboard,
 		pawn_attack_bb |= 1 << en_sq
 		}
 	
-		if pawn_attack_bb & kingSafety.Opp_bb != 0 {
+		if pawn_attack_bb & kingSafety.Opp_pawn_bb != 0 {
 			result = false
 		}
 	}

@@ -7,10 +7,41 @@ This is a source review, not a verified strength or correctness rating. The Go t
 | Area | Current state | Main gap |
 | --- | --- | --- |
 | Documentation | The root README maps the architecture and setup. Feature and todo notes describe intent. | No explanation of state invariants, search score conventions, API contract, or known bugs. Some notes describe planned features as if present. |
-| Rules engine | Bitboards, FEN loading, move generation, make/undo, castling, en passant, promotion, checkmate and stalemate paths exist. | No perft reference suite; draw rules are absent; state restoration and special moves need adversarial checks. |
+| Rules engine | Bitboards, FEN loading, move generation, make/undo, castling, en passant, promotion, checkmate and stalemate paths exist. A perft suite now passes six standard positions. | Draw rules are absent; broader state restoration and special-move behavior still need adversarial checks. |
 | Bot | Evaluation, fixed depth negamax/alpha-beta, quiescence and an in-memory transposition table exist. The CLI invokes the bot. | Search has apparent correctness errors. No iterative deepening, time management, UCI adapter, or measured Elo. |
-| Tests | 23 Go test functions and 3 benchmark functions cover board operations, move types and selected FENs. | No bot or HTTP tests, no frontend tests, no perft suite or automated CI gate. Existing benchmarks do not establish playing strength. |
+| Tests | 28 Go test functions and 3 benchmark functions cover board operations, move types, selected FENs, and six perft positions. | No bot or HTTP tests, no frontend tests, or automated CI gate. Existing benchmarks do not establish playing strength. |
 | UI | React/Vite has a board, move list, evaluation breakdown, highlights and basic controls. | Bot/settings/game panels are placeholders; no bot endpoint or promotion choice. Some controls and displayed data are unreliable. |
+
+### R1 execution — 4 October 2026
+
+- Environment: Go 1.27.1 (`/usr/local/go/bin/go`; already installed but absent from `PATH`), Node.js v18.19.1, npm 9.2.0. No toolchain installation was needed.
+- `npm ci` completed and installed 308 packages. npm reported 21 dependency vulnerabilities (1 low, 4 moderate, 16 high); dependencies were not upgraded as part of baseline setup.
+- Go checks needed writable caches because the default home cache and GOPATH were read-only in this environment. This command passed:
+
+  ```sh
+  PATH="/usr/local/go/bin:$PATH" GOPATH=/tmp/chess-gopath GOCACHE=/tmp/chess-gocache GOMODCACHE=/tmp/chess-gomodcache go test ./...
+  ```
+
+- `npm run build` passed (Vite 4.5.0; 2,062 modules transformed). `npm run lint` failed with 100 existing ESLint errors, including unused imports/variables, missing prop validation, invalid JSX properties, and an undefined `reportWebVitals` reference. These are recorded for UI follow-up rather than changed in R1.
+- Browser smoke: `go run .` served on port 8080 and `npm run dev -- --host 127.0.0.1` served on port 4000. Opening `http://127.0.0.1:4000/` rendered the initial board, board controls, and Game/Analysis/Settings tabs. `GET http://127.0.0.1:8080/chessgame` returned HTTP 200 JSON with the initial position and 20 legal moves.
+- npm emitted its audit summary during `npm ci`; no audit fix was applied. No application source changes were needed for setup.
+
+### R2 execution — 12 October 2026
+
+- Added `src/tests/perft_test.go` with recursive perft and sorted root-divide diagnostics. Expected counts are from the [ChessProgramming Wiki perft results](https://chessprogramming.org/Perft_Results):
+
+  | Position | Depth | Nodes |
+  | --- | ---: | ---: |
+  | Initial position | 4 | 197,281 |
+  | Kiwipete (castling, checks, pins) | 3 | 97,862 |
+  | Position 3 (en passant, king safety) | 4 | 43,238 |
+  | Position 4 (promotion, castling) | 3 | 9,467 |
+  | Position 5 (promotion, check evasion) | 3 | 62,379 |
+  | Position 6 (pins, checks) | 3 | 89,890 |
+
+- The perft run exposed and regression tests now cover four issues: pawn-check detection counted any opposing piece on a pawn attack square; en passant could expose the moving side's king; check-evasion generation allowed a double pawn push through an occupied intermediate square; and undo failed to restore the opponent's castling rights after capturing a rook on its home square. The fixes make those legality and restoration conditions explicit.
+- Position 5's one-node mismatch was isolated with Stockfish 16 divide to `c4b3 d8a5`: `b2b4` must not be offered as a check evasion because the bishop on b3 blocks the pawn's path.
+- Verification passed: the perft and focused regression tests, followed by `go test ./...` using Go 1.27.1 and writable Go caches under `/tmp`.
 
 ### Findings to verify first
 
@@ -26,8 +57,8 @@ Each checkbox is intended to be a separate, reviewable agent task with a runnabl
 
 ### Restore the baseline
 
-- [ ] **R1 — Reproduce a clean run.** Install a supported Go toolchain and frontend dependencies, run Go tests and UI lint/build, start both services, and document exact versions, commands, failures and one browser smoke test. Fix only setup blockers in this item.
-- [ ] **R2 — Establish a correctness oracle.** Add perft for the initial position and several castling, en passant, promotion, pin and check positions, with trusted reference counts and a divide mode for debugging. Require it to pass before search tuning.
+- [x] **R1 — Reproduce a clean run.** Install a supported Go toolchain and frontend dependencies, run Go tests and UI lint/build, start both services, and document exact versions, commands, failures and one browser smoke test. Fix only setup blockers in this item.
+- [x] **R2 — Establish a correctness oracle.** Add perft for the initial position and several castling, en passant, promotion, pin and check positions, with trusted reference counts and a divide mode for debugging. Require it to pass before search tuning.
 - [ ] **R3 — Make state round trips exact.** Test make/undo across every special move and rook capture, comparing board, castling, en passant, clocks, history, hash and legal moves. Repair any mismatch and validate malformed FENs without panics.
 
 ### Fix playing correctness
