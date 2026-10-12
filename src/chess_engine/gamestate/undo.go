@@ -116,16 +116,20 @@ func (gs *GameState) Undo() {
 	// check update enpassent
 	gs.Enpass_ind = gs.History.EnPassHist[last_move_ind]
 
-	// update castle rights
+	// Restore both sides: a capture on a rook's home square can change the
+	// opponent's castling rights as well as the mover's.
 	if gs.White_to_move {
 		gs.WhiteCastle = gs.History.CastleRight[last_move_ind]
+		gs.BlackCastle = gs.History.OppCastleRight[last_move_ind]
 	} else {
 		gs.BlackCastle = gs.History.CastleRight[last_move_ind]
+		gs.WhiteCastle = gs.History.OppCastleRight[last_move_ind]
 	}
 
 	gs.History.PrevMoves = gs.History.PrevMoves[:last_move_ind]
 	gs.History.Cap_pieces = gs.History.Cap_pieces[:last_move_ind]
 	gs.History.CastleRight = gs.History.CastleRight[:last_move_ind]
+	gs.History.OppCastleRight = gs.History.OppCastleRight[:last_move_ind]
 	gs.History.EnPassHist = gs.History.EnPassHist[:last_move_ind]
 
 

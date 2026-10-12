@@ -49,8 +49,10 @@ func DefenderMoves(threat_sq uint, threat_paths []uint,
 
 			double := uint(int(sq) - 2 * Player.Fwd) // double pawn push
 			single := uint(int(sq) - Player.Fwd) // single pawn push
-	
-			if (Player.P_start_row == double / 8) && (Player.Pawn_bb & (1 << double) != 0) {
+			occupied := Player.Team_bb | Player.Opp_bb
+
+			if (Player.P_start_row == double / 8) && (Player.Pawn_bb & (1 << double) != 0) &&
+				(occupied & (1 << single) == 0) {
 				// double pawn push
 				movelist = append(movelist, (1 << 12 | sq << 6 | double))
 	

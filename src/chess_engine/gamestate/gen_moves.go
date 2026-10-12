@@ -105,6 +105,12 @@ func (gs *GameState) RM_IllegalMoves(pinned_pieces map[uint][]uint) {
 
 	for _, move := range gs.MoveList {
 
+		// En passant can remove two blockers from a rank at once. A normal
+		// pinned-piece ray check does not catch every discovered attack it opens.
+		if (move>>12)&0xf == 0b0101 && gs.enPassantLeavesKingInCheck(move) {
+			continue
+		}
+
 		// check if move is legal
 		start_sq = move & 0b111111
 
@@ -125,6 +131,17 @@ func (gs *GameState) RM_IllegalMoves(pinned_pieces map[uint][]uint) {
 		}
 	}
 	gs.MoveList = legal_moves
+}
+
+func (gs *GameState) enPassantLeavesKingInCheck(move uint) bool {
+	// Test the unusual two-square removal on a copied board so the king-safety
+	// analysis sees the opened line without changing the live position.
+	player := *gs
+	player.Board = gs.Board.Copy()
+	player.Board.Move(move, gs.White_to_move)
+	player.Make_BP()
+	player.GetCheck()
+	return player.InCheck
 }
 
 // ----------------------------------------------------------------------------
